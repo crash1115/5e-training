@@ -266,11 +266,25 @@ async function addTrainingTab(app, html, data) {
       }
     });
 
+    // Set Training Tab as Active
+    html.find('.tabs .item[data-tab="training"]').click(ev => {
+      app.activateTrainingTab = true;
+    });
+
+    // Unset Training Tab as Active
+    html.find('.tabs .item:not(.tabs .item[data-tab="training"])').click(ev => {
+      app.activateTrainingTab = false;
+    });
+
   }
 
 }
 
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
-  addTrainingTab(app, html, data);
+  addTrainingTab(app, html, data).then(function(){
+    if (app.activateTrainingTab) {
+      app._tabs[0].activate("training");
+    }
+  })
 });
