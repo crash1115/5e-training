@@ -46,7 +46,7 @@ Misspell a name? Need to change the ability score to Con for just this one roll 
 ### Supported Modules
 - Sky's Alt D&D 5e Character Sheet
 - Tidy5e Sheet (including dark mode with your custom colors!)
-- D&D5E Dark Mode
+- D&D5E Dark Mode (works with both the default sheet and Sky's Alt 5e sheet)
 
 ### Unsupported Modules
 - Obsidian (no plans to support at this time)

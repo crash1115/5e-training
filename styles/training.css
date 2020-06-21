@@ -106,6 +106,13 @@
 	margin-right: 0px;
 }
 
+/* Controls dark mode support */
+.tidy5eDark .tidy5e.sheet.actor .training .inventory-list .item-controls a,
+.tidy5eDark .tidy5e.sheet.actor .training .inventory-list .item-controls a:hover {
+  color: var(--darkmode-primary-color);
+	font-weight: 300;
+}
+
 /* Training bar dark mode support */
 .tidy5eDark .training .progress-bar {
 	background-color: var(--darkmode-faint-color);
