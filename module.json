@@ -1,0 +1,15 @@
+{
+	"name": "5e-training",
+	"title": "Crash's 5e Downtime Tracking",
+	"description": "Adds a section to the character sheet to keep track of downtime activity progression. Track proficiency training, spell scribing, and anything else you can think of.",
+	"version": "0.1.0",
+	"author": "CRASH1115#2944",
+	"minimumCoreVersion": "0.6.0",
+	"compatibleCoreVersion": "0.6.2",
+	"systems": ["dnd5e"],
+	"scripts": ["training.js"],
+	"styles": ["styles/training.css"],
+	"url": "https://github.com/crash1115/5e-training",
+  "manifest": "https://raw.githubusercontent.com/crash1115/5e-training/master/module.json",
+	"download": "https://github.com//crash1115/5e-training/raw/master/5e-training.zip"
+}

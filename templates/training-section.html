@@ -1,0 +1,40 @@
+<div class="tab training flexrow" data-group="primary" data-tab="training">
+  <ol class="inventory-list">
+    <li class="inventory-header flexrow">
+      <h3 class="item-name flexrow">Activity Progress</h3>
+      <div class="item-controls">
+        <a class="item-control item-create training-add" title="Add New item">
+          <i class="fas fa-plus-circle"></i> Add
+        </a>
+      </div>
+    </li>
+    <ol class="item-list">
+      {{#each actor.flags.5e-training.trainingItems as |training tid| }}
+        <li class="item flexrow">
+          <div class="item-name flexrow rollable training-roll" id="roll-{{tid}}">
+            <div class="item-image" style="background-image: url(icons/svg/d20.svg);"></div>
+            <h4>{{training.name}}</h4>
+          </div>
+          <div class="item-detail">
+            {{training.progressionStyle}} {{#if (eq training.progressionStyle "ability")}}({{training.ability}}){{/if}}
+          </div>
+          <div class="item-detail">
+            {{training.progress}} / {{training.completionAt}}
+          </div>
+          <div class="item-detail flexrow bar">
+            <div class="progress-bar">
+              <div class="training-completion" style="width:{{trainingCompletion training}}%;">
+                <span>{{trainingCompletion training}}%</span>
+              </div>
+            </div>
+          </div>
+          <div class="item-controls">
+            <!-- <input type="text" class="item-control training-override" id="override-{{tid}}" title="Override Progression Value" name="{{id}}" value="{{training.progress}}" width="4"/> -->
+            <a class="item-control item-edit training-edit" id="edit-{{tid}}" title='Edit Item'><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete training-delete" id="delete-{{tid}}" title='Delete Item'><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+      {{/each}}
+    </ol>
+  </ol>
+</div>

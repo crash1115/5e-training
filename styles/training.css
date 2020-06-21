@@ -1,0 +1,76 @@
+/*********************************/
+/*         TRAINING TAB        */
+/*****************************/
+
+/* Training Bar */
+.training .progress-bar {
+	background-color: rgba(0,0,0,0.1);
+	border-radius: 4px;
+	height: 20px;
+	margin: 5px;
+}
+
+/* Training Bar Progress */
+.training .progress-bar .training-completion {
+	background-color: rgba(255,0,0,0.4);
+	border-radius: 4px;
+	height: 100%;
+	line-height: 22px;
+}
+
+/* Training Bar Progress Percent Text */
+.training .progress-bar .training-completion span {
+	margin-left: 5px;
+}
+
+.training .item-detail {
+	text-transform: capitalize;
+}
+
+.training .item-detail.bar {
+	flex: 1 !important;
+}
+
+/*********************************/
+/*           DIALOGS           */
+/*****************************/
+
+.training-dialog .field {
+	display: flex;
+	margin-bottom: 10px;
+	padding-top: 5px;
+}
+
+.training-dialog .field * {
+	flex: 5;
+}
+
+/*********************************/
+/* SUPPORT FOR D&D5E DARK MODE */
+/*****************************/
+
+/* Training Bar */
+.dark-mode .training .progress-bar {
+	background-color: #303030;
+}
+
+/* Training Bar Progress */
+.dark-mode .training .progress-bar .training-completion {
+	background-color: #3F88E6;
+	color: #000000;
+}
+
+
+/*********************************/
+/*   SUPPORT FOR TIDY 5E DARK  */
+/*****************************/
+
+/* Training Bar */
+.tidy5eDark .training .progress-bar {
+	background-color: var(--darkmode-faint-color);
+}
+
+/* Training Bar Progress */
+.tidy5eDark .training .progress-bar .training-completion {
+	background-color: var(--darkmode-secondary-accent);
+}
