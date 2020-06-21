@@ -89,7 +89,7 @@ async function addTrainingTab(app, html, data) {
         name: 'New Downtime Activity',
         ability: 'int',
         progress: 0,
-        completionAt: undefined,
+        completionAt: 10,
         progressionStyle: 'ability'
       };
       if (flags.trainingItems == undefined){
