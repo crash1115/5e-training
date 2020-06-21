@@ -2,6 +2,25 @@
 /*         TRAINING TAB        */
 /*****************************/
 
+/* Type Column */
+.training .item-detail {
+	text-transform: capitalize;
+}
+
+/* Progress Columns */
+.training .item-detail.bar {
+	flex: 1 !important;
+}
+
+/* Progress Override Input */
+.training .item-detail .training-override {
+	text-align: right;
+  padding-top: 1px;
+  line-height: 1;
+	display: inline;
+  max-width: 30px;
+}
+
 /* Training Bar */
 .training .progress-bar {
 	background-color: rgba(0,0,0,0.1);
@@ -12,6 +31,7 @@
 
 /* Training Bar Progress */
 .training .progress-bar .training-completion {
+	color: #111111;
 	background-color: rgba(255,0,0,0.4);
 	border-radius: 4px;
 	height: 100%;
@@ -21,14 +41,6 @@
 /* Training Bar Progress Percent Text */
 .training .progress-bar .training-completion span {
 	margin-left: 5px;
-}
-
-.training .item-detail {
-	text-transform: capitalize;
-}
-
-.training .item-detail.bar {
-	flex: 1 !important;
 }
 
 /*********************************/

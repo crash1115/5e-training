@@ -68,7 +68,7 @@ async function addTrainingTab(app, html, data) {
     // Add New Downtime Activity
     html.find('.training-add').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Training | Training Add excuted!");
+      console.log("Crash's 5e Downtime Tracking | Create Downtime Activity excuted!");
       let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
       let flags = actor.data.flags['5e-training'];
       let newProf = {
@@ -122,7 +122,7 @@ async function addTrainingTab(app, html, data) {
     // Remove Downtime Activity
     html.find('.training-delete').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Training | Training Delete excuted!");
+      console.log("Crash's 5e Downtime Tracking | Delete Downtime Activity excuted!");
       let fieldId = event.currentTarget.id;
       let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
       let flags = actor.data.flags['5e-training'];
@@ -159,7 +159,7 @@ async function addTrainingTab(app, html, data) {
     // Edit Downtime Activity
     html.find('.training-edit').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Training | Training Edit excuted!");
+      console.log("Crash's 5e Downtime Tracking | Edit Downtime Activity excuted!");
       let fieldId = event.currentTarget.id;
       let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
       let flags = actor.data.flags['5e-training'];
@@ -202,36 +202,37 @@ async function addTrainingTab(app, html, data) {
       }).render(true);
     });
 
-    // Edit Training Raw Value
-    // html.find('.training-override').change(async (event) => {
-    //   event.preventDefault();
-    //   console.log("Crash's 5e Training | Training Override excuted!");
-    //   let fieldId = event.currentTarget.id;
-    //   let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
-    //   let flags = actor.data.flags['5e-training'];
-    //   let trainingIdx = parseInt(fieldId.replace('override-',''));
-    //
-    //   if(isNaN(field.value)){
-    //     // do nothing
-    //   } else if(field.value.charAt(0)=="+"){
-    //     var val = parseInt(field.value.substr(1).trim());
-    //     flags.trainingItems[trainingIdx].progress += val;
-    //   } else if (field.value.charAt(0)=="-"){
-    //     var val = parseInt(field.value.substr(1).trim());
-    //     flags.trainingItems[trainingIdx].progress -= val;
-    //   } else {
-    //     flags.trainingItems[trainingIdx].progress = parseInt(field.value);
-    //   }
-    //
-    //   actor.update({'flags.5e-training': null}).then(function(){
-    //     actor.update({'flags.5e-training': flags});
-    //   });
-    // });
+    // Edit Progression Value
+    html.find('.training-override').change(async (event) => {
+      event.preventDefault();
+      console.log("Crash's 5e Downtime Tracking | progression Override excuted!");
+      let fieldId = event.currentTarget.id;
+      let field = event.currentTarget;
+      let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
+      let flags = actor.data.flags['5e-training'];
+      let trainingIdx = parseInt(fieldId.replace('override-',''));
+
+      if(isNaN(field.value)){
+        // do nothing
+      } else if(field.value.charAt(0)=="+"){
+        var val = parseInt(field.value.substr(1).trim());
+        flags.trainingItems[trainingIdx].progress += val;
+      } else if (field.value.charAt(0)=="-"){
+        var val = parseInt(field.value.substr(1).trim());
+        flags.trainingItems[trainingIdx].progress -= val;
+      } else {
+        flags.trainingItems[trainingIdx].progress = parseInt(field.value);
+      }
+
+      actor.update({'flags.5e-training': null}).then(function(){
+        actor.update({'flags.5e-training': flags});
+      });
+    });
 
     // Roll To Train
     html.find('.training-roll').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Training | Training Roll excuted!");
+      console.log("Crash's 5e Downtime Tracking | Progress Downtime Activity excuted!");
       let fieldId = event.currentTarget.id;
       let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
       let flags = actor.data.flags['5e-training'];
