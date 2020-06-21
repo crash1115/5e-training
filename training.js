@@ -65,6 +65,20 @@ async function addTrainingTab(app, html, data) {
     let trainingTabHtml = $(await renderTemplate('modules/5e-training/templates/training-section.html', data));
     sheet.append(trainingTabHtml);
 
+    // Check for Tidy5e and add listener for delete lock
+    let tidy5eSheetActive = (game.modules.get("tidy5e-sheet") !== undefined) && (game.modules.get("tidy5e-sheet").active);
+    if (tidy5eSheetActive){
+      html.find('.tidy5e-delete-toggle').click(async (event) => {
+        event.preventDefault();
+        let actor = game.actors.entities.find(a => a.data._id === data.actor._id);;
+        if(actor.getFlag('tidy5e-sheet', 'allow-delete')){
+          await actor.unsetFlag('tidy5e-sheet', 'allow-delete');
+        } else {
+          await actor.setFlag('tidy5e-sheet', 'allow-delete', true);
+        }
+      });
+    }
+
     // Add New Downtime Activity
     html.find('.training-add').click(async (event) => {
       event.preventDefault();

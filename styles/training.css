@@ -74,15 +74,43 @@
 
 
 /*********************************/
-/*   SUPPORT FOR TIDY 5E DARK  */
+/*     SUPPORT FOR TIDY 5E     */
 /*****************************/
 
-/* Training Bar */
+/* Hide the lock by default */
+.training .tidy5e-delete-lock {
+	display: none;
+}
+
+/* Show the lock when tidy is active*/
+.tidy5e .training .tidy5e-delete-lock {
+	display: inline-block;
+}
+
+/* Tweak some item controls styles to fit the lock toggle */
+.tidy5e .training .item-controls {
+	min-width: fit-content;
+	min-width: -moz-fit-content;
+}
+
+.tidy5e .training .item-controls a {
+	min-width: fit-content;
+	min-width: -moz-fit-content;
+	flex: 1 !important;
+	margin-right: 5px;
+}
+
+.tidy5e .training .item-controls .item-create {
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-right: 0px;
+}
+
+/* Training bar dark mode support */
 .tidy5eDark .training .progress-bar {
 	background-color: var(--darkmode-faint-color);
 }
 
-/* Training Bar Progress */
 .tidy5eDark .training .progress-bar .training-completion {
 	background-color: var(--darkmode-secondary-accent);
 }
