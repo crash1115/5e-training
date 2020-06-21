@@ -3,6 +3,10 @@ This is a module for Foundry VTT that modifies the dnd5e character sheet and add
 
 ![](/images/default_sheet.PNG?raw=true)
 
+![](/images/skys_sheet.PNG?raw=true)
+
+![](/images/tidy_sheet.PNG?raw=true)
+
 ## Features
 Does your group do a lot of downtime activities? Do you have a hard time keeping track of it all? Then this is the mod for you!
 
