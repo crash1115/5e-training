@@ -10,6 +10,6 @@
 	"scripts": ["training.js"],
 	"styles": ["styles/training.css"],
 	"url": "https://github.com/crash1115/5e-training",
-  "manifest": "https://raw.githubusercontent.com/crash1115/5e-training/master/module.json",
-	"download": "https://github.com//crash1115/5e-training/raw/master/5e-training.zip"
+  "manifest": "https://raw.githubusercontent.com/crash1115/5e-training/v0.1.0/module.json",
+	"download": "https://github.com/crash1115/5e-training/releases/download/v0.1.0/5e-training.zip"
 }
