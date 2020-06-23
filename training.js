@@ -1,3 +1,5 @@
+// Import Templates
+import { preloadTemplates } from "./load-templates.js";
 
 // Register Handlebars Helpers
 Handlebars.registerHelper("trainingCompletion", function(trainingItem) {
@@ -6,7 +8,8 @@ Handlebars.registerHelper("trainingCompletion", function(trainingItem) {
 });
 
 // Register Game Settings
-Hooks.once("ready", () => {
+Hooks.once("init", () => {
+  preloadTemplates();
 
   game.settings.register("5e-training", "enableTraining", {
     name: "Show Training Tab",
@@ -18,22 +21,69 @@ Hooks.once("ready", () => {
   });
 
   game.settings.register("5e-training", "tabName", {
-    name: "Training Tab Name",
-    hint: "Sets the title of the training tab to whatever you enter here. Default is 'Training,' but you may wish to call it something else depending on how you use the module.",
+    name: "Downtime Tab Name",
+    hint: "Sets the title of the training tab to whatever you enter here. Default is 'Downtime,' but you may wish to call it something else depending on how you use the module.",
     scope: "world",
     config: true,
-    default: "Training",
+    default: "Downtime",
     type: String
   });
 
+  game.settings.register("5e-training", "defaultAbility", {
+    name: "Default Attribute for Ability Check Progression",
+    hint: "Sets the default attribute assigned to a downtime activity upon creation. This can be edited after activity creation.",
+    scope: "world",
+    config: true,
+    type: String,
+    choices: {
+      "str": "Strength",
+      "dex": "Dexterity",
+      "con": "Constitution",
+      "int": "Intelligence",
+      "wis": "Wisdom",
+      "cha": "Charisma",
+    },
+    default: "int",
+  });
+
   game.settings.register("5e-training", "totalToComplete", {
-    name: "Activity Completion Target",
-    hint: "Sets the target number required to reach 100% activity completion for downtime activities that require ability checks. A good rule of thumb is that the average individual will be able to contribute about 10 points to their total per day spent performing the activity. The default is 300 (or 30 days for the average individual).",
+    name: "Default Activity Completion Target (Ability Checks)",
+    hint: "Sets the default target number required to reach 100% activity completion for downtime activities using ability check progression. A good rule of thumb is that the average individual will be able to contribute about 10 points to their total per check to progress the activity. The default is 300 (or 30 days for the average individual training once a day).",
     scope: "world",
     config: true,
     default: 300,
     type: Number
   });
+
+  game.settings.register("5e-training", "attemptsToComplete", {
+    name: "Default Activity Completion Target (Simple)",
+    hint: "Sets the default target number of attempts required to reach 100% activity completion for downtime activities using simple progression. The default is 10 attempts.",
+    scope: "world",
+    config: true,
+    default: 10,
+    type: Number
+  });
+
+  // IF ABOUT TIME IS ENABLED
+  // if((game.modules.get("calendar-weather") !== undefined) && (game.modules.get("calendar-weather").active)){
+  //   game.settings.register("5e-training", "timeToComplete", {
+  //     name: "Default Activity Completion Target (Time)",
+  //     hint: "Sets the default target number of DAYS required to reach 100% activity completion for downtime activities using time-based progression. The default is 30 days. (Requires About Time)",
+  //     scope: "world",
+  //     config: true,
+  //     default: 30,
+  //     type: Number
+  //   });
+  //
+  //   game.settings.register("5e-training", "eableReminders", {
+  //     name: "Enable Downtime Reminders",
+  //     hint: "Enabling this will display a prompt to the DM at the start of each day to help them remember to ask the players if they have any downtime activities they'd like to make progress on. (Requires About Time)",
+  //     scope: "world",
+  //     config: true,
+  //     default: 30,
+  //     type: Number
+  //   });
+  // }
 
 });
 
@@ -83,48 +133,52 @@ async function addTrainingTab(app, html, data) {
     html.find('.training-add').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Create Downtime Activity excuted!");
+
+      // Set up some variables
       let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
       let flags = actor.data.flags['5e-training'];
-      let newProf = {
+      let add = false;
+      let newActivity = {
         name: 'New Downtime Activity',
-        ability: 'int',
+        // ability: 'int',
         progress: 0,
-        completionAt: 10,
+        // completionAt: game.settings.get("5e-training", "totalToComplete"),
         progressionStyle: 'ability'
       };
+      let selectChange = function(){console.log('hello');}
+
+      let dialogContent = await renderTemplate('modules/5e-training/templates/add-training-dialog.html', {training: newActivity});
+
+      // Set up flags if they don't exist
       if (flags.trainingItems == undefined){
         flags.trainingItems = [];
       }
-      let add = false;
-      let dialogContent = await renderTemplate('modules/5e-training/templates/add-training-dialog.html', {training: newProf});
+
+      // Create dialog
       new Dialog({
         title: `Create New Downtime Activity`,
         content: dialogContent,
         buttons: {
-          yes: {
-            icon: "<i class='fas fa-check'></i>",
-            label: `Create`,
-            callback: () => add = true
-          },
-          no: {
-            icon: "<i class='fas fa-times'></i>",
-            label: `Cancel`,
-            callback: () => add = false
-          },
+          yes: {icon: "<i class='fas fa-check'></i>", label: `Create`, callback: () => add = true},
+          no: {icon: "<i class='fas fa-times'></i>", label: `Cancel`, callback: () => add = false},
         },
         default: "no",
         close: html => {
           if (add) {
-            newProf.name = html.find('#nameInput').val();
-            newProf.progressionStyle = html.find('#progressionStyleInput').val();
-            if (newProf.progressionStyle == 'ability'){
-              newProf.completionAt = game.settings.get("5e-training", "totalToComplete");
-              newProf.ability = html.find('#abilityInput').val();
-            } else if (newProf.progressionStyle == 'simple'){
-              newProf.completionAt = parseInt(html.find('#completionAtInput').val());
-              newProf.ability = undefined;
+            // Set up basic info
+            newActivity.name = html.find('#nameInput').val();
+            newActivity.progressionStyle = html.find('#progressionStyleInput').val();
+            // Progression Type: Ability Check
+            if (newActivity.progressionStyle == 'ability'){
+              newActivity.ability = game.settings.get("5e-training", "defaultAbility");
+              newActivity.completionAt = game.settings.get("5e-training", "totalToComplete");
             }
-            flags.trainingItems.push(newProf);
+            // Progression Type: Simple
+            else if (newActivity.progressionStyle == 'simple'){
+              newActivity.completionAt = game.settings.get("5e-training", "attemptsToComplete");
+            }
+            // Update flags and actor
+            flags.trainingItems.push(newActivity);
             actor.update({'flags.5e-training': null}).then(function(){
               actor.update({'flags.5e-training': flags});
             });
@@ -137,30 +191,28 @@ async function addTrainingTab(app, html, data) {
     html.find('.training-delete').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Delete Downtime Activity excuted!");
+
+      // Set up some variables
       let fieldId = event.currentTarget.id;
       let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
       let flags = actor.data.flags['5e-training'];
       let trainingIdx = parseInt(fieldId.replace('delete-',''));
+      let activity = flags.trainingItems[trainingIdx];
       let del = false;
       let dialogContent = await renderTemplate('modules/5e-training/templates/delete-training-dialog.html');
+
+      // Create dialog
       new Dialog({
-        title: `Delete Downtime Activity`,
+        title: `Delete Downtime Activity: ` + activity.name,
         content: dialogContent,
         buttons: {
-          yes: {
-            icon: "<i class='fas fa-check'></i>",
-            label: `Delete`,
-            callback: () => del = true
-          },
-          no: {
-            icon: "<i class='fas fa-times'></i>",
-            label: `Cancel`,
-            callback: () => del = false
-          },
+          yes: {icon: "<i class='fas fa-check'></i>", label: `Delete`, callback: () => del = true},
+          no: {icon: "<i class='fas fa-times'></i>", label: `Cancel`, callback: () => del = false},
         },
         default: "no",
         close: html => {
           if (del) {
+            // Delete item and update actor
             flags.trainingItems.splice(trainingIdx, 1);
             actor.update({'flags.5e-training': null}).then(function(){
               actor.update({'flags.5e-training': flags});
@@ -174,40 +226,41 @@ async function addTrainingTab(app, html, data) {
     html.find('.training-edit').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Edit Downtime Activity excuted!");
+
+      // Set up some variables
       let fieldId = event.currentTarget.id;
       let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
       let flags = actor.data.flags['5e-training'];
       let trainingIdx = parseInt(fieldId.replace('edit-',''));
+      let activity = flags.trainingItems[trainingIdx];
       let edit = false;
-      let dialogContent = await renderTemplate('modules/5e-training/templates/edit-training-dialog.html', {training: flags.trainingItems[trainingIdx]});
+      let dialogContent = await renderTemplate('modules/5e-training/templates/training-details-dialog.html', {training: activity});
+
+      // Create dialog
       new Dialog({
-        title: `Edit Downtime Activity`,
+        title: `Edit Downtime Activity: ` + activity.name,
         content: dialogContent,
         buttons: {
-          yes: {
-            icon: "<i class='fas fa-check'></i>",
-            label: `Edit`,
-            callback: () => edit = true
-          },
-          no: {
-            icon: "<i class='fas fa-times'></i>",
-            label: `Cancel`,
-            callback: () => edit = false
-          },
+          yes: {icon: "<i class='fas fa-check'></i>", label: `Edit`, callback: () => edit = true},
+          no: {icon: "<i class='fas fa-times'></i>",  label: `Cancel`, callback: () => edit = false},
         },
         default: "no",
         close: html => {
           if (edit) {
-            flags.trainingItems[trainingIdx].name = html.find('#nameInput').val();
-            flags.trainingItems[trainingIdx].progress = parseInt(html.find('#progressInput').val());
-            flags.trainingItems[trainingIdx].progressionStyle = html.find('#progressionStyleInput').val();
-            if (flags.trainingItems[trainingIdx].progressionStyle == 'ability'){
-              flags.trainingItems[trainingIdx].completionAt = game.settings.get("5e-training", "totalToComplete");
-              flags.trainingItems[trainingIdx].ability = html.find('#abilityInput').val();
-            } else if (flags.trainingItems[trainingIdx].progressionStyle == 'simple'){
-              flags.trainingItems[trainingIdx].completionAt = parseInt(html.find('#completionAtInput').val());
-              flags.trainingItems[trainingIdx].ability = undefined;
+            // Set up base values
+            activity.name = html.find('#nameInput').val();
+            activity.progress = parseInt(html.find('#progressInput').val());
+            // Progression Style: Ability Check
+            if (activity.progressionStyle == 'ability'){
+              activity.completionAt = parseInt(html.find('#completionAtInput').val());
+              activity.ability = html.find('#abilityInput').val();
             }
+            // Progression Style: Simple
+            else if (activity.progressionStyle == 'simple'){
+              activity.completionAt = parseInt(html.find('#completionAtInput').val());
+            }
+            // Update flags and actor
+            flags.trainingItems[trainingIdx] = activity;
             actor.update({'flags.5e-training': null}).then(function(){
               actor.update({'flags.5e-training': flags});
             });
@@ -220,24 +273,36 @@ async function addTrainingTab(app, html, data) {
     html.find('.training-override').change(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | progression Override excuted!");
+
+      // Set up some variables
       let fieldId = event.currentTarget.id;
       let field = event.currentTarget;
       let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
       let flags = actor.data.flags['5e-training'];
       let trainingIdx = parseInt(fieldId.replace('override-',''));
+      let activity = flags.trainingItems[trainingIdx];
 
+      // Format text field input
       if(isNaN(field.value)){
         // do nothing
       } else if(field.value.charAt(0)=="+"){
-        var val = parseInt(field.value.substr(1).trim());
-        flags.trainingItems[trainingIdx].progress += val;
+        var increase = parseInt(field.value.substr(1).trim());
+        activity.progress += increase;
       } else if (field.value.charAt(0)=="-"){
-        var val = parseInt(field.value.substr(1).trim());
-        flags.trainingItems[trainingIdx].progress -= val;
+        var decrease = parseInt(field.value.substr(1).trim());
+        activity.progress -= decrease;
       } else {
-        flags.trainingItems[trainingIdx].progress = parseInt(field.value);
+        activity.progress = parseInt(field.value);
       }
 
+      // Log completion
+      if(activity.progress >= activity.completionAt){
+        console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
+        ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
+      }
+
+      // Update flags and actor
+      flags.trainingItems[trainingIdx] = activity;
       actor.update({'flags.5e-training': null}).then(function(){
         actor.update({'flags.5e-training': flags});
       });
@@ -247,19 +312,43 @@ async function addTrainingTab(app, html, data) {
     html.find('.training-roll').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Progress Downtime Activity excuted!");
+
+      // Set up some variables
       let fieldId = event.currentTarget.id;
       let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
       let flags = actor.data.flags['5e-training'];
       let trainingIdx = parseInt(fieldId.replace('roll-',''));
-      if (flags.trainingItems[trainingIdx].progressionStyle == 'ability'){
-        actor.rollAbilityTest(flags.trainingItems[trainingIdx].ability).then(function(result){
-          flags.trainingItems[trainingIdx].progress += result.total;
+      let activity = flags.trainingItems[trainingIdx];
+
+      // Progression Type: Ability Check
+      if (activity.progressionStyle == 'ability'){
+        // Roll to increase progress
+        actor.rollAbilityTest(activity.ability).then(function(result){
+          // Increase progress
+          activity.progress += result.total;
+          // Log activity completion
+          if(activity.progress >= activity.completionAt){
+            console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
+            ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
+          }
+          // Update flags and actor
+          flags.trainingItems[trainingIdx] = activity;
           actor.update({'flags.5e-training': null}).then(function(){
             actor.update({'flags.5e-training': flags});
           });
         });
-      } else if (flags.trainingItems[trainingIdx].progressionStyle == 'simple'){
-        flags.trainingItems[trainingIdx].progress += 1;
+      }
+      // Progression Type: Simple
+      else if (activity.progressionStyle == 'simple'){
+        // Increase progress
+        activity.progress += 1;
+        // Log activity completion
+        if(activity.progress >= activity.completionAt){
+          console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
+          ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
+        }
+        // Update flags and actor
+        flags.trainingItems[trainingIdx] = activity;
         actor.update({'flags.5e-training': null}).then(function(){
           actor.update({'flags.5e-training': flags});
         });
@@ -286,5 +375,5 @@ Hooks.on(`renderActorSheet`, (app, html, data) => {
     if (app.activateTrainingTab) {
       app._tabs[0].activate("training");
     }
-  })
+  });
 });

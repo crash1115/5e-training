@@ -6,31 +6,9 @@
 
   <div class="field">
     <label for="progressionStyle">Progression Type:</label>
-    <select name="progressionStyleInput" id="progressionStyleInput"
-            onchange="if(this.value=='ability'){this.form['abilityInput'].style.visibility='visible'}else{this.form['abilityInput'].style.visibility='hidden'};
-                      if(this.value=='simple'){this.form['completionAtInput'].style.visibility='visible'}else{this.form['completionAtInput'].style.visibility='hidden'};">
+      <select name="progressionStyleInput" id="progressionStyleInput">
       <option value="ability" {{#if (eq training.progressionStyle "ability")}} selected {{/if}}>Ability Check</option>
       <option value="simple" {{#if (eq training.progressionStyle "simple")}} selected {{/if}}>Simple</option>
-      <!-- <option value="custom">Custom</option> -->
     </select>
-  </div>
-
-  <!-- Display only if Ability Check is selected -->
-  <div class="field">
-    <label for="ability">Select an ability to use for progression:</label>
-    <select name="abilityInput" id="abilityInput"" {{#if (eq training.progressionStyle "simple")}}style="visibility:hidden;"{{/if}}>
-      <option value="str" {{#if (eq training.ability "str")}} selected {{/if}}>Strength</option>
-      <option value="dex" {{#if (eq training.ability "dex")}} selected {{/if}}>Dexterity</option>
-      <option value="con" {{#if (eq training.ability "con")}} selected {{/if}}>Constitution</option>
-      <option value="int" {{#if (eq training.ability "int")}} selected {{/if}}>Intelligence</option>
-      <option value="wis" {{#if (eq training.ability "wis")}} selected {{/if}}>Wisdom</option>
-      <option value="cha" {{#if (eq training.ability "cha")}} selected {{/if}}>Charisma</option>
-    </select>
-  </div>
-
-  <!-- Display only if Simple is selected -->
-  <div class="field">
-    <label for="completionAt">Attempts to complete:</label>
-    <input type="text" name="completionAtInput" id="completionAtInput" {{#if (eq training.progressionStyle "ability")}}style="visibility:hidden;"{{/if}} value="{{training.completionAt}}">
   </div>
 </form>

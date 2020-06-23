@@ -1,0 +1,19 @@
+<form class="training-dialog">
+  <div class="field">
+    <label for="name">Name:</label>
+    <input type="text" name="nameInput" id="nameInput" value="{{training.name}}">
+  </div>
+
+  <div class="field">
+    <label for="progress">Current Progress:</label>
+    <input type="text" name="progressInput" id="progressInput" value="{{training.progress}}">
+  </div>
+
+  {{#if (eq training.progressionStyle "ability")}}
+    {{> "modules/5e-training/templates/partials/ability.html" training=training}}
+  {{/if}}
+
+  {{#if (eq training.progressionStyle "simple")}}
+    {{> "modules/5e-training/templates/partials/simple.html" training=training}}
+  {{/if}}
+</form>
