@@ -296,10 +296,7 @@ async function addTrainingTab(app, html, data) {
       }
 
       // Log completion
-      if(activity.progress >= activity.completionAt){
-        console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
-        ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
-      }
+      checkCompletion(actor, activity);
 
       // Update flags and actor
       flags.trainingItems[trainingIdx] = activity;
@@ -327,10 +324,7 @@ async function addTrainingTab(app, html, data) {
           // Increase progress
           activity.progress += result.total;
           // Log activity completion
-          if(activity.progress >= activity.completionAt){
-            console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
-            ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
-          }
+          checkCompletion(actor, activity);
           // Update flags and actor
           flags.trainingItems[trainingIdx] = activity;
           actor.update({'flags.5e-training': null}).then(function(){
@@ -343,10 +337,7 @@ async function addTrainingTab(app, html, data) {
         // Increase progress
         activity.progress += 1;
         // Log activity completion
-        if(activity.progress >= activity.completionAt){
-          console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
-          ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
-        }
+        checkCompletion(actor, activity);
         // Update flags and actor
         flags.trainingItems[trainingIdx] = activity;
         actor.update({'flags.5e-training': null}).then(function(){
@@ -367,6 +358,13 @@ async function addTrainingTab(app, html, data) {
 
   }
 
+}
+
+function checkCompletion(actor, activity){
+  if(activity.progress >= activity.completionAt){
+    console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
+    ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
+  }
 }
 
 
