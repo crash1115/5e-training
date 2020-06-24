@@ -95,14 +95,16 @@ async function addTrainingTab(app, html, data) {
 
   if (showTrainingTab){
 
-    // Make sure flags exist if they don't already
+    // Get our actor
     let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
+    // Make sure flags exist if they don't already
     if (actor.data.flags['5e-training'] === undefined) {
       let trainingList = [];
       const flags = {trainingItems: trainingList};
       actor.data.flags['5e-training'] = flags;
       actor.update({'flags.5e-training': flags});
     }
+    let flags = actor.data.flags['5e-training'];
 
     // Update the nav menu
     let tabName = game.settings.get("5e-training", "tabName");
@@ -135,8 +137,6 @@ async function addTrainingTab(app, html, data) {
       console.log("Crash's 5e Downtime Tracking | Create Downtime Activity excuted!");
 
       // Set up some variables
-      let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
-      let flags = actor.data.flags['5e-training'];
       let add = false;
       let newActivity = {
         name: 'New Downtime Activity',
@@ -194,8 +194,6 @@ async function addTrainingTab(app, html, data) {
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
-      let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
-      let flags = actor.data.flags['5e-training'];
       let trainingIdx = parseInt(fieldId.replace('delete-',''));
       let activity = flags.trainingItems[trainingIdx];
       let del = false;
@@ -229,8 +227,6 @@ async function addTrainingTab(app, html, data) {
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
-      let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
-      let flags = actor.data.flags['5e-training'];
       let trainingIdx = parseInt(fieldId.replace('edit-',''));
       let activity = flags.trainingItems[trainingIdx];
       let edit = false;
@@ -277,8 +273,6 @@ async function addTrainingTab(app, html, data) {
       // Set up some variables
       let fieldId = event.currentTarget.id;
       let field = event.currentTarget;
-      let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
-      let flags = actor.data.flags['5e-training'];
       let trainingIdx = parseInt(fieldId.replace('override-',''));
       let activity = flags.trainingItems[trainingIdx];
 
@@ -312,8 +306,6 @@ async function addTrainingTab(app, html, data) {
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
-      let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
-      let flags = actor.data.flags['5e-training'];
       let trainingIdx = parseInt(fieldId.replace('roll-',''));
       let activity = flags.trainingItems[trainingIdx];
 
