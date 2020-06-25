@@ -268,25 +268,27 @@ async function addTrainingTab(app, html, data) {
     // Edit Progression Value
     html.find('.training-override').change(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Downtime Tracking | progression Override excuted!");
+      console.log("Crash's 5e Downtime Tracking | Progression Override excuted!");
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
       let field = event.currentTarget;
       let trainingIdx = parseInt(fieldId.replace('override-',''));
       let activity = flags.trainingItems[trainingIdx];
+      let change = 0;
 
-      // Format text field input
+      // Format text field input and change
       if(isNaN(field.value)){
-        // do nothing
+        ui.notifications.warn("Downtime Tracking: Invalid input. Please enter a number.");
       } else if(field.value.charAt(0)=="+"){
-        var increase = parseInt(field.value.substr(1).trim());
-        activity.progress += increase;
+        change = parseInt(field.value.substr(1).trim());
+        activity.progress = calculateNewProgress(activity, change);
       } else if (field.value.charAt(0)=="-"){
-        var decrease = parseInt(field.value.substr(1).trim());
-        activity.progress -= decrease;
+        change = 0 - parseInt(field.value.substr(1).trim());
+        activity.progress = calculateNewProgress(activity, change);
       } else {
-        activity.progress = parseInt(field.value);
+        change = parseInt(field.value);
+        activity.progress = calculateNewProgress(activity, change, true);
       }
 
       // Log completion
@@ -314,7 +316,7 @@ async function addTrainingTab(app, html, data) {
         // Roll to increase progress
         actor.rollAbilityTest(activity.ability).then(function(result){
           // Increase progress
-          activity.progress += result.total;
+          activity.progress = calculateNewProgress(activity, result.total);
           // Log activity completion
           checkCompletion(actor, activity);
           // Update flags and actor
@@ -327,7 +329,7 @@ async function addTrainingTab(app, html, data) {
       // Progression Type: Simple
       else if (activity.progressionStyle == 'simple'){
         // Increase progress
-        activity.progress += 1;
+        activity.progress = calculateNewProgress(activity, 1);
         // Log activity completion
         checkCompletion(actor, activity);
         // Update flags and actor
@@ -351,7 +353,25 @@ async function addTrainingTab(app, html, data) {
   }
 
 }
+// Calculates the progress value of an activity.
+// if absolute is true, set progress to the change value rather than adding to it
+function calculateNewProgress(activity, change, absolute = false){
+  if(absolute){
+    activity.progress = change;
+  } else {
+    activity.progress += change;
+  }
 
+  if(activity.progress > activity.completionAt){
+    activity.progress = activity.completionAt;
+  }
+  if (activity.progress < 0){
+    activity.progress = 0;
+  }
+  return activity.progress;
+}
+
+// Checks for completion of an activity and logs it if it's done
 function checkCompletion(actor, activity){
   if(activity.progress >= activity.completionAt){
     console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
