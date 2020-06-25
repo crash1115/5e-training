@@ -1,0 +1,49 @@
+
+{
+	"C5ETRAINING.ActivityProgress": "Activity Progress",
+	"C5ETRAINING.AdjustProgressValue": "Adjust Progress",
+	"C5ETRAINING.AdvanceActivityProgress": "Advance Activity Progress",
+	"C5ETRAINING.AnnounceActivityCompletionFor": "Announce Activity Completion For:",
+	"C5ETRAINING.AnnounceActivityCompletionForHint": "Choose which actor types you would like to have trigger chat messages upon activity completion.",
+
+	"C5ETRAINING.Cancel": "Cancel",
+	"C5ETRAINING.Completed": "completed",
+	"C5ETRAINING.CompletedADowntimeActivity": "completed a downtime activity.",
+	"C5ETRAINING.Create": "Create",
+	"C5ETRAINING.CreateNewDowntimeActivity": "Create New Downtime Activity",
+	"C5ETRAINING.CurrentProgress": "Current Progress",
+
+	"C5ETRAINING.DefaultAbility": "Default Attribute for Ability Check Progression",
+	"C5ETRAINING.DefaultAbilityHint": "Sets the default attribute assigned to a downtime activity upon creation. This can be edited after activity creation.",
+	"C5ETRAINING.DefaultAbilityCompletion": "Default Activity Completion Target (Ability Checks)",
+	"C5ETRAINING.DefaultAbilityCompletionHint": "Sets the default target number required to reach 100% activity completion for downtime activities using ability check progression. A good rule of thumb is that the average individual will be able to contribute about 10 points to their total per check to progress the activity. The default is 300 (or 30 days for the average individual training once a day).",
+	"C5ETRAINING.DefaultSimpleCompletion": "Default Activity Completion Target (Simple)",
+	"C5ETRAINING.DefaultSimpleCompletionHint": "Sets the default target number of attempts required to reach 100% activity completion for downtime activities using simple progression. The default is 10 attempts.",
+	"C5ETRAINING.DefaultTimeCompletion": "Default Activity Completion Target (Time)",
+	"C5ETRAINING.DefaultTimeCompletionHint": "Sets the default target number of DAYS required to reach 100% activity completion for downtime activities using time-based progression. The default is 30 days. (Requires About Time)",
+	"C5ETRAINING.Delete": "Delete",
+	"C5ETRAINING.DeleteConfirmation": "Are you sure you want to delete this item?",
+	"C5ETRAINING.DeleteDowntimeActivity": "Delete Downtime Activity",
+	"C5ETRAINING.DowntimeActivityComplete": "Downtime Activity Complete",
+	"C5ETRAINING.DowntimeTabName": "Downtime Tab Name",
+	"C5ETRAINING.DowntimeTabNameHint": "Sets the title of the training tab to whatever you enter here. Default is 'Downtime,' but you may wish to call it something else depending on how you use the module.",
+
+	"C5ETRAINING.Edit": "Edit",
+	"C5ETRAINING.EditDowntimeActivity": "Edit Downtime Activity",
+	"C5ETRAINING.EnableDowntimeReminders": "Enable Downtime Reminders",
+	"C5ETRAINING.EnableDowntimeRemindersHint": "Enabling this will display a prompt to the GM at the start of each day to help them remember to ask the players if they have any downtime activities they'd like to make progress on. (Requires About Time)",
+
+	"C5ETRAINING.InvalidNumberWarning": "Invalid input. Please enter a number.",
+
+	"C5ETRAINING.Name": "Name",
+	"C5ETRAINING.NewDowntimeActivity": "Add New Downtime Activity",
+	"C5ETRAINING.NpcsOnly": "NPC's Only",
+
+	"C5ETRAINING.PcsAndNpcs": "PC's and NPC's",
+	"C5ETRAINING.PcsOnly": "PC's Only",
+	"C5ETRAINING.ProgressionType": "Progression Type",
+
+	"C5ETRAINING.ShowDowntimeTab": "Show Training Tab",
+	"C5ETRAINING.ShowDowntimeTabHint": "Toggling this on will display the training tab on all player character sheets. You will need to close and reopen sheets for this to take effect.",
+	"C5ETRAINING.Simple": "Simple"
+}

@@ -12,8 +12,8 @@ Hooks.once("init", () => {
   preloadTemplates();
 
   game.settings.register("5e-training", "enableTraining", {
-    name: "Show Training Tab",
-    hint: "Toggling this on will display the training tab on all player character sheets. You will need to close and reopen sheets for this to take effect.",
+    name: game.i18n.localize("C5ETRAINING.ShowDowntimeTab"),
+    hint: game.i18n.localize("C5ETRAINING.ShowDowntimeTabHint"),
     scope: "world",
     config: true,
     default: true,
@@ -21,8 +21,8 @@ Hooks.once("init", () => {
   });
 
   game.settings.register("5e-training", "tabName", {
-    name: "Downtime Tab Name",
-    hint: "Sets the title of the training tab to whatever you enter here. Default is 'Downtime,' but you may wish to call it something else depending on how you use the module.",
+    name: game.i18n.localize("C5ETRAINING.DowntimeTabName"),
+    hint: game.i18n.localize("C5ETRAINING.DowntimeTabNameHint"),
     scope: "world",
     config: true,
     default: "Downtime",
@@ -30,25 +30,25 @@ Hooks.once("init", () => {
   });
 
   game.settings.register("5e-training", "defaultAbility", {
-    name: "Default Attribute for Ability Check Progression",
-    hint: "Sets the default attribute assigned to a downtime activity upon creation. This can be edited after activity creation.",
+    name: game.i18n.localize("C5ETRAINING.DefaultAbility"),
+    hint: game.i18n.localize("C5ETRAINING.DefaultAbilityHint"),
     scope: "world",
     config: true,
     type: String,
     choices: {
-      "str": "Strength",
-      "dex": "Dexterity",
-      "con": "Constitution",
-      "int": "Intelligence",
-      "wis": "Wisdom",
-      "cha": "Charisma",
+      "str": game.i18n.localize("DND5E.AbilityStr"),
+      "dex": game.i18n.localize("DND5E.AbilityDex"),
+      "con": game.i18n.localize("DND5E.AbilityCon"),
+      "int": game.i18n.localize("DND5E.AbilityInt"),
+      "wis": game.i18n.localize("DND5E.AbilityWis"),
+      "cha":game.i18n.localize("DND5E.AbilityCha"),
     },
     default: "int",
   });
 
   game.settings.register("5e-training", "totalToComplete", {
-    name: "Default Activity Completion Target (Ability Checks)",
-    hint: "Sets the default target number required to reach 100% activity completion for downtime activities using ability check progression. A good rule of thumb is that the average individual will be able to contribute about 10 points to their total per check to progress the activity. The default is 300 (or 30 days for the average individual training once a day).",
+    name: game.i18n.localize("C5ETRAINING.DefaultAbilityCompletion"),
+    hint: game.i18n.localize("C5ETRAINING.DefaultAbilityCompletionHint"),
     scope: "world",
     config: true,
     default: 300,
@@ -56,49 +56,48 @@ Hooks.once("init", () => {
   });
 
   game.settings.register("5e-training", "attemptsToComplete", {
-    name: "Default Activity Completion Target (Simple)",
-    hint: "Sets the default target number of attempts required to reach 100% activity completion for downtime activities using simple progression. The default is 10 attempts.",
+    name: game.i18n.localize("C5ETRAINING.DefaultSimpleCompletion"),
+    hint: game.i18n.localize("C5ETRAINING.DefaultSimpleCompletionHint"),
     scope: "world",
     config: true,
     default: 10,
     type: Number
   });
 
+  // IF ABOUT TIME IS ENABLED
+  // game.settings.register("5e-training", "timeToComplete", {
+  //   name: game.i18n.localize("C5ETRAINING.DefaultTimeCompletion"),
+  //   hint: game.i18n.localize("C5ETRAINING.DefaultTimeCompletionHint"),
+  //   scope: "world",
+  //   config: true,
+  //   default: 30,
+  //   type: Number
+  // });
+
+  // IF ABOUT TIME IS ENABLED
+  // game.settings.register("5e-training", "enableDowntimeReminders", {
+  //   name: game.i18n.localize("C5ETRAINING.EnableDowntimeReminders"),
+  //   hint: game.i18n.localize("C5ETRAINING.EnableDowntimeRemindersHint"),
+  //   scope: "world",
+  //   config: true,
+  //   default: false,
+  //   type: Boolean
+  // });
+
   game.settings.register("5e-training", "announceCompletionFor", {
-    name: "Announce Activity Completion For...",
-    hint: "Choose which actor types you would like to have trigger chat messages upon activity completion.",
+    name: game.i18n.localize("C5ETRAINING.AnnounceActivityCompletionFor"),
+    hint: game.i18n.localize("C5ETRAINING.AnnounceActivityCompletionForHint"),
     scope: "world",
     config: true,
     type: String,
     choices: {
-      "pc": "PC's Only",
-      "npc": "NPC's Only",
-      "both": "PC's and NPC's",
-      "none": "None"
+      "pc": game.i18n.localize("C5ETRAINING.PcsOnly"),
+      "npc": game.i18n.localize("C5ETRAINING.NpcsOnly"),
+      "both": game.i18n.localize("C5ETRAINING.PcsAndNpcs"),
+      "none": game.i18n.localize("DND5E.None"),
     },
     default: "pc",
   });
-
-  // IF ABOUT TIME IS ENABLED
-  // if((game.modules.get("calendar-weather") !== undefined) && (game.modules.get("calendar-weather").active)){
-  //   game.settings.register("5e-training", "timeToComplete", {
-  //     name: "Default Activity Completion Target (Time)",
-  //     hint: "Sets the default target number of DAYS required to reach 100% activity completion for downtime activities using time-based progression. The default is 30 days. (Requires About Time)",
-  //     scope: "world",
-  //     config: true,
-  //     default: 30,
-  //     type: Number
-  //   });
-  //
-  //   game.settings.register("5e-training", "eableReminders", {
-  //     name: "Enable Downtime Reminders",
-  //     hint: "Enabling this will display a prompt to the DM at the start of each day to help them remember to ask the players if they have any downtime activities they'd like to make progress on. (Requires About Time)",
-  //     scope: "world",
-  //     config: true,
-  //     default: 30,
-  //     type: Number
-  //   });
-  // }
 
 });
 
@@ -154,13 +153,10 @@ async function addTrainingTab(app, html, data) {
       // Set up some variables
       let add = false;
       let newActivity = {
-        name: 'New Downtime Activity',
-        // ability: 'int',
+        name: game.i18n.localize("C5ETRAINING.NewDowntimeActivity"),
         progress: 0,
-        // completionAt: game.settings.get("5e-training", "totalToComplete"),
         progressionStyle: 'ability'
       };
-      let selectChange = function(){console.log('hello');}
 
       let dialogContent = await renderTemplate('modules/5e-training/templates/add-training-dialog.html', {training: newActivity});
 
@@ -171,11 +167,11 @@ async function addTrainingTab(app, html, data) {
 
       // Create dialog
       new Dialog({
-        title: `Create New Downtime Activity`,
+        title: game.i18n.localize("C5ETRAINING.CreateNewDowntimeActivity"),
         content: dialogContent,
         buttons: {
-          yes: {icon: "<i class='fas fa-check'></i>", label: `Create`, callback: () => add = true},
-          no: {icon: "<i class='fas fa-times'></i>", label: `Cancel`, callback: () => add = false},
+          yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.Create"), callback: () => add = true},
+          no: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => add = false},
         },
         default: "no",
         close: html => {
@@ -216,11 +212,11 @@ async function addTrainingTab(app, html, data) {
 
       // Create dialog
       new Dialog({
-        title: `Delete Downtime Activity: ` + activity.name,
+        title: `Delete Downtime Activity`,
         content: dialogContent,
         buttons: {
-          yes: {icon: "<i class='fas fa-check'></i>", label: `Delete`, callback: () => del = true},
-          no: {icon: "<i class='fas fa-times'></i>", label: `Cancel`, callback: () => del = false},
+          yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.Delete"), callback: () => del = true},
+          no: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => del = false},
         },
         default: "no",
         close: html => {
@@ -249,11 +245,11 @@ async function addTrainingTab(app, html, data) {
 
       // Create dialog
       new Dialog({
-        title: `Edit Downtime Activity: ` + activity.name,
+        title: game.i18n.localize("C5ETRAINING.EditDowntimeActivity"),
         content: dialogContent,
         buttons: {
-          yes: {icon: "<i class='fas fa-check'></i>", label: `Edit`, callback: () => edit = true},
-          no: {icon: "<i class='fas fa-times'></i>",  label: `Cancel`, callback: () => edit = false},
+          yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.Edit"), callback: () => edit = true},
+          no: {icon: "<i class='fas fa-times'></i>",  label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => edit = false},
         },
         default: "no",
         close: html => {
@@ -294,7 +290,7 @@ async function addTrainingTab(app, html, data) {
 
       // Format text field input and change
       if(isNaN(field.value)){
-        ui.notifications.warn("Downtime Tracking: Invalid input. Please enter a number.");
+        ui.notifications.warn("Downtime Tracking: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
       } else if(field.value.charAt(0)=="+"){
         change = parseInt(field.value.substr(1).trim());
         activity.progress = calculateNewProgress(activity, change);
@@ -411,10 +407,9 @@ function checkCompletion(actor, activity){
     }
 
     if (sendIt){
-      console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
-      ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
+      console.log("Crash's 5e Downtime Tracking | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedADowntimeActivity"));
+      ChatMessage.create({alias: game.i18n.localize("C5ETRAINING.DowntimeActivityComplete"), content: actor.name + " " + game.i18n.localize("C5ETRAINING.Completed") + " " + activity.name});
     }
-
   }
 }
 
