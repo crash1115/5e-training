@@ -3,7 +3,7 @@ import { preloadTemplates } from "./load-templates.js";
 
 // Register Handlebars Helpers
 Handlebars.registerHelper("trainingCompletion", function(trainingItem) {
-  var percentComplete = Math.min(100,(100 * trainingItem.progress / trainingItem.completionAt)).toFixed(0);
+  let percentComplete = Math.min(100,(100 * trainingItem.progress / trainingItem.completionAt)).toFixed(0);
   return percentComplete;
 });
 
@@ -62,6 +62,21 @@ Hooks.once("init", () => {
     config: true,
     default: 10,
     type: Number
+  });
+
+  game.settings.register("5e-training", "announceCompletionFor", {
+    name: "Announce Activity Completion For...",
+    hint: "Choose which actor types you would like to have trigger chat messages upon activity completion.",
+    scope: "world",
+    config: true,
+    type: String,
+    choices: {
+      "pc": "PC's Only",
+      "npc": "NPC's Only",
+      "both": "PC's and NPC's",
+      "none": "None"
+    },
+    default: "pc",
   });
 
   // IF ABOUT TIME IS ENABLED
@@ -364,18 +379,42 @@ function calculateNewProgress(activity, change, absolute = false){
 
   if(activity.progress > activity.completionAt){
     activity.progress = activity.completionAt;
-  }
-  if (activity.progress < 0){
+  } else if (activity.progress < 0){
     activity.progress = 0;
   }
+
   return activity.progress;
 }
 
 // Checks for completion of an activity and logs it if it's done
 function checkCompletion(actor, activity){
   if(activity.progress >= activity.completionAt){
-    console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
-    ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
+    let alertFor = game.settings.get("5e-training", "announceCompletionFor");
+    let isPc = actor.isPC;
+    let sendIt;
+
+    switch(alertFor){
+      case "none":
+        sendIt = false;
+        break;
+      case "both":
+        sendIt = true;
+        break;
+      case "npc":
+        sendIt = !isPc;
+        break
+      case "pc":
+        sendIt = isPc;
+        break;
+      default:
+        sendIt = false;
+    }
+
+    if (sendIt){
+      console.log("Crash's 5e Downtime Tracking | " + actor.name + " completed a downtime activity!");
+      ChatMessage.create({alias: "Downtime Activity Complete", content: actor.name + " completed " + activity.name});
+    }
+
   }
 }
 
