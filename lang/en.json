@@ -43,7 +43,7 @@
 	"C5ETRAINING.PcsOnly": "PC's Only",
 	"C5ETRAINING.ProgressionType": "Progression Type",
 
-	"C5ETRAINING.ShowDowntimeTab": "Show Training Tab",
+	"C5ETRAINING.ShowDowntimeTab": "Show Downtime Tab",
 	"C5ETRAINING.ShowDowntimeTabHint": "Toggling this on will display the training tab on all player character sheets. You will need to close and reopen sheets for this to take effect.",
 	"C5ETRAINING.Simple": "Simple"
 }
