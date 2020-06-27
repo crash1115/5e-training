@@ -83,21 +83,38 @@
 }
 
 /* Show the lock when tidy is active*/
-.tidy5e .training .tidy5e-delete-lock {
+.tidy5e.sheet.actor .training .tidy5e-delete-lock {
 	display: inline-block;
 }
 
 /* Tweak some item controls styles to fit the lock toggle */
-.tidy5e .training .item-controls {
+.tidy5e.sheet.actor .training .item-controls {
 	min-width: fit-content;
 	min-width: -moz-fit-content;
 }
 
-.tidy5e .training .item-controls a {
+.tidy5e.sheet.actor .training .item-controls a {
 	min-width: fit-content;
 	min-width: -moz-fit-content;
 	flex: 1 !important;
 	margin-right: 5px;
+}
+
+.tidy5e .training .item-controls .item-create {
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-right: 0px;
+}
+
+/* Tweak activity entries on NPC sheet */
+.tidy5e.sheet.actor.npc .training .inventory-list .item .item-name .item-image {
+	height: 30px;
+	width: 30px;
+	flex: 0 0 30px;
+}
+
+.tidy5e.sheet.actor.npc .training .inventory-list .item .item-name h4 {
+	line-height: 30px;
 }
 
 .tidy5e.sheet.actor.npc .training .inventory-list .inventory-header .item-controls a.item-create{
@@ -105,10 +122,8 @@
 	padding: 4px 5px;
 }
 
-.tidy5e .training .item-controls .item-create {
-	padding-left: 5px;
-	padding-right: 5px;
-	margin-right: 0px;
+.tidy5e.sheet.actor.npc .training .inventory-list .item {
+	line-height: 30px;
 }
 
 /* Controls dark mode support */
