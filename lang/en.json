@@ -58,5 +58,7 @@
 	"C5ETRAINING.ShowDowntimeTabHint": "Toggling this on will display the training tab on all player character sheets. You will need to close and reopen sheets for this to take effect.",
 	"C5ETRAINING.Simple": "Simple",
 
-	"C5ETRAINING.Time": "Time (UTC)"
+	"C5ETRAINING.Time": "Time (UTC)",
+
+  "C5ETRAINING.User": "User"
 }

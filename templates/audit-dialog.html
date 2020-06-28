@@ -12,6 +12,7 @@
       <table>
         <tr>
           <th>{{ localize "C5ETRAINING.Time" }}</th>
+          <th>{{ localize "C5ETRAINING.User" }}</th>
           <th>{{ localize "C5ETRAINING.Activity" }}</th>
           <th>{{ localize "C5ETRAINING.Action" }}</th>
           <th>{{ localize "C5ETRAINING.ProgressChange" }}</th>
@@ -37,6 +38,7 @@
     <table>
       <tr>
         <th>{{ localize "C5ETRAINING.Time" }}</th>
+        <th>{{ localize "C5ETRAINING.User" }}</th>
         <th>{{ localize "C5ETRAINING.Activity" }}</th>
         <th>{{ localize "C5ETRAINING.Action" }}</th>
         <th>{{ localize "C5ETRAINING.ProgressChange" }}</th>
@@ -45,9 +47,10 @@
       {{#each changes as |change id|}}
       <tr>
         <td>{{change.timestamp}}</td>
+        <td>{{change.user}}</td>
         <td>{{change.activityName}} {{change.dismissed}}</td>
         <td>{{change.actionName}}</td>
-        <td>{{change.oldValue}} -> {{change.newValue}} ({{change.dif}})</td>
+        <td>{{change.oldValue}} -> {{change.newValue}} ({{change.diff}})</td>
         <td><input type="checkbox" name="{{change.timestamp}}" id="{{change.timestamp}}"/></td>
       </tr>
       {{/each}}

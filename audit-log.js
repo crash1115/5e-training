@@ -5,8 +5,7 @@ export default class AuditLog extends FormApplication {
       id: "downtime-audit-log-form",
       template: "modules/5e-training/templates/audit-dialog.html",
       title: game.i18n.localize("C5ETRAINING.AuditLog"),
-      width: 750,
-      maxHeight: 600,
+      width: 900,
       resizable: true,
       closeOnSubmit: true
     });
@@ -25,15 +24,21 @@ export default class AuditLog extends FormApplication {
     for (var a=0; a < activities.length; a++){
       if(!activities[a].changes){ continue; }
       for(var c=0; c < activities[a].changes.length; c++){
+        // Don't include the change if it's already been dismissed
         if(activities[a].changes[c].dismissed){ continue; }
+        // calc difference and add a '+' if the change is positive
+        let difference = activities[a].changes[c].newValue - activities[a].changes[c].oldValue;
+        if (difference > 0){ difference = "+" + difference;}
+        // Set up our display object
         let change = {
           timestamp: activities[a].changes[c].timestamp,
+          user: activities[a].changes[c].user,
           activityName: activities[a].name,
           actionName: activities[a].changes[c].actionName,
           valueChanged: activities[a].changes[c].valueChanged,
           oldValue: activities[a].changes[c].oldValue,
           newValue: activities[a].changes[c].newValue,
-          dif: activities[a].changes[c].newValue - activities[a].changes[c].oldValue
+          diff: difference
         }
         changes.push(change);
       }

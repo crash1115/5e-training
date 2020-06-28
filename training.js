@@ -326,8 +326,9 @@ async function addTrainingTab(app, html, data) {
       if (activity.progressionStyle == 'ability'){
         // Roll to increase progress
         actor.rollAbilityTest(activity.ability).then(function(result){
+          let rollMode = getRollMode(result.formula);
           // Increase progress
-          activity = calculateNewProgress(activity, "Roll (Ability)", result.total);
+          activity = calculateNewProgress(activity, "Roll, " + rollMode + " (Ability)", result.total);
           // Log activity completion
           checkCompletion(actor, activity);
           // Update flags and actor
@@ -373,6 +374,7 @@ async function addTrainingTab(app, html, data) {
 }
 // Calculates the progress value of an activity and logs the change to the progress
 // if absolute is true, set progress to the change value rather than adding to it
+// RETURNS THE ENTIRE ACTIVITY
 function calculateNewProgress(activity, actionName, change, absolute = false){
 
   let newProgress = 0;
@@ -391,7 +393,7 @@ function calculateNewProgress(activity, actionName, change, absolute = false){
 
   // Log activity change
   // Make sure flags exist and add them if they don't
-  if (activity.changes == undefined){
+  if (!activity.changes){
     activity.changes = [];
   }
   // Create and add new change to log
@@ -400,7 +402,9 @@ function calculateNewProgress(activity, actionName, change, absolute = false){
     actionName: actionName,
     valueChanged: "progress",
     oldValue: activity.progress,
-    newValue: newProgress
+    newValue: newProgress,
+    user: game.user.name,
+    note: ""
   }
   activity.changes.push(log);
 
@@ -439,6 +443,13 @@ function checkCompletion(actor, activity){
   }
 }
 
+// Takes in the die roll string and returns whether it was made at adv/disadv/normal
+function getRollMode(formula){
+  let d20Roll = formula.split(" ")[0];
+  if(d20Roll == "2d20kh"){ return  game.i18n.localize("DND5E.Advantage"); }
+  else if(d20Roll == "2d20kl"){ return game.i18n.localize("DND5E.Disadvantage"); }
+  else { return game.i18n.localize("DND5E.Normal"); }
+}
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
   addTrainingTab(app, html, data).then(function(){
