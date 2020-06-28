@@ -4,11 +4,6 @@
     <input type="text" name="nameInput" id="nameInput" value="{{training.name}}">
   </div>
 
-  <div class="field">
-    <label for="progress">{{ localize "C5ETRAINING.CurrentProgress" }}:</label>
-    <input type="text" name="progressInput" id="progressInput" value="{{training.progress}}">
-  </div>
-
   {{#if (eq training.progressionStyle "ability")}}
     {{> "modules/5e-training/templates/partials/ability.html" training=training}}
   {{/if}}

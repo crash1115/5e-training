@@ -1,5 +1,6 @@
-// Import Templates
+// Imports
 import { preloadTemplates } from "./load-templates.js";
+import AuditLog from "./audit-log.js";
 
 // Register Handlebars Helpers
 Handlebars.registerHelper("trainingCompletion", function(trainingItem) {
@@ -96,7 +97,7 @@ Hooks.once("init", () => {
       "both": game.i18n.localize("C5ETRAINING.PcsAndNpcs"),
       "none": game.i18n.localize("DND5E.None"),
     },
-    default: "pc",
+    default: "pc"
   });
 
 });
@@ -112,7 +113,7 @@ async function addTrainingTab(app, html, data) {
     // Get our actor
     let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
     // Make sure flags exist if they don't already
-    if (actor.data.flags['5e-training'] === undefined) {
+    if (actor.data.flags['5e-training'] === undefined || actor.data.flags['5e-training'] === null) {
       let trainingList = [];
       const flags = {trainingItems: trainingList};
       actor.data.flags['5e-training'] = flags;
@@ -256,7 +257,6 @@ async function addTrainingTab(app, html, data) {
           if (edit) {
             // Set up base values
             activity.name = html.find('#nameInput').val();
-            activity.progress = parseInt(html.find('#progressInput').val());
             // Progression Style: Ability Check
             if (activity.progressionStyle == 'ability'){
               activity.completionAt = parseInt(html.find('#completionAtInput').val());
@@ -286,20 +286,20 @@ async function addTrainingTab(app, html, data) {
       let field = event.currentTarget;
       let trainingIdx = parseInt(fieldId.replace('override-',''));
       let activity = flags.trainingItems[trainingIdx];
-      let change = 0;
+      let adjustment = 0;
 
       // Format text field input and change
       if(isNaN(field.value)){
         ui.notifications.warn("Downtime Tracking: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
       } else if(field.value.charAt(0)=="+"){
-        change = parseInt(field.value.substr(1).trim());
-        activity.progress = calculateNewProgress(activity, change);
+        adjustment = parseInt(field.value.substr(1).trim());
+        activity = calculateNewProgress(activity, "Adjust Progress (+)", adjustment);
       } else if (field.value.charAt(0)=="-"){
-        change = 0 - parseInt(field.value.substr(1).trim());
-        activity.progress = calculateNewProgress(activity, change);
+        adjustment = 0 - parseInt(field.value.substr(1).trim());
+        activity = calculateNewProgress(activity, "Adjust Progress (-)", adjustment);
       } else {
-        change = parseInt(field.value);
-        activity.progress = calculateNewProgress(activity, change, true);
+        adjustment = parseInt(field.value);
+        activity = calculateNewProgress(activity, "Set Progress (=)", adjustment, true);
       }
 
       // Log completion
@@ -327,7 +327,7 @@ async function addTrainingTab(app, html, data) {
         // Roll to increase progress
         actor.rollAbilityTest(activity.ability).then(function(result){
           // Increase progress
-          activity.progress = calculateNewProgress(activity, result.total);
+          activity = calculateNewProgress(activity, "Roll (Ability)", result.total);
           // Log activity completion
           checkCompletion(actor, activity);
           // Update flags and actor
@@ -340,7 +340,7 @@ async function addTrainingTab(app, html, data) {
       // Progression Type: Simple
       else if (activity.progressionStyle == 'simple'){
         // Increase progress
-        activity.progress = calculateNewProgress(activity, 1);
+        activity = calculateNewProgress(activity, "Attempt (Simple)", 1);
         // Log activity completion
         checkCompletion(actor, activity);
         // Update flags and actor
@@ -349,6 +349,13 @@ async function addTrainingTab(app, html, data) {
           actor.update({'flags.5e-training': flags});
         });
       }
+    });
+
+    // Review Changes
+    html.find('.training-audit').click(async (event) => {
+      event.preventDefault();
+      console.log("Crash's 5e Downtime Tracking | GM Audit excuted!");
+      new AuditLog(actor).render(true);
     });
 
     // Set Training Tab as Active
@@ -364,22 +371,41 @@ async function addTrainingTab(app, html, data) {
   }
 
 }
-// Calculates the progress value of an activity.
+// Calculates the progress value of an activity and logs the change to the progress
 // if absolute is true, set progress to the change value rather than adding to it
-function calculateNewProgress(activity, change, absolute = false){
+function calculateNewProgress(activity, actionName, change, absolute = false){
+
+  let newProgress = 0;
+
   if(absolute){
-    activity.progress = change;
+    newProgress = change;
   } else {
-    activity.progress += change;
+    newProgress = activity.progress + change;
   }
 
-  if(activity.progress > activity.completionAt){
-    activity.progress = activity.completionAt;
-  } else if (activity.progress < 0){
-    activity.progress = 0;
+  if(newProgress > activity.completionAt){
+    newProgress = activity.completionAt;
+  } else if (newProgress < 0){
+    newProgress = 0;
   }
 
-  return activity.progress;
+  // Log activity change
+  // Make sure flags exist and add them if they don't
+  if (activity.changes == undefined){
+    activity.changes = [];
+  }
+  // Create and add new change to log
+  let log = {
+    timestamp: new Date(),
+    actionName: actionName,
+    valueChanged: "progress",
+    oldValue: activity.progress,
+    newValue: newProgress
+  }
+  activity.changes.push(log);
+
+  activity.progress = newProgress;
+  return activity;
 }
 
 // Checks for completion of an activity and logs it if it's done
