@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 0.3.1
+Fixes:
+- Fixed an issue where enabling MQoL's Item Delete Check setting prevented downtime activities from being deleted on some character sheets. 
+
 ## Version 0.3.0
 New Features:
 - Added localization support. Currently we've only got English, but if you'd like to contribute, please get in touch!
