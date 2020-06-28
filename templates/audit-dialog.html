@@ -6,7 +6,7 @@
   <!-- Player View -->
   {{#unless isGm}}
     <div class="instructions">
-      {{ localize "C5ETRAINING.AuditLogInstructionsPlayer" }}
+      <p>{{ localize "C5ETRAINING.AuditLogInstructionsPlayer" }}</p>
     </div>
     <div class="action-table">
       <table>
@@ -32,7 +32,8 @@
   <!-- GM View -->
   {{#if isGm}}
   <div class="instructions">
-    {{ localize "C5ETRAINING.AuditLogInstructionsGm" }}
+    <p>{{ localize "C5ETRAINING.AuditLogInstructionsGm" }}</p>
+    <p>{{ localize "C5ETRAINING.AuditLogDeleteNote" }}</p>
   </div>
   <div class="action-table">
     <table>

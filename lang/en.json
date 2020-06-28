@@ -9,6 +9,7 @@
 	"C5ETRAINING.AnnounceActivityCompletionForHint": "Choose which actor types you would like to have trigger chat messages upon activity completion.",
 	"C5ETRAINING.Apply": "Apply",
 	"C5ETRAINING.AuditLog": "Change Log",
+  "C5ETRAINING.AuditLogDeleteNote": "Note: Dismissing changes does NOT revert them. If you'd like to revert changes you see here, you must do so manually, but this log can serve as a guide to help you figure out what changes to make if required.",
 	"C5ETRAINING.AuditLogInstructionsGm": "This log shows a list of all changes made to the progress of each of this character's downtime activities. You may remove items from this list after you've reviewed them by checking the box in the Dismiss column and hitting the button at the bottom of the window. Once you do this, neither you nor the player will be able to see them anymore.",
   "C5ETRAINING.AuditLogInstructionsPlayer": "This log shows a list of changes made to the progress of each of your downtime activities that have not yet been reviewed by your GM. Once they are reviewed, they will no longer be visible here.",
 
