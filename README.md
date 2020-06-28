@@ -5,6 +5,9 @@ Downtime Tracking is a module for Foundry VTT that adds a tab to all actor sheet
 
 [![Image from Gyazo](https://i.gyazo.com/7f072b341c266eed397c772b0328c542.png)](https://gyazo.com/7f072b341c266eed397c772b0328c542)
 
+## Example Uses
+Check out some examples for how to use the module [here](/examples.md).
+
 ## Multiple Progression Systems
 There are two core ways to track activities in this module:
 
@@ -40,11 +43,11 @@ Sometimes we forget things. Sometimes we mess up. Version 0.3.0 of the module ad
 
 [![Image from Gyazo](https://i.gyazo.com/5fa7f966fd12c3ad321bb2bf4359be55.png)](https://gyazo.com/5fa7f966fd12c3ad321bb2bf4359be55)
 
-# Localization (v0.3.0+)
+## Localization (v0.3.0+)
 This module includes support for localization. If you'd like to contribute, please get in touch with me on Discord, or add an issue to the repo. Currently supported languages are:
 - English
 
-# Compatibility
+## Compatibility
 ### Supported Modules
 - Sky's Alt D&D 5e Character Sheet
 - Tidy5e Sheet (including dark mode with your custom colors!)
@@ -53,12 +56,12 @@ This module includes support for localization. If you'd like to contribute, plea
 ### Unsupported Modules
 - Obsidian (no plans to support at this time)
 
-# Got Questions? Find a Bug?
-Contact me on Discord (CRASH1115#2944).
+## Got Questions? Find a Bug?
+Contact me on Discord (CRASH1115#2944) to chat, or create an issue right here on GitHub.
 
-# Attributions and Special Thanks
+## Attributions and Special Thanks
 - Thanks to platypus_pi for help with English localization
 
-# License
+## License
 - This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).
 - This work is licensed under the [Foundry Virtual Tabletop EULA - Limited License Agreement for Module Development](https://foundryvtt.com/article/license/).
