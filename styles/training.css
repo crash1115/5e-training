@@ -169,9 +169,10 @@
 	line-height: 30px;
 }
 
-.tidy5e.sheet.actor.npc .training .inventory-list .inventory-header .item-controls a.item-create{
+.tidy5e.sheet.actor.npc .training .inventory-list .inventory-header .item-controls a.item-create {
 	margin-top: 0px;
 	padding: 4px 5px;
+	margin-right: 5px;
 }
 
 .tidy5e.sheet.actor.npc .training .inventory-list .item {
