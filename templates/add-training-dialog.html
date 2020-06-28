@@ -1,14 +1,14 @@
 <form class="training-dialog">
   <div class="field">
-    <label for="name">Name:</label>
+    <label for="name">{{ localize "C5ETRAINING.Name" }}:</label>
     <input type="text" name="nameInput" id="nameInput" value="{{training.name}}">
   </div>
 
   <div class="field">
-    <label for="progressionStyle">Progression Type:</label>
+    <label for="progressionStyle">{{ localize "C5ETRAINING.ProgressionType" }}:</label>
       <select name="progressionStyleInput" id="progressionStyleInput">
-      <option value="ability" {{#if (eq training.progressionStyle "ability")}} selected {{/if}}>Ability Check</option>
-      <option value="simple" {{#if (eq training.progressionStyle "simple")}} selected {{/if}}>Simple</option>
+      <option value="ability" {{#if (eq training.progressionStyle "ability")}} selected {{/if}}>{{ localize "DND5E.ActionAbil" }}</option>
+      <option value="simple" {{#if (eq training.progressionStyle "simple")}} selected {{/if}}>{{ localize "C5ETRAINING.Simple" }}</option>
     </select>
   </div>
 </form>

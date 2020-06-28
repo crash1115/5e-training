@@ -1,23 +1,26 @@
 <div class="tab training flexrow" data-group="primary" data-tab="training">
   <ol class="inventory-list">
     <li class="inventory-header flexrow">
-      <h3 class="item-name flexrow">Activity Progress</h3>
+      <h3 class="item-name flexrow">{{ localize 'C5ETRAINING.ActivityProgress' }}</h3>
       <div class="item-controls">
         <a class="tidy5e-delete-lock">
           <label for="tidy5e-allow-delete" class="tidy5e-delete-toggle">
-            <span class="tidy5e-delete-disabled" title="show item delete button"><i class="fas fa-lock"></i>Delete disabled</span>
-            <span class="tidy5e-delete-enabled" title="hide item delete button"><i class="fas fa-unlock"></i>Delete enabled</span>
+            <span class="tidy5e-delete-disabled" title="{{ localize 'TIDY5E.DeleteDisabledHint' }}"><i class="fas fa-lock"></i>{{ localize 'TIDY5E.DeleteDisabled' }}</span>
+            <span class="tidy5e-delete-enabled" title="{{ localize 'TIDY5E.DeleteEnabledHint' }}"><i class="fas fa-unlock"></i>{{ localize 'TIDY5E.DeleteEnabled' }}</span>
           </label>
         </a>
-        <a class="item-control item-create training-add" title="Add New Activity">
-          <i class="fas fa-plus-circle"></i> Add
+        <a class="item-control item-create training-audit" title="{{ localize 'C5ETRAINING.ReviewChanges' }}">
+          <i class="fas fa-clipboard"></i> {{ localize 'C5ETRAINING.AuditLog' }}
+        </a>
+        <a class="item-control item-create training-add" title="{{ localize 'C5ETRAINING.CreateNewDowntimeActivity' }}">
+          <i class="fas fa-plus-circle"></i> {{ localize 'DND5E.Add' }}
         </a>
       </div>
     </li>
     <ol class="item-list">
       {{#each actor.flags.5e-training.trainingItems as |training tid| }}
         <li class="item flexrow">
-          <div class="item-name flexrow rollable training-roll" id="roll-{{tid}}" title="Advance Activity Progression">
+          <div class="item-name flexrow rollable training-roll" id="roll-{{tid}}" title="{{ localize 'C5ETRAINING.AdvanceActivityProgress' }}">
             <div class="item-image" style="background-image: url(icons/svg/d20.svg);"></div>
             <h4>{{training.name}}</h4>
           </div>
@@ -25,7 +28,7 @@
             {{training.progressionStyle}} {{#if (eq training.progressionStyle "ability")}}({{training.ability}}){{/if}}
           </div>
           <div class="item-detail">
-            <input type="text" class="item-control training-override" id="override-{{tid}}" title="Override Progression Value" value="{{training.progress}}"/>
+            <input type="text" class="item-control training-override" id="override-{{tid}}" title="{{ localize 'C5ETRAINING.AdjustProgressValue' }}" value="{{training.progress}}"/>
             <span> / {{training.completionAt}}</span>
           </div>
           <div class="item-detail flexrow bar">
@@ -36,8 +39,8 @@
             </div>
           </div>
           <div class="item-controls">
-            <a class="item-control item-edit training-edit" id="edit-{{tid}}" title='Edit Activity'><i class="fas fa-edit"></i></a>
-            <a class="item-control item-delete training-delete" id="delete-{{tid}}" title='Delete Activity'><i class="fas fa-trash"></i></a>
+            <a class="item-control item-edit training-edit" id="edit-{{tid}}" title="{{ localize 'C5ETRAINING.EditDowntimeActivity' }}"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete training-delete" id="delete-{{tid}}" title="{{ localize 'C5ETRAINING.DeleteDowntimeActivity' }}"><i class="fas fa-trash"></i></a>
           </div>
         </li>
       {{/each}}

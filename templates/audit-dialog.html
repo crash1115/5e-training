@@ -1,0 +1,68 @@
+<form class="audit-log">
+  <input type="hidden" name="actorId" value="{{object._id}}"/>
+
+  <h1 class="title">{{object.name}}'s Downtime Activity Log</h1>
+
+  <!-- Player View -->
+  {{#unless isGm}}
+    <div class="instructions">
+      <p>{{ localize "C5ETRAINING.AuditLogInstructionsPlayer" }}</p>
+    </div>
+    <div class="action-table">
+      <table>
+        <tr>
+          <th>{{ localize "C5ETRAINING.Time" }}</th>
+          <th>{{ localize "C5ETRAINING.User" }}</th>
+          <th>{{ localize "C5ETRAINING.Activity" }}</th>
+          <th>{{ localize "C5ETRAINING.Action" }}</th>
+          <th>{{ localize "C5ETRAINING.ProgressChange" }}</th>
+        </tr>
+        {{#each changes as |change id|}}
+        <tr>
+          <td>{{change.timestamp}}</td>
+          <td>{{change.user}}</td>
+          <td>{{change.activityName}} {{change.dismissed}}</td>
+          <td>{{change.actionName}}</td>
+          <td>{{change.oldValue}} -> {{change.newValue}} ({{change.diff}})</td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+  {{/unless}}
+
+  <!-- GM View -->
+  {{#if isGm}}
+  <div class="instructions">
+    <p>{{ localize "C5ETRAINING.AuditLogInstructionsGm" }}</p>
+    <p>{{ localize "C5ETRAINING.AuditLogDeleteNote" }}</p>
+  </div>
+  <div class="action-table">
+    <table>
+      <tr>
+        <th>{{ localize "C5ETRAINING.Time" }}</th>
+        <th>{{ localize "C5ETRAINING.User" }}</th>
+        <th>{{ localize "C5ETRAINING.Activity" }}</th>
+        <th>{{ localize "C5ETRAINING.Action" }}</th>
+        <th>{{ localize "C5ETRAINING.ProgressChange" }}</th>
+        <th>{{ localize "C5ETRAINING.Dismiss" }}<th>
+      </tr>
+      {{#each changes as |change id|}}
+      <tr>
+        <td>{{change.timestamp}}</td>
+        <td>{{change.user}}</td>
+        <td>{{change.activityName}} {{change.dismissed}}</td>
+        <td>{{change.actionName}}</td>
+        <td>{{change.oldValue}} -> {{change.newValue}} ({{change.diff}})</td>
+        <td><input type="checkbox" name="{{change.timestamp}}" id="{{change.timestamp}}"/></td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+
+  <footer>
+    <button id="apply-audits"><i class='fas fa-check'></i> {{ localize "C5ETRAINING.DismissSelected" }}</button>
+  </footer>
+  {{/if}}
+
+
+</form>

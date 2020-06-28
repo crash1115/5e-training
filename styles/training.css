@@ -2,6 +2,19 @@
 /*         TRAINING TAB        */
 /*****************************/
 
+/* Tweak some item controls styles to fit the additional buttons*/
+.training .item-controls {
+	min-width: fit-content;
+	min-width: -moz-fit-content;
+}
+
+.training .item-controls a {
+	min-width: fit-content;
+	min-width: -moz-fit-content;
+	flex: 1 !important;
+	margin-right: 5px;
+}
+
 /* Type Column */
 .training .item-detail {
 	text-transform: capitalize;
@@ -57,6 +70,47 @@
 	flex: 5;
 }
 
+
+/*********************************/
+/*         AUDIT LOGS          */
+/*****************************/
+
+.audit-log .instructions {
+	margin-bottom: 10px;
+}
+
+.audit-log .action-table {
+	margin-bottom: 20px;
+}
+
+.audit-log .action-table table {
+	text-align: left;
+	border: none;
+	background-color: none;
+}
+
+.audit-log .action-table table tr th,
+.audit-log .action-table table tr td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.audit-log .action-table table tr:nth-of-type(even) td {
+	background-color: rgba(0,0,0,0.2);
+}
+
+.audit-log .action-table table tr:hover td {
+	background-color: rgba(255,0,0,0.2);
+}
+
+.audit-log footer{
+	display: flex;
+}
+.audit-log #apply-audits,
+.audit-log #cancel-audits {
+	flex: 1;
+}
+
 /*********************************/
 /* SUPPORT FOR D&D5E DARK MODE */
 /*****************************/
@@ -72,6 +126,14 @@
 	color: #000000;
 }
 
+.dark-mode .audit-log .action-table table tr:nth-of-type(even) td {
+	background-color: rgba(0,0,0,0.5);
+}
+
+.dark-mode .audit-log .action-table table tr:hover td {
+	background-color: rgba(63,136,230, 0.4);
+}
+
 
 /*********************************/
 /*     SUPPORT FOR TIDY 5E     */
@@ -83,27 +145,38 @@
 }
 
 /* Show the lock when tidy is active*/
-.tidy5e .training .tidy5e-delete-lock {
+.tidy5e.sheet.actor .training .tidy5e-delete-lock {
 	display: inline-block;
-}
-
-/* Tweak some item controls styles to fit the lock toggle */
-.tidy5e .training .item-controls {
-	min-width: fit-content;
-	min-width: -moz-fit-content;
-}
-
-.tidy5e .training .item-controls a {
-	min-width: fit-content;
-	min-width: -moz-fit-content;
-	flex: 1 !important;
-	margin-right: 5px;
 }
 
 .tidy5e .training .item-controls .item-create {
 	padding-left: 5px;
 	padding-right: 5px;
+}
+
+.tidy5e .training .item-controls .item-create:last-child {
 	margin-right: 0px;
+}
+
+/* Tweak activity entries on NPC sheet */
+.tidy5e.sheet.actor.npc .training .inventory-list .item .item-name .item-image {
+	height: 30px;
+	width: 30px;
+	flex: 0 0 30px;
+}
+
+.tidy5e.sheet.actor.npc .training .inventory-list .item .item-name h4 {
+	line-height: 30px;
+}
+
+.tidy5e.sheet.actor.npc .training .inventory-list .inventory-header .item-controls a.item-create {
+	margin-top: 0px;
+	padding: 4px 5px;
+	margin-right: 5px;
+}
+
+.tidy5e.sheet.actor.npc .training .inventory-list .item {
+	line-height: 30px;
 }
 
 /* Controls dark mode support */
