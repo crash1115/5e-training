@@ -156,6 +156,7 @@ async function addTrainingTab(app, html, data) {
       let newActivity = {
         name: game.i18n.localize("C5ETRAINING.NewDowntimeActivity"),
         progress: 0,
+        changes: [],
         progressionStyle: 'ability'
       };
 
