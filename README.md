@@ -47,6 +47,7 @@ Sometimes we forget things. Sometimes we mess up. Version 0.3.0 of the module ad
 This module includes support for localization. Currently supported languages are:
 - English
 - Korean
+
 If you'd like to contribute, please get in touch with me or create a pull request with your translations. For existing translations, new keys may get added as the module is update. If this is the case, you'll be able to find a .json file with all the newly added, untranslated keys in the `lang/missing` directory.
 
 ## Compatibility
