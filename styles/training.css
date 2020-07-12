@@ -16,8 +16,13 @@
 }
 
 /* Type Column */
-.training .item-detail {
+.training .item-detail.type {
 	text-transform: capitalize;
+}
+
+/* Override Column */
+.dnd5e.sheet.actor .training .inventory-list .item-detail.override {
+	flex: 0 0 90px;
 }
 
 /* Progress Columns */
@@ -31,7 +36,7 @@
   padding-top: 1px;
   line-height: 1;
 	display: inline;
-  max-width: 30px;
+  max-width: 40px;
 }
 
 /* Training Bar */
@@ -157,6 +162,10 @@
 
 .tidy5e.sheet.actor.npc .training .inventory-list .item .item-name h4 {
 	line-height: 30px;
+}
+
+.tidy5e.sheet.actor.npc .training .inventory-list .item-detail .training-override {
+	max-width: 40px;
 }
 
 .tidy5e.sheet.actor.npc .training .inventory-list .inventory-header .item-controls a.item-create {
