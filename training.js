@@ -400,7 +400,7 @@ function calculateNewProgress(activity, actionName, change, absolute = false){
 }
 
 // Checks for completion of an activity and logs it if it's done
-function checkCompletion(actor, activity){
+async function checkCompletion(actor, activity){
   if(activity.progress >= activity.completionAt){
     let alertFor = game.settings.get("5e-training", "announceCompletionFor");
     let isPc = actor.isPC;
@@ -425,7 +425,8 @@ function checkCompletion(actor, activity){
 
     if (sendIt){
       console.log("Crash's 5e Downtime Tracking | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedADowntimeActivity"));
-      ChatMessage.create({alias: game.i18n.localize("C5ETRAINING.DowntimeActivityComplete"), content: actor.name + " " + game.i18n.localize("C5ETRAINING.Completed") + " " + activity.name});
+      let chatHtml = await renderTemplate('modules/5e-training/templates/completion-message.html', {actor:actor, activity:activity});
+      ChatMessage.create({content: chatHtml});
     }
   }
 }
