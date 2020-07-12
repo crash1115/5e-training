@@ -139,16 +139,6 @@
 /*     SUPPORT FOR TIDY 5E     */
 /*****************************/
 
-/* Hide the lock by default */
-.training .tidy5e-delete-lock {
-	display: none;
-}
-
-/* Show the lock when tidy is active*/
-.tidy5e.sheet.actor .training .tidy5e-delete-lock {
-	display: inline-block;
-}
-
 .tidy5e .training .item-controls .item-create {
 	padding-left: 5px;
 	padding-right: 5px;
