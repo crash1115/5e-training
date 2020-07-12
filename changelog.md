@@ -1,8 +1,20 @@
 # Change Log
 
+## Version 0.3.2
+Improvements:
+- Increased width of progress adjustment column to allow for larger values
+- Updated styling for the activity completion notifications
+- Korean language translation, courtesy of KLO#1490
+
+Removed:
+- The toggle for the Tidy5e delete lock. Deleing downtime items requires confirmation already. Essentially asking for it twice was needlessly annoying for some folks.
+
+Fixes:
+- Fixed some styling for the item control buttons
+
 ## Version 0.3.1
 Fixes:
-- Fixed an issue where enabling MQoL's Item Delete Check setting prevented downtime activities from being deleted on some character sheets. 
+- Fixed an issue where enabling MQoL's Item Delete Check setting prevented downtime activities from being deleted on some character sheets.
 
 ## Version 0.3.0
 New Features:
