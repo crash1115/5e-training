@@ -37,12 +37,12 @@ Hooks.once("init", () => {
     config: true,
     type: String,
     choices: {
-      "str": game.i18n.localize("DND5E.AbilityStr"),
-      "dex": game.i18n.localize("DND5E.AbilityDex"),
-      "con": game.i18n.localize("DND5E.AbilityCon"),
-      "int": game.i18n.localize("DND5E.AbilityInt"),
-      "wis": game.i18n.localize("DND5E.AbilityWis"),
-      "cha":game.i18n.localize("DND5E.AbilityCha"),
+      "str": game.i18n.localize("C5ETRAINING.AbilityStr"),
+      "dex": game.i18n.localize("C5ETRAINING.AbilityDex"),
+      "con": game.i18n.localize("C5ETRAINING.AbilityCon"),
+      "int": game.i18n.localize("C5ETRAINING.AbilityInt"),
+      "wis": game.i18n.localize("C5ETRAINING.AbilityWis"),
+      "cha":game.i18n.localize("C5ETRAINING.AbilityCha"),
     },
     default: "int",
   });
@@ -95,7 +95,7 @@ Hooks.once("init", () => {
       "pc": game.i18n.localize("C5ETRAINING.PcsOnly"),
       "npc": game.i18n.localize("C5ETRAINING.NpcsOnly"),
       "both": game.i18n.localize("C5ETRAINING.PcsAndNpcs"),
-      "none": game.i18n.localize("DND5E.None"),
+      "none": game.i18n.localize("C5ETRAINING.None"),
     },
     default: "pc"
   });
@@ -434,9 +434,9 @@ async function checkCompletion(actor, activity){
 // Takes in the die roll string and returns whether it was made at adv/disadv/normal
 function getRollMode(formula){
   let d20Roll = formula.split(" ")[0];
-  if(d20Roll == "2d20kh"){ return  game.i18n.localize("DND5E.Advantage"); }
-  else if(d20Roll == "2d20kl"){ return game.i18n.localize("DND5E.Disadvantage"); }
-  else { return game.i18n.localize("DND5E.Normal"); }
+  if(d20Roll == "2d20kh"){ return  game.i18n.localize("C5ETRAINING.Advantage"); }
+  else if(d20Roll == "2d20kl"){ return game.i18n.localize("C5ETRAINING.Disadvantage"); }
+  else { return game.i18n.localize("C5ETRAINING.Normal"); }
 }
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {

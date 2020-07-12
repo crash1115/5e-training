@@ -1,13 +1,23 @@
 
 {
+  "C5ETRAINING.AbilityCha": "Charisma",
+  "C5ETRAINING.AbilityCheck": "Ability Check",
+  "C5ETRAINING.AbilityCon": "Constitution",
+  "C5ETRAINING.AbilityDex": "Dexterity",
+  "C5ETRAINING.AbilityInt": "Intelligence",
+  "C5ETRAINING.AbilityStr": "Strength",
+  "C5ETRAINING.AbilityWis": "Wisdom",
   "C5ETRAINING.Action": "액션",
 	"C5ETRAINING.Activity": "활동",
 	"C5ETRAINING.ActivityProgress": "활동 진행률",
+  "C5ETRAINING.Add": "Add",
+  "C5ETRAINING.Advantage": "Advantage",
 	"C5ETRAINING.AdjustProgressValue": "진행률 조정",
 	"C5ETRAINING.AdvanceActivityProgress": "고급 활동 진행률",
 	"C5ETRAINING.AnnounceActivityCompletionFor": "활동 완료 알림 : ",
 	"C5ETRAINING.AnnounceActivityCompletionForHint": "활동 완료 시 채팅 메시지를 작동 시킬 액터 유형을 선택한다",
 	"C5ETRAINING.Apply": "적용",
+  "C5ETRAINING.AttemptsToComplete": "Attempts to complete",
 	"C5ETRAINING.AuditLog": "기록 변경",
   "C5ETRAINING.AuditLogDeleteNote": "참고:변경을 취소해도 변경사항은 복구되지 않는다. 여기에 표시된 변경사항을 되돌리려면 수동으로 변경해야 하지만 기록을 사용하여 변경사항을 파악하는데 도움을 줄 수 있다.",
 	"C5ETRAINING.AuditLogInstructionsGm": "이 기록은 이 캐릭터의 여가 활동의 진행 상황에 대한 모든 변경 내역을 보여준다. 취소 열의 상자를 선택하고 창 하단의 버튼을 눌러 확인 후 항목을 제거할 수 있다. 이렇게 할 경우 다시 볼 수 없다.",
@@ -16,6 +26,7 @@
 	"C5ETRAINING.Cancel": "취소",
 	"C5ETRAINING.Completed": "완료 :",
 	"C5ETRAINING.CompletedADowntimeActivity": "완료된 여가 활동",
+  "C5ETRAINING.CompletionTarget": "Completion Target",
 	"C5ETRAINING.Create": "생성",
 	"C5ETRAINING.CreateNewDowntimeActivity": "새 여가 활동 생성",
 	"C5ETRAINING.CurrentProgress": "현재 진행률",
@@ -31,6 +42,7 @@
 	"C5ETRAINING.Delete": "삭제",
 	"C5ETRAINING.DeleteConfirmation": "이 항목을 정말로 삭제하시겠습니까?",
 	"C5ETRAINING.DeleteDowntimeActivity": "여가 활동 삭제",
+  "C5ETRAINING.Disadvantage": "Disadvantage",
 	"C5ETRAINING.Dismiss": "삭제",
   "C5ETRAINING.DismissSelected": "선택 대상 삭제",
 	"C5ETRAINING.DowntimeActivityComplete": "여가 활동 완료",
@@ -46,6 +58,8 @@
 
 	"C5ETRAINING.Name": "이름",
 	"C5ETRAINING.NewDowntimeActivity": "새 여가 활동",
+  "C5ETRAINING.None": "None",
+  "C5ETRAINING.Normal": "Normal",
 	"C5ETRAINING.NpcsOnly": "NPC만",
 
 	"C5ETRAINING.PcsAndNpcs": "PC와 NPC",
@@ -55,6 +69,7 @@
 
   "C5ETRAINING.ReviewChanges": "변경 내용 확인",
 
+  "C5ETRAINING.SelectAnAbility": "Select an ability to use for progression",
 	"C5ETRAINING.ShowDowntimeTab": "여가시간 탭 표시",
 	"C5ETRAINING.ShowDowntimeTabHint": "이것을 활성화 하면 모든 플레이어 시트에 훈련 탭이 표시된다. 이를 적용하려면 시트를 다시 열어야 한다.",
 	"C5ETRAINING.Simple": "심플",
