@@ -44,9 +44,10 @@ Sometimes we forget things. Sometimes we mess up. Version 0.3.0 of the module ad
 [![Image from Gyazo](https://i.gyazo.com/5fa7f966fd12c3ad321bb2bf4359be55.png)](https://gyazo.com/5fa7f966fd12c3ad321bb2bf4359be55)
 
 ## Localization (v0.3.0+)
-This module includes support for localization. If you'd like to contribute, please get in touch with me. Currently supported languages are:
+This module includes support for localization. Currently supported languages are:
 - English
 - Korean
+If you'd like to contribute, please get in touch with me or create a pull request with your translations. For existing translations, new keys may get added as the module is update. If this is the case, you'll be able to find a .json file with all the newly added, untranslated keys in the `lang/missing` directory.
 
 ## Compatibility
 ### Supported Modules
