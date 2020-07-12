@@ -1,16 +1,16 @@
 <div class="field">
-  <label for="ability">Select an ability to use for progression:</label>
+  <label for="ability">{{ localize 'C5ETRAINING.SelectAnAbility' }}:</label>
   <select name="abilityInput" id="abilityInput"" {{#if (eq training.progressionStyle "simple")}}style="visibility:hidden;"{{/if}}>
-    <option value="str" {{#if (eq training.ability "str")}} selected {{/if}}>Strength</option>
-    <option value="dex" {{#if (eq training.ability "dex")}} selected {{/if}}>Dexterity</option>
-    <option value="con" {{#if (eq training.ability "con")}} selected {{/if}}>Constitution</option>
-    <option value="int" {{#if (eq training.ability "int")}} selected {{/if}}>Intelligence</option>
-    <option value="wis" {{#if (eq training.ability "wis")}} selected {{/if}}>Wisdom</option>
-    <option value="cha" {{#if (eq training.ability "cha")}} selected {{/if}}>Charisma</option>
+    <option value="str" {{#if (eq training.ability "str")}} selected {{/if}}>{{ localize 'C5ETRAINING.AbilityStr' }}</option>
+    <option value="dex" {{#if (eq training.ability "dex")}} selected {{/if}}>{{ localize 'C5ETRAINING.AbilityDex' }}</option>
+    <option value="con" {{#if (eq training.ability "con")}} selected {{/if}}>{{ localize 'C5ETRAINING.AbilityCon' }}</option>
+    <option value="int" {{#if (eq training.ability "int")}} selected {{/if}}>{{ localize 'C5ETRAINING.AbilityInt' }}</option>
+    <option value="wis" {{#if (eq training.ability "wis")}} selected {{/if}}>{{ localize 'C5ETRAINING.AbilityWis' }}</option>
+    <option value="cha" {{#if (eq training.ability "cha")}} selected {{/if}}>{{ localize 'C5ETRAINING.AbilityCha' }}</option>
   </select>
 </div>
 
 <div class="field">
-  <label for="completionAt">Completion Target:</label>
+  <label for="completionAt">{{ localize 'C5ETRAINING.CompletionTarget' }}:</label>
   <input type="text" name="completionAtInput" id="completionAtInput" value="{{training.completionAt}}">
 </div>

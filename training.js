@@ -37,12 +37,12 @@ Hooks.once("init", () => {
     config: true,
     type: String,
     choices: {
-      "str": game.i18n.localize("DND5E.AbilityStr"),
-      "dex": game.i18n.localize("DND5E.AbilityDex"),
-      "con": game.i18n.localize("DND5E.AbilityCon"),
-      "int": game.i18n.localize("DND5E.AbilityInt"),
-      "wis": game.i18n.localize("DND5E.AbilityWis"),
-      "cha":game.i18n.localize("DND5E.AbilityCha"),
+      "str": game.i18n.localize("C5ETRAINING.AbilityStr"),
+      "dex": game.i18n.localize("C5ETRAINING.AbilityDex"),
+      "con": game.i18n.localize("C5ETRAINING.AbilityCon"),
+      "int": game.i18n.localize("C5ETRAINING.AbilityInt"),
+      "wis": game.i18n.localize("C5ETRAINING.AbilityWis"),
+      "cha":game.i18n.localize("C5ETRAINING.AbilityCha"),
     },
     default: "int",
   });
@@ -95,7 +95,7 @@ Hooks.once("init", () => {
       "pc": game.i18n.localize("C5ETRAINING.PcsOnly"),
       "npc": game.i18n.localize("C5ETRAINING.NpcsOnly"),
       "both": game.i18n.localize("C5ETRAINING.PcsAndNpcs"),
-      "none": game.i18n.localize("DND5E.None"),
+      "none": game.i18n.localize("C5ETRAINING.None"),
     },
     default: "pc"
   });
@@ -131,20 +131,6 @@ async function addTrainingTab(app, html, data) {
     let sheet = html.find('.sheet-body');
     let trainingTabHtml = $(await renderTemplate('modules/5e-training/templates/training-section.html', data));
     sheet.append(trainingTabHtml);
-
-    // Check for Tidy5e and add listener for delete lock
-    let tidy5eSheetActive = (game.modules.get("tidy5e-sheet") !== undefined) && (game.modules.get("tidy5e-sheet").active);
-    if (tidy5eSheetActive){
-      html.find('.tidy5e-delete-toggle').click(async (event) => {
-        event.preventDefault();
-        let actor = game.actors.entities.find(a => a.data._id === data.actor._id);;
-        if(actor.getFlag('tidy5e-sheet', 'allow-delete')){
-          await actor.unsetFlag('tidy5e-sheet', 'allow-delete');
-        } else {
-          await actor.setFlag('tidy5e-sheet', 'allow-delete', true);
-        }
-      });
-    }
 
     // Add New Downtime Activity
     html.find('.training-add').click(async (event) => {
@@ -414,7 +400,7 @@ function calculateNewProgress(activity, actionName, change, absolute = false){
 }
 
 // Checks for completion of an activity and logs it if it's done
-function checkCompletion(actor, activity){
+async function checkCompletion(actor, activity){
   if(activity.progress >= activity.completionAt){
     let alertFor = game.settings.get("5e-training", "announceCompletionFor");
     let isPc = actor.isPC;
@@ -439,7 +425,8 @@ function checkCompletion(actor, activity){
 
     if (sendIt){
       console.log("Crash's 5e Downtime Tracking | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedADowntimeActivity"));
-      ChatMessage.create({alias: game.i18n.localize("C5ETRAINING.DowntimeActivityComplete"), content: actor.name + " " + game.i18n.localize("C5ETRAINING.Completed") + " " + activity.name});
+      let chatHtml = await renderTemplate('modules/5e-training/templates/completion-message.html', {actor:actor, activity:activity});
+      ChatMessage.create({content: chatHtml});
     }
   }
 }
@@ -447,9 +434,9 @@ function checkCompletion(actor, activity){
 // Takes in the die roll string and returns whether it was made at adv/disadv/normal
 function getRollMode(formula){
   let d20Roll = formula.split(" ")[0];
-  if(d20Roll == "2d20kh"){ return  game.i18n.localize("DND5E.Advantage"); }
-  else if(d20Roll == "2d20kl"){ return game.i18n.localize("DND5E.Disadvantage"); }
-  else { return game.i18n.localize("DND5E.Normal"); }
+  if(d20Roll == "2d20kh"){ return  game.i18n.localize("C5ETRAINING.Advantage"); }
+  else if(d20Roll == "2d20kl"){ return game.i18n.localize("C5ETRAINING.Disadvantage"); }
+  else { return game.i18n.localize("C5ETRAINING.Normal"); }
 }
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
