@@ -1,22 +1,4 @@
 
 {
-  "C5ETRAINING.AbilityCha": "Charisma",
-  "C5ETRAINING.AbilityCheck": "Ability Check",
-  "C5ETRAINING.AbilityCon": "Constitution",
-  "C5ETRAINING.AbilityDex": "Dexterity",
-  "C5ETRAINING.AbilityInt": "Intelligence",
-  "C5ETRAINING.AbilityStr": "Strength",
-  "C5ETRAINING.AbilityWis": "Wisdom",
-  "C5ETRAINING.Add": "Add",
-  "C5ETRAINING.Advantage": "Advantage",
-  "C5ETRAINING.AttemptsToComplete": "Attempts to complete",
 
-  "C5ETRAINING.CompletionTarget": "Completion Target",
-
-  "C5ETRAINING.Disadvantage": "Disadvantage",
-
-  "C5ETRAINING.None": "None",
-  "C5ETRAINING.Normal": "Normal",
-
-  "C5ETRAINING.SelectAnAbility": "Select an ability to use for progression",
 }
