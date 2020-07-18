@@ -16,8 +16,9 @@
 }
 
 /* Type Column */
-.training .item-detail.type {
+.dnd5e.sheet.actor .training .inventory-list .item-detail.type {
 	text-transform: capitalize;
+	flex: 0 0 110px;
 }
 
 /* Override Column */
@@ -98,7 +99,10 @@
 .audit-log .action-table table tr td {
 	padding-top: 5px;
 	padding-bottom: 5px;
+	text-transform: capitalize;
 }
+
+
 
 .audit-log .action-table table tr:nth-of-type(even) td {
 	background-color: rgba(0,0,0,0.2);

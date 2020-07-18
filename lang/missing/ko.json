@@ -1,4 +1,27 @@
 
 {
-
+  "C5ETRAINING.Ability": "Ability",
+  "C5ETRAINING.Attempt": "Attempt",
+  "C5ETRAINING.Custom": "Custom",
+  "C5ETRAINING.CustomRoll": "Custom Roll",
+  "C5ETRAINING.Roll": "Roll",
+  "C5ETRAINING.Skill": "Skill",
+  "C5ETRAINING.SkillAcr": "Acrobatics",
+  "C5ETRAINING.SkillAni": "Animal Handling",
+  "C5ETRAINING.SkillArc": "Arcana",
+  "C5ETRAINING.SkillAth": "Athletics",
+  "C5ETRAINING.SkillDec": "Deception",
+  "C5ETRAINING.SkillHis": "History",
+  "C5ETRAINING.SkillIns": "Insight",
+  "C5ETRAINING.SkillInv": "Investigation",
+  "C5ETRAINING.SkillItm": "Intimidation",
+  "C5ETRAINING.SkillMed": "Medicine",
+  "C5ETRAINING.SkillNat": "Nature",
+  "C5ETRAINING.SkillPer": "Persuasion",
+  "C5ETRAINING.SkillPrc": "Perception",
+  "C5ETRAINING.SkillPrf": "Performance",
+  "C5ETRAINING.SkillRel": "Religion",
+  "C5ETRAINING.SkillSlt": "Sleight of Hand",
+  "C5ETRAINING.SkillSte": "Stealth",
+  "C5ETRAINING.SkillSur": "Survival"
 }

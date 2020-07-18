@@ -8,6 +8,16 @@ Handlebars.registerHelper("trainingCompletion", function(trainingItem) {
   return percentComplete;
 });
 
+Handlebars.registerHelper("progressionStyle", function(trainingItem) {
+  let progressionTypeString = "";
+  if(trainingItem.progressionStyle === "simple"){
+    progressionTypeString = game.i18n.localize("C5ETRAINING.Simple");
+  } else if(trainingItem.progressionStyle === "ability"){
+    progressionTypeString = getAbilityName(trainingItem.ability);
+  }
+  return progressionTypeString;
+});
+
 // Register Game Settings
 Hooks.once("init", () => {
   preloadTemplates();
@@ -42,7 +52,25 @@ Hooks.once("init", () => {
       "con": game.i18n.localize("C5ETRAINING.AbilityCon"),
       "int": game.i18n.localize("C5ETRAINING.AbilityInt"),
       "wis": game.i18n.localize("C5ETRAINING.AbilityWis"),
-      "cha":game.i18n.localize("C5ETRAINING.AbilityCha"),
+      "cha": game.i18n.localize("C5ETRAINING.AbilityCha"),
+      "acr": game.i18n.localize("C5ETRAINING.SkillAcr"),
+      "ani": game.i18n.localize("C5ETRAINING.SkillAni"),
+      "arc": game.i18n.localize("C5ETRAINING.SkillArc"),
+      "ath": game.i18n.localize("C5ETRAINING.SkillAth"),
+      "dec": game.i18n.localize("C5ETRAINING.SkillDec"),
+      "his": game.i18n.localize("C5ETRAINING.SkillHis"),
+      "ins": game.i18n.localize("C5ETRAINING.SkillIns"),
+      "inv": game.i18n.localize("C5ETRAINING.SkillInv"),
+      "itm": game.i18n.localize("C5ETRAINING.SkillItm"),
+      "med": game.i18n.localize("C5ETRAINING.SkillMed"),
+      "nat": game.i18n.localize("C5ETRAINING.SkillNat"),
+      "per": game.i18n.localize("C5ETRAINING.SkillPer"),
+      "prc": game.i18n.localize("C5ETRAINING.SkillPrc"),
+      "prf": game.i18n.localize("C5ETRAINING.SkillPrf"),
+      "rel": game.i18n.localize("C5ETRAINING.SkillRel"),
+      "slt": game.i18n.localize("C5ETRAINING.SkillSlt"),
+      "ste": game.i18n.localize("C5ETRAINING.SkillSte"),
+      "sur": game.i18n.localize("C5ETRAINING.SkillSur")
     },
     default: "int",
   });
@@ -279,14 +307,17 @@ async function addTrainingTab(app, html, data) {
       if(isNaN(field.value)){
         ui.notifications.warn("Downtime Tracking: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
       } else if(field.value.charAt(0)=="+"){
+        let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (+)";
         adjustment = parseInt(field.value.substr(1).trim());
-        activity = calculateNewProgress(activity, "Adjust Progress (+)", adjustment);
+        activity = calculateNewProgress(activity, changeName, adjustment);
       } else if (field.value.charAt(0)=="-"){
+        let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (-)";
         adjustment = 0 - parseInt(field.value.substr(1).trim());
-        activity = calculateNewProgress(activity, "Adjust Progress (-)", adjustment);
+        activity = calculateNewProgress(activity, changeName, adjustment);
       } else {
+        let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (=)";
         adjustment = parseInt(field.value);
-        activity = calculateNewProgress(activity, "Set Progress (=)", adjustment, true);
+        activity = calculateNewProgress(activity, changeName, adjustment, true);
       }
 
       // Log completion
@@ -308,14 +339,18 @@ async function addTrainingTab(app, html, data) {
       let fieldId = event.currentTarget.id;
       let trainingIdx = parseInt(fieldId.replace('roll-',''));
       let activity = flags.trainingItems[trainingIdx];
+      let abilities = ['str','dex','con','int','wis','con'];
+      let skillRoll = !abilities.includes(activity.ability);
 
-      // Progression Type: Ability Check
-      if (activity.progressionStyle == 'ability'){
+      // Progression Type: Ability Check - ABILITY
+      if (activity.progressionStyle == 'ability' && !skillRoll){
+        let abilityName = getAbilityName(activity.ability);
         // Roll to increase progress
         actor.rollAbilityTest(activity.ability).then(function(result){
           let rollMode = getRollMode(result.formula);
+          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
           // Increase progress
-          activity = calculateNewProgress(activity, "Roll, " + rollMode + " (Ability)", result.total);
+          activity = calculateNewProgress(activity, attemptName, result.total);
           // Log activity completion
           checkCompletion(actor, activity);
           // Update flags and actor
@@ -325,10 +360,30 @@ async function addTrainingTab(app, html, data) {
           });
         });
       }
+      // Progression Type: Ability Check - SKILL
+      else if (activity.progressionStyle == 'ability' && skillRoll){
+        let abilityName = getAbilityName(activity.ability);
+        // Roll to increase progress
+        actor.rollSkill(activity.ability).then(function(result){
+          let rollMode = getRollMode(result.formula);
+          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
+          // Increase progress
+          activity = calculateNewProgress(activity, attemptName, result.total);
+          // Log activity completion
+          checkCompletion(actor, activity);
+          // Update flags and actor
+          flags.trainingItems[trainingIdx] = activity;
+          actor.update({'flags.5e-training': null}).then(function(){
+            actor.update({'flags.5e-training': flags});
+          });
+        });
+      }
+
       // Progression Type: Simple
       else if (activity.progressionStyle == 'simple'){
+        let activityName = game.i18n.localize("C5ETRAINING.Attempt") + " (" + game.i18n.localize("C5ETRAINING.Simple") + ")";
         // Increase progress
-        activity = calculateNewProgress(activity, "Attempt (Simple)", 1);
+        activity = calculateNewProgress(activity, activityName, 1);
         // Log activity completion
         checkCompletion(actor, activity);
         // Update flags and actor
@@ -437,6 +492,19 @@ function getRollMode(formula){
   if(d20Roll == "2d20kh"){ return  game.i18n.localize("C5ETRAINING.Advantage"); }
   else if(d20Roll == "2d20kl"){ return game.i18n.localize("C5ETRAINING.Disadvantage"); }
   else { return game.i18n.localize("C5ETRAINING.Normal"); }
+}
+
+function getAbilityName(ability){
+  let capitalized = ability.charAt(0).toUpperCase() + ability.slice(1);
+  let abilities = ['str','dex','con','int','wis','con'];
+  let isSkill = !abilities.includes(ability);
+  let localizationKey = "C5ETRAINING.";
+  if(isSkill){
+    localizationKey = localizationKey + "Skill" + capitalized;
+  } else {
+    localizationKey = localizationKey + "Ability" + capitalized;
+  }
+  return game.i18n.localize(localizationKey);
 }
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {

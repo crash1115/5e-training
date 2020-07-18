@@ -1,5 +1,6 @@
 
 {
+  "C5ETRAINING.Ability": "Ability",
   "C5ETRAINING.AbilityCha": "Charisma",
   "C5ETRAINING.AbilityCheck": "Ability Check",
   "C5ETRAINING.AbilityCon": "Constitution",
@@ -17,6 +18,7 @@
 	"C5ETRAINING.AnnounceActivityCompletionFor": "Announce Activity Completion For:",
 	"C5ETRAINING.AnnounceActivityCompletionForHint": "Choose which actor types you would like to have trigger chat messages upon activity completion.",
 	"C5ETRAINING.Apply": "Apply",
+  "C5ETRAINING.Attempt": "Attempt",
   "C5ETRAINING.AttemptsToComplete": "Attempts to complete",
 	"C5ETRAINING.AuditLog": "Change Log",
   "C5ETRAINING.AuditLogDeleteNote": "Note: Dismissing changes does NOT revert them. If you'd like to revert changes you see here, you must do so manually, but this log can serve as a guide to help you figure out what changes to make if required.",
@@ -30,6 +32,8 @@
 	"C5ETRAINING.Create": "Create",
 	"C5ETRAINING.CreateNewDowntimeActivity": "Create New Downtime Activity",
 	"C5ETRAINING.CurrentProgress": "Current Progress",
+  "C5ETRAINING.Custom": "Custom",
+  "C5ETRAINING.CustomRoll": "Custom Roll",
 
 	"C5ETRAINING.DefaultAbility": "Default Attribute for Ability Check Progression",
 	"C5ETRAINING.DefaultAbilityHint": "Sets the default attribute assigned to a downtime activity upon creation. This can be edited after activity creation.",
@@ -68,11 +72,31 @@
 	"C5ETRAINING.ProgressionType": "Progression Type",
 
   "C5ETRAINING.ReviewChanges": "Review Changes",
+  "C5ETRAINING.Roll": "Roll",
 
   "C5ETRAINING.SelectAnAbility": "Select an ability to use for progression",
 	"C5ETRAINING.ShowDowntimeTab": "Show Downtime Tab",
 	"C5ETRAINING.ShowDowntimeTabHint": "Toggling this on will display the training tab on all player character sheets. You will need to close and reopen sheets for this to take effect.",
 	"C5ETRAINING.Simple": "Simple",
+  "C5ETRAINING.Skill": "Skill",
+  "C5ETRAINING.SkillAcr": "Acrobatics",
+  "C5ETRAINING.SkillAni": "Animal Handling",
+  "C5ETRAINING.SkillArc": "Arcana",
+  "C5ETRAINING.SkillAth": "Athletics",
+  "C5ETRAINING.SkillDec": "Deception",
+  "C5ETRAINING.SkillHis": "History",
+  "C5ETRAINING.SkillIns": "Insight",
+  "C5ETRAINING.SkillInv": "Investigation",
+  "C5ETRAINING.SkillItm": "Intimidation",
+  "C5ETRAINING.SkillMed": "Medicine",
+  "C5ETRAINING.SkillNat": "Nature",
+  "C5ETRAINING.SkillPer": "Persuasion",
+  "C5ETRAINING.SkillPrc": "Perception",
+  "C5ETRAINING.SkillPrf": "Performance",
+  "C5ETRAINING.SkillRel": "Religion",
+  "C5ETRAINING.SkillSlt": "Sleight of Hand",
+  "C5ETRAINING.SkillSte": "Stealth",
+  "C5ETRAINING.SkillSur": "Survival",
 
 	"C5ETRAINING.Time": "Time (UTC)",
 
