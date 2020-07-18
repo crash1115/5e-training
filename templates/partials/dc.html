@@ -1,0 +1,39 @@
+<div class="field">
+  <label for="ability">{{ localize 'C5ETRAINING.SelectAnAbility' }}:</label>
+  <select name="abilityInput" id="abilityInput"" {{#if (eq training.progressionStyle "simple")}}style="visibility:hidden;"{{/if}}>
+    <option value="str" {{#if (eq training.ability "str")}} selected {{/if}}>{{ localize 'C5ETRAINING.Ability' }}: {{ localize 'C5ETRAINING.AbilityStr' }}</option>
+    <option value="dex" {{#if (eq training.ability "dex")}} selected {{/if}}>{{ localize 'C5ETRAINING.Ability' }}: {{ localize 'C5ETRAINING.AbilityDex' }}</option>
+    <option value="con" {{#if (eq training.ability "con")}} selected {{/if}}>{{ localize 'C5ETRAINING.Ability' }}: {{ localize 'C5ETRAINING.AbilityCon' }}</option>
+    <option value="int" {{#if (eq training.ability "int")}} selected {{/if}}>{{ localize 'C5ETRAINING.Ability' }}: {{ localize 'C5ETRAINING.AbilityInt' }}</option>
+    <option value="wis" {{#if (eq training.ability "wis")}} selected {{/if}}>{{ localize 'C5ETRAINING.Ability' }}: {{ localize 'C5ETRAINING.AbilityWis' }}</option>
+    <option value="cha" {{#if (eq training.ability "cha")}} selected {{/if}}>{{ localize 'C5ETRAINING.Ability' }}: {{ localize 'C5ETRAINING.AbilityCha' }}</option>
+    <option value="acr" {{#if (eq training.ability "acr")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillAcr' }}</option>
+    <option value="ani" {{#if (eq training.ability "ani")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillAni' }}</option>
+    <option value="arc" {{#if (eq training.ability "arc")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillArc' }}</option>
+    <option value="ath" {{#if (eq training.ability "ath")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillAth' }}</option>
+    <option value="dec" {{#if (eq training.ability "dec")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillDec' }}</option>
+    <option value="his" {{#if (eq training.ability "his")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillHis' }}</option>
+    <option value="ins" {{#if (eq training.ability "ins")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillIns' }}</option>
+    <option value="inv" {{#if (eq training.ability "inv")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillInv' }}</option>
+    <option value="itm" {{#if (eq training.ability "itm")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillItm' }}</option>
+    <option value="med" {{#if (eq training.ability "med")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillMed' }}</option>
+    <option value="nat" {{#if (eq training.ability "nat")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillNat' }}</option>
+    <option value="per" {{#if (eq training.ability "per")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillPer' }}</option>
+    <option value="prc" {{#if (eq training.ability "prc")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillPrc' }}</option>
+    <option value="prf" {{#if (eq training.ability "prf")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillPrf' }}</option>
+    <option value="rel" {{#if (eq training.ability "rel")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillRel' }}</option>
+    <option value="slt" {{#if (eq training.ability "slt")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillSlt' }}</option>
+    <option value="ste" {{#if (eq training.ability "ste")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillSte' }}</option>
+    <option value="sur" {{#if (eq training.ability "sur")}} selected {{/if}}>{{ localize 'C5ETRAINING.Skill' }}: {{ localize 'C5ETRAINING.SkillSur' }}</option>
+  </select>
+</div>
+
+<div class="field">
+  <label for="completionAt">{{ localize 'C5ETRAINING.SuccessesRequired' }}:</label>
+  <input type="text" name="completionAtInput" id="completionAtInput" value="{{training.completionAt}}">
+</div>
+
+<div class="field">
+  <label for="dc">{{ localize 'C5ETRAINING.CheckDC' }}:</label>
+  <input type="text" name="dcInput" id="dcInput" value="{{training.dc}}">
+</div>

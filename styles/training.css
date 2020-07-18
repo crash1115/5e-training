@@ -18,7 +18,7 @@
 /* Type Column */
 .dnd5e.sheet.actor .training .inventory-list .item-detail.type {
 	text-transform: capitalize;
-	flex: 0 0 110px;
+	flex: 0 0 140px;
 }
 
 /* Override Column */
