@@ -12,7 +12,7 @@
 	"C5ETRAINING.ActivityProgress": "활동 진행률",
   "C5ETRAINING.Add": "추가",
   "C5ETRAINING.Advantage": "유리함",
-    "C5ETRAINING.AdjustProgressValue": "진행률 조정",
+  "C5ETRAINING.AdjustProgressValue": "진행률 조정",
 	"C5ETRAINING.AdvanceActivityProgress": "고급 활동 진행률",
 	"C5ETRAINING.AnnounceActivityCompletionFor": "활동 완료 알림 : ",
 	"C5ETRAINING.AnnounceActivityCompletionForHint": "활동 완료 시 채팅 메시지를 작동 시킬 액터 유형을 선택한다",
