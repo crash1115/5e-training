@@ -13,6 +13,10 @@ Improvements:
 
 ## Version 0.3.2
 Improvements:
+- Added some missing Korean language translation keys, courtesy of KLO#1490
+
+## Version 0.3.2
+Improvements:
 - Increased width of progress adjustment column to allow for larger values
 - Updated styling for the activity completion notifications
 - Korean language translation, courtesy of KLO#1490
