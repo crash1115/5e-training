@@ -19,7 +19,7 @@
             <h4>{{training.name}}</h4>
           </div>
           <div class="item-detail type">
-            {{training.progressionStyle}} {{#if (eq training.progressionStyle "ability")}}({{training.ability}}){{/if}}
+            {{progressionStyle training}}
           </div>
           <div class="item-detail override">
             <input type="text" class="item-control training-override" id="override-{{tid}}" title="{{ localize 'C5ETRAINING.AdjustProgressValue' }}" value="{{training.progress}}"/>

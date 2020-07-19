@@ -9,15 +9,19 @@ Downtime Tracking is a module for Foundry VTT that adds a tab to all actor sheet
 Check out some examples for how to use the module [here](/examples.md).
 
 ## Multiple Progression Systems
-There are two core ways to track activities in this module:
+There are three core ways to track activities in this module:
 
 **Simple Progression** is exactly what it says on the tin. Every attempt to progress the activity adds one to the progress score. Just set the completion threshold based on the number of attempts you'd like the activity to take. This is handy for things with static requirements like scribing spells, or anything you just need a simple way to track. Hence the name, Simple Mode.
 
 [![Image from Gyazo](https://i.gyazo.com/5f7d0c52b2e1632dceebe94f5de842d4.gif)](https://gyazo.com/5f7d0c52b2e1632dceebe94f5de842d4)
 
-**Ability Check Progression** is the fun stuff. When you set up an activity that uses this mode, you also select an associated ability score to go along with it. Every attempt to progress the activity prompts the player for an ability check. Currently, this uses the core 5e roll system and prompts for advantage/disadvantage, and modifiers. The check is rolled, and the total gets added to the progress score. Use this one for training skill or tool proficiencies.
+**Ability Check Progression** is the fun stuff. When you set up an activity that uses this mode, you also select an associated ability or skill to go along with it. Every attempt to progress the activity prompts the player for an ability/skill check. Currently, this uses the core 5e roll system and prompts for advantage/disadvantage, and modifiers. The check is rolled, and the total gets added to the progress score. Use this one for training skill or tool proficiencies.
 
 [![Image from Gyazo](https://i.gyazo.com/83287fa524afe4fc618d0c9014b66bff.gif)](https://gyazo.com/83287fa524afe4fc618d0c9014b66bff)
+
+**DC Progression (v0.4.0+)** is a hybrid of the first two modes. This progression mode prompts the player to make a skill or ability check against a set DC. If the roll is successful, the progression score increases by one. If the roll fails, no progress is gained. Currently, this uses the core 5e roll system and prompts for advantage/disadvantage, and modifiers.
+
+[![Image from Gyazo](https://i.gyazo.com/75ff889b77d7a3e1aced719503cf3eeb.gif)](https://gyazo.com/75ff889b77d7a3e1aced719503cf3eeb)
 
 ## Customizable
 Several settings allow you to get the functionality you want out of the module. Current settings allow you to:
@@ -25,8 +29,6 @@ Several settings allow you to get the functionality you want out of the module. 
 - Customize the name of the Downtime tab. Wanna call it "Training" because you only use it for skill proficiencies? You got it. Need to call it "Oh No, Not Again" because your players are just *like that*? You can do that, too. I've totally been there.
 - Set defaults for each type of downtime activity progression. If you want really slow progression, you can make it happen. If you want to really reward your players for taking the time to train stuff by letting them do it quickly, you can do that, too. Go wild. Find whatever works for you.
 - Choose which types of actors display activity completion notifications.
-
-[![Image from Gyazo](https://i.gyazo.com/7b34743aab42fba1af69ea60582dc0b8.png)](https://gyazo.com/7b34743aab42fba1af69ea60582dc0b8)
 
 ## Speedy Progress Updates
 You know what sucks? Accidentally rolling with disadvantage when you didn't mean to. If something gets messed up, or if you need to adjust a progress value quickly, we got you covered. You can edit progress values right from the activity's entry! The input accepts relative and absolute values, so entering "-15" will subtract 15 from the progress total, and entering "57" will set it to 57.

@@ -1,5 +1,16 @@
 # Change Log
 
+## Version 0.4.0
+New Features:
+- Added a DC progression type. This is a hybrid between Simple and Ability Check types. When you create a downtime item of this type, you can select the number of successes required to complete the activity, a skill or ability associated with it, and the DC of the check. Passing the check will increase the success count by one. Failing the check will not increase it.
+
+Improvements:
+- You can now select skills when selecting what kind of ability check to roll for Ability Check progression
+
+## Version 0.3.2
+Improvements:
+- Added some missing Korean language translation keys, courtesy of KLO#1490
+
 ## Version 0.3.2
 Improvements:
 - Added some missing Korean language translation keys, courtesy of KLO#1490

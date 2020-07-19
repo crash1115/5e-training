@@ -8,6 +8,18 @@ Handlebars.registerHelper("trainingCompletion", function(trainingItem) {
   return percentComplete;
 });
 
+Handlebars.registerHelper("progressionStyle", function(trainingItem) {
+  let progressionTypeString = "";
+  if(trainingItem.progressionStyle === "simple"){
+    progressionTypeString = game.i18n.localize("C5ETRAINING.Simple");
+  } else if(trainingItem.progressionStyle === "ability"){
+    progressionTypeString = getAbilityName(trainingItem.ability);
+  } else if(trainingItem.progressionStyle === "dc"){
+    progressionTypeString = getAbilityName(trainingItem.ability)+" (" + game.i18n.localize("C5ETRAINING.DC") + trainingItem.dc + ")";
+  }
+    return progressionTypeString;
+});
+
 // Register Game Settings
 Hooks.once("init", () => {
   preloadTemplates();
@@ -42,7 +54,25 @@ Hooks.once("init", () => {
       "con": game.i18n.localize("C5ETRAINING.AbilityCon"),
       "int": game.i18n.localize("C5ETRAINING.AbilityInt"),
       "wis": game.i18n.localize("C5ETRAINING.AbilityWis"),
-      "cha":game.i18n.localize("C5ETRAINING.AbilityCha"),
+      "cha": game.i18n.localize("C5ETRAINING.AbilityCha"),
+      "acr": game.i18n.localize("C5ETRAINING.SkillAcr"),
+      "ani": game.i18n.localize("C5ETRAINING.SkillAni"),
+      "arc": game.i18n.localize("C5ETRAINING.SkillArc"),
+      "ath": game.i18n.localize("C5ETRAINING.SkillAth"),
+      "dec": game.i18n.localize("C5ETRAINING.SkillDec"),
+      "his": game.i18n.localize("C5ETRAINING.SkillHis"),
+      "ins": game.i18n.localize("C5ETRAINING.SkillIns"),
+      "inv": game.i18n.localize("C5ETRAINING.SkillInv"),
+      "itm": game.i18n.localize("C5ETRAINING.SkillItm"),
+      "med": game.i18n.localize("C5ETRAINING.SkillMed"),
+      "nat": game.i18n.localize("C5ETRAINING.SkillNat"),
+      "per": game.i18n.localize("C5ETRAINING.SkillPer"),
+      "prc": game.i18n.localize("C5ETRAINING.SkillPrc"),
+      "prf": game.i18n.localize("C5ETRAINING.SkillPrf"),
+      "rel": game.i18n.localize("C5ETRAINING.SkillRel"),
+      "slt": game.i18n.localize("C5ETRAINING.SkillSlt"),
+      "ste": game.i18n.localize("C5ETRAINING.SkillSte"),
+      "sur": game.i18n.localize("C5ETRAINING.SkillSur")
     },
     default: "int",
   });
@@ -62,6 +92,24 @@ Hooks.once("init", () => {
     scope: "world",
     config: true,
     default: 10,
+    type: Number
+  });
+
+  game.settings.register("5e-training", "defaultDcDifficulty", {
+    name: game.i18n.localize("C5ETRAINING.DefaultDcDifficulty"),
+    hint: game.i18n.localize("C5ETRAINING.DefaultDcDifficultyHint"),
+    scope: "world",
+    config: true,
+    default: 10,
+    type: Number
+  });
+
+  game.settings.register("5e-training", "defaultDcSuccesses", {
+    name: game.i18n.localize("C5ETRAINING.DefaultDcSuccesses"),
+    hint: game.i18n.localize("C5ETRAINING.DefaultDcSuccessesHint"),
+    scope: "world",
+    config: true,
+    default: 5,
     type: Number
   });
 
@@ -176,6 +224,12 @@ async function addTrainingTab(app, html, data) {
             else if (newActivity.progressionStyle == 'simple'){
               newActivity.completionAt = game.settings.get("5e-training", "attemptsToComplete");
             }
+            // Progression Type: DC
+            else if (newActivity.progressionStyle == 'dc'){
+              newActivity.completionAt = game.settings.get("5e-training", "defaultDcSuccesses");
+              newActivity.ability = game.settings.get("5e-training", "defaultAbility");
+              newActivity.dc = game.settings.get("5e-training", "defaultDcDifficulty");
+            }
             // Update flags and actor
             flags.trainingItems.push(newActivity);
             actor.update({'flags.5e-training': null}).then(function(){
@@ -253,6 +307,12 @@ async function addTrainingTab(app, html, data) {
             else if (activity.progressionStyle == 'simple'){
               activity.completionAt = parseInt(html.find('#completionAtInput').val());
             }
+            // Progression Style: DC
+            else if (activity.progressionStyle == 'dc'){
+              activity.completionAt = parseInt(html.find('#completionAtInput').val());
+              activity.ability = html.find('#abilityInput').val();
+              activity.dc = html.find('#dcInput').val();
+            }
             // Update flags and actor
             flags.trainingItems[trainingIdx] = activity;
             actor.update({'flags.5e-training': null}).then(function(){
@@ -279,14 +339,17 @@ async function addTrainingTab(app, html, data) {
       if(isNaN(field.value)){
         ui.notifications.warn("Downtime Tracking: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
       } else if(field.value.charAt(0)=="+"){
+        let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (+)";
         adjustment = parseInt(field.value.substr(1).trim());
-        activity = calculateNewProgress(activity, "Adjust Progress (+)", adjustment);
+        activity = calculateNewProgress(activity, changeName, adjustment);
       } else if (field.value.charAt(0)=="-"){
+        let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (-)";
         adjustment = 0 - parseInt(field.value.substr(1).trim());
-        activity = calculateNewProgress(activity, "Adjust Progress (-)", adjustment);
+        activity = calculateNewProgress(activity, changeName, adjustment);
       } else {
+        let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (=)";
         adjustment = parseInt(field.value);
-        activity = calculateNewProgress(activity, "Set Progress (=)", adjustment, true);
+        activity = calculateNewProgress(activity, changeName, adjustment, true);
       }
 
       // Log completion
@@ -308,14 +371,36 @@ async function addTrainingTab(app, html, data) {
       let fieldId = event.currentTarget.id;
       let trainingIdx = parseInt(fieldId.replace('roll-',''));
       let activity = flags.trainingItems[trainingIdx];
+      let abilities = ['str','dex','con','int','wis','con'];
+      let skillRoll = !abilities.includes(activity.ability);
 
-      // Progression Type: Ability Check
-      if (activity.progressionStyle == 'ability'){
+      // Progression Type: Ability Check or DC - ABILITY
+      if (activity.ability && !skillRoll){
+        let abilityName = getAbilityName(activity.ability);
         // Roll to increase progress
-        actor.rollAbilityTest(activity.ability).then(function(result){
-          let rollMode = getRollMode(result.formula);
+        actor.rollAbilityTest(activity.ability).then(function(r){
+          let rollMode = getRollMode(r._formula);
+          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
           // Increase progress
-          activity = calculateNewProgress(activity, "Roll, " + rollMode + " (Ability)", result.total);
+          activity = calculateNewProgress(activity, attemptName, r._total);
+          // Log activity completion
+          checkCompletion(actor, activity);
+          // Update flags and actor
+          flags.trainingItems[trainingIdx] = activity;
+          actor.update({'flags.5e-training': null}).then(function(){
+            actor.update({'flags.5e-training': flags});
+          });
+        });
+      }
+      // Progression Type: Ability Check or DC - SKILL
+      else if (activity.ability && skillRoll){
+        let abilityName = getAbilityName(activity.ability);
+        // Roll to increase progress
+        actor.rollSkill(activity.ability).then(function(r){
+          let rollMode = getRollMode(r._formula);
+          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
+          // Increase progress
+          activity = calculateNewProgress(activity, attemptName, r._total);
           // Log activity completion
           checkCompletion(actor, activity);
           // Update flags and actor
@@ -327,8 +412,9 @@ async function addTrainingTab(app, html, data) {
       }
       // Progression Type: Simple
       else if (activity.progressionStyle == 'simple'){
+        let activityName = game.i18n.localize("C5ETRAINING.Attempt") + " (" + game.i18n.localize("C5ETRAINING.Simple") + ")";
         // Increase progress
-        activity = calculateNewProgress(activity, "Attempt (Simple)", 1);
+        activity = calculateNewProgress(activity, activityName, 1);
         // Log activity completion
         checkCompletion(actor, activity);
         // Update flags and actor
@@ -369,7 +455,15 @@ function calculateNewProgress(activity, actionName, change, absolute = false){
   if(absolute){
     newProgress = change;
   } else {
-    newProgress = activity.progress + change;
+    if(activity.dc){ //if there's a dc set
+      if(change >= activity.dc){ //if the check beat the dc
+        newProgress = activity.progress += 1; //increase the progress
+      } else { //check didnt beat dc
+        newProgress = activity.progress; //add nothing
+      }
+    } else { //if no dc set
+      newProgress = activity.progress + change;
+    }
   }
 
   if(newProgress > activity.completionAt){
@@ -437,6 +531,19 @@ function getRollMode(formula){
   if(d20Roll == "2d20kh"){ return  game.i18n.localize("C5ETRAINING.Advantage"); }
   else if(d20Roll == "2d20kl"){ return game.i18n.localize("C5ETRAINING.Disadvantage"); }
   else { return game.i18n.localize("C5ETRAINING.Normal"); }
+}
+
+function getAbilityName(ability){
+  let capitalized = ability.charAt(0).toUpperCase() + ability.slice(1);
+  let abilities = ['str','dex','con','int','wis','con'];
+  let isSkill = !abilities.includes(ability);
+  let localizationKey = "C5ETRAINING.";
+  if(isSkill){
+    localizationKey = localizationKey + "Skill" + capitalized;
+  } else {
+    localizationKey = localizationKey + "Ability" + capitalized;
+  }
+  return game.i18n.localize(localizationKey);
 }
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
