@@ -439,13 +439,14 @@ async function addTrainingTab(app, html, data) {
       let fieldId = event.currentTarget.id;
       let trainingIdx = parseInt(fieldId.replace('toggle-desc-',''));
       let activity = flags.trainingItems[trainingIdx];
+      let desc = activity.description || "";
       let li = $(event.currentTarget).parents(".item");
 
       if ( li.hasClass("expanded") ) {
         let summary = li.children(".item-summary");
         summary.slideUp(200, () => summary.remove());
       } else {
-        let div = $(`<div class="item-summary">${activity.description}</div>`);
+        let div = $(`<div class="item-summary">${desc}</div>`);
         li.append(div.hide());
         div.slideDown(200);
       }
