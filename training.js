@@ -190,6 +190,7 @@ async function addTrainingTab(app, html, data) {
       let newActivity = {
         name: game.i18n.localize("C5ETRAINING.NewDowntimeActivity"),
         progress: 0,
+        description: "",
         changes: [],
         progressionStyle: 'ability'
       };
@@ -209,12 +210,13 @@ async function addTrainingTab(app, html, data) {
           yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.Create"), callback: () => add = true},
           no: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => add = false},
         },
-        default: "no",
+        default: "yes",
         close: html => {
           if (add) {
             // Set up basic info
             newActivity.name = html.find('#nameInput').val();
             newActivity.progressionStyle = html.find('#progressionStyleInput').val();
+            newActivity.description = html.find('#descriptionInput').val();
             // Progression Type: Ability Check
             if (newActivity.progressionStyle == 'ability'){
               newActivity.ability = game.settings.get("5e-training", "defaultAbility");
@@ -232,39 +234,6 @@ async function addTrainingTab(app, html, data) {
             }
             // Update flags and actor
             flags.trainingItems.push(newActivity);
-            actor.update({'flags.5e-training': null}).then(function(){
-              actor.update({'flags.5e-training': flags});
-            });
-          }
-        }
-      }).render(true);
-    });
-
-    // Remove Downtime Activity
-    html.find('.training-delete').click(async (event) => {
-      event.preventDefault();
-      console.log("Crash's 5e Downtime Tracking | Delete Downtime Activity excuted!");
-
-      // Set up some variables
-      let fieldId = event.currentTarget.id;
-      let trainingIdx = parseInt(fieldId.replace('delete-',''));
-      let activity = flags.trainingItems[trainingIdx];
-      let del = false;
-      let dialogContent = await renderTemplate('modules/5e-training/templates/delete-training-dialog.html');
-
-      // Create dialog
-      new Dialog({
-        title: `Delete Downtime Activity`,
-        content: dialogContent,
-        buttons: {
-          yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.Delete"), callback: () => del = true},
-          no: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => del = false},
-        },
-        default: "no",
-        close: html => {
-          if (del) {
-            // Delete item and update actor
-            flags.trainingItems.splice(trainingIdx, 1);
             actor.update({'flags.5e-training': null}).then(function(){
               actor.update({'flags.5e-training': flags});
             });
@@ -293,11 +262,12 @@ async function addTrainingTab(app, html, data) {
           yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.Edit"), callback: () => edit = true},
           no: {icon: "<i class='fas fa-times'></i>",  label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => edit = false},
         },
-        default: "no",
+        default: "yes",
         close: html => {
           if (edit) {
             // Set up base values
             activity.name = html.find('#nameInput').val();
+            activity.description = html.find('#descriptionInput').val();
             // Progression Style: Ability Check
             if (activity.progressionStyle == 'ability'){
               activity.completionAt = parseInt(html.find('#completionAtInput').val());
@@ -315,6 +285,39 @@ async function addTrainingTab(app, html, data) {
             }
             // Update flags and actor
             flags.trainingItems[trainingIdx] = activity;
+            actor.update({'flags.5e-training': null}).then(function(){
+              actor.update({'flags.5e-training': flags});
+            });
+          }
+        }
+      }).render(true);
+    });
+
+    // Remove Downtime Activity
+    html.find('.training-delete').click(async (event) => {
+      event.preventDefault();
+      console.log("Crash's 5e Downtime Tracking | Delete Downtime Activity excuted!");
+
+      // Set up some variables
+      let fieldId = event.currentTarget.id;
+      let trainingIdx = parseInt(fieldId.replace('delete-',''));
+      let activity = flags.trainingItems[trainingIdx];
+      let del = false;
+      let dialogContent = await renderTemplate('modules/5e-training/templates/delete-training-dialog.html');
+
+      // Create dialog
+      new Dialog({
+        title: `Delete Downtime Activity`,
+        content: dialogContent,
+        buttons: {
+          yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.Delete"), callback: () => del = true},
+          no: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => del = false},
+        },
+        default: "yes",
+        close: html => {
+          if (del) {
+            // Delete item and update actor
+            flags.trainingItems.splice(trainingIdx, 1);
             actor.update({'flags.5e-training': null}).then(function(){
               actor.update({'flags.5e-training': flags});
             });
@@ -423,6 +426,32 @@ async function addTrainingTab(app, html, data) {
           actor.update({'flags.5e-training': flags});
         });
       }
+    });
+
+    // Toggle Information Display
+    // Modified version of _onItemSummary from dnd5e system located in
+    // dnd5e/module/actor/sheets/base.js
+    html.find('.training-toggle-desc').click(async (event) => {
+      event.preventDefault();
+      console.log("Crash's 5e Downtime Tracking | Toggle Acvtivity Info excuted!");
+
+      // Set up some variables
+      let fieldId = event.currentTarget.id;
+      let trainingIdx = parseInt(fieldId.replace('toggle-desc-',''));
+      let activity = flags.trainingItems[trainingIdx];
+      let desc = activity.description || "";
+      let li = $(event.currentTarget).parents(".item");
+
+      if ( li.hasClass("expanded") ) {
+        let summary = li.children(".item-summary");
+        summary.slideUp(200, () => summary.remove());
+      } else {
+        let div = $(`<div class="item-summary">${desc}</div>`);
+        li.append(div.hide());
+        div.slideDown(200);
+      }
+      li.toggleClass("expanded");
+
     });
 
     // Review Changes

@@ -6,12 +6,13 @@
   "C5ETRAINING.CheckDC": "Check DC",
   "C5ETRAINING.Custom": "Custom",
   "C5ETRAINING.CustomRoll": "Custom Roll",
-  
+
   "C5ETRAINING.DC": "DC",
   "C5ETRAINING.DefaultDcDifficulty": "Default Check Difficulty (DC)",
   "C5ETRAINING.DefaultDcDifficultyHint": "Sets the default DC for ability checks used by downtime activities using the DC progression system. Defaults to 10.",
   "C5ETRAINING.DefaultDcSuccesses": "Default Activity Completion Target (DC)",
   "C5ETRAINING.DefaultDcSuccessesHint": "Sets the default target number of check successes required to reach 100% activity completion for downtime activities using the DC progression system. The default is 5 successes.",
+  "C5ETRAINING.Description": "Description",
 
   "C5ETRAINING.Roll": "Roll",
 
@@ -34,5 +35,7 @@
   "C5ETRAINING.SkillSlt": "Sleight of Hand",
   "C5ETRAINING.SkillSte": "Stealth",
   "C5ETRAINING.SkillSur": "Survival",
-  "C5ETRAINING.SuccessesRequired": "Successes Required"
+  "C5ETRAINING.SuccessesRequired": "Successes Required",
+
+  "C5ETRAINING.ToggleInfo": "Toggle Info"
 }

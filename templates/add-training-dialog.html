@@ -12,4 +12,10 @@
       <option value="dc" {{#if (eq training.progressionStyle "dc")}} selected {{/if}}>{{ localize "C5ETRAINING.DC" }}</option>
     </select>
   </div>
+
+  <div class="wide-field">
+    <label for="description">{{ localize "C5ETRAINING.Description" }}:</label>
+    <textarea name="descriptionInput" id="descriptionInput">{{training.description}}</textarea>
+  </div>
+
 </form>

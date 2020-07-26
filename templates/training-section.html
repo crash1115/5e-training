@@ -14,9 +14,9 @@
     <ol class="item-list">
       {{#each actor.flags.5e-training.trainingItems as |training tid| }}
         <li class="item flexrow">
-          <div class="item-name flexrow rollable training-roll" id="roll-{{tid}}" title="{{ localize 'C5ETRAINING.AdvanceActivityProgress' }}">
-            <div class="item-image" style="background-image: url(icons/svg/d20.svg);"></div>
-            <h4>{{training.name}}</h4>
+          <div class="item-name flexrow">
+            <div class="item-image rollable training-roll" id="roll-{{tid}}" title="{{ localize 'C5ETRAINING.AdvanceActivityProgress' }}" style="background-image: url(icons/svg/d20.svg);"></div>
+            <h4 class="rollable training-toggle-desc" id="toggle-desc-{{tid}}" title="{{ localize 'C5ETRAINING.ToggleInfo' }}">{{training.name}}</h4>
           </div>
           <div class="item-detail type">
             {{progressionStyle training}}
