@@ -66,6 +66,11 @@
 /*           DIALOGS           */
 /*****************************/
 
+.training-dialog .wide-field {
+	margin-bottom: 10px;
+	padding-top: 5px;
+}
+
 .training-dialog .field {
 	display: flex;
 	margin-bottom: 10px;
