@@ -37,4 +37,5 @@ A really cool idea from Arkangel#5736 on Discord. Set up an actor to keep track 
 - Type: Simple
 - Completion Target: 10
 - Description: Enter a description of your faction here, or maybe the name of the group's contact within the organization
+
 ![Example of Faction Reputation Tracking](https://media.discordapp.net/attachments/513918036919713802/737320248163827712/unknown.png)
