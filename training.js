@@ -25,8 +25,17 @@ Hooks.once("init", () => {
   preloadTemplates();
 
   game.settings.register("5e-training", "enableTraining", {
-    name: game.i18n.localize("C5ETRAINING.ShowDowntimeTab"),
-    hint: game.i18n.localize("C5ETRAINING.ShowDowntimeTabHint"),
+    name: game.i18n.localize("C5ETRAINING.ShowDowntimeTabPc"),
+    hint: game.i18n.localize("C5ETRAINING.ShowDowntimeTabPcHint"),
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
+  game.settings.register("5e-training", "enableTrainingNpc", {
+    name: game.i18n.localize("C5ETRAINING.ShowDowntimeTabNpc"),
+    hint: game.i18n.localize("C5ETRAINING.ShowDowntimeTabNpcHint"),
     scope: "world",
     config: true,
     default: true,
@@ -153,8 +162,10 @@ Hooks.once("init", () => {
 // The Meat And Potatoes
 async function addTrainingTab(app, html, data) {
 
-  // Fetch Setting
-  let showTrainingTab = game.settings.get("5e-training", "enableTraining");
+  // Determine if we should show the downtime tab
+  let showTrainingTab = false;
+  if(data.isCharacter){ showTrainingTab = game.settings.get("5e-training", "enableTraining"); }
+  else if(data.isNPC){ showTrainingTab = game.settings.get("5e-training", "enableTrainingNpc"); }
 
   if (showTrainingTab){
 

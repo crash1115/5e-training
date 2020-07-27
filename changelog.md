@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 0.4.2
+Improvements:
+- Added an option to toggle the display of the downtime tab on NPC sheets independently.
+
+Removed:
+- The downtime tab no longer shows up on vehicle actor sheets.
+
 ## Version 0.4.1
 Improvements:
 - Added a description field to the add/edit dialogs so you can add notes to your downtime activities. Clicking the activity's name on the downtime tab will display the notes.
