@@ -16,6 +16,10 @@
 
   "C5ETRAINING.Roll": "Roll",
 
+  "C5ETRAINING.ShowDowntimeTabPc": "Show Downtime Tab (PCs)",
+	"C5ETRAINING.ShowDowntimeTabPcHint": "Toggling this on will display the downtime tab on all PC sheets. You will need to close and reopen sheets for this to take effect.",
+  "C5ETRAINING.ShowDowntimeTabNpc": "Show Downtime Tab (NPCs)",
+	"C5ETRAINING.ShowDowntimeTabNpcHint": "Toggling this on will display the dolwntime tab on all NPC sheets. You will need to close and reopen sheets for this to take effect.",
   "C5ETRAINING.Skill": "Skill",
   "C5ETRAINING.SkillAcr": "Acrobatics",
   "C5ETRAINING.SkillAni": "Animal Handling",

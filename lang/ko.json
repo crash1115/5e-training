@@ -70,8 +70,6 @@
   "C5ETRAINING.ReviewChanges": "변경 내용 확인",
 
   "C5ETRAINING.SelectAnAbility": "진행해 사용할 능력치를 선택하십시오",
-	"C5ETRAINING.ShowDowntimeTab": "여가시간 탭 표시",
-	"C5ETRAINING.ShowDowntimeTabHint": "이것을 활성화 하면 모든 플레이어 시트에 훈련 탭이 표시된다. 이를 적용하려면 시트를 다시 열어야 한다.",
 	"C5ETRAINING.Simple": "심플",
 
 	"C5ETRAINING.Time": "시간 (UTC)",
