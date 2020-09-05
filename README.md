@@ -17,11 +17,11 @@ There are three core ways to track activities in this module:
 
 [![Image from Gyazo](https://i.gyazo.com/5f7d0c52b2e1632dceebe94f5de842d4.gif)](https://gyazo.com/5f7d0c52b2e1632dceebe94f5de842d4)
 
-**Ability Check Progression** is the fun stuff. When you set up an activity that uses this mode, you also select an associated ability or skill to go along with it. Every attempt to progress the activity prompts the player for an ability/skill check. Currently, this uses the core 5e roll system and prompts for advantage/disadvantage, and modifiers. The check is rolled, and the total gets added to the progress score. Use this one for training skill or tool proficiencies.
+**Ability(/Skill/Tool) Check Progression** is the fun stuff. When you set up an activity that uses this mode, you also select an associated ability, skill, or tool to go along with it. Every attempt to progress the activity prompts the player for an ability/skill/tool check. Currently, this uses the core 5e roll system and prompts for advantage/disadvantage, and modifiers. The check is rolled, and the total gets added to the progress score.
 
 [![Image from Gyazo](https://i.gyazo.com/83287fa524afe4fc618d0c9014b66bff.gif)](https://gyazo.com/83287fa524afe4fc618d0c9014b66bff)
 
-**DC Progression (v0.4.0+)** is a hybrid of the first two modes. This progression mode prompts the player to make a skill or ability check against a set DC. If the roll is successful, the progression score increases by one. If the roll fails, no progress is gained. Currently, this uses the core 5e roll system and prompts for advantage/disadvantage, and modifiers.
+**Check With DC Progression (v0.4.0+)** is a hybrid of the first two modes. This progression mode prompts the player to make a skill, ability, or tool check against a set DC. If the roll is successful, the progression score increases by one. If the roll fails, no progress is gained. Currently, this uses the core 5e roll system and prompts for advantage/disadvantage, and modifiers.
 
 [![Image from Gyazo](https://i.gyazo.com/75ff889b77d7a3e1aced719503cf3eeb.gif)](https://gyazo.com/75ff889b77d7a3e1aced719503cf3eeb)
 
@@ -59,6 +59,7 @@ If you'd like to contribute, please get in touch with me or create a pull reques
 - Sky's Alt D&D 5e Character Sheet
 - Tidy5e Sheet (including dark mode with your custom colors!)
 - D&D5E Dark Mode (works with both the default sheet and Sky's Alt 5e sheet)
+- Ethck's Downtime Tracking
 
 ### Unsupported Modules
 - Obsidian (no plans to support at this time)
