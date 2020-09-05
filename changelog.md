@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 0.4.3
+Fixes:
+- Enhanced compatibility with Ethck's very cool downtime module. Clicking things will no longer open dialogs from two modules, and styles no longer wreak havoc with one another.
+
 ## Version 0.4.2
 Improvements:
 - Added an option to toggle the display of the downtime tab on NPC sheets independently.
