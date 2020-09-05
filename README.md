@@ -1,3 +1,5 @@
+![GitHub All Releases](https://img.shields.io/github/downloads/crash1115/5e-training/total) ![GitHub Releases](https://img.shields.io/github/downloads/crash1115/5e-training/latest/total) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/crash1115/5e-training?label=latest%20version)
+
 # Crash's 5e Downtime Tracking
 Does your group do a lot of downtime activities? Do you have a hard time keeping track of it all? Then this is the mod for you!
 

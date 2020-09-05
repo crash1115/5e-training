@@ -3,12 +3,12 @@
 /*****************************/
 
 /* Tweak some item controls styles to fit the additional buttons*/
-.training .item-controls {
+.crash-training .item-controls {
 	min-width: fit-content;
 	min-width: -moz-fit-content;
 }
 
-.training .item-controls a {
+.crash-training .item-controls a {
 	min-width: fit-content;
 	min-width: -moz-fit-content;
 	flex: 1 !important;
@@ -16,23 +16,23 @@
 }
 
 /* Type Column */
-.dnd5e.sheet.actor .training .inventory-list .item-detail.type {
+.dnd5e.sheet.actor .crash-training .inventory-list .item-detail.type {
 	text-transform: capitalize;
 	flex: 0 0 140px;
 }
 
 /* Override Column */
-.dnd5e.sheet.actor .training .inventory-list .item-detail.override {
+.dnd5e.sheet.actor .crash-training .inventory-list .item-detail.override {
 	flex: 0 0 90px;
 }
 
 /* Progress Columns */
-.training .item-detail.bar {
+.crash-training .item-detail.bar {
 	flex: 1 !important;
 }
 
 /* Progress Override Input */
-.training .item-detail .training-override {
+.crash-training .item-detail .crash-training-override {
 	text-align: right;
   padding-top: 1px;
   line-height: 1;
@@ -41,7 +41,7 @@
 }
 
 /* Training Bar */
-.training .progress-bar {
+.crash-training .progress-bar {
 	background-color: rgba(0,0,0,0.1);
 	border-radius: 4px;
 	height: 20px;
@@ -49,7 +49,7 @@
 }
 
 /* Training Bar Progress */
-.training .progress-bar .training-completion {
+.crash-training .progress-bar .crash-training-completion {
 	color: #111111;
 	background-color: rgba(255,0,0,0.4);
 	border-radius: 4px;
@@ -58,7 +58,7 @@
 }
 
 /* Training Bar Progress Percent Text */
-.training .progress-bar .training-completion span {
+.crash-training .progress-bar .crash-training-completion span {
 	margin-left: 5px;
 }
 
@@ -66,18 +66,18 @@
 /*           DIALOGS           */
 /*****************************/
 
-.training-dialog .wide-field {
+.crash-training-dialog .wide-field {
 	margin-bottom: 10px;
 	padding-top: 5px;
 }
 
-.training-dialog .field {
+.crash-training-dialog .field {
 	display: flex;
 	margin-bottom: 10px;
 	padding-top: 5px;
 }
 
-.training-dialog .field * {
+.crash-training-dialog .field * {
 	flex: 5;
 }
 
@@ -86,22 +86,22 @@
 /*         AUDIT LOGS          */
 /*****************************/
 
-.audit-log .instructions {
+.crash-audit-log .instructions {
 	margin-bottom: 10px;
 }
 
-.audit-log .action-table {
+.crash-audit-log .action-table {
 	margin-bottom: 20px;
 }
 
-.audit-log .action-table table {
+.crash-audit-log .action-table table {
 	text-align: left;
 	border: none;
 	background-color: none;
 }
 
-.audit-log .action-table table tr th,
-.audit-log .action-table table tr td {
+.crash-audit-log .action-table table tr th,
+.crash-audit-log .action-table table tr td {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	text-transform: capitalize;
@@ -109,19 +109,19 @@
 
 
 
-.audit-log .action-table table tr:nth-of-type(even) td {
+.crash-audit-log .action-table table tr:nth-of-type(even) td {
 	background-color: rgba(0,0,0,0.2);
 }
 
-.audit-log .action-table table tr:hover td {
+.crash-audit-log .action-table table tr:hover td {
 	background-color: rgba(255,0,0,0.2);
 }
 
-.audit-log footer{
+.crash-audit-log footer{
 	display: flex;
 }
-.audit-log #apply-audits,
-.audit-log #cancel-audits {
+.crash-audit-log #apply-audits,
+.crash-audit-log #cancel-audits {
 	flex: 1;
 }
 
@@ -130,12 +130,12 @@
 /*****************************/
 
 /* Training Bar */
-.dark-mode .training .progress-bar {
+.dark-mode .crash-training .progress-bar {
 	background-color: #303030;
 }
 
 /* Training Bar Progress */
-.dark-mode .training .progress-bar .training-completion {
+.dark-mode .crash-training .progress-bar .crash-training-completion {
 	background-color: #3F88E6;
 	color: #000000;
 }
@@ -153,52 +153,52 @@
 /*     SUPPORT FOR TIDY 5E     */
 /*****************************/
 
-.tidy5e .training .item-controls .item-create {
+.tidy5e .crash-training .item-controls .item-create {
 	padding-left: 5px;
 	padding-right: 5px;
 }
 
-.tidy5e .training .item-controls .item-create:last-child {
+.tidy5e .crash-training .item-controls .item-create:last-child {
 	margin-right: 0px;
 }
 
 /* Tweak activity entries on NPC sheet */
-.tidy5e.sheet.actor.npc .training .inventory-list .item .item-name .item-image {
+.tidy5e.sheet.actor.npc .crash-training .inventory-list .item .item-name .item-image {
 	height: 30px;
 	width: 30px;
 	flex: 0 0 30px;
 }
 
-.tidy5e.sheet.actor.npc .training .inventory-list .item .item-name h4 {
+.tidy5e.sheet.actor.npc .crash-training .inventory-list .item .item-name h4 {
 	line-height: 30px;
 }
 
-.tidy5e.sheet.actor.npc .training .inventory-list .item-detail .training-override {
+.tidy5e.sheet.actor.npc .crash-training .inventory-list .item-detail .crash-training-override {
 	max-width: 40px;
 }
 
-.tidy5e.sheet.actor.npc .training .inventory-list .inventory-header .item-controls a.item-create {
+.tidy5e.sheet.actor.npc .crash-training .inventory-list .inventory-header .item-controls a.item-create {
 	margin-top: 0px;
 	padding: 4px 5px;
 	margin-right: 5px;
 }
 
-.tidy5e.sheet.actor.npc .training .inventory-list .item {
+.tidy5e.sheet.actor.npc .crash-training .inventory-list .item {
 	line-height: 30px;
 }
 
 /* Controls dark mode support */
-.tidy5eDark .tidy5e.sheet.actor .training .inventory-list .item-controls a,
-.tidy5eDark .tidy5e.sheet.actor .training .inventory-list .item-controls a:hover {
+.tidy5eDark .tidy5e.sheet.actor .crash-training .inventory-list .item-controls a,
+.tidy5eDark .tidy5e.sheet.actor .crash-training .inventory-list .item-controls a:hover {
   color: var(--darkmode-primary-color);
 	font-weight: 300;
 }
 
 /* Training bar dark mode support */
-.tidy5eDark .training .progress-bar {
+.tidy5eDark .crash-training .progress-bar {
 	background-color: var(--darkmode-faint-color);
 }
 
-.tidy5eDark .training .progress-bar .training-completion {
+.tidy5eDark .crash-training .progress-bar .crash-training-completion {
 	background-color: var(--darkmode-secondary-accent);
 }

@@ -30,3 +30,12 @@ Your PC's have arrived in town, and something is amiss. There's a super cool wor
 - Set the completion target to 100 (or any other number you see fit)
 
 Do the skill challenge as normal. Each time a player makes a check, use the quick adjustment field to increase the progression by the amount the player rolled on their skill check. A group of five PC's who all roll really well could reach the completion target in a day, but it's more likely that this will be a 2-3 day affair. Either way, now you have a super simple way to keep track of how they're doing.
+
+## Track Faction Reputation
+A really cool idea from Arkangel#5736 on Discord. Set up an actor to keep track of your party's relationships with factions in the world/region, then create a downtime activity for each faction to keep track of how much they like the party. Assuming your reputation scale goes from 1-10, you could set each one up like this:
+- Name: Name of Faction
+- Type: Simple
+- Completion Target: 10
+- Description: Enter a description of your faction here, or maybe the name of the group's contact within the organization
+
+![Example of Faction Reputation Tracking](https://media.discordapp.net/attachments/513918036919713802/737320248163827712/unknown.png)
