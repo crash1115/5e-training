@@ -1,12 +1,12 @@
-<div class="tab training flexrow" data-group="primary" data-tab="training">
+<div class="tab crash-training flexrow" data-group="primary" data-tab="training">
   <ol class="inventory-list">
     <li class="inventory-header flexrow">
       <h3 class="item-name flexrow">{{ localize 'C5ETRAINING.ActivityProgress' }}</h3>
       <div class="item-controls">
-        <a class="item-control item-create training-audit" title="{{ localize 'C5ETRAINING.ReviewChanges' }}">
+        <a class="item-control item-create crash-training-audit" title="{{ localize 'C5ETRAINING.ReviewChanges' }}">
           <i class="fas fa-clipboard"></i> {{ localize 'C5ETRAINING.AuditLog' }}
         </a>
-        <a class="item-control item-create training-add" title="{{ localize 'C5ETRAINING.CreateNewDowntimeActivity' }}">
+        <a class="item-control item-create crash-training-add" title="{{ localize 'C5ETRAINING.CreateNewDowntimeActivity' }}">
           <i class="fas fa-plus-circle"></i> {{ localize 'C5ETRAINING.Add' }}
         </a>
       </div>
@@ -15,26 +15,26 @@
       {{#each actor.flags.5e-training.trainingItems as |training tid| }}
         <li class="item flexrow">
           <div class="item-name flexrow">
-            <div class="item-image rollable training-roll" id="roll-{{tid}}" title="{{ localize 'C5ETRAINING.AdvanceActivityProgress' }}" style="background-image: url(icons/svg/d20.svg);"></div>
-            <h4 class="rollable training-toggle-desc" id="toggle-desc-{{tid}}" title="{{ localize 'C5ETRAINING.ToggleInfo' }}">{{training.name}}</h4>
+            <div class="item-image rollable crash-training-roll" id="roll-{{tid}}" title="{{ localize 'C5ETRAINING.AdvanceActivityProgress' }}" style="background-image: url(icons/svg/d20.svg);"></div>
+            <h4 class="rollable crash-training-toggle-desc" id="toggle-desc-{{tid}}" title="{{ localize 'C5ETRAINING.ToggleInfo' }}">{{training.name}}</h4>
           </div>
           <div class="item-detail type">
             {{progressionStyle training}}
           </div>
           <div class="item-detail override">
-            <input type="text" class="item-control training-override" id="override-{{tid}}" title="{{ localize 'C5ETRAINING.AdjustProgressValue' }}" value="{{training.progress}}"/>
+            <input type="text" class="item-control crash-training-override" id="override-{{tid}}" title="{{ localize 'C5ETRAINING.AdjustProgressValue' }}" value="{{training.progress}}"/>
             <span> / {{training.completionAt}}</span>
           </div>
           <div class="item-detail flexrow bar">
             <div class="progress-bar">
-              <div class="training-completion" style="width:{{trainingCompletion training}}%;">
+              <div class="crash-training-completion" style="width:{{trainingCompletion training}}%;">
                 <span>{{trainingCompletion training}}%</span>
               </div>
             </div>
           </div>
           <div class="item-controls">
-            <a class="item-control training-edit" id="edit-{{tid}}" title="{{ localize 'C5ETRAINING.EditDowntimeActivity' }}"><i class="fas fa-edit"></i></a>
-            <a class="item-control training-delete" id="delete-{{tid}}" title="{{ localize 'C5ETRAINING.DeleteDowntimeActivity' }}"><i class="fas fa-trash"></i></a>
+            <a class="item-control crash-training-edit" id="edit-{{tid}}" title="{{ localize 'C5ETRAINING.EditDowntimeActivity' }}"><i class="fas fa-edit"></i></a>
+            <a class="item-control crash-training-delete" id="delete-{{tid}}" title="{{ localize 'C5ETRAINING.DeleteDowntimeActivity' }}"><i class="fas fa-trash"></i></a>
           </div>
         </li>
       {{/each}}

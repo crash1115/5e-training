@@ -192,7 +192,7 @@ async function addTrainingTab(app, html, data) {
     sheet.append(trainingTabHtml);
 
     // Add New Downtime Activity
-    html.find('.training-add').click(async (event) => {
+    html.find('.crash-training-add').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Create Downtime Activity excuted!");
 
@@ -254,7 +254,7 @@ async function addTrainingTab(app, html, data) {
     });
 
     // Edit Downtime Activity
-    html.find('.training-edit').click(async (event) => {
+    html.find('.crash-training-edit').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Edit Downtime Activity excuted!");
 
@@ -305,7 +305,7 @@ async function addTrainingTab(app, html, data) {
     });
 
     // Remove Downtime Activity
-    html.find('.training-delete').click(async (event) => {
+    html.find('.crash-training-delete').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Delete Downtime Activity excuted!");
 
@@ -338,7 +338,7 @@ async function addTrainingTab(app, html, data) {
     });
 
     // Edit Progression Value
-    html.find('.training-override').change(async (event) => {
+    html.find('.crash-training-override').change(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Progression Override excuted!");
 
@@ -377,7 +377,7 @@ async function addTrainingTab(app, html, data) {
     });
 
     // Roll To Train
-    html.find('.training-roll').click(async (event) => {
+    html.find('.crash-training-roll').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Progress Downtime Activity excuted!");
 
@@ -442,7 +442,7 @@ async function addTrainingTab(app, html, data) {
     // Toggle Information Display
     // Modified version of _onItemSummary from dnd5e system located in
     // dnd5e/module/actor/sheets/base.js
-    html.find('.training-toggle-desc').click(async (event) => {
+    html.find('.crash-training-toggle-desc').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | Toggle Acvtivity Info excuted!");
 
@@ -466,7 +466,7 @@ async function addTrainingTab(app, html, data) {
     });
 
     // Review Changes
-    html.find('.training-audit').click(async (event) => {
+    html.find('.crash-training-audit').click(async (event) => {
       event.preventDefault();
       console.log("Crash's 5e Downtime Tracking | GM Audit excuted!");
       new AuditLog(actor).render(true);
