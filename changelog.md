@@ -1,5 +1,15 @@
 # Change Log
 
+## Version 0.4.4
+Improvements:
+- Added the ability to select tools in addition to skills and ability checks. Tools are limited to those the actor has in their inventory. This means they're not available on NPC sheets.
+
+Changes:
+
+- "Ability" progression mode is now called "Ability/Skill/Tool Check" mode.
+- "DC" progression mode is now called "Check with DC".
+- Together, these modes are referred to as "Check-Based" progression modes, since they both utilize checks. You'll see them referred to this way in the module settings.
+
 ## Version 0.4.3
 Fixes:
 - Enhanced compatibility with Ethck's very cool downtime module. Clicking things will no longer open dialogs from two modules, and styles no longer wreak havoc with one another.

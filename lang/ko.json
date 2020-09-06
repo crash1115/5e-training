@@ -31,10 +31,6 @@
 	"C5ETRAINING.CreateNewDowntimeActivity": "새 여가 활동 생성",
 	"C5ETRAINING.CurrentProgress": "현재 진행률",
 
-	"C5ETRAINING.DefaultAbility": "능력 판정 진행에 대한 기본 속성",
-	"C5ETRAINING.DefaultAbilityHint": "생성시 여가 활동에 할당된 기본 속성을 설정한다. 생성 후 편집할 수 있다.",
-	"C5ETRAINING.DefaultAbilityCompletion": "기본 활동 달성 목표 (능력 판정)",
-	"C5ETRAINING.DefaultAbilityCompletionHint": "능력 판정 진행을 통한 여가 활동의 100% 완료에 필요한 기본 목표 수를 설정한다. 경험에 비추어 볼 때 평균적 개인은 활동 진행을 위해 판정 당 전체 점수에 10점 정도를 기여할 수 있다. 기본값은 300(또는 일별 평균 개인 훈련의 경우 30일)이다.",
 	"C5ETRAINING.DefaultSimpleCompletion": "기본 활동 완료 목표 (심플)",
 	"C5ETRAINING.DefaultSimpleCompletionHint": "심플 진행을 통한 여가 활동에 대해 100% 완료에 필요한 기본 목표 시도 횟수를 설정한다. 기본값은 10이다.",
 	"C5ETRAINING.DefaultTimeCompletion": "기본 활동 완료 목표 (시간)",
