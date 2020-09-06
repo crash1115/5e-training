@@ -387,7 +387,7 @@ async function addTrainingTab(app, html, data) {
 
       // Format text field input and change
       if(isNaN(field.value)){
-        ui.notifications.warn("Downtime Tracking: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
+        ui.notifications.warn("Crash's 5e Downtime Tracking: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
       } else if(field.value.charAt(0)==="+"){
         let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (+)";
         adjustment = parseInt(field.value.substr(1).trim());
@@ -463,21 +463,25 @@ async function addTrainingTab(app, html, data) {
       else if (rollType === "tool"){
         let toolId = activity.ability.slice(5); //strip the "tool-" from the value
         let tool = actor.getOwnedItem(toolId);
-        let toolName = tool.name;
-        // Roll to increase progress
-        tool.rollToolCheck().then(function(r){
-          let rollMode = getRollMode(r._formula);
-          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName + " (" + rollMode + ")";
-          // Increase progress
-          activity = calculateNewProgress(activity, attemptName, r._total);
-          // Log activity completion
-          checkCompletion(actor, activity);
-          // Update flags and actor
-          flags.trainingItems[trainingIdx] = activity;
-          actor.update({'flags.5e-training': null}).then(function(){
-            actor.update({'flags.5e-training': flags});
+        if(tool){
+          let toolName = tool.name;
+          // Roll to increase progress
+          tool.rollToolCheck().then(function(r){
+            let rollMode = getRollMode(r._formula);
+            let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName + " (" + rollMode + ")";
+            // Increase progress
+            activity = calculateNewProgress(activity, attemptName, r._total);
+            // Log activity completion
+            checkCompletion(actor, activity);
+            // Update flags and actor
+            flags.trainingItems[trainingIdx] = activity;
+            actor.update({'flags.5e-training': null}).then(function(){
+              actor.update({'flags.5e-training': flags});
+            });
           });
-        });
+        } else {
+          ui.notifications.warn("Crash's 5e Downtime Tracking: " + game.i18n.localize("C5ETRAINING.ToolNotFoundWarning"));
+        }
       }
       // Progression Type: Simple
       else if (rollType === 'simple'){
@@ -639,7 +643,11 @@ function getAbilityName(activity, actor){
   } else if(rollType === "tool") {
     let toolId = activity.ability.slice(5);
     let tool = actor.items.filter(item => { return item._id === toolId })[0];
-    return tool.name;
+    if(tool){
+      return tool.name;
+    } else {
+      return "["+game.i18n.localize("C5ETRAINING.InvalidTool")+"]";
+    }
   } else {
     return "???"
   }

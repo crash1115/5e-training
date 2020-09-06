@@ -68,6 +68,7 @@
 	"C5ETRAINING.EnableDowntimeRemindersHint": "Enabling this will display a prompt to the GM at the start of each day to help them remember to ask the players if they have any downtime activities they'd like to make progress on. (Requires About Time)",
 
 	"C5ETRAINING.InvalidNumberWarning": "Invalid input. Please enter a number.",
+  "C5ETRAINING.InvalidTool": "Tool Not Found",
 
 	"C5ETRAINING.Name": "Name",
 	"C5ETRAINING.NewDowntimeActivity": "New Downtime Activity",
@@ -113,6 +114,7 @@
 	"C5ETRAINING.Time": "Time (UTC)",
   "C5ETRAINING.ToggleInfo": "Toggle Info",
   "C5ETRAINING.Tool": "Tool",
+  "C5ETRAINING.ToolNotFoundWarning": "Selected tool not found. Please edit the activity and select a new one.",
 
   "C5ETRAINING.User": "User"
 }

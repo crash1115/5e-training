@@ -20,6 +20,8 @@
   "C5ETRAINING.DefaultDcSuccessesHint": "Sets the default target number of check successes required to reach 100% activity completion for downtime activities using the Check With DC progression system. The default is 5 successes.",
   "C5ETRAINING.Description": "Description",
 
+  "C5ETRAINING.InvalidTool": "Tool Not Found", 
+
   "C5ETRAINING.Roll": "Roll",
 
   "C5ETRAINING.ShowDowntimeTabPc": "Show Downtime Tab (PCs)",
@@ -48,5 +50,6 @@
   "C5ETRAINING.SuccessesRequired": "Successes Required",
 
   "C5ETRAINING.ToggleInfo": "Toggle Info",
-  "C5ETRAINING.Tool": "Tool"
+  "C5ETRAINING.Tool": "Tool",
+  "C5ETRAINING.ToolNotFoundWarning": "Selected tool not found. Please edit the activity and select a new one."
 }
