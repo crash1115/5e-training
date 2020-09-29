@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 0.4.5
+Compatibility patch for 0.7.1+
+- Modifies the way flags are updated to prevent data loss when using Foundry core versions higher than 0.7.0
+
 ## Version 0.4.4
 Improvements:
 - Added the ability to select tools in addition to skills and ability checks. Tools are limited to those the actor has in their inventory. This means they're not available on NPC sheets.

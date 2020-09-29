@@ -281,9 +281,7 @@ async function addTrainingTab(app, html, data) {
             }
             // Update flags and actor
             flags.trainingItems.push(newActivity);
-            actor.update({'flags.5e-training': null}).then(function(){
-              actor.update({'flags.5e-training': flags});
-            });
+            updateDowntimeFlag(actor, flags)
           }
         }
       }).render(true);
@@ -332,9 +330,7 @@ async function addTrainingTab(app, html, data) {
             }
             // Update flags and actor
             flags.trainingItems[trainingIdx] = activity;
-            actor.update({'flags.5e-training': null}).then(function(){
-              actor.update({'flags.5e-training': flags});
-            });
+            updateDowntimeFlag(actor, flags);
           }
         }
       }).render(true);
@@ -365,9 +361,7 @@ async function addTrainingTab(app, html, data) {
           if (del) {
             // Delete item and update actor
             flags.trainingItems.splice(trainingIdx, 1);
-            actor.update({'flags.5e-training': null}).then(function(){
-              actor.update({'flags.5e-training': flags});
-            });
+            updateDowntimeFlag(actor, flags);
           }
         }
       }).render(true);
@@ -407,9 +401,7 @@ async function addTrainingTab(app, html, data) {
 
       // Update flags and actor
       flags.trainingItems[trainingIdx] = activity;
-      actor.update({'flags.5e-training': null}).then(function(){
-        actor.update({'flags.5e-training': flags});
-      });
+      updateDowntimeFlag(actor, flags);
     });
 
     // ROLL TO TRAIN
@@ -436,9 +428,7 @@ async function addTrainingTab(app, html, data) {
           checkCompletion(actor, activity);
           // Update flags and actor
           flags.trainingItems[trainingIdx] = activity;
-          actor.update({'flags.5e-training': null}).then(function(){
-            actor.update({'flags.5e-training': flags});
-          });
+          updateDowntimeFlag(actor, flags);
         });
       }
       // Progression Type: Ability Check or DC - SKILL
@@ -454,9 +444,7 @@ async function addTrainingTab(app, html, data) {
           checkCompletion(actor, activity);
           // Update flags and actor
           flags.trainingItems[trainingIdx] = activity;
-          actor.update({'flags.5e-training': null}).then(function(){
-            actor.update({'flags.5e-training': flags});
-          });
+          updateDowntimeFlag(actor, flags);
         });
       }
       // Progression Type: Ability Check or DC - TOOL
@@ -475,9 +463,7 @@ async function addTrainingTab(app, html, data) {
             checkCompletion(actor, activity);
             // Update flags and actor
             flags.trainingItems[trainingIdx] = activity;
-            actor.update({'flags.5e-training': null}).then(function(){
-              actor.update({'flags.5e-training': flags});
-            });
+            updateDowntimeFlag(actor, flags);
           });
         } else {
           ui.notifications.warn("Crash's 5e Downtime Tracking: " + game.i18n.localize("C5ETRAINING.ToolNotFoundWarning"));
@@ -492,9 +478,7 @@ async function addTrainingTab(app, html, data) {
         checkCompletion(actor, activity);
         // Update flags and actor
         flags.trainingItems[trainingIdx] = activity;
-        actor.update({'flags.5e-training': null}).then(function(){
-          actor.update({'flags.5e-training': flags});
-        });
+        updateDowntimeFlag(actor, flags);
       }
     });
 
@@ -685,6 +669,20 @@ function determineRollType(activity){
   }
 
   return rollType;
+}
+
+// Updates the actor flags
+// Foundry versions 0.7.0 and earlier required the use of a workaround to get the flags to set properly
+// In 0.7.1 and onward, this workaround resulted in data loss and was no longer required.
+// Check for core version here, and do the right thing so nothing gets nuked.
+async function updateDowntimeFlag(actor, flags){
+  if(game.data.version < "0.7.1"){
+    actor.update({'flags.5e-training': null}).then(function(){
+      actor.update({'flags.5e-training': flags});
+    });
+  } else {
+    actor.update({'flags.5e-training': flags});
+  }
 }
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
