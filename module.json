@@ -5,7 +5,7 @@
 	"version": "0.4.5",
 	"author": "CRASH1115#2944",
 	"minimumCoreVersion": "0.6.6",
-	"compatibleCoreVersion": "0.7.0",
+	"compatibleCoreVersion": "0.7.2",
 	"systems": ["dnd5e"],
 	"esmodules": ["training.js"],
 	"styles": ["styles/training.css"],
