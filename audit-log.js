@@ -75,10 +75,18 @@ export default class AuditLog extends FormApplication {
       }
     }
 
+    // Update actor and flags
     flags.trainingItems = activities;
-    actor.update({'flags.5e-training': null}).then(function(){
+    // Foundry versions 0.7.0 and earlier required the use of a workaround to get the flags to set properly
+    // In 0.7.1 and onward, this workaround resulted in data loss and was no longer required.
+    // Check for core version here, and do the right thing so nothing gets nuked.
+    if(game.data.version < "0.7.1"){
+      actor.update({'flags.5e-training': null}).then(function(){
+        actor.update({'flags.5e-training': flags});
+      });
+    } else {
       actor.update({'flags.5e-training': flags});
-    });
+    }
 
   }
 
