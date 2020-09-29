@@ -1,5 +1,7 @@
 ![GitHub All Releases](https://img.shields.io/github/downloads/crash1115/5e-training/total) ![GitHub Releases](https://img.shields.io/github/downloads/crash1115/5e-training/latest/total) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/crash1115/5e-training?label=latest%20version)
 
+WARNING: Using versions of this module lower than 0.4.5 with versions of Foundry above 0.7.0 can result in PERMANENT loss of downtime activities. If you're upgrading to Foundry 0.7.x PLEASE make sure you're running version 0.4.5 of Downtime Tracking.
+
 # Crash's 5e Downtime Tracking
 Does your group do a lot of downtime activities? Do you have a hard time keeping track of it all? Then this is the mod for you!
 
