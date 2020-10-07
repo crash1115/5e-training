@@ -122,26 +122,6 @@ Hooks.once("init", () => {
     type: Number
   });
 
-  // IF ABOUT TIME IS ENABLED
-  // game.settings.register("5e-training", "timeToComplete", {
-  //   name: game.i18n.localize("C5ETRAINING.DefaultTimeCompletion"),
-  //   hint: game.i18n.localize("C5ETRAINING.DefaultTimeCompletionHint"),
-  //   scope: "world",
-  //   config: true,
-  //   default: 30,
-  //   type: Number
-  // });
-
-  // IF ABOUT TIME IS ENABLED
-  // game.settings.register("5e-training", "enableDowntimeReminders", {
-  //   name: game.i18n.localize("C5ETRAINING.EnableDowntimeReminders"),
-  //   hint: game.i18n.localize("C5ETRAINING.EnableDowntimeRemindersHint"),
-  //   scope: "world",
-  //   config: true,
-  //   default: false,
-  //   type: Boolean
-  // });
-
   game.settings.register("5e-training", "announceCompletionFor", {
     name: game.i18n.localize("C5ETRAINING.AnnounceActivityCompletionFor"),
     hint: game.i18n.localize("C5ETRAINING.AnnounceActivityCompletionForHint"),
