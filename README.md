@@ -66,15 +66,13 @@ If you'd like to contribute, please get in touch with me or create a pull reques
 ### Unsupported Modules
 - Obsidian (no plans to support at this time)
 
-### Known Issues
-- Roll dialog does not show up if you're using Downtime Tracker along with the Use Average Rolls setting of Group Roll Checks and Saves. This issue has been reports here, and this page will be updated when it gets fixed: https://github.com/trdischat/grouproll/issues/10
-
 ## Got Questions? Find a Bug?
 Contact me on Discord (CRASH1115#2944) to chat, or create an issue right here on GitHub.
 
 ## Attributions and Special Thanks
 - Thanks to platypus_pi for help with English localization
 - Thanks to KLO#1490 for Korean localization
+- Thanks to hmqgg#5775 for Chinese localization
 
 ## License
 - This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).

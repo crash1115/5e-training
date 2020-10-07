@@ -3,6 +3,7 @@
 ## Version 0.4.6
 Improvements:
 - Changed the way activity data is updated behind the scenes so things don't explode for no good reason. Special thanks to Ethck#6879 for slogging through it with me.
+- Added Chinese localization thanks to hmqgg#5775
 
 Fixes:
 - Fixed a bug where the names of the rolls were displaying as ??? in the audit log. This doesn't fix any activities that have been logged as ??? already, but will prevent them from saving that way going forward.
