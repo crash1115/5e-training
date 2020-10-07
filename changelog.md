@@ -1,5 +1,13 @@
 # Change Log
 
+## Version 0.4.6
+Improvements:
+- Changed the way activity data is updated behind the scenes so things don't explode for no good reason. Special thanks to Ethck#6879 for slogging through it with me.
+- Added Chinese localization thanks to hmqgg#5775
+
+Fixes:
+- Fixed a bug where the names of the rolls were displaying as ??? in the audit log. This doesn't fix any activities that have been logged as ??? already, but will prevent them from saving that way going forward.
+
 ## Version 0.4.5
 Compatibility patch for 0.7.1+
 - Modifies the way flags are updated to prevent data loss when using Foundry core versions higher than 0.7.0
@@ -9,7 +17,6 @@ Improvements:
 - Added the ability to select tools in addition to skills and ability checks. Tools are limited to those the actor has in their inventory. This means they're not available on NPC sheets.
 
 Changes:
-
 - "Ability" progression mode is now called "Ability/Skill/Tool Check" mode.
 - "DC" progression mode is now called "Check with DC".
 - Together, these modes are referred to as "Check-Based" progression modes, since they both utilize checks. You'll see them referred to this way in the module settings.
