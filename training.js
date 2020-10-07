@@ -414,7 +414,7 @@ async function addTrainingTab(app, html, data) {
 
       // Progression Type: Ability Check or DC - ABILITY
       if (rollType === "ability"){
-        let abilityName = getAbilityName(activity.ability);
+        let abilityName = getAbilityName(activity, actor);
         // Roll to increase progress
         actor.rollAbilityTest(activity.ability).then(async function(r){
           let rollMode = getRollMode(r._formula);
@@ -431,7 +431,7 @@ async function addTrainingTab(app, html, data) {
       }
       // Progression Type: Ability Check or DC - SKILL
       else if (rollType === "skill"){
-        let abilityName = getAbilityName(activity.ability);
+        let abilityName = getAbilityName(activity, actor);
         // Roll to increase progress
         actor.rollSkill(activity.ability).then(async function(r){
           let rollMode = getRollMode(r._formula);
