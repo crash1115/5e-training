@@ -508,6 +508,8 @@ async function addTrainingTab(app, html, data) {
 
   }
 
+  //Tab is ready
+  Hooks.call(`CrashTrainingTabReady`, app, html, data);
 }
 
 // Calculates the progress value of an activity and logs the change to the progress
@@ -658,4 +660,8 @@ Hooks.on(`renderActorSheet`, (app, html, data) => {
       app._tabs[0].activate("training");
     }
   });
+});
+
+Hooks.on(`CrashTrainingTabReady`, (app, html, data) => {
+  console.log("Crash's 5e Downtime Tracking | Downtime tab ready!");
 });
