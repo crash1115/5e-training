@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 0.4.8
+- Compatibility with Foundry 0.7.6 and dnd5e 1.1.0
+
 ## Version 0.4.7
 - Added the `CrashTrainingTabReady` hook, which fires when the downtime tab is ready. Example usage:
 ```js
