@@ -58,13 +58,11 @@ If you'd like to contribute, please get in touch with me or create a pull reques
 
 ## Compatibility
 ### Supported Modules
-- Sky's Alt D&D 5e Character Sheet
-- Tidy5e Sheet (including dark mode with your custom colors!)
-- D&D5E Dark Mode (works with both the default sheet and Sky's Alt 5e sheet)
-- Ethck's Downtime Tracking
+- Should work with most alternate sheet modules
 
 ### Unsupported Modules
 - Obsidian (no plans to support at this time)
+- MARS 5e (I'm currently looking into what it'll take to support this, but haven't yet had the time)
 
 ## Got Questions? Find a Bug?
 Contact me on Discord (CRASH1115#2944) to chat, or create an issue right here on GitHub.
