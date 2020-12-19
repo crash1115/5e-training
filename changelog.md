@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 0.4.9
+- Compatibility with Foundry 0.7.9 and dnd5e 1.2.0
+
 ## Version 0.4.8
 - Compatibility with Foundry 0.7.6 and dnd5e 1.1.0
 
