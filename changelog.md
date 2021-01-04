@@ -1,6 +1,6 @@
 # Change Log
 
-## Version 0.4.9
+## Version 0.4.10
 - Compatibility patch for Tidy5e v0.4.x. It's not pretty, but you can see the buttons now.
 
 ## Version 0.4.9
