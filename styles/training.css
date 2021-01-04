@@ -3,26 +3,30 @@
 /*****************************/
 
 /* Tweak some item controls styles to fit the additional buttons*/
-.crash-training .item-controls {
+.crash-training .crash-item-controls {
 	min-width: fit-content;
 	min-width: -moz-fit-content;
+	flex: 0 0 44px;
+	justify-content: space-between;
 }
 
-.crash-training .item-controls a {
+.crash-training .crash-item-controls a {
 	min-width: fit-content;
 	min-width: -moz-fit-content;
 	flex: 1 !important;
 	margin-right: 5px;
+	font-size: 12px;
+	text-align: center;
 }
 
 /* Type Column */
-.dnd5e.sheet.actor .crash-training .inventory-list .item-detail.type {
+.crash-training .inventory-list .item-detail.type {
 	text-transform: capitalize;
 	flex: 0 0 140px;
 }
 
 /* Override Column */
-.dnd5e.sheet.actor .crash-training .inventory-list .item-detail.override {
+.crash-training .inventory-list .item-detail.override {
 	flex: 0 0 90px;
 }
 
@@ -146,59 +150,4 @@
 
 .dark-mode .audit-log .action-table table tr:hover td {
 	background-color: rgba(63,136,230, 0.4);
-}
-
-
-/*********************************/
-/*     SUPPORT FOR TIDY 5E     */
-/*****************************/
-
-.tidy5e .crash-training .item-controls .item-create {
-	padding-left: 5px;
-	padding-right: 5px;
-}
-
-.tidy5e .crash-training .item-controls .item-create:last-child {
-	margin-right: 0px;
-}
-
-/* Tweak activity entries on NPC sheet */
-.tidy5e.sheet.actor.npc .crash-training .inventory-list .item .item-name .item-image {
-	height: 30px;
-	width: 30px;
-	flex: 0 0 30px;
-}
-
-.tidy5e.sheet.actor.npc .crash-training .inventory-list .item .item-name h4 {
-	line-height: 30px;
-}
-
-.tidy5e.sheet.actor.npc .crash-training .inventory-list .item-detail .crash-training-override {
-	max-width: 40px;
-}
-
-.tidy5e.sheet.actor.npc .crash-training .inventory-list .inventory-header .item-controls a.item-create {
-	margin-top: 0px;
-	padding: 4px 5px;
-	margin-right: 5px;
-}
-
-.tidy5e.sheet.actor.npc .crash-training .inventory-list .item {
-	line-height: 30px;
-}
-
-/* Controls dark mode support */
-.tidy5eDark .tidy5e.sheet.actor .crash-training .inventory-list .item-controls a,
-.tidy5eDark .tidy5e.sheet.actor .crash-training .inventory-list .item-controls a:hover {
-  color: var(--darkmode-primary-color);
-	font-weight: 300;
-}
-
-/* Training bar dark mode support */
-.tidy5eDark .crash-training .progress-bar {
-	background-color: var(--darkmode-faint-color);
-}
-
-.tidy5eDark .crash-training .progress-bar .crash-training-completion {
-	background-color: var(--darkmode-secondary-accent);
 }
