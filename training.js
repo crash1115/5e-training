@@ -144,8 +144,8 @@ async function addTrainingTab(app, html, data) {
 
   // Determine if we should show the downtime tab
   let showTrainingTab = false;
-  if(data.isCharacter){ showTrainingTab = game.settings.get("5e-training", "enableTraining"); }
-  else if(data.isNPC){ showTrainingTab = game.settings.get("5e-training", "enableTrainingNpc"); }
+  if(data.isCharacter && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTraining"); }
+  else if(data.isNPC && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTrainingNpc"); }
 
   if (showTrainingTab){
 
