@@ -1,5 +1,8 @@
 # Change Log
 
+## Version 0.4.11
+- Fixed an issue where the downtime tab would attempt to display on actor sheets inside compendiums and throw some errors.
+
 ## Version 0.4.10
 - Compatibility patch for Tidy5e v0.4.x. It's not pretty, but you can see the buttons now.
 
