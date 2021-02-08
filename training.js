@@ -283,6 +283,9 @@ async function addTrainingTab(app, html, data) {
               newActivity.completionAt = game.settings.get("5e-training", "defaultDcSuccesses");
               newActivity.ability = game.settings.get("5e-training", "defaultAbility");
               newActivity.dc = game.settings.get("5e-training", "defaultDcDifficulty");
+            } else if(newActivity.progressionStyle == 'macro'){
+              newActivity.macroName = ''
+              newActivity.completionAt = game.settings.get("5e-training", "totalToComplete");
             }
             // Update flags and actor
             trainingItems.push(newActivity);
@@ -333,6 +336,10 @@ async function addTrainingTab(app, html, data) {
               activity.completionAt = parseInt(html.find('#completionAtInput').val());
               activity.ability = html.find('#abilityInput').val();
               activity.dc = html.find('#dcInput').val();
+            }
+            else if (activity.progressionStyle === 'macro'){
+              activity.completionAt = parseInt(html.find('#completionAtInput').val());
+              activity.macroName = html.find('#macroInput').val();
             }
             // Update flags and actor
             trainingItems[trainingIdx] = activity;
@@ -498,6 +505,15 @@ async function addTrainingTab(app, html, data) {
         trainingItems[trainingIdx] = activity;
         await actor.unsetFlag("5e-training", "trainingItems");
         await actor.setFlag("5e-training", "trainingItems", trainingItems);
+      }
+      // Progression Type: Macro
+      else if (rollType === "macro"){
+        let macroName = activity.macroName;
+        if (macroName.length < 1){
+          displayHelpChat();
+        } else {
+          game.macros.getName(macroName).execute();
+        }
       }
     });
 
@@ -690,6 +706,8 @@ function determineRollType(activity){
     } else if(activity.ability.substr(0,5) === "tool-"){
       rollType = "tool";
     }
+  } else if(activity.macroName) {
+    rollType = "macro";
   } else {
     rollType = "simple";
   }
@@ -729,4 +747,63 @@ Hooks.on(`renderActorSheet`, (app, html, data) => {
 
 Hooks.on(`CrashTrainingTabReady`, (app, html, data) => {
   console.log("Crash's 5e Downtime Tracking | Downtime tab ready!");
+});
+
+
+
+// Open up for other people to use
+export function crashTNT(){
+  async function updateActivityProgress(actorName, itemName, newProgress){
+    let actor = game.actors.getName(actorName);
+    let allItems = actor.getFlag("5e-training", "trainingItems");
+    let itemIdx = allItems.findIndex((i) => i.name === itemName);
+    if(itemIdx < 0){
+      ui.notifications.warn( game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") );
+    }
+    else {
+      let thisItem = allItems[itemIdx];
+      let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
+      // Increase progress
+      newProgress = parseInt(newProgress);
+      thisItem = calculateNewProgress(thisItem, game.i18n.localize("C5ETRAINING.Macro"), newProgress, true);
+      // Log activity completion
+      checkCompletion(actor, thisItem, alreadyCompleted);
+      // Update flags and actor
+      allItems[itemIdx] = thisItem;
+      await actor.unsetFlag("5e-training", "trainingItems");
+      await actor.setFlag("5e-training", "trainingItems", allItems);
+    }
+  }
+
+  function getActivitiesForActor(actorName){
+    let actor = game.actors.getName(actorName);
+    if(actor){
+      let allItems = actor.getFlag("5e-training", "trainingItems");
+      return allItems;
+    } else {
+      ui.notifications.warn("Crash's 5e Tracking & Training: " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning"));
+    }
+  }
+
+  function getActivity(actorName, itemName){
+    let actor = game.actors.getName(actorName);
+    let allItems = actor.getFlag("5e-training", "trainingItems");
+    let itemIdx = allItems.findIndex((i) => i.name === itemName);
+    if(itemIdx < 0){
+      ui.notifications.warn( game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") );
+    } else {
+      return allItems[itemIdx];
+    }
+  }
+
+  return {
+    updateActivityProgress: updateActivityProgress,
+    getActivity: getActivity,
+    getActivitiesForActor: getActivitiesForActor
+  };
+}
+
+
+Hooks.on(`ready`, () => {
+	window.CrashTNT = crashTNT();
 });

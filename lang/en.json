@@ -12,6 +12,7 @@
   "C5ETRAINING.Action": "Action",
 	"C5ETRAINING.Activity": "Activity",
 	"C5ETRAINING.ActivityProgress": "Activity Progress",
+  "C5ETRAINING.ActorNotFoundWarning": "Actor not found.",
   "C5ETRAINING.Add": "Add",
   "C5ETRAINING.Advantage": "Advantage",
 	"C5ETRAINING.AdjustProgressValue": "Adjust Progress",
@@ -73,8 +74,12 @@
   "C5ETRAINING.gmOnlyMode": "Enable GM Only Mode.",
   "C5ETRAINING.gmOnlyModeHint": "Enabling this will put the module into GM Only mode. When this is on, the tab does not display on sheets for non-GM users, completion messages are automatically whispered to GM rather than displayed publicly, and roll dialogs will automatically have the Private GM Roll mode selected.",
 
+  "C5ETRAINING.ItemNotFoundWarning": "Item not found.",
 	"C5ETRAINING.InvalidNumberWarning": "Invalid input. Please enter a number.",
   "C5ETRAINING.InvalidTool": "Tool Not Found",
+
+	"C5ETRAINING.Macro": "Macro",
+  "C5ETRAINING.MacroName": "Macro Name",
 
 	"C5ETRAINING.Name": "Name",
 	"C5ETRAINING.NewDowntimeActivity": "New Downtime Activity",

@@ -3,7 +3,7 @@
 # Crash's 5e Downtime Tracking
 Does your group do a lot of downtime activities? Do you have a hard time keeping track of it all? Then this is the mod for you!
 
-Downtime Tracking is a module for Foundry VTT that adds a tab to all actor sheets (character and NPC) that lets you add and keep track of downtime activities. Finally working on that History proficiency? It's in here. Learning how to use thieves tools? In here. Need to keep track of how much of the town's water supply you've accidentally (I hope) poisoned? If you can measure it with a percentage, you can track it in here.
+Downtime Tracking is a module for the dnd5e system in Foundry VTT that adds a tab to all actor sheets (character and NPC) that lets you add and keep track of downtime activities. Finally working on that History proficiency? It's in here. Learning how to use thieves tools? In here. Need to keep track of how much of the town's water supply you've accidentally (I hope) poisoned? If you can measure it with a percentage, you can track it in here.
 
 [![Image from Gyazo](https://i.gyazo.com/7f072b341c266eed397c772b0328c542.png)](https://gyazo.com/7f072b341c266eed397c772b0328c542)
 
@@ -11,7 +11,7 @@ Downtime Tracking is a module for Foundry VTT that adds a tab to all actor sheet
 Check out some examples for how to use the module [here](/examples.md).
 
 ## Multiple Progression Systems
-There are three core ways to track activities in this module:
+There are three core ways to track activities in this module, and one extra fancy bonus way:
 
 **Simple Progression** is exactly what it says on the tin. Every attempt to progress the activity adds one to the progress score. Just set the completion threshold based on the number of attempts you'd like the activity to take. This is handy for things with static requirements like scribing spells, or anything you just need a simple way to track. Hence the name, Simple Mode.
 
@@ -25,12 +25,15 @@ There are three core ways to track activities in this module:
 
 [![Image from Gyazo](https://i.gyazo.com/75ff889b77d7a3e1aced719503cf3eeb.gif)](https://gyazo.com/75ff889b77d7a3e1aced719503cf3eeb)
 
+**Macro Progression (v0.5.0+)** is the fancy stuff. Throw in the name of a macro you'd like to run when you click on an activity, then reference this module's API to do all sorts of neat stuff.
+
 ## Customizable
 Several settings allow you to get the functionality you want out of the module. Current settings allow you to:
 - Enable and disable the tab on actor sheets.
 - Customize the name of the Downtime tab. Wanna call it "Training" because you only use it for skill proficiencies? You got it. Need to call it "Oh No, Not Again" because your players are just *like that*? You can do that, too. I've totally been there.
 - Set defaults for each type of downtime activity progression. If you want really slow progression, you can make it happen. If you want to really reward your players for taking the time to train stuff by letting them do it quickly, you can do that, too. Go wild. Find whatever works for you.
 - Choose which types of actors display activity completion notifications.
+- Choose whether or not to show the activities tab to players, or only the GM.
 
 ## Speedy Progress Updates
 You know what sucks? Accidentally rolling with disadvantage when you didn't mean to. If something gets messed up, or if you need to adjust a progress value quickly, we got you covered. You can edit progress values right from the activity's entry! The input accepts relative and absolute values, so entering "-15" will subtract 15 from the progress total, and entering "57" will set it to 57.
@@ -52,7 +55,7 @@ This module includes support for localization. Currently supported languages are
 - English
 - Korean
 
-If you'd like to contribute, please get in touch with me or create a pull request with your translations. For existing translations, new keys may get added as the module is update. If this is the case, you'll be able to find a .json file with all the newly added, untranslated keys in the `lang/missing` directory.
+If you'd like to contribute, please get in touch with me or create a pull request (use the `dev` branch) with your translations. For existing translations, new keys may get added as the module is updated so keep checking back to make sure you're up to date.
 
 ## Compatibility
 ### Supported Modules

@@ -16,6 +16,11 @@
     {{> "modules/5e-training/templates/partials/dc.html" training=training}}
   {{/if}}
 
+  {{#if (eq training.progressionStyle "macro")}}
+    {{> "modules/5e-training/templates/partials/macro.html" training=training}}
+  {{/if}}
+
+
   <div class="wide-field">
     <label for="description">{{ localize "C5ETRAINING.Description" }}:</label>
     <textarea name="descriptionInput" id="descriptionInput">{{training.description}}</textarea>
