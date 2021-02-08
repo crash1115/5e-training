@@ -1,12 +1,12 @@
 # Example Uses
-These are just a few of the ways you could use 5e Downtime Tracking to keep track of various things in your game! Use this as inspiration, or do something totally new and different.
+These are just a few of the ways you could use Crash's Tracking & Training (5e) to keep track of various things in your game! Use this as inspiration, or do something totally new and different.
 
 ## Train Thieves Tools Proficiency
 Let's say your ranger saw the rogue pick a lock and thought that was cool. Now she wants to train to be able to do that, too. Try a setup like this:
 - Type: Ability Score (Dex)
 - Completion Target: 300
 
-Have your player roll to progress this activity each day they use their downtime to practice. A good rough guideline is that it takes an average person about a month of work (I believe the 5e DMG says 4 weeks) to become proficient in a task if they spend 8 hours a day performing it. The average person will roll a 10 on this check. 30 days x 10 = 300 target. Players who have good Dex will naturally do better on this check than others on average, thus making the training time a little quicker for them.
+Have your player roll to progress this activity each day they use their downtime to practice. A good rough guideline is that it takes an average person about a month of work to become proficient in a task if they spend 8 hours a day performing it. The average person will roll a 10 on this check. 30 days x 10 = 300 target. Players who have good Dex will naturally do better on this check than others on average, thus making the training time a little quicker for them.
 
 ## Kill 10 Rats
 The RPG classic! With Simple progression mode, this one's a snap:
@@ -39,3 +39,48 @@ A really cool idea from Arkangel#5736 on Discord. Set up an actor to keep track 
 - Description: Enter a description of your faction here, or maybe the name of the group's contact within the organization
 
 ![Example of Faction Reputation Tracking](https://media.discordapp.net/attachments/513918036919713802/737320248163827712/unknown.png)
+
+## Increase By 1d20 (Macro)
+Probably the most requested thing ever:
+- Type: Macro
+- Completion Target: 100
+- Macro Name: My First Downtime Macro
+
+Create a new script macro. Make the name `My First Downtime Macro` (or whatever, as long as it matches the Macro Name setting in the activity) and paste the following code in. Change the `actorName` and `itemName` to match the name of your actor and your activity. Also read through the comments so you can understand how the macro works. This will give you the tools and know-how to make even more cool things!
+
+```
+// We need two pieces of information first: the name of the actor that owns the Activity
+// we want to update, an the name of the activity itself. Enter those inside the backticks (``).
+// The names will be case sensitive, so check your spelling!
+let actorName = `Name of your actor`;
+let itemName = `Name of your activity`;
+
+// This command takes the names we just specified and fetches the appropriate activity.
+let item = CrashTNT.getActivity(actorName, itemName);
+
+// Now that we have our item, let's get its current progress value so we can modify it later.
+let oldProgress = item.progress;
+
+// Now we have the four things we need to get to work.
+// If you wanna get fancy, you can do all sorts of things after this point.
+// Prompt the user for a number or times to roll, automatically
+// remove items from inventory to represent crafting materials used up,
+// or anything you want! The possibilities are endless.
+
+// For now, we're starting nice and easy. Let's set up a formula so we can roll!
+// You can add all sorts of things to this if you want, but we're gonna start
+// with a simple, classic d20.
+let formula = '1d20';
+
+// Now let's get the result so we can use it.
+// The parseInt around the roll ensures we get a number to avoid weirdness later.
+let result = parseInt( new Roll(formula).roll().result );
+
+// We want to increase our activity's progress by the number we rolled on the die,
+// so let's do that math real quick.
+let newProgress = oldProgress + result;
+
+// Now we update! This function takes the name of the actor and item we specified at the start,
+// then finds that activity and sets its progress to some new value we specify.
+CrashTNT.updateActivityProgress(actorName, itemName, newProgress);
+```
