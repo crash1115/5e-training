@@ -20,6 +20,19 @@ Handlebars.registerHelper("progressionStyle", function(trainingItem, actor) {
     return progressionTypeString;
 });
 
+Handlebars.registerHelper("trainingRollBtnClass", function(trainingItem) {
+  let className = 'crash-training-roll';
+  if(trainingItem.progress >= trainingItem.completionAt){ className = 'crash-training-roll-disabled'; }
+  return className;
+});
+
+Handlebars.registerHelper("trainingRollBtnTooltip", function(trainingItem) {
+  let className = game.i18n.localize('C5ETRAINING.AdvanceActivityProgress');
+  if(trainingItem.progress >= trainingItem.completionAt){ className = game.i18n.localize('C5ETRAINING.AdvanceActivityProgressDisabled'); }
+  return className;
+});
+
+
 // Register Game Settings
 Hooks.once("init", () => {
   preloadTemplates();
@@ -373,6 +386,7 @@ async function addTrainingTab(app, html, data) {
       let trainingIdx = parseInt(fieldId.replace('crash-override-',''));
       let activity = trainingItems[trainingIdx];
       let adjustment = 0;
+      let alreadyCompleted = activity.progress >= activity.completionAt;
 
       // Format text field input and change
       if(isNaN(field.value)){
@@ -392,7 +406,7 @@ async function addTrainingTab(app, html, data) {
       }
 
       // Log completion
-      checkCompletion(actor, activity);
+      checkCompletion(actor, activity, alreadyCompleted);
 
       // Update flags and actor
       trainingItems[trainingIdx] = activity;
@@ -410,6 +424,7 @@ async function addTrainingTab(app, html, data) {
       let trainingIdx = parseInt(fieldId.replace('crash-roll-',''));
       let activity = trainingItems[trainingIdx];
       let rollType = determineRollType(activity);
+      let alreadyCompleted = activity.progress >= activity.completionAt;
 
       // Progression Type: Ability Check or DC - ABILITY
       if (rollType === "ability"){
@@ -423,7 +438,7 @@ async function addTrainingTab(app, html, data) {
         // Increase progress
         activity = calculateNewProgress(activity, attemptName, r._total);
         // Log activity completion
-        checkCompletion(actor, activity);
+        checkCompletion(actor, activity, alreadyCompleted);
         // Update flags and actor
         trainingItems[trainingIdx] = activity;
         await actor.unsetFlag("5e-training", "trainingItems");
@@ -441,7 +456,7 @@ async function addTrainingTab(app, html, data) {
         // Increase progress
         activity = calculateNewProgress(activity, attemptName, r._total);
         // Log activity completion
-        checkCompletion(actor, activity);
+        checkCompletion(actor, activity, alreadyCompleted);
         // Update flags and actor
         trainingItems[trainingIdx] = activity;
         await actor.unsetFlag("5e-training", "trainingItems");
@@ -463,7 +478,7 @@ async function addTrainingTab(app, html, data) {
           // Increase progress
           activity = calculateNewProgress(activity, attemptName, r._total);
           // Log activity completion
-          checkCompletion(actor, activity);
+          checkCompletion(actor, activity, alreadyCompleted);
           // Update flags and actor
           trainingItems[trainingIdx] = activity;
           await actor.unsetFlag("5e-training", "trainingItems");
@@ -478,7 +493,7 @@ async function addTrainingTab(app, html, data) {
         // Increase progress
         activity = calculateNewProgress(activity, activityName, 1);
         // Log activity completion
-        checkCompletion(actor, activity);
+        checkCompletion(actor, activity, alreadyCompleted);
         // Update flags and actor
         trainingItems[trainingIdx] = activity;
         await actor.unsetFlag("5e-training", "trainingItems");
@@ -584,10 +599,11 @@ function calculateNewProgress(activity, actionName, change, absolute = false){
 }
 
 // Checks for completion of an activity and logs it if it's done
-async function checkCompletion(actor, activity){
+async function checkCompletion(actor, activity, alreadyCompleted){
+  if(alreadyCompleted){ return; }
   if(activity.progress >= activity.completionAt){
     let alertFor = game.settings.get("5e-training", "announceCompletionFor");
-    let isPc = actor.isPC;
+    let isPc = actor.hasPlayerOwner;
     let sendIt;
 
     switch(alertFor){

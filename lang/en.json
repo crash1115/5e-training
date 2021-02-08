@@ -16,6 +16,7 @@
   "C5ETRAINING.Advantage": "Advantage",
 	"C5ETRAINING.AdjustProgressValue": "Adjust Progress",
 	"C5ETRAINING.AdvanceActivityProgress": "Advance Activity Progress",
+  "C5ETRAINING.AdvanceActivityProgressDisabled": "Rolling disabled. Activity already complete.",
 	"C5ETRAINING.AnnounceActivityCompletionFor": "Announce Activity Completion For:",
 	"C5ETRAINING.AnnounceActivityCompletionForHint": "Choose which actor types you would like to have trigger chat messages upon activity completion.",
 	"C5ETRAINING.Apply": "Apply",

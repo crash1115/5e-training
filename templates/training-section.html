@@ -15,7 +15,7 @@
       {{#each actor.flags.5e-training.trainingItems as |training tid| }}
         <li class="item flexrow">
           <div class="item-name flexrow rollable">
-            <div class="crash-training-roll" id="crash-roll-{{tid}}" title="{{ localize 'C5ETRAINING.AdvanceActivityProgress' }}"></div>
+            <div class="{{trainingRollBtnClass training}}" id="crash-roll-{{tid}}" title="{{trainingRollBtnTooltip training}}"></div>
             <h4 class="crash-training-toggle-desc" id="crash-toggle-desc-{{tid}}" title="{{ localize 'C5ETRAINING.ToggleInfo' }}">{{training.name}}</h4>
           </div>
           <div class="item-detail type">

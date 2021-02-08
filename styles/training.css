@@ -20,7 +20,8 @@
 }
 
 /* Roll Button */
-.crash-training .crash-training-roll {
+.crash-training .crash-training-roll,
+.crash-training .crash-training-roll-disabled {
 	flex: 0 0 30px;
 	height: 30px;
 	background-size: 24px;
@@ -29,6 +30,10 @@
 	border: none;
 	margin-right: 5px;
 	background-image: url("/../icons/svg/d20-grey.svg");
+}
+
+.crash-training .crash-training-roll-disabled {
+	opacity: 50%;
 }
 
 .crash-training .crash-training-roll:hover {
