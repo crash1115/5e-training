@@ -24,6 +24,15 @@ Handlebars.registerHelper("progressionStyle", function(trainingItem, actor) {
 Hooks.once("init", () => {
   preloadTemplates();
 
+  game.settings.register("5e-training", "gmOnlyMode", {
+    name: game.i18n.localize("C5ETRAINING.gmOnlyMode"),
+    hint: game.i18n.localize("C5ETRAINING.gmOnlyModeHint"),
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   game.settings.register("5e-training", "enableTraining", {
     name: game.i18n.localize("C5ETRAINING.ShowDowntimeTabPc"),
     hint: game.i18n.localize("C5ETRAINING.ShowDowntimeTabPcHint"),
@@ -153,8 +162,9 @@ async function addTrainingTab(app, html, data) {
 
   // Determine if we should show the downtime tab
   let showTrainingTab = false;
-  if(data.isCharacter && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTraining"); }
-  else if(data.isNPC && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTrainingNpc"); }
+  let showToUser = game.users.current.isGM || !game.settings.get("5e-training", "gmOnlyMode");
+  if(data.isCharacter && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTraining") && showToUser; }
+  else if(data.isNPC && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTrainingNpc") && showToUser; }
 
   if (showTrainingTab){
 
@@ -405,35 +415,38 @@ async function addTrainingTab(app, html, data) {
       if (rollType === "ability"){
         let abilityName = getAbilityName(activity, actor);
         // Roll to increase progress
-        actor.rollAbilityTest(activity.ability).then(async function(r){
-          let rollMode = getRollMode(r._formula);
-          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
-          // Increase progress
-          activity = calculateNewProgress(activity, attemptName, r._total);
-          // Log activity completion
-          checkCompletion(actor, activity);
-          // Update flags and actor
-          trainingItems[trainingIdx] = activity;
-          await actor.unsetFlag("5e-training", "trainingItems");
-          await actor.setFlag("5e-training", "trainingItems", trainingItems);
-        });
+        let r;
+        if (game.settings.get("5e-training", "gmOnlyMode")){ r = await actor.rollAbilityTest(activity.ability, {rollMode : "gmroll"}); }
+        else {r = await actor.rollAbilityTest(activity.ability); }
+        let rollMode = getRollMode(r._formula);
+        let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
+        // Increase progress
+        activity = calculateNewProgress(activity, attemptName, r._total);
+        // Log activity completion
+        checkCompletion(actor, activity);
+        // Update flags and actor
+        trainingItems[trainingIdx] = activity;
+        await actor.unsetFlag("5e-training", "trainingItems");
+        await actor.setFlag("5e-training", "trainingItems", trainingItems);
       }
       // Progression Type: Ability Check or DC - SKILL
       else if (rollType === "skill"){
         let abilityName = getAbilityName(activity, actor);
         // Roll to increase progress
-        actor.rollSkill(activity.ability).then(async function(r){
-          let rollMode = getRollMode(r._formula);
-          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
-          // Increase progress
-          activity = calculateNewProgress(activity, attemptName, r._total);
-          // Log activity completion
-          checkCompletion(actor, activity);
-          // Update flags and actor
-          trainingItems[trainingIdx] = activity;
-          await actor.unsetFlag("5e-training", "trainingItems");
-          await actor.setFlag("5e-training", "trainingItems", trainingItems);
-        });
+        let r;
+        if (game.settings.get("5e-training", "gmOnlyMode")){ r = await actor.rollSkill(activity.ability, {rollMode : "gmroll"}); }
+        else {r = await actor.rollSkill(activity.ability); }
+        let rollMode = getRollMode(r._formula);
+        let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
+        // Increase progress
+        activity = calculateNewProgress(activity, attemptName, r._total);
+        // Log activity completion
+        checkCompletion(actor, activity);
+        // Update flags and actor
+        trainingItems[trainingIdx] = activity;
+        await actor.unsetFlag("5e-training", "trainingItems");
+        await actor.setFlag("5e-training", "trainingItems", trainingItems);
+
       }
       // Progression Type: Ability Check or DC - TOOL
       else if (rollType === "tool"){
@@ -442,18 +455,19 @@ async function addTrainingTab(app, html, data) {
         if(tool){
           let toolName = tool.name;
           // Roll to increase progress
-          tool.rollToolCheck().then(async function(r){
-            let rollMode = getRollMode(r._formula);
-            let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName + " (" + rollMode + ")";
-            // Increase progress
-            activity = calculateNewProgress(activity, attemptName, r._total);
-            // Log activity completion
-            checkCompletion(actor, activity);
-            // Update flags and actor
-            trainingItems[trainingIdx] = activity;
-            await actor.unsetFlag("5e-training", "trainingItems");
-            await actor.setFlag("5e-training", "trainingItems", trainingItems);
-          });
+          let r;
+          if (game.settings.get("5e-training", "gmOnlyMode")){ r = await tool.rollToolCheck({rollMode : "gmroll"}); }
+          else {r = await tool.rollToolCheck(); }
+          let rollMode = getRollMode(r._formula);
+          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName + " (" + rollMode + ")";
+          // Increase progress
+          activity = calculateNewProgress(activity, attemptName, r._total);
+          // Log activity completion
+          checkCompletion(actor, activity);
+          // Update flags and actor
+          trainingItems[trainingIdx] = activity;
+          await actor.unsetFlag("5e-training", "trainingItems");
+          await actor.setFlag("5e-training", "trainingItems", trainingItems);
         } else {
           ui.notifications.warn("Crash's 5e Downtime Tracking: " + game.i18n.localize("C5ETRAINING.ToolNotFoundWarning"));
         }
@@ -596,7 +610,11 @@ async function checkCompletion(actor, activity){
     if (sendIt){
       console.log("Crash's 5e Downtime Tracking | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedADowntimeActivity"));
       let chatHtml = await renderTemplate('modules/5e-training/templates/completion-message.html', {actor:actor, activity:activity});
-      ChatMessage.create({content: chatHtml});
+      let chatObj = {content: chatHtml};
+      if(game.settings.get("5e-training", "gmOnlyMode")){
+        chatObj.whisper = ChatMessage.getWhisperRecipients("GM");
+      }
+      ChatMessage.create(chatObj);
     }
   }
 }

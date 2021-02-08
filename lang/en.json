@@ -69,6 +69,9 @@
   "C5ETRAINING.ExtraSheetWidth": "Character Sheet Width Adjustment",
 	"C5ETRAINING.ExtraSheetWidthHint": "(Client) Entering a value here will change the default character sheet width by the specified number of pixels. You might need to adjust this to be bigger or smaller to ensure that the sheet's tabs stay on one line. The default is 50, and works if you're using the core dnd5e sheet and the default tab name.",
 
+  "C5ETRAINING.gmOnlyMode": "Enable GM Only Mode.",
+  "C5ETRAINING.gmOnlyModeHint": "Enabling this will put the module into GM Only mode. When this is on, the tab does not display on sheets for non-GM users, completion messages are automatically whispered to GM rather than displayed publicly, and roll dialogs will automatically have the Private GM Roll mode selected.",
+
 	"C5ETRAINING.InvalidNumberWarning": "Invalid input. Please enter a number.",
   "C5ETRAINING.InvalidTool": "Tool Not Found",
 

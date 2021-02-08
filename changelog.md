@@ -1,9 +1,10 @@
 # Change Log
 
-## Version 0.4.12
+## Version 0.5.0
 - Fixed an issue where activities would not roll when Better Rolls was enabled.
 - Fixed an issue where the roll indicator wasn't displaying on hover.
 - Added a setting that allows the user to make the character sheet wider when it opens. This is a client-specific setting, so users can change it as they need to if they're using different sheets or have different preferences.
+- Added a setting to hide the activities from players. Off by default. When this is on, the tab does not display on the sheets, completion messages are automatically whispered to GM rather than displayed publicly, and roll dialogs will automatically have the Private GM Roll mode selected.
 
 ## Version 0.4.11
 - Fixed an issue where the downtime tab would attempt to display on actor sheets inside compendiums and throw some errors.
