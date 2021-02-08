@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 0.4.12
+- Fixed an issue where activities would not roll when Better Rolls was enabled.
+- Fixed an issue where the roll indicator wasn't displaying on hover.
+- Added a setting that allows the user to make the character sheet wider when it opens. This is a client-specific setting, so users can change it as they need to if they're using different sheets or have different preferences.
+
 ## Version 0.4.11
 - Fixed an issue where the downtime tab would attempt to display on actor sheets inside compendiums and throw some errors.
 
