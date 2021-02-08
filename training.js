@@ -51,6 +51,15 @@ Hooks.once("init", () => {
     type: String
   });
 
+  game.settings.register("5e-training", "extraSheetWidth", {
+    name: game.i18n.localize("C5ETRAINING.ExtraSheetWidth"),
+    hint: game.i18n.localize("C5ETRAINING.ExtraSheetWidthHint"),
+    scope: "client",
+    config: true,
+    default: 50,
+    type: Number
+  });
+
   game.settings.register("5e-training", "defaultAbility", {
     name: game.i18n.localize("C5ETRAINING.DefaultAbility"),
     hint: game.i18n.localize("C5ETRAINING.DefaultAbilityHint"),
@@ -654,7 +663,29 @@ function determineRollType(activity){
   return rollType;
 }
 
+// Determines whether or not the sheet should have its width adjusted.
+// If the setting for extra width is set, and if the sheet is of a type for which
+// we have training enabled, this returns true.
+function adjustSheetWidth(app){
+  let settingEnabled = !!game.settings.get("5e-training", "extraSheetWidth");
+  let sheetHasTab = ((app.object.data.type === 'npc') && game.settings.get("5e-training", "enableTrainingNpc")) ||
+                    ((app.object.data.type === 'character') && game.settings.get("5e-training", "enableTraining"));
+
+  let currentWidth = app.position.width;
+  let defaultWidth = app.options.width;
+  let sheetIsSmaller = currentWidth < (defaultWidth + game.settings.get("5e-training", "extraSheetWidth"))
+
+  return settingEnabled && sheetHasTab && sheetIsSmaller;
+}
+
 Hooks.on(`renderActorSheet`, (app, html, data) => {
+
+  let widenSheet = adjustSheetWidth(app);
+  if(widenSheet){
+    let newPos = {width: app.position.width + game.settings.get("5e-training", "extraSheetWidth")}
+    app.setPosition(newPos);
+  }
+
   addTrainingTab(app, html, data).then(function(){
     if (app.activateTrainingTab) {
       app._tabs[0].activate("training");
