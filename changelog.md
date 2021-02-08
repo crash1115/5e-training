@@ -7,6 +7,8 @@
 - Added a setting to hide the activities from players. Off by default. When this is on, the tab does not display on the sheets, completion messages are automatically whispered to GM rather than displayed publicly, and roll dialogs will automatically have the Private GM Roll mode selected.
 - Disable roll button on completed activities
 - Prevent roll completion messages from displaying if activity was already completed
+- Added the ability to set a macro to run when an activity gets rolled
+- Opened up an accessible API and added the `updateActivityProgress`, `getActivitiesForActor`, and `getActivity` methods in order to facilitate macro use.
 
 ## Version 0.4.11
 - Fixed an issue where the downtime tab would attempt to display on actor sheets inside compendiums and throw some errors.
@@ -24,7 +26,7 @@
 - Added the `CrashTrainingTabReady` hook, which fires when the downtime tab is ready. Example usage:
 ```js
 Hooks.on(`CrashTrainingTabReady`, (app, html, data) => {
-  console.log("Crash's 5e Downtime Tracking | Downtime tab ready!");
+  console.log("Crash's Tracking & Training (5e) | Downtime tab ready!");
 });
 ```
 

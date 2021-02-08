@@ -1,12 +1,12 @@
 # Example Uses
-These are just a few of the ways you could use 5e Downtime Tracking to keep track of various things in your game! Use this as inspiration, or do something totally new and different.
+These are just a few of the ways you could use Crash's Tracking & Training (5e) to keep track of various things in your game! Use this as inspiration, or do something totally new and different.
 
 ## Train Thieves Tools Proficiency
 Let's say your ranger saw the rogue pick a lock and thought that was cool. Now she wants to train to be able to do that, too. Try a setup like this:
 - Type: Ability Score (Dex)
 - Completion Target: 300
 
-Have your player roll to progress this activity each day they use their downtime to practice. A good rough guideline is that it takes an average person about a month of work (I believe the 5e DMG says 4 weeks) to become proficient in a task if they spend 8 hours a day performing it. The average person will roll a 10 on this check. 30 days x 10 = 300 target. Players who have good Dex will naturally do better on this check than others on average, thus making the training time a little quicker for them.
+Have your player roll to progress this activity each day they use their downtime to practice. A good rough guideline is that it takes an average person about a month of work to become proficient in a task if they spend 8 hours a day performing it. The average person will roll a 10 on this check. 30 days x 10 = 300 target. Players who have good Dex will naturally do better on this check than others on average, thus making the training time a little quicker for them.
 
 ## Kill 10 Rats
 The RPG classic! With Simple progression mode, this one's a snap:
@@ -46,7 +46,7 @@ Probably the most requested thing ever:
 - Completion Target: 100
 - Macro Name: My First Downtime Macro
 
-Create a new script macro. Make the name `My First Downtime Macro` and paste the following code in. Change the `actorName` and `itemName` to match the name of your actor and your activity. Also read through the comments so you can understand how the macro works. This will give you the tools and know-how to make even more cool things!
+Create a new script macro. Make the name `My First Downtime Macro` (or whatever, as long as it matches the Macro Name setting in the activity) and paste the following code in. Change the `actorName` and `itemName` to match the name of your actor and your activity. Also read through the comments so you can understand how the macro works. This will give you the tools and know-how to make even more cool things!
 
 ```
 // We need two pieces of information first: the name of the actor that owns the Activity

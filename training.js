@@ -235,7 +235,7 @@ async function addTrainingTab(app, html, data) {
     // ADD NEW DOWNTIME ACTIVITY
     html.find('.crash-training-add').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Downtime Tracking | Create Downtime Activity excuted!");
+      console.log("Crash's Tracking & Training (5e) | Create Downtime Activity excuted!");
 
       // Set up some variables
       let add = false;
@@ -299,7 +299,7 @@ async function addTrainingTab(app, html, data) {
     // EDIT DOWNTIME ACTIVITY
     html.find('.crash-training-edit').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Downtime Tracking | Edit Downtime Activity excuted!");
+      console.log("Crash's Tracking & Training (5e) | Edit Downtime Activity excuted!");
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
@@ -353,7 +353,7 @@ async function addTrainingTab(app, html, data) {
     // DELETE DOWNTIME ACTIVITY
     html.find('.crash-training-delete').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Downtime Tracking | Delete Downtime Activity excuted!");
+      console.log("Crash's Tracking & Training (5e) | Delete Downtime Activity excuted!");
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
@@ -385,7 +385,7 @@ async function addTrainingTab(app, html, data) {
     // EDIT PROGRESS VALUE
     html.find('.crash-training-override').change(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Downtime Tracking | Progression Override excuted!");
+      console.log("Crash's Tracking & Training (5e) | Progression Override excuted!");
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
@@ -397,7 +397,7 @@ async function addTrainingTab(app, html, data) {
 
       // Format text field input and change
       if(isNaN(field.value)){
-        ui.notifications.warn("Crash's 5e Downtime Tracking: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
+        ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
       } else if(field.value.charAt(0)==="+"){
         let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (+)";
         adjustment = parseInt(field.value.substr(1).trim());
@@ -424,7 +424,7 @@ async function addTrainingTab(app, html, data) {
     // ROLL TO TRAIN
     html.find('.crash-training-roll').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Downtime Tracking | Progress Downtime Activity excuted!");
+      console.log("Crash's Tracking & Training (5e) | Progress Downtime Activity excuted!");
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
@@ -491,7 +491,7 @@ async function addTrainingTab(app, html, data) {
           await actor.unsetFlag("5e-training", "trainingItems");
           await actor.setFlag("5e-training", "trainingItems", trainingItems);
         } else {
-          ui.notifications.warn("Crash's 5e Downtime Tracking: " + game.i18n.localize("C5ETRAINING.ToolNotFoundWarning"));
+          ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ToolNotFoundWarning"));
         }
       }
       // Progression Type: Simple
@@ -522,7 +522,7 @@ async function addTrainingTab(app, html, data) {
     // dnd5e/module/actor/sheets/base.js
     html.find('.crash-training-toggle-desc').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Downtime Tracking | Toggle Acvtivity Info excuted!");
+      console.log("Crash's Tracking & Training (5e) | Toggle Acvtivity Info excuted!");
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
@@ -546,7 +546,7 @@ async function addTrainingTab(app, html, data) {
     // OPEN AUDIT LOG
     html.find('.crash-training-audit').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's 5e Downtime Tracking | GM Audit excuted!");
+      console.log("Crash's Tracking & Training (5e) | GM Audit excuted!");
       new AuditLog(actor).render(true);
     });
 
@@ -640,7 +640,7 @@ async function checkCompletion(actor, activity, alreadyCompleted){
     }
 
     if (sendIt){
-      console.log("Crash's 5e Downtime Tracking | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedADowntimeActivity"));
+      console.log("Crash's Tracking & Training (5e) | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedADowntimeActivity"));
       let chatHtml = await renderTemplate('modules/5e-training/templates/completion-message.html', {actor:actor, activity:activity});
       let chatObj = {content: chatHtml};
       if(game.settings.get("5e-training", "gmOnlyMode")){
@@ -746,7 +746,7 @@ Hooks.on(`renderActorSheet`, (app, html, data) => {
 });
 
 Hooks.on(`CrashTrainingTabReady`, (app, html, data) => {
-  console.log("Crash's 5e Downtime Tracking | Downtime tab ready!");
+  console.log("Crash's Tracking & Training (5e) | Downtime tab ready!");
 });
 
 

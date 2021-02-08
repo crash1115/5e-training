@@ -1,9 +1,9 @@
 ![GitHub All Releases](https://img.shields.io/github/downloads/crash1115/5e-training/total) ![GitHub Releases](https://img.shields.io/github/downloads/crash1115/5e-training/latest/total) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/crash1115/5e-training?label=latest%20version)
 
-# Crash's 5e Downtime Tracking
+# Crash's Tracking & Training (5e)
 Does your group do a lot of downtime activities? Do you have a hard time keeping track of it all? Then this is the mod for you!
 
-Downtime Tracking is a module for the dnd5e system in Foundry VTT that adds a tab to all actor sheets (character and NPC) that lets you add and keep track of downtime activities. Finally working on that History proficiency? It's in here. Learning how to use thieves tools? In here. Need to keep track of how much of the town's water supply you've accidentally (I hope) poisoned? If you can measure it with a percentage, you can track it in here.
+Tracking & Training is a module for the dnd5e system in Foundry VTT that adds a tab to all actor sheets (character and NPC) that lets you add and keep track of downtime activities. Finally working on that History proficiency? It's in here. Learning how to use thieves tools? In here. Need to keep track of how much of the town's water supply you've accidentally (I hope) poisoned? If you can measure it with a percentage, you can track it in here.
 
 [![Image from Gyazo](https://i.gyazo.com/7f072b341c266eed397c772b0328c542.png)](https://gyazo.com/7f072b341c266eed397c772b0328c542)
 
@@ -76,3 +76,41 @@ Contact me on Discord (CRASH1115#2944) to chat, or create an issue right here on
 ## License
 - This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).
 - This work is licensed under the [Foundry Virtual Tabletop EULA - Limited License Agreement for Module Development](https://foundryvtt.com/article/license/).
+
+
+# API Info
+This is sort of a work in progress, but here's what's available.
+
+### CrashTNT.updateActivityProgress(actorName, itemName, newProgress)
+Ex: `CrashTNT.updateActivity("Nazir", "Smithing Proficiency", 75)`
+
+Params
+- `actorName` is a string that matches the name of the actor that owns the Activity you'd like to change. It's case sensitive.
+- `itemName` is a string that matches the name of the Activity you'd like to updatee. It's case sensitive.
+- `newProgress` is an integer. This is the value you'd like to set the activity's progress to.
+
+Returns
+- Nothing. This method will update the selected Activity, replacing the value of the `progress` property with the value provided.
+
+---
+
+### CrashTNT.getActivitiesForActor(actorName)
+Ex: `CrashTNT.getActivitiesForActor("Mary Sue")`
+
+Params
+- `actorName` is a string that matches the name of the actor you'd like to get activities for. It's case sensitive.
+
+Returns
+- An array of Activity objects
+
+---
+
+### CrashTNT.getActivity(actorName, itemName)
+Ex: `CrashTNT.getActivity("Val Fletcher", "Craft Magic Armor")`
+
+Params
+- `actorName` is a string that matches the name of the actor that owns the activity you're trying to get. It's case sensitive.
+- `itemName` is a string that matches the name of the activity you're trying to get. It's case sensitive.
+
+Returns
+- An single Activity object
