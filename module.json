@@ -34,4 +34,34 @@
 	"url": "https://github.com/crash1115/5e-training",
   "manifest": "https://raw.githubusercontent.com/crash1115/5e-training/master/module.json",
 	"download": "https://github.com/crash1115/5e-training/releases/download/v0.5.0/5e-training.zip"
+	"readme": "https://github.com//crash1115/5e-training/blob/master/README.md",
+	"bugs": "https://github.com/crash1115/5e-training/issues",
+  "allowBugReporter": true,
+	"manifestPlusVersion": "1.1.0",
+  "media": [
+		{
+			"type": "icon",
+			"link": "https://i.gyazo.com/c6703b13bbcdb5b222a2f758e58f95f1.png"
+		},
+    {
+      "type": "cover",
+      "link": "https://i.gyazo.com/445151200d8b187dec2687eafb234cbb.png"
+    },
+    {
+      "type": "screenshot",
+      "link": "https://i.gyazo.com/1cad6ed7d1d24194e8851c90690ebd90.png"
+    },
+    {
+      "type": "screenshot",
+      "link": "https://i.gyazo.com/1fa6b9d8958d540463daa0d99c53f555.png"
+    },
+    {
+      "type": "screenshot",
+      "link": "https://i.gyazo.com/e6949446ab42a47f1da40aecc7d402f3.png"
+    },
+    {
+      "type": "screenshot",
+      "link": "https://i.gyazo.com/3ccd4cf168c7ffbe9c876e21e2a673dc.png"
+    }
+  ]
 }
