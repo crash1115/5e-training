@@ -17,13 +17,18 @@
 		},
 		{
 			"lang": "ko",
-			"name": "Korean",
+			"name": "한국어",
 			"path": "lang/ko.json"
 		},
 		{
 			"lang": "cn",
 			"name": "中文",
 			"path": "lang/cn.json"
+		},
+		{
+			"lang": "es",
+			"name": "Español",
+			"path": "lang/es.json"
 		}
 	],
 	"url": "https://github.com/crash1115/5e-training",
