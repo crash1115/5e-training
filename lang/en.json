@@ -36,6 +36,7 @@
   "C5ETRAINING.CompletionTarget": "Completion Target",
 	"C5ETRAINING.Create": "Create",
 	"C5ETRAINING.CreateNewDowntimeActivity": "Create New Downtime Activity",
+  "C5ETRAINING.CreationInstructions": "Enter a name for the activity and select a progression system. Progression-specific settings (which skill or tool to use, what the DC is, which macro to run, etc) can be altered by editing the activity after it has been created.",
 	"C5ETRAINING.CurrentProgress": "Current Progress",
   "C5ETRAINING.Custom": "Custom",
   "C5ETRAINING.CustomRoll": "Custom Roll",
