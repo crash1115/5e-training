@@ -15,11 +15,11 @@
       {{#each actor.flags.5e-training.trainingItems as |training tid| }}
         <li class="item flexrow">
           <div class="item-name flexrow rollable">
-            <div class="{{trainingRollBtnClass training}}" id="crash-roll-{{tid}}" title="{{trainingRollBtnTooltip training}}"></div>
+            <div class="{{5e-training-trainingRollBtnClass training}}" id="crash-roll-{{tid}}" title="{{5e-training-trainingRollBtnTooltip training}}"></div>
             <h4 class="crash-training-toggle-desc" id="crash-toggle-desc-{{tid}}" title="{{ localize 'C5ETRAINING.ToggleInfo' }}">{{training.name}}</h4>
           </div>
           <div class="item-detail type">
-            {{progressionStyle training ../actor}}
+            {{5e-training-progressionStyle training ../actor}}
           </div>
           <div class="item-detail override">
             <input type="text" class="item-control crash-training-override" id="crash-override-{{tid}}" title="{{ localize 'C5ETRAINING.AdjustProgressValue' }}" value="{{training.progress}}"/>
@@ -27,8 +27,8 @@
           </div>
           <div class="item-detail flexrow bar">
             <div class="progress-bar">
-              <div class="crash-training-completion" style="width:{{trainingCompletion training}}%;">
-                <span>{{trainingCompletion training}}%</span>
+              <div class="crash-training-completion" style="width:{{5e-training-trainingCompletion training}}%;">
+                <span>{{5e-training-trainingCompletion training}}%</span>
               </div>
             </div>
           </div>

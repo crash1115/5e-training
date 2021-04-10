@@ -3,12 +3,12 @@ import { preloadTemplates } from "./load-templates.js";
 import AuditLog from "./audit-log.js";
 
 // Register Handlebars Helpers
-Handlebars.registerHelper("trainingCompletion", function(trainingItem) {
+Handlebars.registerHelper("5e-training-trainingCompletion", function(trainingItem) {
   let percentComplete = Math.min(100,(100 * trainingItem.progress / trainingItem.completionAt)).toFixed(0);
   return percentComplete;
 });
 
-Handlebars.registerHelper("progressionStyle", function(trainingItem, actor) {
+Handlebars.registerHelper("5e-training-progressionStyle", function(trainingItem, actor) {
   let progressionTypeString = "";
   if(trainingItem.progressionStyle === "simple"){
     progressionTypeString = game.i18n.localize("C5ETRAINING.Simple");
@@ -20,13 +20,13 @@ Handlebars.registerHelper("progressionStyle", function(trainingItem, actor) {
     return progressionTypeString;
 });
 
-Handlebars.registerHelper("trainingRollBtnClass", function(trainingItem) {
+Handlebars.registerHelper("5e-training-trainingRollBtnClass", function(trainingItem) {
   let className = 'crash-training-roll';
   if(trainingItem.progress >= trainingItem.completionAt){ className = 'crash-training-roll-disabled'; }
   return className;
 });
 
-Handlebars.registerHelper("trainingRollBtnTooltip", function(trainingItem) {
+Handlebars.registerHelper("5e-training-trainingRollBtnTooltip", function(trainingItem) {
   let className = game.i18n.localize('C5ETRAINING.AdvanceActivityProgress');
   if(trainingItem.progress >= trainingItem.completionAt){ className = game.i18n.localize('C5ETRAINING.AdvanceActivityProgressDisabled'); }
   return className;
@@ -182,7 +182,7 @@ async function addTrainingTab(app, html, data) {
   if (showTrainingTab){
 
     // Get our actor and our flags
-    let actor = game.actors.entities.find(a => a.data._id === data.actor._id);
+    let actor = game.actors.contents.find(a => a.data._id === data.actor._id);
     let trainingItems = await actor.getFlag("5e-training", "trainingItems");
 
     // Update the nav menu
@@ -473,7 +473,7 @@ async function addTrainingTab(app, html, data) {
       // Progression Type: Ability Check or DC - TOOL
       else if (rollType === "tool"){
         let toolId = activity.ability.slice(5); //strip the "tool-" from the value
-        let tool = actor.getOwnedItem(toolId);
+        let tool = actor.items.get(toolId);
         if(tool){
           let toolName = tool.name;
           // Roll to increase progress
@@ -685,7 +685,7 @@ function getActorTools(actor){
   let tools = items.filter(item => item.type === "tool");
   let formatted = tools.map(obj => {
     let newObj = {};
-    newObj.value = "tool-" + obj._id;
+    newObj.value = "tool-" + obj.data._id;
     newObj.label = game.i18n.localize("C5ETRAINING.Tool") + ": " + obj.name;
     return newObj;
   });
