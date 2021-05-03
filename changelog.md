@@ -1,5 +1,14 @@
 # Change Log
 
+## Version 0.5.1
+- Compatibility update for Foundry 0.8.2. This version will not work with Foundry 0.7.x.
+- Previous versions remain compatible with Foundry 0.7.x.
+- Added some text to the downtime item creation dialog that clarifies when/how to choose what skill/ability/tool gets used for the check.
+- Namespaced Handlebars helpers to avoid compatibility issues
+- Added Spanish translations, thanks to MS-PBS
+- Compatibility with Bug Reporter
+- Manifest+ support
+
 ## Version 0.5.0
 - Fixed an issue where activities would not roll when Better Rolls was enabled.
 - Fixed an issue where the roll indicator wasn't displaying on hover.
