@@ -289,7 +289,6 @@ async function addTrainingTab(app, html, data) {
             }
             // Update flags and actor
             trainingItems.push(newActivity);
-            await actor.unsetFlag("5e-training", "trainingItems");
             await actor.setFlag("5e-training", "trainingItems", trainingItems);
           }
         }
@@ -343,7 +342,6 @@ async function addTrainingTab(app, html, data) {
             }
             // Update flags and actor
             trainingItems[trainingIdx] = activity;
-            await actor.unsetFlag("5e-training", "trainingItems");
             await actor.setFlag("5e-training", "trainingItems", trainingItems);
           }
         }
@@ -375,7 +373,6 @@ async function addTrainingTab(app, html, data) {
           if (del) {
             // Delete item and update actor
             trainingItems.splice(trainingIdx, 1);
-            await actor.unsetFlag("5e-training", "trainingItems");
             await actor.setFlag("5e-training", "trainingItems", trainingItems);
           }
         }
@@ -417,7 +414,6 @@ async function addTrainingTab(app, html, data) {
 
       // Update flags and actor
       trainingItems[trainingIdx] = activity;
-      await actor.unsetFlag("5e-training", "trainingItems");
       await actor.setFlag("5e-training", "trainingItems", trainingItems);
     });
 
@@ -448,7 +444,6 @@ async function addTrainingTab(app, html, data) {
         checkCompletion(actor, activity, alreadyCompleted);
         // Update flags and actor
         trainingItems[trainingIdx] = activity;
-        await actor.unsetFlag("5e-training", "trainingItems");
         await actor.setFlag("5e-training", "trainingItems", trainingItems);
       }
       // Progression Type: Ability Check or DC - SKILL
@@ -466,7 +461,6 @@ async function addTrainingTab(app, html, data) {
         checkCompletion(actor, activity, alreadyCompleted);
         // Update flags and actor
         trainingItems[trainingIdx] = activity;
-        await actor.unsetFlag("5e-training", "trainingItems");
         await actor.setFlag("5e-training", "trainingItems", trainingItems);
 
       }
@@ -488,7 +482,6 @@ async function addTrainingTab(app, html, data) {
           checkCompletion(actor, activity, alreadyCompleted);
           // Update flags and actor
           trainingItems[trainingIdx] = activity;
-          await actor.unsetFlag("5e-training", "trainingItems");
           await actor.setFlag("5e-training", "trainingItems", trainingItems);
         } else {
           ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ToolNotFoundWarning"));
@@ -503,7 +496,6 @@ async function addTrainingTab(app, html, data) {
         checkCompletion(actor, activity, alreadyCompleted);
         // Update flags and actor
         trainingItems[trainingIdx] = activity;
-        await actor.unsetFlag("5e-training", "trainingItems");
         await actor.setFlag("5e-training", "trainingItems", trainingItems);
       }
       // Progression Type: Macro
@@ -770,7 +762,6 @@ export function crashTNT(){
       checkCompletion(actor, thisItem, alreadyCompleted);
       // Update flags and actor
       allItems[itemIdx] = thisItem;
-      await actor.unsetFlag("5e-training", "trainingItems");
       await actor.setFlag("5e-training", "trainingItems", allItems);
     }
   }
