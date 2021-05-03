@@ -772,7 +772,7 @@ export function crashTNT(){
       let allItems = actor.getFlag("5e-training", "trainingItems");
       return allItems;
     } else {
-      ui.notifications.warn("Crash's 5e Tracking & Training: " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning"));
+      ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning"));
     }
   }
 
