@@ -796,5 +796,5 @@ export function crashTNT(){
 
 
 Hooks.on(`ready`, () => {
-	window.CrashTNT = crashTNT();
+	globalThis.CrashTNT = crashTNT();
 });
