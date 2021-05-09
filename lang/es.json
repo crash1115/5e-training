@@ -127,5 +127,6 @@
   "C5ETRAINING.Tool": "Herramienta",
   "C5ETRAINING.ToolNotFoundWarning": "Herramienta selccionada no encontrada. Edita la actividad y elige una nueva.",
 
-  "C5ETRAINING.User": "Usuario"
+  "C5ETRAINING.User": "Usuario",
+  "C5ETRAINING.LogActionMacro": "Macro / código externo"
 }

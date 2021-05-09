@@ -16,8 +16,10 @@ Handlebars.registerHelper("5e-training-progressionStyle", function(trainingItem,
     progressionTypeString = getAbilityName(trainingItem, actor);
   } else if(trainingItem.progressionStyle === "dc"){
     progressionTypeString = getAbilityName(trainingItem, actor)+" (" + game.i18n.localize("C5ETRAINING.DC") + trainingItem.dc + ")";
+  } else if(trainingItem.progressionStyle === "macro"){
+    progressionTypeString = game.i18n.localize("C5ETRAINING.Macro");
   }
-    return progressionTypeString;
+  return progressionTypeString;
 });
 
 Handlebars.registerHelper("5e-training-trainingRollBtnClass", function(trainingItem) {
@@ -757,7 +759,7 @@ export function crashTNT(){
       let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
       // Increase progress
       newProgress = parseInt(newProgress);
-      thisItem = calculateNewProgress(thisItem, game.i18n.localize("C5ETRAINING.Macro"), newProgress, true);
+      thisItem = calculateNewProgress(thisItem, game.i18n.localize("C5ETRAINING.LogActionMacro"), newProgress, true);
       // Log activity completion
       checkCompletion(actor, thisItem, alreadyCompleted);
       // Update flags and actor
