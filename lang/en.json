@@ -129,5 +129,8 @@
   "C5ETRAINING.ToolNotFoundWarning": "Selected tool not found. Please edit the activity and select a new one.",
 
   "C5ETRAINING.User": "User",
+
+  "C5ETRAINING.CheckTypeColumnHeader": "Type",
+  "C5ETRAINING.ProgressColumnHeader": "Progress",
   "C5ETRAINING.LogActionMacro": "Macro / External Code"
 }

@@ -2,26 +2,45 @@
 /*         TRAINING TAB        */
 /*****************************/
 
-/* Tweak some item controls styles to fit the additional buttons*/
-.crash-training .crash-item-controls {
-	min-width: fit-content;
-	min-width: -moz-fit-content;
-	flex: 0 0 44px;
-	justify-content: space-between;
+/* Type Column Header */
+.dnd5e.sheet .crash-training .activity-type {
+  flex: 0 0 150px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+	border-right: 1px solid #c9c7b8;
 }
 
-.crash-training .crash-item-controls a {
-	min-width: fit-content;
-	min-width: -moz-fit-content;
-	flex: 1 !important;
-	margin-right: 5px;
+/* Progress Override Column Header*/
+.dnd5e.sheet .crash-training .activity-override {
+  flex: 0 0 110px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+}
+
+/* Progress Column Header*/
+.dnd5e.sheet .crash-training .activity-progress {
+  flex: 0 0 90px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+}
+
+/* Add and Audit Log Buttons */
+.dnd5e.sheet .crash-training .crash-item-controls {
+  flex: 0 0 150px;
+	justify-content: space-between;
+}
+.dnd5e.sheet .crash-training .crash-item-controls .crash-training-audit,
+.dnd5e.sheet .crash-training .crash-item-controls .crash-training-add {
 	font-size: 12px;
 	text-align: center;
 }
 
-/* Roll Button */
-.crash-training .crash-training-roll,
-.crash-training .crash-training-roll-disabled {
+/* Roll Buttons */
+.dnd5e.sheet .crash-training .crash-training-roll,
+.dnd5e.sheet .crash-training .crash-training-roll-disabled {
 	flex: 0 0 30px;
 	height: 30px;
 	background-size: 24px;
@@ -31,50 +50,50 @@
 	margin-right: 5px;
 	background-image: url("/../icons/svg/d20-grey.svg");
 }
-
-.crash-training .crash-training-roll-disabled {
+.dnd5e.sheet .crash-training .crash-training-roll-disabled {
 	opacity: 50%;
 }
-
-.crash-training .crash-training-roll:hover {
+.dnd5e.sheet .crash-training .crash-training-roll:hover {
 	background-image: url("/../icons/svg/d20-black.svg");
 }
 
 /* Type Column */
-.crash-training .inventory-list .item-detail.type {
+.dnd5e.sheet .crash-training .activity-type-row {
+  flex: 0 0 150px;
 	text-transform: capitalize;
-	flex: 0 0 140px;
+	text-align: center;
+	font-size: 12px;
+	border-right: 1px solid #c9c7b8;
 }
 
-/* Override Column */
-.crash-training .inventory-list .item-detail.override {
-	flex: 0 0 90px;
+/* Progress Override Column */
+.dnd5e.sheet .crash-training .activity-override-row {
+  flex: 0 0 110px;
+	font-size: 12px;
 }
-
-/* Progress Columns */
-.crash-training .item-detail.bar {
-	flex: 1 !important;
-}
-
-/* Progress Override Input */
-.crash-training .item-detail .crash-training-override {
+.dnd5e.sheet .crash-training .activity-override-row input {
+	max-width: 50px;
 	text-align: right;
-  padding-top: 1px;
-  line-height: 1;
-	display: inline;
-  max-width: 40px;
+}
+
+/* Progress Bar Column */
+.dnd5e.sheet .crash-training .activity-progress-row {
+  flex: 0 0 190px;
+	font-size: 12px;
+	border-right: 1px solid #c9c7b8;
 }
 
 /* Training Bar */
-.crash-training .progress-bar {
+.dnd5e.sheet .crash-training .activity-progress-row .progress-bar {
+	flex: 0 0 180px; /* 190 - 10px margin */
 	background-color: rgba(0,0,0,0.1);
 	border-radius: 4px;
 	height: 20px;
 	margin: 5px;
 }
 
-/* Training Bar Progress */
-.crash-training .progress-bar .crash-training-completion {
+/* Training Bar - Filled Portion */
+.dnd5e.sheet .crash-training .activity-progress-row .crash-training-completion {
 	color: #111111;
 	background-color: rgba(255,0,0,0.4);
 	border-radius: 4px;
@@ -83,9 +102,24 @@
 }
 
 /* Training Bar Progress Percent Text */
-.crash-training .progress-bar .crash-training-completion span {
+.dnd5e.sheet .crash-training .activity-progress-row .crash-training-completion span {
 	margin-left: 5px;
 }
+
+/* Add and Audit Log Buttons */
+.dnd5e.sheet .crash-training .crash-item-row-controls {
+  flex: 0 0 45px; /*50px - 5px right padding on the row*/
+	justify-content: space-between;
+	display: flex;
+	padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
+}
+.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-edit,
+.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-delete {
+	font-size: 12px;
+	text-align: center;
+	flex: 1;
+}
+
 
 /*********************************/
 /*           DIALOGS           */
@@ -105,7 +139,6 @@
 .crash-training-dialog .field * {
 	flex: 5;
 }
-
 
 /*********************************/
 /*         AUDIT LOGS          */
@@ -131,8 +164,6 @@
 	padding-bottom: 5px;
 	text-transform: capitalize;
 }
-
-
 
 .crash-audit-log .action-table table tr:nth-of-type(even) td {
 	background-color: rgba(0,0,0,0.2);
