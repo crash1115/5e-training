@@ -7,7 +7,7 @@
 	"minimumCoreVersion": "0.8.1",
 	"compatibleCoreVersion": "0.8.2",
 	"systems": ["dnd5e"],
-	"esmodules": ["training.js"],
+	"esmodules": ["scripts/crash-5e-training.js"],
 	"styles": ["styles/training-tab.css", "styles/activity-app.css", "styles/audit-log.css", "styles/category-app.css"],
 	"languages": [
 		{
