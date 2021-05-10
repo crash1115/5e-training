@@ -871,16 +871,22 @@ export function crashTNT(){
     let actor = game.actors.getName(actorName);
     if(!actor) {
       ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning"));
+      return;
     }
     let allItems = actor.getFlag("5e-training", "trainingItems");
     let itemIdx = allItems.findIndex((i) => i.name === itemName);
     if(itemIdx < 0){
       ui.notifications.warn( game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") );
+      return;
     }
     else {
       let thisItem = allItems[itemIdx];
       let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
       // Increase progress
+      if(isNaN(newProgress)){
+        ui.notifications.warn( game.i18n.localize("C5ETRAINING.ProgressValueIsNanWarning") );
+        return;
+      }
       newProgress = parseInt(newProgress);
       thisItem = calculateNewProgress(thisItem, game.i18n.localize("C5ETRAINING.LogActionMacro"), newProgress, true);
       // Log activity completion
@@ -905,11 +911,13 @@ export function crashTNT(){
     let actor = game.actors.getName(actorName);
     if(!actor) {
       ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning"));
+      return;
     }
     let allItems = actor.getFlag("5e-training", "trainingItems");
     let itemIdx = allItems.findIndex((i) => i.name === itemName);
     if(itemIdx < 0){
       ui.notifications.warn( game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") );
+      return;
     } else {
       return allItems[itemIdx];
     }
