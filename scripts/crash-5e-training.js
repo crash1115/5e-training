@@ -3,7 +3,6 @@ import { preloadTemplates } from "./load-templates.js";
 import { registerSettings } from "./settings.js";
 import { registerHelpers } from "./handlebars-helpers.js";
 import AuditLog from "./AuditLog.js";
-// import CategoryApp from "./CategoryApp.js";
 import CrashTrackingAndTraining from "./CrashTrackingAndTraining.js";
 
 // Register Game Settings
@@ -234,7 +233,7 @@ export function crashTNT(){
     let allItems = actor.getFlag("5e-training", "trainingItems");
     let itemIdx = allItems.findIndex((i) => i.name === itemName);
     if(itemIdx < 0){
-      ui.notifications.warn( game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") );
+      ui.notifications.warn( game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") + ": " + itemName );
       return;
     }
     else {
@@ -246,9 +245,9 @@ export function crashTNT(){
         return;
       }
       newProgress = parseInt(newProgress);
-      thisItem = calculateNewProgress(thisItem, game.i18n.localize("C5ETRAINING.LogActionMacro"), newProgress, true);
+      thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, game.i18n.localize("C5ETRAINING.LogActionMacro"), newProgress, true);
       // Log activity completion
-      checkCompletion(actor, thisItem, alreadyCompleted);
+      CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
       // Update flags and actor
       allItems[itemIdx] = thisItem;
       await actor.setFlag("5e-training", "trainingItems", allItems);
@@ -274,7 +273,7 @@ export function crashTNT(){
     let allItems = actor.getFlag("5e-training", "trainingItems");
     let itemIdx = allItems.findIndex((i) => i.name === itemName);
     if(itemIdx < 0){
-      ui.notifications.warn( game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") );
+      ui.notifications.warn( game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") + ": " + itemName );
       return;
     } else {
       return allItems[itemIdx];

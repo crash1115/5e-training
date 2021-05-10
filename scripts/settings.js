@@ -53,74 +53,12 @@ export function registerSettings() {
     type: Number
   });
 
-  game.settings.register("5e-training", "defaultAbility", {
-    name: game.i18n.localize("C5ETRAINING.DefaultAbility"),
-    hint: game.i18n.localize("C5ETRAINING.DefaultAbilityHint"),
-    scope: "world",
-    config: true,
-    type: String,
-    choices: {
-      "str": game.i18n.localize("C5ETRAINING.AbilityStr"),
-      "dex": game.i18n.localize("C5ETRAINING.AbilityDex"),
-      "con": game.i18n.localize("C5ETRAINING.AbilityCon"),
-      "int": game.i18n.localize("C5ETRAINING.AbilityInt"),
-      "wis": game.i18n.localize("C5ETRAINING.AbilityWis"),
-      "cha": game.i18n.localize("C5ETRAINING.AbilityCha"),
-      "acr": game.i18n.localize("C5ETRAINING.SkillAcr"),
-      "ani": game.i18n.localize("C5ETRAINING.SkillAni"),
-      "arc": game.i18n.localize("C5ETRAINING.SkillArc"),
-      "ath": game.i18n.localize("C5ETRAINING.SkillAth"),
-      "dec": game.i18n.localize("C5ETRAINING.SkillDec"),
-      "his": game.i18n.localize("C5ETRAINING.SkillHis"),
-      "ins": game.i18n.localize("C5ETRAINING.SkillIns"),
-      "inv": game.i18n.localize("C5ETRAINING.SkillInv"),
-      "itm": game.i18n.localize("C5ETRAINING.SkillItm"),
-      "med": game.i18n.localize("C5ETRAINING.SkillMed"),
-      "nat": game.i18n.localize("C5ETRAINING.SkillNat"),
-      "per": game.i18n.localize("C5ETRAINING.SkillPer"),
-      "prc": game.i18n.localize("C5ETRAINING.SkillPrc"),
-      "prf": game.i18n.localize("C5ETRAINING.SkillPrf"),
-      "rel": game.i18n.localize("C5ETRAINING.SkillRel"),
-      "slt": game.i18n.localize("C5ETRAINING.SkillSlt"),
-      "ste": game.i18n.localize("C5ETRAINING.SkillSte"),
-      "sur": game.i18n.localize("C5ETRAINING.SkillSur")
-    },
-    default: "int",
-  });
-
   game.settings.register("5e-training", "totalToComplete", {
     name: game.i18n.localize("C5ETRAINING.DefaultAbilityCompletion"),
     hint: game.i18n.localize("C5ETRAINING.DefaultAbilityCompletionHint"),
     scope: "world",
     config: true,
     default: 300,
-    type: Number
-  });
-
-  game.settings.register("5e-training", "attemptsToComplete", {
-    name: game.i18n.localize("C5ETRAINING.DefaultSimpleCompletion"),
-    hint: game.i18n.localize("C5ETRAINING.DefaultSimpleCompletionHint"),
-    scope: "world",
-    config: true,
-    default: 10,
-    type: Number
-  });
-
-  game.settings.register("5e-training", "defaultDcDifficulty", {
-    name: game.i18n.localize("C5ETRAINING.DefaultDcDifficulty"),
-    hint: game.i18n.localize("C5ETRAINING.DefaultDcDifficultyHint"),
-    scope: "world",
-    config: true,
-    default: 10,
-    type: Number
-  });
-
-  game.settings.register("5e-training", "defaultDcSuccesses", {
-    name: game.i18n.localize("C5ETRAINING.DefaultDcSuccesses"),
-    hint: game.i18n.localize("C5ETRAINING.DefaultDcSuccessesHint"),
-    scope: "world",
-    config: true,
-    default: 5,
     type: Number
   });
 

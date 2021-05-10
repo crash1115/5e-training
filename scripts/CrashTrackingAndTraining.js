@@ -104,18 +104,18 @@ export default class CrashTrackingAndTraining {
           newItem.description = html.find('#descriptionInput').val();
           // Progression Type: Ability Check
           if (newItem.progressionStyle === 'ability'){
-            newItem.ability = game.settings.get("5e-training", "defaultAbility");
+            newItem.ability = "int";
             newItem.completionAt = game.settings.get("5e-training", "totalToComplete");
           }
           // Progression Type: Simple
           else if (newItem.progressionStyle === 'simple'){
-            newItem.completionAt = game.settings.get("5e-training", "attemptsToComplete");
+            newItem.completionAt = 5;
           }
           // Progression Type: DC
-          else if (newAItem.progressionStyle === 'dc'){
-            newItem.completionAt = game.settings.get("5e-training", "defaultDcSuccesses");
-            newItem.ability = game.settings.get("5e-training", "defaultAbility");
-            newItem.dc = game.settings.get("5e-training", "defaultDcDifficulty");
+          else if (newItem.progressionStyle === 'dc'){
+            newItem.completionAt = 5;
+            newItem.ability = "int";
+            newItem.dc = 10;
           } else if(newItem.progressionStyle == 'macro'){
             newItem.macroName = ''
             newItem.completionAt = game.settings.get("5e-training", "totalToComplete");
@@ -247,7 +247,6 @@ export default class CrashTrackingAndTraining {
     console.log("Crash's Tracking & Training (5e) | Progress Downtime Activity excuted!");
 
     // Set up some variables
-
     let actor = game.actors.get(actorId);
     let allItems = actor.getFlag("5e-training","trainingItems") || [];
     let thisItem = allItems.filter(obj => obj.id === itemId)[0];
@@ -259,16 +258,21 @@ export default class CrashTrackingAndTraining {
       let abilityName = CrashTrackingAndTraining.getAbilityName(thisItem, actor);
       // Roll to increase progress
       let r;
-      if (game.settings.get("5e-training", "gmOnlyMode")){ r = await actor.rollAbilityTest(thisItem.ability, {rollMode : "gmroll"}); }
-      else {r = await actor.rollAbilityTest(thisItem.ability); }
-      let rollMode = CrashTrackingAndTraining.getRollMode(r._formula);
-      let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
-      // Increase progress
-      thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, r._total);
-      // Log item completion
-      CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
-      // Update flags and actor
-      await actor.setFlag("5e-training", "trainingItems", allItems);
+      if (game.settings.get("5e-training", "gmOnlyMode")){
+        r = await actor.rollAbilityTest(thisItem.ability, {rollMode : "gmroll"});
+      } else {
+        r = await actor.rollAbilityTest(thisItem.ability);
+      }
+      if(r){
+        let rollMode = CrashTrackingAndTraining.getrollmodeString(r.options.advantageMode);
+        let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
+        // Increase progress
+        thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, r._total);
+        // Log item completion
+        CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
+        // Update flags and actor
+        await actor.setFlag("5e-training", "trainingItems", allItems);
+      }
     }
 
     // Progression Type: Ability Check or DC - SKILL
@@ -276,16 +280,21 @@ export default class CrashTrackingAndTraining {
       let abilityName = CrashTrackingAndTraining.getAbilityName(thisItem, actor);
       // Roll to increase progress
       let r;
-      if (game.settings.get("5e-training", "gmOnlyMode")){ r = await actor.rollSkill(thisItem.ability, {rollMode : "gmroll"}); }
-      else {r = await actor.rollSkill(thisItem.ability); }
-      let rollMode = CrashTrackingAndTraining.getRollMode(r._formula);
-      let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
-      // Increase progress
-      thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, r._total);
-      // Log item completion
-      CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
-      // Update flags and actor
-      await actor.setFlag("5e-training", "trainingItems", allItems);
+      if (game.settings.get("5e-training", "gmOnlyMode")){
+        r = await actor.rollSkill(thisItem.ability, {rollMode : "gmroll"});
+      } else {
+        r = await actor.rollSkill(thisItem.ability);
+      }
+      if(r){
+        let rollMode = CrashTrackingAndTraining.getrollmodeString(r.options.advantageMode);
+        let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
+        // Increase progress
+        thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, r._total);
+        // Log item completion
+        CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
+        // Update flags and actor
+        await actor.setFlag("5e-training", "trainingItems", allItems);
+      }
     }
 
     // Progression Type: Ability Check or DC - TOOL
@@ -296,16 +305,21 @@ export default class CrashTrackingAndTraining {
         let toolName = tool.name;
         // Roll to increase progress
         let r;
-        if (game.settings.get("5e-training", "gmOnlyMode")){ r = await tool.rollToolCheck({rollMode : "gmroll"}); }
-        else {r = await tool.rollToolCheck(); }
-        let rollMode = CrashTrackingAndTraining.getRollMode(r._formula);
-        let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName + " (" + rollMode + ")";
-        // Increase progress
-        thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, r._total);
-        // Log item completion
-        CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
-        // Update flags and actor
-        await actor.setFlag("5e-training", "trainingItems", allItems);
+        if (game.settings.get("5e-training", "gmOnlyMode")){
+          r = await tool.rollToolCheck({rollMode : "gmroll"});
+        } else {
+          r = await tool.rollToolCheck();
+        }
+        if(r){
+          let rollMode = CrashTrackingAndTraining.getrollmodeString(r.options.advantageMode);
+          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName + " (" + rollMode + ")";
+          // Increase progress
+          thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, r._total);
+          // Log item completion
+          CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
+          // Update flags and actor
+          await actor.setFlag("5e-training", "trainingItems", allItems);
+        }
       } else {
         ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ToolNotFoundWarning"));
       }
@@ -325,10 +339,11 @@ export default class CrashTrackingAndTraining {
     // Progression Type: Macro
     else if (rollType === "macro"){
       let macroName = thisItem.macroName;
-      if (macroName.length < 1){
-        displayHelpChat();
+      let macro = game.macros.getName(macroName);
+      if (macro){
+        macro.execute();
       } else {
-        game.macros.getName(macroName).execute();
+        ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.MacroNotFoundWarning") +": " + macroName);
       }
     }
   }
@@ -406,7 +421,7 @@ export default class CrashTrackingAndTraining {
       }
 
       if (sendIt){
-        console.log("Crash's Tracking & Training (5e) | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedADowntimeActivity"));
+        console.log("Crash's Tracking & Training (5e) | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedATrackedItem"));
         let chatHtml = await renderTemplate('modules/5e-training/templates/completion-message.html', {actor:actor, activity:item});
         let chatObj = {content: chatHtml};
         if(game.settings.get("5e-training", "gmOnlyMode")){
@@ -441,11 +456,13 @@ export default class CrashTrackingAndTraining {
   }
 
   // Takes in the die roll string and returns whether it was made at adv/disadv/normal
-  static getRollMode(formula){
-    let d20Roll = formula.split(" ")[0];
-    if(d20Roll === "2d20kh"){ return  game.i18n.localize("C5ETRAINING.Advantage"); }
-    else if(d20Roll === "2d20kl"){ return game.i18n.localize("C5ETRAINING.Disadvantage"); }
-    else { return game.i18n.localize("C5ETRAINING.Normal"); }
+  static getrollmodeString(type){
+    let lookup = {
+      "-1": game.i18n.localize("C5ETRAINING.Disadvantage"),
+      "0": game.i18n.localize("C5ETRAINING.Normal"),
+      "1": game.i18n.localize("C5ETRAINING.Advantage")
+    }
+    return lookup[type] || "???";
   }
 
   // Determines what string should be displayed on the list of activities on the sheet
