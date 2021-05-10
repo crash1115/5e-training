@@ -1,0 +1,30 @@
+/*********************************/
+/*        CATEGORY APP         */
+/*****************************/
+
+.crash-category-app .instructions {
+	margin-bottom: 10px;
+}
+
+.crash-category-app .field {
+  display: flex;
+  margin-bottom: 10px;
+  padding-top: 5px;
+}
+
+.crash-category-app .field * {
+	flex: 5;
+}
+
+.crash-category-app .wide-field {
+	margin-bottom: 10px;
+	padding-top: 5px;
+}
+
+.crash-category-app footer {
+	display: flex;
+}
+
+.crash-category-app #crash-create-category {
+	flex: 1;
+}

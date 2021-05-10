@@ -1,0 +1,21 @@
+<form class="crash-category-app">
+  <input type="hidden" name="actorId" value="{{actor.id}}"/>
+  <input type="hidden" name="categoryId" value="{{category.id}}"/>
+
+  <p>{{ localize "C5ETRAINING.CategoryCreationInstructions" }}</p>
+
+  <div class="field">
+    <label for="name">{{ localize "C5ETRAINING.Name" }}:</label>
+    <input type="text" name="nameInput" id="nameInput" value="{{category.name}}"/>
+  </div>
+
+  <div class="wide-field">
+    <label for="description">{{ localize "C5ETRAINING.Description" }}:</label>
+    <textarea name="descriptionInput" id="descriptionInput">{{category.description}}</textarea>
+  </div>
+
+  <footer>
+    <button id="crash-create-category"><i class='fas fa-check'></i> {{ localize "C5ETRAINING.SaveCategory" }}</button>
+  </footer>
+
+</form>

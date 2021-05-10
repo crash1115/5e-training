@@ -8,7 +8,7 @@
 	"compatibleCoreVersion": "0.8.2",
 	"systems": ["dnd5e"],
 	"esmodules": ["training.js"],
-	"styles": ["styles/training.css"],
+	"styles": ["styles/training-tab.css", "styles/activity-app.css", "styles/audit-log.css", "styles/category-app.css"],
 	"languages": [
 		{
 			"lang": "en",

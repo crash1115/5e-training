@@ -13,7 +13,6 @@
 	"C5ETRAINING.Activity": "Activity",
 	"C5ETRAINING.ActivityProgress": "Activity Progress",
   "C5ETRAINING.ActorNotFoundWarning": "Actor not found.",
-  "C5ETRAINING.Add": "Add",
   "C5ETRAINING.Advantage": "Advantage",
 	"C5ETRAINING.AdjustProgressValue": "Adjust Progress",
 	"C5ETRAINING.AdvanceActivityProgress": "Advance Activity Progress",
@@ -132,5 +131,16 @@
 
   "C5ETRAINING.CheckTypeColumnHeader": "Type",
   "C5ETRAINING.ProgressColumnHeader": "Progress",
-  "C5ETRAINING.LogActionMacro": "Macro / External Code"
+  "C5ETRAINING.LogActionMacro": "Macro / External Code",
+  "C5ETRAINING.Uncategorized": "Uncategorized",
+  "C5ETRAINING.CreateEditCategoryAppTitle": "Create / Edit Category",
+  "C5ETRAINING.CategoryCreationInstructions": "You can use categories to organize items on this tab.",
+  "C5ETRAINING.SaveCategory": "Save Category",
+  "C5ETRAINING.Category": "Category",
+  "C5ETRAINING.AddCategory": "Add Category",
+  "C5ETRAINING.AddItem": "Add Item",
+  "C5ETRAINING.CreateNewCategory": "Create a new category",
+  "C5ETRAINING.DeleteCategory": "Delete Category",
+  "C5ETRAINING.DeleteCategoryConfirmation": "Are you sure you want to delete this category? All items in the category will be moved to the Uncategorized section."
+
 }

@@ -1,0 +1,53 @@
+/*********************************/
+/*         AUDIT LOGS          */
+/*****************************/
+
+.crash-audit-log .instructions {
+	margin-bottom: 10px;
+}
+
+.crash-audit-log .action-table {
+	margin-bottom: 20px;
+}
+
+.crash-audit-log .action-table table {
+	text-align: left;
+	border: none;
+	background-color: none;
+}
+
+.crash-audit-log .action-table table tr th,
+.crash-audit-log .action-table table tr td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-transform: capitalize;
+}
+
+.crash-audit-log .action-table table tr:nth-of-type(even) td {
+	background-color: rgba(0,0,0,0.2);
+}
+
+.crash-audit-log .action-table table tr:hover td {
+	background-color: rgba(255,0,0,0.2);
+}
+
+.crash-audit-log footer{
+	display: flex;
+}
+
+.crash-audit-log #apply-audits,
+.crash-audit-log #cancel-audits {
+	flex: 1;
+}
+
+/*********************************/
+/* SUPPORT FOR D&D5E DARK MODE */
+/*****************************/
+
+.dark-mode .audit-log .action-table table tr:nth-of-type(even) td {
+	background-color: rgba(0,0,0,0.5);
+}
+
+.dark-mode .audit-log .action-table table tr:hover td {
+	background-color: rgba(63,136,230, 0.4);
+}

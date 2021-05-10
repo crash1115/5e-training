@@ -20,6 +20,15 @@
     {{> "modules/5e-training/templates/partials/macro.html" training=training}}
   {{/if}}
 
+  <div class="field">
+    <label for="progressionStyle">{{ localize "C5ETRAINING.Category" }}:</label>
+    <select name="categoryInput" id="categoryInput">
+      <option value="" {{#unless training.category}} selected {{/unless}} >{{ localize "C5ETRAINING.None" }}</option>
+      {{#each categories as |category cid| }}
+        <option value="{{category.id}}" {{#if (eq ../training.category category.id)}} selected {{/if}} >{{ category.name }}</option>
+      {{/each}}
+    </select>
+  </div>
 
   <div class="wide-field">
     <label for="description">{{ localize "C5ETRAINING.Description" }}:</label>

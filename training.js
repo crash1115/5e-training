@@ -1,6 +1,7 @@
 // Imports
 import { preloadTemplates } from "./load-templates.js";
 import AuditLog from "./audit-log.js";
+import CategoryApp from "./category-app.js";
 
 // Register Handlebars Helpers
 Handlebars.registerHelper("5e-training-trainingCompletion", function(trainingItem) {
@@ -9,6 +10,9 @@ Handlebars.registerHelper("5e-training-trainingCompletion", function(trainingIte
 });
 
 Handlebars.registerHelper("5e-training-progressionStyle", function(trainingItem, actor) {
+  if(!trainingItem || !actor){
+    return "?";
+  }
   let progressionTypeString = "";
   if(trainingItem.progressionStyle === "simple"){
     progressionTypeString = game.i18n.localize("C5ETRAINING.Simple");
@@ -32,6 +36,31 @@ Handlebars.registerHelper("5e-training-trainingRollBtnTooltip", function(trainin
   let className = game.i18n.localize('C5ETRAINING.AdvanceActivityProgress');
   if(trainingItem.progress >= trainingItem.completionAt){ className = game.i18n.localize('C5ETRAINING.AdvanceActivityProgressDisabled'); }
   return className;
+});
+
+Handlebars.registerHelper("5e-training-isInCategory", function(actor, category) {
+  let thisCategoryId = category.id;
+  let allTrainingItems = actor.flags["5e-training"].trainingItems;
+  let matchingItems = [];
+  for(var i = 0; i < allTrainingItems.length; i++){
+    let thisItem = allTrainingItems[i];
+    if(thisItem.category == thisCategoryId){
+      matchingItems.push(thisItem);
+    }
+  }
+  return matchingItems;
+});
+
+Handlebars.registerHelper("5e-training-isUncategorized", function(actor) {
+  let allTrainingItems = actor.flags["5e-training"].trainingItems;
+  let matchingItems = [];
+  for(var i = 0; i < allTrainingItems.length; i++){
+    let thisItem = allTrainingItems[i];
+    if(!thisItem.category){
+      matchingItems.push(thisItem);
+    }
+  }
+  return matchingItems;
 });
 
 
@@ -240,16 +269,19 @@ async function addTrainingTab(app, html, data) {
       console.log("Crash's Tracking & Training (5e) | Create Downtime Activity excuted!");
 
       // Set up some variables
+      let categories = actor.data.flags["5e-training"].categories;
       let add = false;
       let newActivity = {
         name: game.i18n.localize("C5ETRAINING.NewDowntimeActivity"),
         progress: 0,
         description: "",
         changes: [],
-        progressionStyle: 'ability'
+        progressionStyle: 'ability',
+        category: "",
+        id: randomID()
       };
 
-      let dialogContent = await renderTemplate('modules/5e-training/templates/add-training-dialog.html', {training: newActivity});
+      let dialogContent = await renderTemplate('modules/5e-training/templates/add-training-dialog.html', {training: newActivity, categories: categories});
 
       // If there is no flag, create an empty array to use as a placeholder
       if (!trainingItems) {
@@ -270,6 +302,7 @@ async function addTrainingTab(app, html, data) {
             // Set up basic info
             newActivity.name = html.find('#nameInput').val();
             newActivity.progressionStyle = html.find('#progressionStyleInput').val();
+            newActivity.category = html.find('#categoryInput').val();
             newActivity.description = html.find('#descriptionInput').val();
             // Progression Type: Ability Check
             if (newActivity.progressionStyle === 'ability'){
@@ -303,11 +336,13 @@ async function addTrainingTab(app, html, data) {
       console.log("Crash's Tracking & Training (5e) | Edit Downtime Activity excuted!");
 
       // Set up some variables
+      let categories = actor.data.flags["5e-training"].categories;
       let fieldId = event.currentTarget.id;
-      let trainingIdx = parseInt(fieldId.replace('crash-edit-',''));
-      let activity = trainingItems[trainingIdx];
+      let trainingId = fieldId.replace('crash-edit-','');
+      let allActivities = actor.data.flags["5e-training"].trainingItems;
+      let activity = allActivities.filter(obj => obj.id === trainingId)[0];
       let edit = false;
-      let dialogContent = await renderTemplate('modules/5e-training/templates/training-details-dialog.html', {training: activity, options: DROPDOWN_OPTIONS});
+      let dialogContent = await renderTemplate('modules/5e-training/templates/training-details-dialog.html', {training: activity, options: DROPDOWN_OPTIONS, categories: categories});
 
       // Create dialog
       new Dialog({
@@ -322,6 +357,7 @@ async function addTrainingTab(app, html, data) {
           if (edit) {
             // Set up base values
             activity.name = html.find('#nameInput').val();
+            activity.category = html.find('#categoryInput').val();
             activity.description = html.find('#descriptionInput').val();
             // Progression Style: Ability Check
             if (activity.progressionStyle === 'ability'){
@@ -343,7 +379,6 @@ async function addTrainingTab(app, html, data) {
               activity.macroName = html.find('#macroInput').val();
             }
             // Update flags and actor
-            trainingItems[trainingIdx] = activity;
             await actor.setFlag("5e-training", "trainingItems", trainingItems);
           }
         }
@@ -357,8 +392,10 @@ async function addTrainingTab(app, html, data) {
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
-      let trainingIdx = parseInt(fieldId.replace('crash-delete-',''));
-      let activity = trainingItems[trainingIdx];
+      let trainingId = fieldId.replace('crash-delete-','');
+      let allActivities = actor.data.flags["5e-training"].trainingItems;
+      let activity = allActivities.filter(obj => obj.id === trainingId)[0];
+      let trainingIdx = allActivities.findIndex(obj => obj.id === activity.id)
       let del = false;
       let dialogContent = await renderTemplate('modules/5e-training/templates/delete-training-dialog.html');
 
@@ -389,8 +426,9 @@ async function addTrainingTab(app, html, data) {
       // Set up some variables
       let fieldId = event.currentTarget.id;
       let field = event.currentTarget;
-      let trainingIdx = parseInt(fieldId.replace('crash-override-',''));
-      let activity = trainingItems[trainingIdx];
+      let trainingId = fieldId.replace('crash-override-','');
+      let allActivities = actor.data.flags["5e-training"].trainingItems;
+      let activity = allActivities.filter(obj => obj.id === trainingId)[0];
       let adjustment = 0;
       let alreadyCompleted = activity.progress >= activity.completionAt;
 
@@ -415,7 +453,6 @@ async function addTrainingTab(app, html, data) {
       checkCompletion(actor, activity, alreadyCompleted);
 
       // Update flags and actor
-      trainingItems[trainingIdx] = activity;
       await actor.setFlag("5e-training", "trainingItems", trainingItems);
     });
 
@@ -426,8 +463,9 @@ async function addTrainingTab(app, html, data) {
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
-      let trainingIdx = parseInt(fieldId.replace('crash-roll-',''));
-      let activity = trainingItems[trainingIdx];
+      let trainingId = fieldId.replace('crash-roll-','');
+      let allActivities = actor.data.flags["5e-training"].trainingItems;
+      let activity = allActivities.filter(obj => obj.id === trainingId)[0];
       let rollType = determineRollType(activity);
       let alreadyCompleted = activity.progress >= activity.completionAt;
 
@@ -445,9 +483,9 @@ async function addTrainingTab(app, html, data) {
         // Log activity completion
         checkCompletion(actor, activity, alreadyCompleted);
         // Update flags and actor
-        trainingItems[trainingIdx] = activity;
         await actor.setFlag("5e-training", "trainingItems", trainingItems);
       }
+
       // Progression Type: Ability Check or DC - SKILL
       else if (rollType === "skill"){
         let abilityName = getAbilityName(activity, actor);
@@ -462,10 +500,9 @@ async function addTrainingTab(app, html, data) {
         // Log activity completion
         checkCompletion(actor, activity, alreadyCompleted);
         // Update flags and actor
-        trainingItems[trainingIdx] = activity;
         await actor.setFlag("5e-training", "trainingItems", trainingItems);
-
       }
+
       // Progression Type: Ability Check or DC - TOOL
       else if (rollType === "tool"){
         let toolId = activity.ability.slice(5); //strip the "tool-" from the value
@@ -483,12 +520,12 @@ async function addTrainingTab(app, html, data) {
           // Log activity completion
           checkCompletion(actor, activity, alreadyCompleted);
           // Update flags and actor
-          trainingItems[trainingIdx] = activity;
           await actor.setFlag("5e-training", "trainingItems", trainingItems);
         } else {
           ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ToolNotFoundWarning"));
         }
       }
+
       // Progression Type: Simple
       else if (rollType === 'simple'){
         let activityName = game.i18n.localize("C5ETRAINING.Attempt") + " (" + game.i18n.localize("C5ETRAINING.Simple") + ")";
@@ -497,9 +534,9 @@ async function addTrainingTab(app, html, data) {
         // Log activity completion
         checkCompletion(actor, activity, alreadyCompleted);
         // Update flags and actor
-        trainingItems[trainingIdx] = activity;
         await actor.setFlag("5e-training", "trainingItems", trainingItems);
       }
+
       // Progression Type: Macro
       else if (rollType === "macro"){
         let macroName = activity.macroName;
@@ -520,8 +557,9 @@ async function addTrainingTab(app, html, data) {
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
-      let trainingIdx = parseInt(fieldId.replace('crash-toggle-desc-',''));
-      let activity = trainingItems[trainingIdx];
+      let trainingId = fieldId.replace('crash-toggle-desc-','');
+      let allActivities = actor.data.flags["5e-training"].trainingItems;
+      let activity = allActivities.filter(obj => obj.id === trainingId)[0];
       let desc = activity.description || "";
       let li = $(event.currentTarget).parents(".item");
 
@@ -535,6 +573,78 @@ async function addTrainingTab(app, html, data) {
       }
       li.toggleClass("expanded");
 
+    });
+
+    // NEW CATEGORY
+    html.find('.crash-training-new-category').click(async (event) => {
+      event.preventDefault();
+      console.log("Crash's Tracking & Training (5e) | New Category excuted!");
+      if(!actor.data.flags["5e-training"].categories){
+        await actor.setFlag("5e-training", "categories", []);
+      }
+      let category = { id: randomID(), name: "New Category", description: "" };
+      let data = {
+        actor: actor,
+        category: category
+      };
+      new CategoryApp(data).render(true);
+    });
+
+    // EDIT CATEGORY
+    html.find('.crash-training-edit-category').click(async (event) => {
+      event.preventDefault();
+      console.log("Crash's Tracking & Training (5e) | Edit Category excuted!");
+      let categories = actor.data.flags["5e-training"].categories;
+      let fieldId = event.currentTarget.id;
+      let categoryId = fieldId.replace('crash-edit-category-','');
+      let category = categories.filter(obj => obj.id === categoryId)[0];
+      let data = {
+        actor: actor,
+        category: category
+      };
+      new CategoryApp(data).render(true);
+    });
+
+    //DELETE CATEGORY
+    html.find('.crash-training-delete-category').click(async (event) => {
+      event.preventDefault();
+      console.log("Crash's Tracking & Training (5e) | Delete Category excuted!");
+
+      // Set up some variables
+      let fieldId = event.currentTarget.id;
+      let categoryId = fieldId.replace('crash-delete-category-','');
+      let allCategories = actor.data.flags["5e-training"].categories;
+      let allActivities = actor.data.flags["5e-training"].trainingItems;
+      let category = allCategories.filter(obj => obj.id === categoryId)[0];
+      let categoryIdx = allCategories.findIndex(obj => obj.id === category.id)
+      let del = false;
+      let dialogContent = await renderTemplate('modules/5e-training/templates/delete-category-dialog.html');
+
+      // Create dialog
+      new Dialog({
+        title: `Delete Category`,
+        content: dialogContent,
+        buttons: {
+          yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.Delete"), callback: () => del = true},
+          no: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => del = false},
+        },
+        default: "yes",
+        close: async (html) => {
+          if (del) {
+            // Delete item
+            allCategories.splice(categoryIdx, 1);
+            // Unset categories from activities
+            for(var i = 0; i < allActivities.length; i++){
+              if(allActivities[i].category === categoryId){
+                allActivities[i].category = "";
+              }
+            }
+            // Update actor
+            await actor.setFlag("5e-training", "categories", allCategories);
+            await actor.setFlag("5e-training", "trainingItems", allActivities);
+          }
+        }
+      }).render(true);
     });
 
     // OPEN AUDIT LOG
@@ -716,22 +826,32 @@ function adjustSheetWidth(app){
   let settingEnabled = !!game.settings.get("5e-training", "extraSheetWidth");
   let sheetHasTab = ((app.object.data.type === 'npc') && game.settings.get("5e-training", "enableTrainingNpc")) ||
                     ((app.object.data.type === 'character') && game.settings.get("5e-training", "enableTraining"));
-
   let currentWidth = app.position.width;
   let defaultWidth = app.options.width;
-  let sheetIsSmaller = currentWidth < (defaultWidth + game.settings.get("5e-training", "extraSheetWidth"))
+  let sheetIsSmaller = currentWidth < (defaultWidth + game.settings.get("5e-training", "extraSheetWidth"));
 
   return settingEnabled && sheetHasTab && sheetIsSmaller;
 }
 
-Hooks.on(`renderActorSheet`, (app, html, data) => {
+// Goes through each activity on each actor and adds an Id to it if it doesn't have one
+async function addIdsToAllActivities(){
+  for(let a of game.actors.contents){
+    let allTrainingItems = a.data.flags["5e-training"]?.trainingItems  || [];
+    for(var i = 0; i < allTrainingItems.length; i++){
+      if(!allTrainingItems[i].id){
+        allTrainingItems[i].id = randomID();
+      }
+    }
+    await a.setFlag("5e-training", "trainingItems", allTrainingItems);
+  }
+}
 
+Hooks.on(`renderActorSheet`, (app, html, data) => {
   let widenSheet = adjustSheetWidth(app);
   if(widenSheet){
     let newPos = {width: app.position.width + game.settings.get("5e-training", "extraSheetWidth")}
     app.setPosition(newPos);
   }
-
   addTrainingTab(app, html, data).then(function(){
     if (app.activateTrainingTab) {
       app._tabs[0].activate("training");
@@ -749,6 +869,9 @@ Hooks.on(`CrashTrainingTabReady`, (app, html, data) => {
 export function crashTNT(){
   async function updateActivityProgress(actorName, itemName, newProgress){
     let actor = game.actors.getName(actorName);
+    if(!actor) {
+      ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning"));
+    }
     let allItems = actor.getFlag("5e-training", "trainingItems");
     let itemIdx = allItems.findIndex((i) => i.name === itemName);
     if(itemIdx < 0){
@@ -780,6 +903,9 @@ export function crashTNT(){
 
   function getActivity(actorName, itemName){
     let actor = game.actors.getName(actorName);
+    if(!actor) {
+      ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning"));
+    }
     let allItems = actor.getFlag("5e-training", "trainingItems");
     let itemIdx = allItems.findIndex((i) => i.name === itemName);
     if(itemIdx < 0){
@@ -799,4 +925,5 @@ export function crashTNT(){
 
 Hooks.on(`ready`, () => {
 	globalThis.CrashTNT = crashTNT();
+  addIdsToAllActivities();
 });
