@@ -30,9 +30,9 @@ export function registerHelpers(){
   });
 
   Handlebars.registerHelper("5e-training-trainingRollBtnTooltip", function(trainingItem) {
-    let className = game.i18n.localize('C5ETRAINING.AdvanceActivityProgress');
-    if(trainingItem.progress >= trainingItem.completionAt){ className = game.i18n.localize('C5ETRAINING.AdvanceActivityProgressDisabled'); }
-    return className;
+    let text = game.i18n.localize('C5ETRAINING.AdvanceActivityProgress');
+    if(trainingItem.progress >= trainingItem.completionAt){ text = game.i18n.localize('C5ETRAINING.AdvanceActivityProgressDisabled'); }
+    return text;
   });
 
   Handlebars.registerHelper("5e-training-isInCategory", function(actor, category) {
