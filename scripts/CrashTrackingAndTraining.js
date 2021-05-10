@@ -381,6 +381,7 @@ export default class CrashTrackingAndTraining {
     }
     // Create and add new change to log
     let logEntry = {
+      id: randomID(),
       timestamp: new Date(),
       actionName: actionName,
       valueChanged: "progress",

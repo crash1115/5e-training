@@ -134,5 +134,11 @@
   "C5ETRAINING.DeleteCategory": "Delete Category",
   "C5ETRAINING.DeleteCategoryConfirmation": "Are you sure you want to delete this category? All items in the category will be moved to the Uncategorized section.",
 
-  "C5ETRAINING.MacroNotFoundWarning": "Couldn't find macro with name"
+  "C5ETRAINING.MacroNotFoundWarning": "Couldn't find macro with name",
+
+  "C5ETRAINING.StartingMigration": "STARTING MIGRATION",
+  "C5ETRAINING.MigrationComplete": "MIGRATION COMPLETE",
+  "C5ETRAINING.BackingUpDataFor": "BACKING UP DATA FOR ACTOR",
+  "C5ETRAINING.UpdatingDataFor": "UPDATING DATA FOR ACTOR",
+  "C5ETRAINING.ProblemUpdatingDataFor": "PROBLEM UPDATING DATA FOR ACTOR"
 }

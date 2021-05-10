@@ -175,29 +175,67 @@ function adjustSheetWidth(app){
   return settingEnabled && sheetHasTab && sheetIsSmaller;
 }
 
-// TODO: UPDATE THIS TO MAKE IT SAFE
-// return if not gm
-// check against game setting to see if migrate
-// backup data
-// migrate
-// update game setting to say migration complete
 async function migrateAllActivities(){
   if(!game.user.isGM){ return; }
+
+  const LATEST_MIGRATION = "0.6.0";
+  let lastMigrationApplied = game.settings.get("5e-training", "lastMigrated");
+  let currentModuleVersion = game.modules.get("5e-training").data.version;
+
+  // If last migration applied is newer than the version of the latest migration, we don't need to migrate.
+  if (isNewerVersion(lastMigrationApplied, LATEST_MIGRATION)){ return; }
+  // If last migration applied is the same as the version of the latest migration, we don't need to migrate.
+  if (lastMigrationApplied === LATEST_MIGRATION){ return; }
+
+  // Alert that we're starting a migration
+  ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.StartingMigration"));
+  console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.StartingMigration"));
+
+  // Start loop through actors
   for(let a of game.actors.contents){
 
-    // v0.7.0 - Add id's to items
-    let allTrainingItems = a.getFlag("5e-training","trainingItems") || [];
-    for(var i = 0; i < allTrainingItems.length; i++){
-      if(!allTrainingItems[i].id){
-        allTrainingItems[i].id = randomID();
-      }
-    }
-    await a.setFlag("5e-training", "trainingItems", allTrainingItems);
+    // See if we even need to do this migration
+    let categories = a.getFlag("5e-training","categories");
+    let allTrainingItems = a.getFlag("5e-training","trainingItems");
+    if(!allTrainingItems){ continue; }
 
-    // v0.7.0 - Add categories to actor
-    let categories = a.getFlag("5e-training","categories") || [];
-    await a.setFlag("5e-training", "categories", categories);
+    // Backup old data and store in backup flag
+    let backup = { categories: categories, trainingItems: allTrainingItems, version: lastMigrationApplied};
+    ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.BackingUpDataFor") + ": " + a.data.name);
+    console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.BackingUpDataFor") + ": " + a.data.name);
+    await a.setFlag("5e-training", "backup", backup);
+
+    // Alert that we're migrating actor
+    ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.UpdatingDataFor") + ": " + a.data.name);
+    console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.UpdatingDataFor") + ": " + a.data.name);
+
+    try {
+      // v0.7.0 - Add id's to items and log entries
+      let categories = a.getFlag("5e-training","categories") || [];
+      let allTrainingItems = a.getFlag("5e-training","trainingItems") || [];
+      for(var i = 0; i < allTrainingItems.length; i++){
+        let item = allTrainingItems[i];
+        item.id = item.id || randomID();
+        let logEntries = item.changes || [];
+        for(var j = 0; j < logEntries.length; j++){
+          let entry = logEntries[j];
+          entry.id == entry.id || randomID();
+        }
+      }
+      await a.setFlag("5e-training", "trainingItems", allTrainingItems);
+      await a.setFlag("5e-training", "categories", categories);
+      // End 0.7.0 migration
+    } catch (err) {
+      console.error(err);
+      ui.notifications.warning("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
+      console.error("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
+    }
   }
+
+  // Set
+  ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.MigrationComplete") + ": " + LATEST_MIGRATION);
+  console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.MigrationComplete") + ": " + LATEST_MIGRATION);
+  game.settings.set("5e-training", "lastMigrated", currentModuleVersion);
 }
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
