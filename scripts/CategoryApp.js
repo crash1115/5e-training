@@ -24,7 +24,7 @@ export default class CategoryApp extends FormApplication {
   async _updateObject(event, formData) {
     let actorId = formData.actorId;
     let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag("5e-training", "categories");
+    let allCategories = actor.getFlag("5e-training", "categories") || [];
     let newCategory = {};
 
     // Build category data

@@ -195,9 +195,12 @@ async function migrateAllActivities(){
   for(let a of game.actors.contents){
 
     // See if we even need to do this migration
-    let categories = a.getFlag("5e-training","categories");
-    let allTrainingItems = a.getFlag("5e-training","trainingItems");
-    if(!allTrainingItems){ continue; }
+    let categories = a.getFlag("5e-training","categories") || [];
+    let allTrainingItems = a.getFlag("5e-training","trainingItems") || [];
+    if(allTrainingItems.length < 1){
+      console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);
+      continue;
+    }
 
     // Backup old data and store in backup flag
     let backup = { categories: categories, trainingItems: allTrainingItems, version: lastMigrationApplied};
@@ -211,8 +214,6 @@ async function migrateAllActivities(){
 
     try {
       // v0.7.0 - Add id's to items and log entries
-      let categories = a.getFlag("5e-training","categories") || [];
-      let allTrainingItems = a.getFlag("5e-training","trainingItems") || [];
       for(var i = 0; i < allTrainingItems.length; i++){
         let item = allTrainingItems[i];
         item.id = item.id || randomID();

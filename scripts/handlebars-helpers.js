@@ -37,7 +37,7 @@ export function registerHelpers(){
 
   Handlebars.registerHelper("5e-training-isInCategory", function(actor, category) {
     let thisCategoryId = category.id;
-    let allTrainingItems = actor.flags["5e-training"].trainingItems;
+    let allTrainingItems = actor.flags["5e-training"]?.trainingItems || [];
     let matchingItems = [];
     for(var i = 0; i < allTrainingItems.length; i++){
       let thisItem = allTrainingItems[i];
@@ -49,7 +49,7 @@ export function registerHelpers(){
   });
 
   Handlebars.registerHelper("5e-training-isUncategorized", function(actor) {
-    let allTrainingItems = actor.flags["5e-training"].trainingItems;
+    let allTrainingItems = actor.flags["5e-training"]?.trainingItems || [];
     let matchingItems = [];
     for(var i = 0; i < allTrainingItems.length; i++){
       let thisItem = allTrainingItems[i];
