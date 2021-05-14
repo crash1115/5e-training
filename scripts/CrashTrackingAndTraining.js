@@ -1,5 +1,7 @@
 import CategoryApp from "./CategoryApp.js";
 import TrackedItemApp from "./TrackedItemApp.js";
+import TrackedItem from "./TrackedItem.js";
+import Category from "./Category.js";
 
 export default class CrashTrackingAndTraining {
 
@@ -7,10 +9,9 @@ export default class CrashTrackingAndTraining {
     console.log("Crash's Tracking & Training (5e) | New Category excuted!");
 
     let actor = game.actors.get(actorId);
-    let newCategory = { id: randomID(), name: game.i18n.localize("C5ETRAINING.NewCategory"), description: "" };
     let data = {
       actor: actor,
-      category: newCategory
+      category: new Category
     };
     new CategoryApp(data).render(true);
   }
@@ -73,7 +74,7 @@ export default class CrashTrackingAndTraining {
     let allCategories = actor.getFlag("5e-training","categories") || [];
     let data = {
       actor: actor,
-      item: null,
+      item: new TrackedItem,
       categories: allCategories,
       dropdownOptions: DROPDOWN_OPTIONS
     };

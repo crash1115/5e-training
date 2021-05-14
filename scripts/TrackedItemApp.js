@@ -1,3 +1,5 @@
+import TrackedItem from "./TrackedItem.js";
+
 export default class TrackedItemApp extends FormApplication {
 
   static get defaultOptions() {
@@ -15,26 +17,8 @@ export default class TrackedItemApp extends FormApplication {
   async getData(options = {}) {
     let originalData = super.getData();
 
-    let newItem = {
-      id: randomID(),
-      name: game.i18n.localize("C5ETRAINING.NewItem"),
-      img: "icons/svg/book.svg",
-      category: "",
-      description: "",
-      progressionStyle: "ABILITY",
-      ability: "int",
-      skill: null,
-      tool: null,
-      fixedIncrease: null,
-      macroName: null,
-      dc: null,
-      progress: 0,
-      completionAt: game.settings.get("5e-training", "totalToComplete"),
-      changes: []
-    };
-
     if(!originalData.object.item){
-      originalData.object.item = newItem;
+      originalData.object.item = new TrackedItem;
     }
 
     return {
