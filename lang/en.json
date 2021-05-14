@@ -166,5 +166,6 @@
   "C5ETRAINING.DeleteCategory": "Delete Category",
 
   "C5ETRAINING.None": "None",
-  "C5ETRAINING.Delete": "Delete"
+  "C5ETRAINING.Delete": "Delete",
+  "C5ETRAINING.RollItemProgress": "Roll item to increase progress"
 }
