@@ -7,7 +7,8 @@ export default class TrackedItemApp extends FormApplication {
       title: game.i18n.localize("C5ETRAINING.CreateEditItemAppTitle"),
       width: 400,
       resizable: true,
-      closeOnSubmit: true
+      closeOnSubmit: true,
+      submitOnClose: false
     });
   }
 
@@ -38,7 +39,6 @@ export default class TrackedItemApp extends FormApplication {
 
     return {
       item: originalData.object.item,
-      actor: originalData.object.actor,
       categories: originalData.object.categories,
       dropdownOptions: originalData.object.dropdownOptions
     };
