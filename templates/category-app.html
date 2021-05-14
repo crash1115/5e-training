@@ -2,16 +2,18 @@
   <input type="hidden" name="actorId" value="{{actor.id}}"/>
   <input type="hidden" name="categoryId" value="{{category.id}}"/>
 
-  <p>{{ localize "C5ETRAINING.CategoryCreationInstructions" }}</p>
-
-  <div class="field">
+  <div class="form-group">
     <label for="name">{{ localize "C5ETRAINING.Name" }}:</label>
-    <input type="text" name="nameInput" id="nameInput" value="{{category.name}}"/>
+    <div class="form-fields">
+      <input type="text" name="nameInput" id="nameInput" value="{{category.name}}"/>
+    </div>
   </div>
 
-  <div class="wide-field">
+  <div class="form-group">
     <label for="description">{{ localize "C5ETRAINING.Description" }}:</label>
-    <textarea name="descriptionInput" id="descriptionInput">{{category.description}}</textarea>
+    <div class="form-fields">
+      <textarea name="descriptionInput" id="descriptionInput">{{category.description}}</textarea>
+    </div>
   </div>
 
   <footer>

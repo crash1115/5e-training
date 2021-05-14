@@ -29,7 +29,7 @@ export default class CategoryApp extends FormApplication {
 
     // Build category data
     newCategory.id = formData.categoryId;
-    newCategory.name = formData.nameInput || "Unnamed Category";
+    newCategory.name = formData.nameInput ||  game.i18n.localize("C5ETRAINING.UnnamedCategory");;
     newCategory.description = formData.descriptionInput || "";
 
     // See if category already exists

@@ -2,6 +2,7 @@
 import { preloadTemplates } from "./load-templates.js";
 import { registerSettings } from "./settings.js";
 import { registerHelpers } from "./handlebars-helpers.js";
+import { performMigrationNumber1 } from "./migrations/migrationNumber1.js";
 import AuditLog from "./AuditLog.js";
 import CrashTrackingAndTraining from "./CrashTrackingAndTraining.js";
 
@@ -42,12 +43,34 @@ async function addTrainingTab(app, html, data) {
     let actorTools = CrashTrackingAndTraining.getActorTools(actor.id);
     const ABILITIES = CrashTrackingAndTraining.formatAbilitiesForDropdown();
     const SKILLS = CrashTrackingAndTraining.formatSkillsForDropdown();
-    const DROPDOWN_OPTIONS = ABILITIES.concat(SKILLS.concat(actorTools));
+    const DROPDOWN_OPTIONS = {abilities: ABILITIES, skills: SKILLS, tools: actorTools};
+
+    // NEW CATEGORY
+    html.find('.crash-training-new-category').click(async (event) => {
+      event.preventDefault();
+      await CrashTrackingAndTraining.addCategory(actor.id);
+    });
+
+    // EDIT CATEGORY
+    html.find('.crash-training-edit-category').click(async (event) => {
+      event.preventDefault();
+      let fieldId = event.currentTarget.id;
+      let categoryId = fieldId.replace('crash-edit-category-','');
+      await CrashTrackingAndTraining.editCategory(actor.id, categoryId);
+    });
+
+    //DELETE CATEGORY
+    html.find('.crash-training-delete-category').click(async (event) => {
+      event.preventDefault();
+      let fieldId = event.currentTarget.id;
+      let categoryId = fieldId.replace('crash-delete-category-','');
+      await CrashTrackingAndTraining.deleteCategory(actor.id, categoryId);
+    });
 
     // ADD NEW DOWNTIME ACTIVITY
     html.find('.crash-training-add').click(async (event) => {
       event.preventDefault();
-      await CrashTrackingAndTraining.addItem(actor.id);
+      await CrashTrackingAndTraining.addItem(actor.id, DROPDOWN_OPTIONS);
     });
 
     // EDIT DOWNTIME ACTIVITY
@@ -115,29 +138,6 @@ async function addTrainingTab(app, html, data) {
 
     });
 
-    // NEW CATEGORY
-    html.find('.crash-training-new-category').click(async (event) => {
-      event.preventDefault();
-      await CrashTrackingAndTraining.addCategory(actor.id);
-
-    });
-
-    // EDIT CATEGORY
-    html.find('.crash-training-edit-category').click(async (event) => {
-      event.preventDefault();
-      let fieldId = event.currentTarget.id;
-      let categoryId = fieldId.replace('crash-edit-category-','');
-      await CrashTrackingAndTraining.editCategory(actor.id, categoryId);
-    });
-
-    //DELETE CATEGORY
-    html.find('.crash-training-delete-category').click(async (event) => {
-      event.preventDefault();
-      let fieldId = event.currentTarget.id;
-      let categoryId = fieldId.replace('crash-delete-category-','');
-      await CrashTrackingAndTraining.deleteCategory(actor.id, categoryId);
-    });
-
     // OPEN AUDIT LOG
     html.find('.crash-training-audit').click(async (event) => {
       event.preventDefault();
@@ -175,35 +175,32 @@ function adjustSheetWidth(app){
   return settingEnabled && sheetHasTab && sheetIsSmaller;
 }
 
-async function migrateAllActivities(){
+async function migrateAllActors(){
   if(!game.user.isGM){ return; }
 
-  const LATEST_MIGRATION = "0.6.0";
-  let lastMigrationApplied = game.settings.get("5e-training", "lastMigrated");
-  let currentModuleVersion = game.modules.get("5e-training").data.version;
-
-  // If last migration applied is newer than the version of the latest migration, we don't need to migrate.
-  if (isNewerVersion(lastMigrationApplied, LATEST_MIGRATION)){ return; }
-  // If last migration applied is the same as the version of the latest migration, we don't need to migrate.
-  if (lastMigrationApplied === LATEST_MIGRATION){ return; }
-
-  // Alert that we're starting a migration
-  ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.StartingMigration"));
-  console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.StartingMigration"));
+  const LATEST_MIGRATION = 1;
 
   // Start loop through actors
-  for(let a of game.actors.contents){
+  for(var i = 0; i < game.actors.contents.length; i++){
+    let a = game.actors.contents[i];
 
-    // See if we even need to do this migration
+    // If last migration applied is newer than or equal to the version of the latest migration, we don't need to migrate.
+    let lastMigrationApplied = a.getFlag("5e-training","schemaVersion") || 0;
+    if (lastMigrationApplied >= LATEST_MIGRATION){ continue; }
+
+    // Get our two main flags
     let categories = a.getFlag("5e-training","categories") || [];
     let allTrainingItems = a.getFlag("5e-training","trainingItems") || [];
+
+    // If there are no trainingItems, we can skip this actor.
     if(allTrainingItems.length < 1){
       console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);
+      await a.setFlag("5e-training","schemaVersion", LATEST_MIGRATION);
       continue;
     }
 
     // Backup old data and store in backup flag
-    let backup = { categories: categories, trainingItems: allTrainingItems, version: lastMigrationApplied};
+    let backup = { categories: categories, trainingItems: allTrainingItems, schemaVersion: lastMigrationApplied};
     ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.BackingUpDataFor") + ": " + a.data.name);
     console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.BackingUpDataFor") + ": " + a.data.name);
     await a.setFlag("5e-training", "backup", backup);
@@ -213,31 +210,17 @@ async function migrateAllActivities(){
     console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.UpdatingDataFor") + ": " + a.data.name);
 
     try {
-      // v0.7.0 - Add id's to items and log entries
-      for(var i = 0; i < allTrainingItems.length; i++){
-        let item = allTrainingItems[i];
-        item.id = item.id || randomID();
-        let logEntries = item.changes || [];
-        for(var j = 0; j < logEntries.length; j++){
-          let entry = logEntries[j];
-          entry.id == entry.id || randomID();
-        }
-      }
-      await a.setFlag("5e-training", "trainingItems", allTrainingItems);
-      await a.setFlag("5e-training", "categories", categories);
-      // End 0.7.0 migration
+      if(lastMigrationApplied < 1 ){ await performMigrationNumber1(a.id); }
+      // Repeat line for new versions as needed
     } catch (err) {
       console.error(err);
-      ui.notifications.warning("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
+      ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
       console.error("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
     }
   }
 
-  // Set
-  ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.MigrationComplete") + ": " + LATEST_MIGRATION);
-  console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.MigrationComplete") + ": " + LATEST_MIGRATION);
-  game.settings.set("5e-training", "lastMigrated", currentModuleVersion);
 }
+
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
   let widenSheet = adjustSheetWidth(app);
@@ -258,7 +241,7 @@ Hooks.on(`CrashTrainingTabReady`, (app, html, data) => {
 
 Hooks.on(`ready`, () => {
 	globalThis.CrashTNT = crashTNT();
-  migrateAllActivities();
+  migrateAllActors();
 });
 
 // Open up for other people to use

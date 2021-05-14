@@ -1,10 +1,10 @@
-<!-- SHOW FOR ABILITY -->
+<!-- SHOW FOR SKILL -->
 <div class="form-group">
-  <label for="ability">{{ localize 'C5ETRAINING.SelectAnAbility' }}</label>
+  <label for="skill">{{ localize 'C5ETRAINING.SelectASkill' }}</label>
   <div class="form-fields">
-    <select name="ability" id="abilityInput">
-      {{#each dropdownOptions.abilities as |option oid| }}
-        <option value="{{option.value}}" {{#if (eq ../item.ability option.value)}} selected {{/if}}>{{option.label}}</option>
+    <select name="skill" id="skillInput"">
+      {{#each dropdownOptions.skills as |option oid| }}
+        <option value="{{option.value}}" {{#if (eq ../item.skill option.value)}} selected {{/if}}>{{option.label}}</option>
       {{/each}}
     </select>
   </div>

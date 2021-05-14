@@ -6,21 +6,33 @@ export function registerHelpers(){
     return percentComplete;
   });
 
-  Handlebars.registerHelper("5e-training-progressionStyle", function(trainingItem, actor) {
-    if(!trainingItem || !actor){
+  Handlebars.registerHelper("5e-training-progressionStyle", function(item, actor) {
+    if(!item || !actor){
       return "?";
     }
-    let progressionTypeString = "";
-    if(trainingItem.progressionStyle === "simple"){
-      progressionTypeString = game.i18n.localize("C5ETRAINING.Simple");
-    } else if(trainingItem.progressionStyle === "ability"){
-      progressionTypeString = CrashTrackingAndTraining.getAbilityName(trainingItem, actor);
-    } else if(trainingItem.progressionStyle === "dc"){
-      progressionTypeString = CrashTrackingAndTraining.getAbilityName(trainingItem, actor)+" (" + game.i18n.localize("C5ETRAINING.DC") + trainingItem.dc + ")";
-    } else if(trainingItem.progressionStyle === "macro"){
-      progressionTypeString = game.i18n.localize("C5ETRAINING.Macro");
+
+    let formatted = "";
+
+    if(item.progressionStyle === "FIXED"){
+      formatted = game.i18n.localize("C5ETRAINING.ProgressionStyleFixed");
+    } else if(item.progressionStyle === "ABILITY" ){
+      formatted = CONFIG.DND5E.abilities[item.ability];
+    } else if(item.progressionStyle === "SKILL" ){
+      formatted = CONFIG.DND5E.skills[item.skill];
+    } else if(item.progressionStyle === "TOOL" ){
+      let toolId = item.tool;
+      let tool = actor.items.filter(item => { return item._id === toolId })[0];
+      if(tool){ formatted =  tool.name; }
+      else { formatted =  "["+game.i18n.localize("C5ETRAINING.InvalidTool")+"]"; }
+    } else if(item.progressionStyle === "MACRO"){
+      formatted = game.i18n.localize("C5ETRAINING.ProgressionStyleMacro");
     }
-    return progressionTypeString;
+
+    if(item.dc){
+      formatted += " (" + game.i18n.localize("C5ETRAINING.DC") + item.dc + ")";
+    }
+
+    return formatted;
   });
 
   Handlebars.registerHelper("5e-training-trainingRollBtnClass", function(trainingItem) {
@@ -30,8 +42,8 @@ export function registerHelpers(){
   });
 
   Handlebars.registerHelper("5e-training-trainingRollBtnTooltip", function(trainingItem) {
-    let text = game.i18n.localize('C5ETRAINING.AdvanceActivityProgress');
-    if(trainingItem.progress >= trainingItem.completionAt){ text = game.i18n.localize('C5ETRAINING.AdvanceActivityProgressDisabled'); }
+    let text = game.i18n.localize('C5ETRAINING.RollItemProgress');
+    if(trainingItem.progress >= trainingItem.completionAt){ text = game.i18n.localize('C5ETRAINING.RollItemDisabled'); }
     return text;
   });
 
@@ -59,4 +71,21 @@ export function registerHelpers(){
     }
     return matchingItems;
   });
+
+  Handlebars.registerHelper("5e-training-getBarColor", function(item) {
+    // Derived from this: https://gist.github.com/mlocati/7210513
+    let perc = Math.min(100,(100 * item.progress / item.completionAt)).toFixed(0);
+    var r, g, b = 0;
+    var a = 0.5;
+  	if(perc < 50) {
+  		r = 255;
+  		g = Math.round(5.1 * perc);
+  	}
+  	else {
+  		g = 255;
+  		r = Math.round(510 - 5.10 * perc);
+  	}
+    return `rgba(${r},${g},${b},${a})`;
+  });
+
 }

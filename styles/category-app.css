@@ -1,30 +1,24 @@
-/*********************************/
-/*        CATEGORY APP         */
-/*****************************/
-
-.crash-category-app .instructions {
-	margin-bottom: 10px;
-}
-
-.crash-category-app .field {
-  display: flex;
-  margin-bottom: 10px;
-  padding-top: 5px;
-}
-
-.crash-category-app .field * {
-	flex: 5;
-}
-
-.crash-category-app .wide-field {
-	margin-bottom: 10px;
-	padding-top: 5px;
-}
-
-.crash-category-app footer {
+form.crash-category-app .form-group {
+	clear: both;
 	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 4px 0;
+	align-items: center;
 }
 
-.crash-category-app #crash-create-category {
-	flex: 1;
+form.crash-category-app .form-group label {
+	color: #4b4a44;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+form.crash-category-app .form-header {
+	margin: 0 0 0.25em 0;
+	padding: 2px 0;
+	border-top: 2px groove #eeede0;
+	border-bottom: 2px groove #eeede0;
+	font-family: "Modesto Condensed", "Palatino Linotype", serif;
+	font-size: 20px;
+	font-weight: 700;
 }

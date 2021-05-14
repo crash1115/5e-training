@@ -1,12 +1,16 @@
-<!-- SHOW FOR ABILITY -->
+<!-- SHOW FOR TOOL -->
 <div class="form-group">
-  <label for="ability">{{ localize 'C5ETRAINING.SelectAnAbility' }}</label>
+  <label for="tool">{{ localize 'C5ETRAINING.SelectATool' }}</label>
   <div class="form-fields">
-    <select name="ability" id="abilityInput">
-      {{#each dropdownOptions.abilities as |option oid| }}
-        <option value="{{option.value}}" {{#if (eq ../item.ability option.value)}} selected {{/if}}>{{option.label}}</option>
+    <select name="tool" id="toolInput">
+      {{#each dropdownOptions.tools as |option oid| }}
+        <option value="{{option.value}}" {{#if (eq ../item.tool option.value)}} selected {{/if}}>{{option.label}}</option>
       {{/each}}
     </select>
+    <label class="help">
+      <i class="fas fa-question-circle"></i>
+      <span class="tooltip">{{ localize 'C5ETRAINING.ToolInputHelpText' }}</span>
+    </label>
   </div>
 </div>
 

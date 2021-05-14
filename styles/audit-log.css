@@ -1,7 +1,3 @@
-/*********************************/
-/*         AUDIT LOGS          */
-/*****************************/
-
 .crash-audit-log .instructions {
 	margin-bottom: 10px;
 }
@@ -44,10 +40,10 @@
 /* SUPPORT FOR D&D5E DARK MODE */
 /*****************************/
 
-.dark-mode .audit-log .action-table table tr:nth-of-type(even) td {
+.dark-mode .crash-audit-log .action-table table tr:nth-of-type(even) td {
 	background-color: rgba(0,0,0,0.5);
 }
 
-.dark-mode .audit-log .action-table table tr:hover td {
+.dark-mode .crash-audit-log .action-table table tr:hover td {
 	background-color: rgba(63,136,230, 0.4);
 }

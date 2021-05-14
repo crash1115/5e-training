@@ -2,15 +2,16 @@ export function registerSettings() {
 
   // Stores data about migrations. This gets updated to the module's current version
   // any time a migration is complete
-  game.settings.register("5e-training", "lastMigrated", {
+  game.settings.register("5e-training", "lastMigrationApplied", {
     scope: "world",
     config: false,
-    default: "0.0.0"
+    default: 0,
+    type: Number
   })
 
   game.settings.register("5e-training", "gmOnlyMode", {
-    name: game.i18n.localize("C5ETRAINING.gmOnlyMode"),
-    hint: game.i18n.localize("C5ETRAINING.gmOnlyModeHint"),
+    name: game.i18n.localize("C5ETRAINING.SettingGmOnlyMode"),
+    hint: game.i18n.localize("C5ETRAINING.SettingGmOnlyModeHint"),
     scope: "world",
     config: true,
     default: false,
@@ -18,8 +19,8 @@ export function registerSettings() {
   });
 
   game.settings.register("5e-training", "enableTraining", {
-    name: game.i18n.localize("C5ETRAINING.ShowDowntimeTabPc"),
-    hint: game.i18n.localize("C5ETRAINING.ShowDowntimeTabPcHint"),
+    name: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabPc"),
+    hint: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabPcHint"),
     scope: "world",
     config: true,
     default: true,
@@ -27,8 +28,8 @@ export function registerSettings() {
   });
 
   game.settings.register("5e-training", "enableTrainingNpc", {
-    name: game.i18n.localize("C5ETRAINING.ShowDowntimeTabNpc"),
-    hint: game.i18n.localize("C5ETRAINING.ShowDowntimeTabNpcHint"),
+    name: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabNpc"),
+    hint: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabNpcHint"),
     scope: "world",
     config: true,
     default: true,
@@ -36,8 +37,8 @@ export function registerSettings() {
   });
 
   game.settings.register("5e-training", "tabName", {
-    name: game.i18n.localize("C5ETRAINING.DowntimeTabName"),
-    hint: game.i18n.localize("C5ETRAINING.DowntimeTabNameHint"),
+    name: game.i18n.localize("C5ETRAINING.SettingTabName"),
+    hint: game.i18n.localize("C5ETRAINING.SettingTabNameHint"),
     scope: "world",
     config: true,
     default: "Downtime",
@@ -45,8 +46,8 @@ export function registerSettings() {
   });
 
   game.settings.register("5e-training", "extraSheetWidth", {
-    name: game.i18n.localize("C5ETRAINING.ExtraSheetWidth"),
-    hint: game.i18n.localize("C5ETRAINING.ExtraSheetWidthHint"),
+    name: game.i18n.localize("C5ETRAINING.SettingExtraSheetWidth"),
+    hint: game.i18n.localize("C5ETRAINING.SettingExtraSheetWidthHint"),
     scope: "client",
     config: true,
     default: 50,
@@ -54,8 +55,8 @@ export function registerSettings() {
   });
 
   game.settings.register("5e-training", "totalToComplete", {
-    name: game.i18n.localize("C5ETRAINING.DefaultAbilityCompletion"),
-    hint: game.i18n.localize("C5ETRAINING.DefaultAbilityCompletionHint"),
+    name: game.i18n.localize("C5ETRAINING.SettingDefaultCompletionTarget"),
+    hint: game.i18n.localize("C5ETRAINING.SettingDefaultCompletionTarget"),
     scope: "world",
     config: true,
     default: 300,
@@ -63,8 +64,8 @@ export function registerSettings() {
   });
 
   game.settings.register("5e-training", "announceCompletionFor", {
-    name: game.i18n.localize("C5ETRAINING.AnnounceActivityCompletionFor"),
-    hint: game.i18n.localize("C5ETRAINING.AnnounceActivityCompletionForHint"),
+    name: game.i18n.localize("C5ETRAINING.SettingAnnounceActivityCompletionFor"),
+    hint: game.i18n.localize("C5ETRAINING.SettingAnnounceActivityCompletionForHint"),
     scope: "world",
     config: true,
     type: String,
