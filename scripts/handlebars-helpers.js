@@ -57,6 +57,7 @@ export function registerHelpers(){
         matchingItems.push(thisItem);
       }
     }
+    matchingItems.sort((a, b) => (a.name > b.name) ? 1 : -1);
     return matchingItems;
   });
 
