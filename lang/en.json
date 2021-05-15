@@ -167,5 +167,13 @@
 
   "C5ETRAINING.None": "None",
   "C5ETRAINING.Delete": "Delete",
-  "C5ETRAINING.RollItemProgress": "Roll item to increase progress"
+  "C5ETRAINING.RollItemProgress": "Roll item to increase progress",
+
+  "C5ETRAINING.MigrationPromptTitle": "New Migration Required",
+  "C5ETRAINING.MigrationPromptBackupWarning": "Back Up Your Data",
+  "C5ETRAINING.MigrationPromptText1": "The latest update of this module made a change to how its data is structured. Any actors that are tracking items using the old data will need to be migrated to this new structure before those items can be used again.",
+  "C5ETRAINING.MigrationPromptText2": "Migrations can cause data to be lost or corrupted. We back up this module's data when we do the migration, but we highly recommend that you back up all your data, just to be safe.",
+  "C5ETRAINING.MigrationPromptText3": "You own {num} actor(s) that need updates. Would you like to run the migration now?",
+  "C5ETRAINING.MigrationPromptYes": "Migrate Now",
+  "C5ETRAINING.MigrationPromptNo": "Do It Later"
 }
