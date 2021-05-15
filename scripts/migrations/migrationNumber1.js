@@ -75,5 +75,5 @@ export const performMigrationNumber1 = async function(actorId) {
   // update flags
   await a.setFlag("5e-training", "trainingItems", allTrainingItems);
   await a.setFlag("5e-training", "categories", categories);
-  await a.setFlag("5e-training","schemaVersion", 1);
+  await a.setFlag("5e-training", "schemaVersion", 1);
 }

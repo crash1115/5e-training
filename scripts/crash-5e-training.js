@@ -176,13 +176,17 @@ function adjustSheetWidth(app){
 }
 
 async function migrateAllActors(){
-  if(!game.user.isGM){ return; }
 
   const LATEST_MIGRATION = 1;
 
   // Start loop through actors
   for(var i = 0; i < game.actors.contents.length; i++){
     let a = game.actors.contents[i];
+
+    // If the user doesn't own the actor, skip it
+    let currentUserId = game.userId;
+    let currentUserOwnsActor = a.data.permission[currentUserId] === 3;
+    if(!currentUserOwnsActor){ continue; }
 
     // If last migration applied is newer than or equal to the version of the latest migration, we don't need to migrate.
     let lastMigrationApplied = a.getFlag("5e-training","schemaVersion") || 0;
