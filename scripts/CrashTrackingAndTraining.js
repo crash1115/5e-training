@@ -444,7 +444,7 @@ export default class CrashTrackingAndTraining {
       return;
     }
     let jsonData = JSON.stringify(allItems);
-    saveDataToFile(jsonData, 'application/json', `${actor.name}-tracked-items-backup.json`);
+    saveDataToFile(jsonData, 'application/json', `tracked-items-backup.json`);
     ui.notifications.info(game.i18n.localize("C5ETRAINING.ExportComplete"));
   }
 
