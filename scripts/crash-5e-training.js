@@ -59,12 +59,26 @@ async function addTrainingTab(app, html, data) {
       await CrashTrackingAndTraining.editCategory(actor.id, categoryId);
     });
 
-    //DELETE CATEGORY
+    // DELETE CATEGORY
     html.find('.crash-training-delete-category').click(async (event) => {
       event.preventDefault();
       let fieldId = event.currentTarget.id;
       let categoryId = fieldId.replace('crash-delete-category-','');
       await CrashTrackingAndTraining.deleteCategory(actor.id, categoryId);
+    });
+
+    // EXPORT
+    html.find('.crash-training-export').click(async (event) => {
+      event.preventDefault();
+      let actorId = actor.id;
+      CrashTrackingAndTraining.exportItems(actor.id);
+    });
+    
+    // IMPORT
+    html.find('.crash-training-import').click(async (event) => {
+      event.preventDefault();
+      let actorId = actor.id;
+      await CrashTrackingAndTraining.importItems(actor.id);
     });
 
     // ADD NEW DOWNTIME ACTIVITY

@@ -436,4 +436,109 @@ export default class CrashTrackingAndTraining {
     ];
   }
 
+  static exportItems(actorId){
+    let actor = game.actors.get(actorId);
+    let allItems = actor.getFlag("5e-training","trainingItems") || [];
+    if(allItems.length < 1){
+      ui.notifications.info(game.i18n.localize("C5ETRAINING.ExportNoTrackedItems"));
+      return;
+    }
+    let jsonData = JSON.stringify(allItems);
+    saveDataToFile(jsonData, 'application/json', `${actor.name}-tracked-items-backup.json`);
+    ui.notifications.info(game.i18n.localize("C5ETRAINING.ExportComplete"));
+  }
+
+  static async importItems(actorId){
+    let actor = game.actors.get(actorId);
+    let input = $('<input type="file">');
+    input.on("change", function(){
+      const file = this.files[0];
+      if (!file){
+        ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportNoFile"));
+        return;
+      }
+      readTextFromFile(file).then(async contents => {
+        let importedItems = JSON.parse(contents);
+        if(importedItems.length < 1){
+          ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportNoTrackedItems"));
+          return;
+        }
+        let act = "quit";
+        let content = `<p><b>${game.i18n.localize("C5ETRAINING.ImportTypeSelectionOverwrite")}:</b> ${game.i18n.localize("C5ETRAINING.ImportTypeSelectionTextOverwrite")}</p>
+                       <p><b>${game.i18n.localize("C5ETRAINING.ImportTypeSelectionCombine")}:</b> ${game.i18n.localize("C5ETRAINING.ImportTypeSelectionTextCombine")}</p>`;
+        // Create dialog
+        new Dialog({
+          title: game.i18n.localize("C5ETRAINING.ImportTypeSelectionTitle"),
+          content: content,
+          buttons: {
+            overwrite: {icon: "<i class='fas fa-file-import'></i>", label: game.i18n.localize("C5ETRAINING.ImportTypeSelectionOverwrite"), callback: () => act = "overwrite"},
+            add: {icon: "<i class='fas fa-plus'></i>", label: game.i18n.localize("C5ETRAINING.ImportTypeSelectionCombine"), callback: () => act = "add"},
+            quit: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => act = "quit"},
+          },
+          default: "quit",
+          close: async (html) => {
+            if(act === "quit"){
+              return;
+            } else if (act === "overwrite") {
+              let currentCategories = actor.getFlag("5e-training","categories") || [];
+              let currentCategoryIds = currentCategories.map(c => c.id);
+
+              for(var i = 0; i < importedItems.length; i++){
+                // Unset missing category ID's
+                if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) > -1)){
+                  importedItems[i].category = "";
+                }
+              }
+              actor.setFlag("5e-training","trainingItems",importedItems);
+              await ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
+            } else if (act === "add") {
+              let currentItems = actor.getFlag("5e-training","trainingItems") || [];
+              let currentCategories = actor.getFlag("5e-training","categories") || [];
+              let currentIds = currentItems.map(i => i.id);
+              let currentNames = currentItems.map(i => i.name);
+              let currentCategoryIds = currentCategories.map(c => c.id);
+              let possibleDupes = false;
+
+              for(var i = 0; i < importedItems.length; i++){
+                // De-dupe ID's
+                if(currentIds.indexOf(importedItems[i].id) > -1){
+                  let matchedIdx = currentIds.indexOf(importedItems[i].id);
+                  importedItems[i].id = randomID();
+                  possibleDupes = true;
+                }
+
+                // Check for duplicate names
+                if(currentNames.indexOf(importedItems[i].name) > -1){
+                  possibleDupes = true;
+                }
+
+                // Unset missing category ID's
+                if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) > -1)){
+                  importedItems[i].category = "";
+                }
+              }
+              let combinedItems = currentItems.concat(importedItems);
+              await actor.setFlag("5e-training","trainingItems", combinedItems);
+              ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
+              if(possibleDupes){
+                new Dialog({
+                  title: game.i18n.localize("C5ETRAINING.ImportDupeWarningTitle"),
+                  content: `<p>${game.i18n.localize("C5ETRAINING.ImportDupeWarningText")}</p>`,
+                  buttons: {
+                    ok: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.ImportDupeWarningConfirm")},
+                  },
+                  default: "ok"
+                }).render(true);
+              }
+            }
+          }
+        }).render(true);
+      });
+    });
+    input.trigger('click');
+
+
+
+  }
+
 }

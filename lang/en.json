@@ -175,5 +175,29 @@
   "C5ETRAINING.MigrationPromptText2": "Migrations can cause data to be lost or corrupted. We back up this module's data when we do the migration, but we highly recommend that you back up all your data, just to be safe.",
   "C5ETRAINING.MigrationPromptText3": "You own {num} actor(s) that need updates. Would you like to run the migration now?",
   "C5ETRAINING.MigrationPromptYes": "Migrate Now",
-  "C5ETRAINING.MigrationPromptNo": "Do It Later"
+  "C5ETRAINING.MigrationPromptNo": "Do It Later",
+
+  "C5ETRAINING.ExportTrackedItems": "Export",
+  "C5ETRAINING.ImportTrackedItems": "Import",
+  "C5ETRAINING.ExportTrackedItemsTooltip": "Export tracked items to a file",
+  "C5ETRAINING.ImportTrackedItemsTooltip": "Import tracked items from a file",
+
+  "C5ETRAINING.ExportNoTrackedItems": "No items to export. Cancelling export.",
+  "C5ETRAINING.ImportNoTrackedItems": "No items to import. Cancelling import.",
+  "C5ETRAINING.ImportNoFile": "No file selected. Cancelling import.",
+
+  "C5ETRAINING.ImportTypeSelectionTitle": "How should we import?",
+  "C5ETRAINING.ImportTypeSelectionTextOverwrite": "Permanently deletes all current tracked items and replaces them with the ones you're importing.",
+  "C5ETRAINING.ImportTypeSelectionTextCombine": "Combines the current tracked items with the ones you're trying to import and keeps them both.",
+  "C5ETRAINING.ImportTypeSelectionOverwrite": "Replace",
+  "C5ETRAINING.ImportTypeSelectionCombine": "Combine",
+
+  "C5ETRAINING.ImportDupeWarningTitle": "Possible Duplicate Items",
+  "C5ETRAINING.ImportDupeWarningText": "We found some things during the import that we thought might be duplicate items. Instead of just deleting whichever one we felt like, we kept them both so you can figure out which to keep.",
+  "C5ETRAINING.ImportDupeWarningConfirm": "Got it, thanks!",
+
+  "C5ETRAINING.ImportComplete": "Import Complete",
+
+  "C5ETRAINING.SettingEnableDebug": "Enable Debug Tools",
+  "C5ETRAINING.SettingEnableDebugHint": "Turn this on to show additional tools for importing, exporting, and restoring data from backups on character sheets."
 }

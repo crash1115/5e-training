@@ -23,6 +23,10 @@
   border: 2px groove #eeede0;
   border-radius: 4px;
 }
+.dnd5e.sheet .crash-training .crash-training-controls div.push-left,
+.tidy5e.sheet .crash-training .crash-training-controls div.push-left {
+  margin-right: auto;
+}
 .tidy5eDark .tidy5e.sheet .crash-training .crash-training-controls div {
   border: 2px groove #7a7971;
 }
