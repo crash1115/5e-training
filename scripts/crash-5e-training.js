@@ -2,7 +2,7 @@
 import { preloadTemplates } from "./load-templates.js";
 import { registerSettings } from "./settings.js";
 import { registerHelpers } from "./handlebars-helpers.js";
-import { performMigrationNumber1 } from "./migrations/migrationNumber1.js";
+import { migrateToVersion1 } from "./migrations/migrationNumber1.js";
 import AuditLog from "./AuditLog.js";
 import CrashTrackingAndTraining from "./CrashTrackingAndTraining.js";
 
@@ -73,7 +73,7 @@ async function addTrainingTab(app, html, data) {
       let actorId = actor.id;
       CrashTrackingAndTraining.exportItems(actor.id);
     });
-    
+
     // IMPORT
     html.find('.crash-training-import').click(async (event) => {
       event.preventDefault();
@@ -193,62 +193,71 @@ async function migrateAllActors(){
 
   const LATEST_MIGRATION = 1;
 
-  let actorsToUpdate = [];
+  let updatesRequired = [];
 
   // Start loop through actors
   for(var i = 0; i < game.actors.contents.length; i++){
+
     let a = game.actors.contents[i];
 
     // If the user doesn't own the actor, skip it
     let currentUserId = game.userId;
     let currentUserOwnsActor = a.data.permission[currentUserId] === 3;
-    if(!currentUserOwnsActor){ continue; }
-
-    // If last migration applied is newer than or equal to the version of the latest migration, we don't need to migrate.
-    let lastMigrationApplied = a.getFlag("5e-training","schemaVersion") || 0;
-    if (lastMigrationApplied >= LATEST_MIGRATION){ continue; }
-
-    // If there are no trainingItems, we can skip this actor.
-    let allTrainingItems = a.getFlag("5e-training","trainingItems") || [];
-    if(allTrainingItems.length < 1){
+    if(!currentUserOwnsActor){
       console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);
-      await a.setFlag("5e-training","schemaVersion", LATEST_MIGRATION);
       continue;
     }
 
-    actorsToUpdate.push(a);
+    // Flag items that need to be updated
+    let itemsToUpdate = 0;
+    let allTrainingItems = a.getFlag("5e-training","trainingItems") || [];
+    for(var j = 0; j < allTrainingItems.length; j++){
+      let itemSchemaVersion = allTrainingItems[j].schemaVersion;
+      if (itemSchemaVersion === undefined){ // Should only happen if it's coming from versions prior to 0.6.0
+        allTrainingItems[j].updateMe = true;
+        allTrainingItems[j].schemaVersion = 0;
+        itemsToUpdate++;
+      } else if(allTrainingItems[j].SchemVersion < LATEST_MIGRATION){ // If the latest is newer, gotta update
+        allTrainingItems[j] = true;
+        itemsToUpdate++;
+      }
+    }
+
+    // If items need to be updated, add them to the updatesRequired array
+    if(itemsToUpdate > 0){
+      updatesRequired.push({actor: a, items: allTrainingItems});
+    }
+
   }
 
-  if(actorsToUpdate.length > 0){
+  if(updatesRequired.length > 0){
     // Prompt to see if the user wants to update their actors.
-    let update = false;
+    let doUpdate = false;
     let content = `<h3>${game.i18n.localize("C5ETRAINING.MigrationPromptTitle")}</h3>
                    <p>${game.i18n.format("C5ETRAINING.MigrationPromptText1")}</p>
                    <h3>${game.i18n.localize("C5ETRAINING.MigrationPromptBackupWarning")}</h3>
                    <p>${game.i18n.format("C5ETRAINING.MigrationPromptText2")}</p>
                    <hr>
-                   <p>${game.i18n.format("C5ETRAINING.MigrationPromptText3", {num: actorsToUpdate.length})}</p>`
+                   <p>${game.i18n.format("C5ETRAINING.MigrationPromptText3", {num: updatesRequired.length})}</p>`
     // Insert dialog
     new Dialog({
       title: `Crash's Tracking & Training (5e)`,
       content: content,
       buttons: {
-        yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.MigrationPromptYes"), callback: () => update = true},
-        no: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.MigrationPromptNo"), callback: () => update = false},
+        yes: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.MigrationPromptYes"), callback: () => doUpdate = true},
+        no: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.MigrationPromptNo"), callback: () => doUpdate = false},
       },
       default: "no",
       close: async (html) => {
         // If they said yes, we migrate
-        if(update){
-          for(var i=0; i < actorsToUpdate.length; i++){
-            // Get our two main flags
-            let a = actorsToUpdate[i];
-            let categories = a.getFlag("5e-training","categories") || [];
-            let allTrainingItems = a.getFlag("5e-training","trainingItems") || [];
-            let lastMigrationApplied = a.getFlag("5e-training","schemaVersion") || 0;
+        if(doUpdate){
+          for(var i=0; i < updatesRequired.length; i++){
+            let thisUpdate = updatesRequired[i];
+            let a = thisUpdate.actor;
+            let allTrainingItems = thisUpdate.items;
 
             // Backup old data and store in backup flag
-            let backup = { categories: categories, trainingItems: allTrainingItems, schemaVersion: lastMigrationApplied};
+            let backup = {trainingItems: allTrainingItems, timestamp: new Date()};
             ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.BackingUpDataFor") + ": " + a.data.name);
             console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.BackingUpDataFor") + ": " + a.data.name);
             await a.setFlag("5e-training", "backup", backup);
@@ -257,14 +266,21 @@ async function migrateAllActors(){
             ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.UpdatingDataFor") + ": " + a.data.name);
             console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.UpdatingDataFor") + ": " + a.data.name);
 
-            try {
-              if(lastMigrationApplied < 1 ){ await performMigrationNumber1(a.id); }
-              // Repeat line for new versions as needed
-            } catch (err) {
-              console.error(err);
-              ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
-              console.error("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
+            // Loop through items and update if they need updates
+            for(var i = 0; i < allTrainingItems.length; i++){
+              if(allTrainingItems[i].updateMe){
+                try {
+                  if(allTrainingItems[i].schemaVersion < 1 ){ allTrainingItems[i] = migrateToVersion1(allTrainingItems[i]); }
+                  // Repeat line for new versions as needed
+                } catch (err) {
+                  console.error(err);
+                  ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
+                  console.error("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
+                }
+                delete allTrainingItems[i].updateMe;
+              }
             }
+            await a.setFlag("5e-training", "trainingItems", allTrainingItems);
           }
         }
       }
@@ -272,7 +288,6 @@ async function migrateAllActors(){
   }
 
 }
-
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
   let widenSheet = adjustSheetWidth(app);

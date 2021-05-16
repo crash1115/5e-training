@@ -15,5 +15,6 @@ export default class TrackedItem {
     this.progress = 0;
     this.completionAt = game.settings.get("5e-training", "totalToComplete");
     this.changes = [];
+    this.schemaVersion = 1;
   }
 }
