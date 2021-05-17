@@ -72,9 +72,11 @@ export default class CrashTrackingAndTraining {
     console.log("Crash's Tracking & Training (5e) | New Item excuted!");
     let actor = game.actors.get(actorId);
     let allCategories = actor.getFlag("5e-training","categories") || [];
+    let item = new TrackedItem;
     let data = {
       actor: actor,
-      item: new TrackedItem,
+      item: item,
+      alreadyCompleted: (item.progress >= item.completionAt),
       categories: allCategories,
       dropdownOptions: DROPDOWN_OPTIONS
     };
@@ -90,6 +92,7 @@ export default class CrashTrackingAndTraining {
     let data = {
       actor: actor,
       item: thisItem,
+      alreadyCompleted: (thisItem.progress >= thisItem.completionAt),
       categories: allCategories,
       dropdownOptions: DROPDOWN_OPTIONS
     };

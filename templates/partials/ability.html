@@ -14,13 +14,25 @@
 <div class="form-group">
   <label for="dc">{{ localize 'C5ETRAINING.CheckDC' }}</label>
   <div class="form-fields">
-    <input type="text" name="dc" id="dcInput" value="{{item.dc}}">
+    <input type="number" name="dc" id="dcInput" value="{{item.dc}}">
   </div>
 </div>
 
 <div class="form-group">
+  {{#if item.dc}}
+  <label for="completionAt">{{ localize 'C5ETRAINING.SuccessesRequired' }}</label>
+  {{else}}
   <label for="completionAt">{{ localize 'C5ETRAINING.CompletionTarget' }}</label>
+  {{/if}}
   <div class="form-fields">
-    <input type="text" name="completionAtInput" id="completionAtInput" value="{{item.completionAt}}">
+    <input type="number" name="completionAtInput" id="completionAtInput" value="{{item.completionAt}}" min="0">
+    <label class="help">
+      <i class="fas fa-question-circle"></i>
+      {{#if item.dc}}
+      <span class="tooltip">{{ localize 'C5ETRAINING.SuccessesRequiredInputHelpText' }}</span>
+      {{else}}
+      <span class="tooltip">{{ localize 'C5ETRAINING.CompletionTargetInputHelpText' }}</span>
+      {{/if}}
+    </label>
   </div>
 </div>

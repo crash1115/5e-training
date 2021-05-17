@@ -1,4 +1,5 @@
 import TrackedItem from "./TrackedItem.js";
+import CrashTrackingAndTraining from "./CrashTrackingAndTraining.js";
 
 export default class TrackedItemApp extends FormApplication {
 
@@ -60,6 +61,16 @@ export default class TrackedItemApp extends FormApplication {
       this.object.item.description = $(ev.currentTarget).val();
     });
 
+    html.on("change", "#progressInput", ev => {
+      let newThing = parseInt($(ev.currentTarget).val());
+      if(!newThing || isNaN(newThing) || (newThing <= 0) || (newThing > this.object.item.completionAt)){
+        ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InputErrorProgress"));
+        this.render();
+      } else {
+        this.object.item.progress = newThing;
+      }
+    });
+
     html.on("change", "#progressionStyleInput", ev => {
       this.object.item.progressionStyle = $(ev.currentTarget).val();
       this.render();
@@ -89,7 +100,7 @@ export default class TrackedItemApp extends FormApplication {
 
     html.on("change", "#fixedIncreaseInput", ev => {
       let newThing = parseInt($(ev.currentTarget).val());
-      if(!newThing || isNaN(newThing)){
+      if(!newThing || isNaN(newThing) || (newThing <= 0)){
         ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InputErrorFixedIncrease"));
         this.render();
       } else {
@@ -99,12 +110,14 @@ export default class TrackedItemApp extends FormApplication {
 
     html.on("change", "#dcInput", ev => {
       let newThing = parseInt($(ev.currentTarget).val());
+      if(!newThing){ newThing = null; }
       this.object.item.dc = newThing;
+      this.render();
     });
 
     html.on("change", "#completionAtInput", ev => {
       let newThing = parseInt($(ev.currentTarget).val());
-      if(!newThing || isNaN(newThing)){
+      if(!newThing || isNaN(newThing) || (newThing <= 0)){
         ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InputErrorCompletionAt"));
         this.render();
       } else {
@@ -177,7 +190,10 @@ export default class TrackedItemApp extends FormApplication {
 
     // Update actor and flags
     await actor.setFlag("5e-training", "trainingItems", allItems);
-    console.log(newItem); //todo remove me
+
+    // Announce completion if complete
+    let alreadyCompleted = this.object.alreadyCompleted;
+    CrashTrackingAndTraining.checkCompletion(actor, newItem, alreadyCompleted);
   }
 
 };

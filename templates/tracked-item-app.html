@@ -1,5 +1,12 @@
 <form class="crash-tracked-item-app">
 
+  <div class="form-group lighter">
+    <label for="name">{{ localize "C5ETRAINING.ItemId" }}</label>
+    <div class="form-fields">
+      <input type="text" name="id" id="idInput" value="{{item.id}}" readonly>
+    </div>
+  </div>
+
   <h3 class="form-header">{{ localize "C5ETRAINING.GeneralInformationHeader" }}</h3>
 
   <!-- SHOW FOR ALL -->
@@ -36,6 +43,17 @@
     <label for="description">{{ localize "C5ETRAINING.Description" }}</label>
     <div class="form-fields">
       <textarea name="description" id="descriptionInput">{{item.description}}</textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="progress">{{ localize 'C5ETRAINING.CurrentProgress' }}</label>
+    <div class="form-fields">
+      <input type="number" name="progress" id="progressInput" value="{{item.progress}}" min="0" max="{{item.completionAt}}">
+      <label class="help">
+        <i class="fas fa-question-circle"></i>
+        <span class="tooltip">{{ localize 'C5ETRAINING.ProgressInputHelpText' }}</span>
+      </label>
     </div>
   </div>
 

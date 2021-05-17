@@ -7,6 +7,10 @@ form.crash-category-app .form-group {
 	align-items: center;
 }
 
+form.crash-category-app .form-group.lighter {
+	opacity: 60%;
+}
+
 form.crash-category-app .form-group label {
 	color: #4b4a44;
 	font-weight: bold;
