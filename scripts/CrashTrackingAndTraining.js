@@ -83,7 +83,7 @@ export default class CrashTrackingAndTraining {
     new TrackedItemApp(data).render(true);
   }
 
-  static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS){ //todo this will be broken
+  static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS){
     console.log("Crash's Tracking & Training (5e) | Edit Downtime Activity excuted!");
     let actor = game.actors.get(actorId);
     let allCategories = actor.getFlag("5e-training","categories") || [];
