@@ -198,6 +198,6 @@
 
   "C5ETRAINING.ImportComplete": "Import Complete",
 
-  "C5ETRAINING.SettingEnableDebug": "Enable Debug Tools",
-  "C5ETRAINING.SettingEnableDebugHint": "Turn this on to show additional tools for importing, exporting, and restoring data from backups on character sheets."
+  "C5ETRAINING.NoIdWarning": "Item ID not found. This is probably because this item was created by an earlier version of this module, and can usually be solved by refreshing the page and choosing to perform the migration when prompted. If no migration prompt is presented, Crash can help you out! Export this actor's tracked items and send them to Crash via a bug report on GitHub or Discord."
+
 }
