@@ -11,6 +11,7 @@
   "C5ETRAINING.BackingUpDataFor": "BACKING UP DATA FOR ACTOR",
   "C5ETRAINING.UpdatingDataFor": "UPDATING DATA FOR ACTOR",
   "C5ETRAINING.ProblemUpdatingDataFor": "PROBLEM UPDATING DATA FOR ACTOR",
+  "C5ETRAINING.SuccessUpdatingDataFor": "SUCCESSFULLY UPDATED DATA FOR ACTOR",
 
   "C5ETRAINING.ActorNotFoundWarning": "Actor not found.",
   "C5ETRAINING.ItemNotFoundWarning": "Could not find tracked item called",

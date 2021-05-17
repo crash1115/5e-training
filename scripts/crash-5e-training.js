@@ -297,20 +297,22 @@ async function migrateAllActors(){
             console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.UpdatingDataFor") + ": " + a.data.name);
 
             // Loop through items and update if they need updates
-            for(var i = 0; i < allTrainingItems.length; i++){
-              if(allTrainingItems[i].updateMe){
+            for(var j = 0; j < allTrainingItems.length; j++){
+              if(allTrainingItems[j].updateMe){
                 try {
-                  if(allTrainingItems[i].schemaVersion < 1 ){ allTrainingItems[i] = migrateToVersion1(allTrainingItems[i]); }
+                  if(allTrainingItems[j].schemaVersion < 1 ){ allTrainingItems[j] = migrateToVersion1(allTrainingItems[j]); }
                   // Repeat line for new versions as needed
                 } catch (err) {
                   console.error(err);
                   ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
                   console.error("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") + ": " + a.data.name);
                 }
-                delete allTrainingItems[i].updateMe;
+                delete allTrainingItems[j].updateMe;
               }
             }
             await a.setFlag("5e-training", "trainingItems", allTrainingItems);
+            ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.SuccessUpdatingDataFor") + ": " + a.data.name);
+            console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.SuccessUpdatingDataFor") + ": " + a.data.name);
           }
         }
       }
