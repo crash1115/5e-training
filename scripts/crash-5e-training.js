@@ -227,7 +227,6 @@ async function migrateAllActors(){
 
   // Start loop through actors
   for(var i = 0; i < game.actors.contents.length; i++){
-
     let a = game.actors.contents[i];
 
     // If the user doesn't own the actor, skip it
@@ -257,7 +256,6 @@ async function migrateAllActors(){
     if(itemsToUpdate > 0){
       updatesRequired.push({actor: a, items: allTrainingItems});
     }
-
   }
 
   if(updatesRequired.length > 0){
@@ -318,7 +316,6 @@ async function migrateAllActors(){
       }
     }).render(true);
   }
-
 }
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
