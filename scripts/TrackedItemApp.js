@@ -33,6 +33,10 @@ export default class TrackedItemApp extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
 
+    //TODO: See if there's a way to do this better. We're updating the object here so
+    // the updates stick around after re-renders for the handful of things that force
+    // them. I'm also pretty sure error handling here is dumb. 17 MAY 2021
+
     html.on("change", "#imgInput", ev => {
       this.object.item.img = $(ev.currentTarget).val();
     });
@@ -122,6 +126,7 @@ export default class TrackedItemApp extends FormApplication {
         this.render();
       } else {
         this.object.item.completionAt = newThing;
+        this.render();
       }
     });
 
@@ -136,35 +141,41 @@ export default class TrackedItemApp extends FormApplication {
     let newItem = objItem;
 
     // Set placeholders for name and image, just in case something's gone really wrong here
-    newItem.name = newItem.name || game.i18n.localize("C5ETRAINING.NewItem");
-    newItem.img = newItem.img || "icons/svg/book.svg";
-    newItem.progressionStyle = newItem.progressionStyle || "ABILITY";
+    newItem.name = formData.name || game.i18n.localize("C5ETRAINING.NewItem");
+    newItem.img = formData.img || "icons/svg/book.svg";
+    newItem.progressionStyle = formData.progressionStyle || "ABILITY";
+
+    // Get the rest of the stuff
+    newItem.category = formData.category;
+    newItem.description = formData.description;
+    newItem.progress = formData.progress;
+    newItem.completionAt = formData.completionAt;
 
     // Unset the type specific stuff: tool, ability, skill, macro, fixedInput
     // Then put stuff back in where required
     if(newItem.progressionStyle === "ABILITY"){
-      newItem.ability = newItem.ability || "int";
+      newItem.ability = formData.ability || "int";
       newItem.skill = null;
       newItem.tool = null;
       newItem.macroName = null;
       newItem.fixedIncrease = null;
     } else if(newItem.progressionStyle === "SKILL"){
       newItem.ability = null;
-      newItem.skill = newItem.skill || "acr";
+      newItem.skill = formData.skill || "acr";
       newItem.tool = null;
       newItem.macroName = null;
       newItem.fixedIncrease = null;
     } else if(newItem.progressionStyle === "TOOL"){
       newItem.ability = null;
       newItem.skill = null;
-      newItem.tool = newItem.tool || "";
+      newItem.tool = formData.tool || "";
       newItem.macroName = null;
       newItem.fixedIncrease = null;
     } else if(newItem.progressionStyle === "MACRO"){
       newItem.ability = null;
       newItem.skill = null;
       newItem.tool = null;
-      newItem.macroName = newItem.macroName || "Unnamed Macro";
+      newItem.macroName = formData.macroName || "Unnamed Macro";
       newItem.fixedIncrease = null;
       newItem.dc = null;
     } else if(newItem.progressionStyle === "FIXED"){
@@ -172,7 +183,7 @@ export default class TrackedItemApp extends FormApplication {
       newItem.skill = null;
       newItem.tool = null;
       newItem.macroName = null;
-      newItem.fixedIncrease = newItem.fixedIncrease || 1;
+      newItem.fixedIncrease = formData.fixedIncrease || 1;
       newItem.dc = null;
     } else {
       // SOMETHING IS WRONG
