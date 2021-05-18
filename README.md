@@ -1,4 +1,4 @@
-[![Header Image](https://raw.githubusercontent.com/crash1115/5e-training/master/media/cover.png)]
+![Header Image](https://raw.githubusercontent.com/crash1115/5e-training/master/media/cover.png)
 
 ![GitHub All Releases](https://img.shields.io/github/downloads/crash1115/5e-training/total) ![GitHub Releases](https://img.shields.io/github/downloads/crash1115/5e-training/latest/total) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/crash1115/5e-training?label=latest%20version)
 
