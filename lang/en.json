@@ -82,6 +82,14 @@
   "C5ETRAINING.SettingAnnounceCompletionFor": "Announce Tracked Item Completion For:",
   "C5ETRAINING.SettingAnnounceCompletionForHint": "Choose which actor types you would like to have trigger chat messages upon tracked item completion.",
 
+  "C5ETRAINING.SettingTabName": "Tab Name",
+  "C5ETRAINING.SettingTabNameHint": "Sets the title of the tab to whatever you enter here. Default is 'Tracking,' but you may wish to call it something else depending on how you use the module.",
+  "C5ETRAINING.SettingAnnounceActivityCompletionFor": "Announce Completion For:",
+  "C5ETRAINING.SettingAnnounceActivityCompletionForHint": "These actor types will cause a chat message to display any time they complete a tracked item.",
+  "C5ETRAINING.NpcsOnly": "NPC's Only",
+  "C5ETRAINING.PcsAndNpcs": "PC's and NPC's",
+  "C5ETRAINING.PcsOnly": "PC's Only",
+
   "C5ETRAINING.CreateEditItemAppTitle": "Create / Edit Tracked Item",
 
   "C5ETRAINING.NewItem": "New Item",

@@ -56,7 +56,7 @@ export function registerSettings() {
 
   game.settings.register("5e-training", "totalToComplete", {
     name: game.i18n.localize("C5ETRAINING.SettingDefaultCompletionTarget"),
-    hint: game.i18n.localize("C5ETRAINING.SettingDefaultCompletionTarget"),
+    hint: game.i18n.localize("C5ETRAINING.SettingDefaultCompletionTargetHint"),
     scope: "world",
     config: true,
     default: 300,
