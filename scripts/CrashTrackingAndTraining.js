@@ -539,9 +539,6 @@ export default class CrashTrackingAndTraining {
       });
     });
     input.trigger('click');
-
-
-
   }
 
 }
