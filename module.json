@@ -2,13 +2,14 @@
 	"name": "5e-training",
 	"title": "Crash's Tracking & Training (5e)",
 	"description": "Adds a section to the character sheet to keep track of downtime activities, training, spell scribing, faction reputation, quest progress, and anything else you can think of.",
-	"version": "0.5.1",
+	"version": "0.6.0",
 	"author": "CRASH1115#2944",
-	"minimumCoreVersion": "0.8.1",
-	"compatibleCoreVersion": "0.8.2",
+	"minimumCoreVersion": "0.8.2",
+	"compatibleCoreVersion": "0.8.4",
 	"systems": ["dnd5e"],
+	"minimumSystemVersion": "1.3.0",
 	"esmodules": ["scripts/crash-5e-training.js"],
-	"styles": ["styles/training-tab.css", "styles/activity-app.css", "styles/audit-log.css", "styles/category-app.css"],
+	"styles": ["styles/training-tab.css", "styles/tracked-item-app.css", "styles/audit-log.css", "styles/category-app.css"],
 	"languages": [
 		{
 			"lang": "en",
@@ -33,35 +34,7 @@
 	],
 	"url": "https://github.com/crash1115/5e-training",
   "manifest": "https://raw.githubusercontent.com/crash1115/5e-training/master/module.json",
-	"download": "https://github.com/crash1115/5e-training/releases/download/v0.5.1/5e-training.zip",
-	"readme": "https://github.com//crash1115/5e-training/blob/master/README.md",
-	"bugs": "https://github.com/crash1115/5e-training/issues",
-  "allowBugReporter": true,
-	"manifestPlusVersion": "1.1.0",
-  "media": [
-		{
-			"type": "icon",
-			"link": "https://i.gyazo.com/c6703b13bbcdb5b222a2f758e58f95f1.png"
-		},
-    {
-      "type": "cover",
-      "link": "https://i.gyazo.com/445151200d8b187dec2687eafb234cbb.png"
-    },
-    {
-      "type": "screenshot",
-      "link": "https://i.gyazo.com/1cad6ed7d1d24194e8851c90690ebd90.png"
-    },
-    {
-      "type": "screenshot",
-      "link": "https://i.gyazo.com/1fa6b9d8958d540463daa0d99c53f555.png"
-    },
-    {
-      "type": "screenshot",
-      "link": "https://i.gyazo.com/e6949446ab42a47f1da40aecc7d402f3.png"
-    },
-    {
-      "type": "screenshot",
-      "link": "https://i.gyazo.com/3ccd4cf168c7ffbe9c876e21e2a673dc.png"
-    }
-  ]
+	"download": "https://github.com/crash1115/5e-training/releases/download/v0.6.0/5e-training.zip",
+	"readme": "https://github.com/crash1115/5e-training/blob/master/README.md",
+	"bugs": "https://github.com/crash1115/5e-training/issues"
 }
