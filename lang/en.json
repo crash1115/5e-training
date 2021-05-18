@@ -81,6 +81,8 @@
   "C5ETRAINING.SettingDefaultCompletionTargetHint": "Sets the default target number required to reach 100% completion for tracked items using check-based progression. A good rule of thumb is that the average person will be able to contribute about 10 points to their progress total per check. The default is 300 (or 30 days for the average person who trains once a day).",
   "C5ETRAINING.SettingAnnounceCompletionFor": "Announce Tracked Item Completion For:",
   "C5ETRAINING.SettingAnnounceCompletionForHint": "Choose which actor types you would like to have trigger chat messages upon tracked item completion.",
+  "C5ETRAINING.SettingShowImportButton": "Show Import Button",
+  "C5ETRAINING.SettingShowImportButtonHint": "Enable this to display the import button on the tracking tab. This is meant to be a troubleshooting / data restoration tool, and there are no checks in place to prevent the importing of unexpected data. Importing unexpected data in this way can break the module for the actor. You use this feature AT YOUR OWN RISK. Crash is happy to help you un-break things if something happens, but she makes no guarantees.",
 
   "C5ETRAINING.SettingTabName": "Tab Name",
   "C5ETRAINING.SettingTabNameHint": "Sets the title of the tab to whatever you enter here. Default is 'Tracking,' but you may wish to call it something else depending on how you use the module.",

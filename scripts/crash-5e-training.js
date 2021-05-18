@@ -34,6 +34,10 @@ async function addTrainingTab(app, html, data) {
     let tabs = html.find('.tabs[data-group="primary"]');
     tabs.append(trainingTabBtn);
 
+    // Get some permissions
+    let showImportButton = game.settings.get("5e-training", "showImportButton");
+    data.showImportButton = showImportButton;
+
     // Create the tab content
     let sheet = html.find('.sheet-body');
     let trainingTabHtml = $(await renderTemplate('modules/5e-training/templates/training-section.html', data));

@@ -9,6 +9,15 @@ export function registerSettings() {
     type: Number
   })
 
+  game.settings.register("5e-training", "showImportButton", {
+    name: game.i18n.localize("C5ETRAINING.SettingShowImportButton"),
+    hint: game.i18n.localize("C5ETRAINING.SettingShowImportButtonHint"),
+    scope: "client",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   game.settings.register("5e-training", "gmOnlyMode", {
     name: game.i18n.localize("C5ETRAINING.SettingGmOnlyMode"),
     hint: game.i18n.localize("C5ETRAINING.SettingGmOnlyModeHint"),

@@ -5,9 +5,11 @@
     <div class="crash-training-export" title="{{ localize 'C5ETRAINING.ExportTrackedItemsTooltip' }}">
       <i class="fas fa-file-import"></i> {{ localize 'C5ETRAINING.ExportTrackedItems' }}
     </div>
+    {{#if showImportButton}}
     <div class="crash-training-import" title="{{ localize 'C5ETRAINING.ImportTrackedItemsTooltip' }}">
       <i class="fas fa-file-export"></i> {{ localize 'C5ETRAINING.ImportTrackedItems' }}
     </div>
+    {{/if}}
     <div class="crash-training-audit push-left" title="{{ localize 'C5ETRAINING.ReviewChanges' }}">
       <i class="fas fa-clipboard"></i> {{ localize 'C5ETRAINING.ChangeLog' }}
     </div>
