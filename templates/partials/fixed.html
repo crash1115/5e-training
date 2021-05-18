@@ -2,7 +2,10 @@
 <div class="form-group">
   <label for="fixedIncrease">{{ localize 'C5ETRAINING.SelectIncreaseAmount' }}</label>
   <div class="form-fields">
-    <input type="number" name="fixedIncrease" id="fixedIncreaseInput" value="{{item.fixedIncrease || 1}}" min="0">
+    <input type="number" name="fixedIncrease" id="fixedIncreaseInput"
+      {{#if item.fixedIncrease}} value="{{item.fixedIncrease}}" {{/if}}
+      {{#unless item.fixedIncrease}} value="1" {{/unless}}
+      min="1">
     <label class="help">
       <i class="fas fa-question-circle"></i>
       <span class="tooltip">{{ localize 'C5ETRAINING.FixedIncreaseInputHelpText' }}</span>
