@@ -4,7 +4,7 @@ export default class AuditLog extends FormApplication {
     return mergeObject(super.defaultOptions, {
       id: "downtime-audit-log-form",
       template: "modules/5e-training/templates/audit-dialog.html",
-      title: game.i18n.localize("C5ETRAINING.AuditLog"),
+      title: game.i18n.localize("C5ETRAINING.ChangeLog"),
       width: 900,
       resizable: true,
       closeOnSubmit: true
@@ -13,14 +13,14 @@ export default class AuditLog extends FormApplication {
 
   async getData(options = {}) {
     let originalData = super.getData();
-    let activities = originalData.object.flags["5e-training"].trainingItems;
+    let activities = originalData.object.data.flags["5e-training"].trainingItems || [];
     let changes = [];
 
-// Loop through each activity. If it's got no changes array, move on to the next one.
-//  If it DOES have a change array, loop through each entry and set up the info we need
-//  for display in the application. Most of it's one-to one, but we need to pull the activity name
-//  from the activity itself, and we do some math for the change. Once that's done,
-//   push the change into the array.
+    // Loop through each activity. If it's got no changes array, move on to the next one.
+    //  If it DOES have a change array, loop through each entry and set up the info we need
+    //  for display in the application. Most of it's one-to one, but we need to pull the activity name
+    //  from the activity itself, and we do some math for the change. Once that's done,
+    //   push the change into the array.
     for (var a=0; a < activities.length; a++){
       if(!activities[a].changes){ continue; }
       for(var c=0; c < activities[a].changes.length; c++){
@@ -52,7 +52,7 @@ export default class AuditLog extends FormApplication {
     });
   }
 
- // Called on submission, handle doing stuff.
+  // Called on submission, handle doing stuff.
   async _updateObject(event, formData) {
 
     let actorId = formData.actorId;

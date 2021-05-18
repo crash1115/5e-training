@@ -1,9 +1,18 @@
-<div class="field">
-  <label for="macro">{{ localize 'C5ETRAINING.MacroName' }}:</label>
-  <input type="text" name="macroInput" id="macroInput" value="{{training.macroName}}">
+<!-- SHOW FOR MACRO -->
+<div class="form-group">
+  <label for="macroName">{{ localize 'C5ETRAINING.MacroName' }}</label>
+  <div class="form-fields">
+    <input type="text" name="macroNameInput" id="macroNameInput" value="{{item.macroName}}">
+    <label class="help">
+      <i class="fas fa-question-circle"></i>
+      <span class="tooltip">{{ localize 'C5ETRAINING.MacroNameInputHelpText' }}</span>
+    </label>
+  </div>
 </div>
 
-<div class="field">
-  <label for="completionAt">{{ localize 'C5ETRAINING.SuccessesRequired' }}:</label>
-  <input type="text" name="completionAtInput" id="completionAtInput" value="{{training.completionAt}}">
+<div class="form-group">
+  <label for="completionAt">{{ localize 'C5ETRAINING.CompletionTarget' }}</label>
+  <div class="form-fields">
+    <input type="number" name="completionAt" id="completionAtInput" value="{{item.completionAt}}" min="0">
+  </div>
 </div>

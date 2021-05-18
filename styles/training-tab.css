@@ -1,0 +1,318 @@
+
+/* Control Buttons Container */
+.dnd5e.sheet .crash-training .crash-training-controls,
+.tidy5e.sheet .crash-training .crash-training-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin: 4px 0;
+}
+.tidy5e.sheet .crash-training .crash-training-controls {
+  margin: 0px 15px 4px 0;
+}
+
+/* Control Buttons */
+.dnd5e.sheet .crash-training .crash-training-controls div,
+.tidy5e.sheet .crash-training .crash-training-controls div {
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  margin-right: 4px;
+  padding: 5px 8px;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  border-radius: 4px;
+}
+.dnd5e.sheet .crash-training .crash-training-controls div.push-left,
+.tidy5e.sheet .crash-training .crash-training-controls div.push-left {
+  margin-right: auto;
+}
+.tidy5eDark .tidy5e.sheet .crash-training .crash-training-controls div {
+  border: 2px groove #7a7971;
+}
+
+.dnd5e.sheet .crash-training .crash-training-controls div:hover,
+.tidy5e.sheet .crash-training .crash-training-controls div:hover {
+  cursor: pointer;
+  color: black;
+  text-shadow: 0 0 5px red;
+}
+.dark-mode .dnd5e.sheet .crash-training .crash-training-controls div:hover {
+  cursor: pointer;
+  color: #3F88E6;
+  text-shadow: 0 0 5px #004aa9;
+}
+.tidy5eDark .tidy5e.sheet .crash-training .crash-training-controls div:hover{
+  text-shadow: none;
+  color: rgba(255, 100, 0, 1);
+}
+
+.dnd5e.sheet .crash-training .crash-training-controls div:last-of-type,
+.tidy5e.sheet  .crash-training .crash-training-controls div:last-of-type {
+  margin-right: 0px;
+}
+
+
+/* Item List */
+.dnd5e.sheet .crash-training .items-list,
+.tidy5e.sheet  .crash-training .items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  color: #7a7971;
+}
+
+/* Item List Header */
+.dnd5e.sheet .crash-training .items-list .items-header,
+.tidy5e.sheet  .crash-training .items-list .items-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-weight: bold;
+  border-radius: 0px;
+}
+.tidy5eDark .tidy5e.sheet  .crash-training .items-list .items-header {
+  border: 1px;
+  color: white;
+}
+
+/* Type Column Header */
+.dnd5e.sheet .crash-training .activity-type,
+.tidy5e.sheet  .crash-training .activity-type {
+  flex: 0 0 150px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+	border-right: 1px solid #c9c7b8;
+}
+.dark-mode .dnd5e.sheet .crash-training .activity-type {
+	border-right: none;
+}
+.tidy5eDark .tidy5e.sheet .crash-training .activity-type {
+	border-right: none;
+}
+
+/* Progress Override Column Header*/
+.dnd5e.sheet .crash-training .activity-override,
+.tidy5e.sheet   .crash-training .activity-override {
+  flex: 0 0 110px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+}
+
+/* Progress Column Header*/
+.dnd5e.sheet .crash-training .activity-progress,
+.tidy5e.sheet   .crash-training .activity-progress {
+  flex: 0 0 190px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  height: 14px;
+  border-right: 1px solid #c9c7b8;
+}
+.dark-mode .dnd5e.sheet .crash-training .activity-progress{
+  border-right: none;
+}
+.tidy5eDark .tidy5e.sheet .crash-training .activity-progress {
+	border-right: none;
+}
+
+/* Edit and Delete Buttons */
+.dnd5e.sheet .crash-training .crash-item-controls,
+.tidy5e.sheet .crash-training .crash-item-controls {
+  flex: 0 0 50px;
+	justify-content: space-between;
+  padding-right: 5px;
+  padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
+}
+
+
+/*======================== COLUMS ==========================*/
+
+/* Item Name */
+.dnd5e.sheet .crash-training .items-list .item-name,
+.tidy5e.sheet .crash-training .items-list .item-name {
+  flex: 2;
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-style: normal;
+  text-align: left;
+  align-items: center;
+}
+
+.dnd5e.sheet .crash-training .item .item-name h4,
+.tidy5e.sheet .crash-training .item .item-name h4 {
+  font-weight: 400;
+}
+
+/* Roll Buttons */
+.dnd5e.sheet .crash-training .crash-training-roll,
+.dnd5e.sheet .crash-training .crash-training-roll-disabled,
+.tidy5e.sheet .crash-training .crash-training-roll,
+.tidy5e.sheet .crash-training .crash-training-roll-disabled {
+	flex: 0 0 30px;
+	height: 30px;
+	background-size: 30px;
+	background-position: center;
+	background-repeat: no-repeat;
+	border: none;
+	margin-right: 5px;
+}
+
+.dnd5e.sheet .crash-training .crash-training-roll .checkmark,
+.tidy5e.sheet .crash-training .crash-training-roll .checkmark {
+	display: none;
+}
+
+.dnd5e.sheet .crash-training .item-name:hover .crash-training-roll,
+.tidy5e.sheet .crash-training .item-name:hover .crash-training-roll {
+  background-image: url("/../icons/svg/d20-grey.svg") !important;
+}
+
+.dnd5e.sheet .crash-training .item-name:hover .crash-training-roll:hover,
+.tidy5e.sheet .crash-training .item-name:hover .crash-training-roll:hover {
+	background-image: url("/../icons/svg/d20-black.svg") !important;
+}
+
+.dnd5e.sheet .crash-training .crash-training-roll-disabled,
+.tidy5e.sheet .crash-training .crash-training-roll-disabled {
+	opacity: 50%;
+}
+
+.dnd5e.sheet .crash-training .crash-training-roll-disabled .checkmark,
+.tidy5e.sheet .crash-training .crash-training-roll-disabled .checkmark {
+  color: white;
+  display: block;
+  font-size: 30px;
+  text-shadow: 0 0 5px black;
+}
+
+/* Type Column */
+.dnd5e.sheet .crash-training .activity-type-row,
+.tidy5e.sheet .crash-training .activity-type-row {
+  flex: 0 0 150px;
+	text-transform: capitalize;
+	text-align: center;
+	font-size: 12px;
+	border-right: 1px solid #c9c7b8;
+}
+
+.dark-mode .dnd5e.sheet .crash-training .activity-type-row{
+  border-right: none;
+}
+.tidy5eDark .tidy5e.sheet .crash-training .activity-type-row{
+  border-right: none;
+}
+
+/* Progress Override Column */
+.dnd5e.sheet .crash-training .activity-override-row,
+.tidy5e.sheet .crash-training .activity-override-row {
+  flex: 0 0 110px;
+	font-size: 12px;
+}
+
+.dnd5e.sheet .crash-training .activity-override-row input,
+.tidy5e.sheet .crash-training .activity-override-row input {
+	max-width: 50px;
+	text-align: right;
+  display: inline-block;
+}
+
+/* Progress Bar Column */
+.dnd5e.sheet .crash-training .activity-progress-row,
+.tidy5e.sheet .crash-training .activity-progress-row {
+  flex: 0 0 190px;
+	font-size: 12px;
+	border-right: 1px solid #c9c7b8;
+}
+.dark-mode .dnd5e.sheet .crash-training .activity-progress-row{
+	border-right: none;
+}
+.tidy5eDark .tidy5e.sheet .crash-training .activity-progress-row{
+	border-right: none;
+}
+
+/* Training Bar */
+.dnd5e.sheet .crash-training .activity-progress-row .progress-bar,
+.tidy5e.sheet .crash-training .activity-progress-row .progress-bar {
+	flex: 0 0 180px; /* 190 - 10px margin */
+	background-color: rgba(0,0,0,0.1);
+	border-radius: 4px;
+	height: 20px;
+	margin: 5px;
+}
+
+/* Training Bar - Filled Portion */
+.dnd5e.sheet .crash-training .activity-progress-row .crash-training-completion,
+.tidy5e.sheet .crash-training .activity-progress-row .crash-training-completion {
+	color: #111111;
+	background-color: rgba(255,0,0,0.4);
+	border-radius: 4px;
+	height: 100%;
+	line-height: 22px;
+}
+.dark-mode .dnd5e.sheet .crash-training .activity-progress-row .crash-training-completion{
+	color: white;
+	background-color: #004aa9;
+  opacity:0.8;
+}
+.tidy5eDark .tidy5e.sheet .crash-training .activity-progress-row .crash-training-completion {
+	color: white;
+	background-color: rgba(255, 100, 0, 0.6);
+}
+
+/* Training Bar Progress Percent Text */
+.dnd5e.sheet .crash-training .activity-progress-row .crash-training-completion span,
+.tidy5e.sheet .crash-training .activity-progress-row .crash-training-completion span {
+	margin-left: 5px;
+}
+
+/* Add and Audit Log Buttons */
+.dnd5e.sheet .crash-training .crash-item-row-controls {
+  flex: 0 0 45px; /*50px - 5px right padding on the row*/
+	justify-content: space-between;
+	display: flex;
+	padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
+}
+
+.tidy5e.sheet .crash-training .crash-item-row-controls {
+  flex: 0 0 45px;
+	justify-content: space-between;
+	display: flex;
+	padding-left: 0px;
+  padding-right: 11px;
+}
+
+.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-edit,
+.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-delete,
+.tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-edit,
+.tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-delete {
+	font-size: 12px;
+	text-align: center;
+	flex: 1;
+}
+
+.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-edit:hover,
+.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-delete:hover,
+.tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-edit:hover,
+.tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-delete:hover {
+	text-shadow: 0 0 5px red;
+}
+
+.dark-mode .dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-edit:hover,
+.dark-mode .dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-delete:hover{
+	text-shadow: 0 0 5px #004aa9;
+}
+
+.tidy5eDark .tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-edit:hover,
+.tidy5eDark .tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-delete:hover{
+  text-shadow: none;
+  color: rgba(255, 100, 0, 1);
+}

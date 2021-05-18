@@ -1,19 +1,19 @@
 <form class="crash-audit-log">
-  <input type="hidden" name="actorId" value="{{object._id}}"/>
+  <input type="hidden" name="actorId" value="{{object.id}}"/>
 
-  <h1 class="title">{{object.name}}'s Downtime Activity Log</h1>
+  <h1 class="title">{{ localize "C5ETRAINING.ChangeLog" }}</h1>
 
   <!-- Player View -->
   {{#unless isGm}}
     <div class="instructions">
-      <p>{{ localize "C5ETRAINING.AuditLogInstructionsPlayer" }}</p>
+      <p>{{ localize "C5ETRAINING.ChangeLogInstructionsPlayer" }}</p>
     </div>
     <div class="action-table">
       <table>
         <tr>
           <th>{{ localize "C5ETRAINING.Time" }}</th>
           <th>{{ localize "C5ETRAINING.User" }}</th>
-          <th>{{ localize "C5ETRAINING.Activity" }}</th>
+          <th>{{ localize "C5ETRAINING.Item" }}</th>
           <th>{{ localize "C5ETRAINING.Action" }}</th>
           <th>{{ localize "C5ETRAINING.ProgressChange" }}</th>
         </tr>
@@ -33,15 +33,15 @@
   <!-- GM View -->
   {{#if isGm}}
   <div class="instructions">
-    <p>{{ localize "C5ETRAINING.AuditLogInstructionsGm" }}</p>
-    <p>{{ localize "C5ETRAINING.AuditLogDeleteNote" }}</p>
+    <p>{{ localize "C5ETRAINING.ChangeLogInstructionsGm" }}</p>
+    <p>{{ localize "C5ETRAINING.ChangeLogDeleteNote" }}</p>
   </div>
   <div class="action-table">
     <table>
       <tr>
         <th>{{ localize "C5ETRAINING.Time" }}</th>
         <th>{{ localize "C5ETRAINING.User" }}</th>
-        <th>{{ localize "C5ETRAINING.Activity" }}</th>
+        <th>{{ localize "C5ETRAINING.Item" }}</th>
         <th>{{ localize "C5ETRAINING.Action" }}</th>
         <th>{{ localize "C5ETRAINING.ProgressChange" }}</th>
         <th>{{ localize "C5ETRAINING.Dismiss" }}<th>

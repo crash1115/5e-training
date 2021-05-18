@@ -1,43 +1,116 @@
-<div class="tab crash-training flexrow" data-group="primary" data-tab="training">
+<div class="tab crash-training" data-group="primary" data-tab="training">
+
+  <!-- Tab Controls -->
+  <div class="crash-training-controls">
+    <div class="crash-training-export" title="{{ localize 'C5ETRAINING.ExportTrackedItemsTooltip' }}">
+      <i class="fas fa-file-import"></i> {{ localize 'C5ETRAINING.ExportTrackedItems' }}
+    </div>
+    {{#if showImportButton}}
+    <div class="crash-training-import" title="{{ localize 'C5ETRAINING.ImportTrackedItemsTooltip' }}">
+      <i class="fas fa-file-export"></i> {{ localize 'C5ETRAINING.ImportTrackedItems' }}
+    </div>
+    {{/if}}
+    <div class="crash-training-audit push-left" title="{{ localize 'C5ETRAINING.ReviewChanges' }}">
+      <i class="fas fa-clipboard"></i> {{ localize 'C5ETRAINING.ChangeLog' }}
+    </div>
+    <div class="crash-training-new-category" title="{{ localize 'C5ETRAINING.CreateNewCategory' }}">
+      <i class="fas fa-list"></i> {{ localize 'C5ETRAINING.AddCategory' }}
+    </div>
+    <div class="crash-training-add" title="{{ localize 'C5ETRAINING.CreateNewItem' }}">
+      <i class="fas fa-plus"></i> {{ localize 'C5ETRAINING.AddItem' }}
+    </div>
+  </div>
+
+  <!-- Items List -->
   <ol class="items-list">
+
+    <!-- Uncategorized -->
     <li class="items-header flexrow">
-      <h3 class="item-name flexrow">{{ localize 'C5ETRAINING.ActivityProgress' }}</h3>
-      <div class="crash-item-controls flexrow">
-        <a class="item-control item-create crash-training-audit" title="{{ localize 'C5ETRAINING.ReviewChanges' }}">
-          <i class="fas fa-clipboard"></i> {{ localize 'C5ETRAINING.AuditLog' }}
-        </a>
-        <a class="item-control item-create crash-training-add" title="{{ localize 'C5ETRAINING.CreateNewDowntimeActivity' }}">
-          <i class="fas fa-plus-circle"></i> {{ localize 'C5ETRAINING.Add' }}
-        </a>
-      </div>
+      <div class="item-name flexrow"><h3>{{ localize 'C5ETRAINING.Uncategorized' }}</h3></div>
+      <div class="activity-type">{{localize "C5ETRAINING.CheckTypeColumnHeader"}}</div>
+      <div class="activity-override">{{localize "C5ETRAINING.ProgressColumnHeader"}}</div>
+      <div class="activity-progress"></div>
+      <div class="crash-item-controls flexrow"></div>
     </li>
     <ol class="item-list inventory-list">
-      {{#each actor.flags.5e-training.trainingItems as |training tid| }}
+      {{#each (5e-training-isUncategorized actor) as |training tid| }}
         <li class="item flexrow">
           <div class="item-name flexrow rollable">
-            <div class="{{trainingRollBtnClass training}}" id="crash-roll-{{tid}}" title="{{trainingRollBtnTooltip training}}"></div>
-            <h4 class="crash-training-toggle-desc" id="crash-toggle-desc-{{tid}}" title="{{ localize 'C5ETRAINING.ToggleInfo' }}">{{training.name}}</h4>
+            <div class="{{5e-training-trainingRollBtnClass training}}"
+                 id="crash-roll-{{training.id}}"
+                 title="{{5e-training-trainingRollBtnTooltip training}}"
+                 style="background-image: url('{{training.img}}')">
+              <div class="checkmark">  <i class="fas fa-check"></i></div>
+            </div>
+            <h4 class="crash-training-toggle-desc" id="crash-toggle-desc-{{training.id}}" title="{{ localize 'C5ETRAINING.ToggleInfo' }}">{{training.name}}</h4>
           </div>
-          <div class="item-detail type">
-            {{progressionStyle training ../actor}}
+          <div class="activity-type-row">
+            {{5e-training-progressionStyle training ../actor}}
           </div>
-          <div class="item-detail override">
-            <input type="text" class="item-control crash-training-override" id="crash-override-{{tid}}" title="{{ localize 'C5ETRAINING.AdjustProgressValue' }}" value="{{training.progress}}"/>
+          <div class="activity-override-row">
+            <input type="text" class="item-control crash-training-override" id="crash-override-{{training.id}}" title="{{ localize 'C5ETRAINING.AdjustProgressValue' }}" value="{{training.progress}}"/>
             <span> / {{training.completionAt}}</span>
           </div>
-          <div class="item-detail flexrow bar">
+          <div class="activity-progress-row">
             <div class="progress-bar">
-              <div class="crash-training-completion" style="width:{{trainingCompletion training}}%;">
-                <span>{{trainingCompletion training}}%</span>
+              <div class="crash-training-completion" style="width:{{5e-training-trainingCompletion training}}%;">
+                <span>{{5e-training-trainingCompletion training}}%</span>
               </div>
             </div>
           </div>
-          <div class="crash-item-controls">
-            <a class="item-control crash-training-edit" id="crash-edit-{{tid}}" title="{{ localize 'C5ETRAINING.EditDowntimeActivity' }}"><i class="fas fa-edit"></i></a>
-            <a class="item-control crash-training-delete" id="crash-delete-{{tid}}" title="{{ localize 'C5ETRAINING.DeleteDowntimeActivity' }}"><i class="fas fa-trash"></i></a>
+          <div class="crash-item-row-controls">
+            <a class="item-control crash-training-edit" id="crash-edit-{{training.id}}" title="{{ localize 'C5ETRAINING.EditItem' }}"><i class="fas fa-edit"></i></a>
+            <a class="item-control crash-training-delete" id="crash-delete-{{training.id}}" title="{{ localize 'C5ETRAINING.DeleteItem' }}"><i class="fas fa-trash"></i></a>
           </div>
         </li>
       {{/each}}
     </ol>
+
+    <!-- Categories -->
+    {{#each actor.flags.5e-training.categories as |category cid| }}
+      <li class="items-header flexrow" title="{{ category.description }}">
+        <div class="item-name flexrow"><h3>{{ category.name }}</h3></div>
+        <div class="activity-type">{{localize "C5ETRAINING.CheckTypeColumnHeader"}}</div>
+        <div class="activity-override">{{localize "C5ETRAINING.ProgressColumnHeader"}}</div>
+        <div class="activity-progress"></div>
+        <div class="crash-item-controls flexrow">
+          <a class="item-control crash-training-edit-category" id="crash-edit-category-{{category.id}}" title="{{ localize 'C5ETRAINING.EditCategory' }}"><i class="fas fa-edit"></i></a>
+          <a class="item-control crash-training-delete-category" id="crash-delete-category-{{category.id}}" title="{{ localize 'C5ETRAINING.DeleteCategory' }}"><i class="fas fa-trash"></i></a>
+        </div>
+      </li>
+      <ol class="item-list inventory-list">
+        {{#each (5e-training-isInCategory ../actor category) as |training tid| }}
+          <li class="item flexrow">
+            <div class="item-name flexrow rollable">
+              <div class="{{5e-training-trainingRollBtnClass training}}"
+                   id="crash-roll-{{training.id}}"
+                   title="{{5e-training-trainingRollBtnTooltip training}}"
+                   style="background-image: url('{{training.img}}')">
+                <div class="checkmark">  <i class="fas fa-check"></i></div>
+              </div>
+              <h4 class="crash-training-toggle-desc" id="crash-toggle-desc-{{training.id}}" title="{{ localize 'C5ETRAINING.ToggleInfo' }}">{{training.name}}</h4>
+            </div>
+            <div class="activity-type-row">
+              {{5e-training-progressionStyle training ../../actor}}
+            </div>
+            <div class="activity-override-row">
+              <input type="text" class="item-control crash-training-override" id="crash-override-{{training.id}}" title="{{ localize 'C5ETRAINING.AdjustProgressValue' }}" value="{{training.progress}}"/>
+              <span> / {{training.completionAt}}</span>
+            </div>
+            <div class="activity-progress-row">
+              <div class="progress-bar">
+                <div class="crash-training-completion" style="width:{{5e-training-trainingCompletion training}}%;">
+                  <span>{{5e-training-trainingCompletion training}}%</span>
+                </div>
+              </div>
+            </div>
+            <div class="crash-item-row-controls">
+              <a class="item-control crash-training-edit" id="crash-edit-{{training.id}}" title="{{ localize 'C5ETRAINING.EditItem' }}"><i class="fas fa-edit"></i></a>
+              <a class="item-control crash-training-delete" id="crash-delete-{{training.id}}" title="{{ localize 'C5ETRAINING.DeleteItem' }}"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+    {{/each}}
   </ol>
 </div>

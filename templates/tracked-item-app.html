@@ -1,0 +1,112 @@
+<form class="crash-tracked-item-app">
+
+  <div class="form-group lighter">
+    <label for="name">{{ localize "C5ETRAINING.ItemId" }}</label>
+    <div class="form-fields">
+      <input type="text" name="id" id="idInput" value="{{item.id}}" readonly>
+    </div>
+  </div>
+
+  <h3 class="form-header">{{ localize "C5ETRAINING.GeneralInformationHeader" }}</h3>
+
+  <!-- SHOW FOR ALL -->
+  <div class="form-group">
+    <label for="name">{{ localize "C5ETRAINING.Name" }}</label>
+    <div class="form-fields">
+      <input type="text" name="name" id="nameInput" value="{{item.name}}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="img">{{ localize "C5ETRAINING.Image" }}</label>
+    <div class="form-fields">
+      <input type="text" name="img" id="imgInput" value="{{item.img}}">
+      <button type="button" id="imgPicker">
+        <i class="fas fa-file-import fa-fw"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="categoryInput">{{ localize "C5ETRAINING.Category" }}</label>
+    <div class="form-fields">
+      <select name="category" id="categoryInput">
+        <option value="" {{#unless item.category}} selected {{/unless}} >{{ localize "C5ETRAINING.None" }}</option>
+        {{#each categories as |category cid| }}
+          <option value="{{category.id}}" {{#if (eq ../item.category category.id)}} selected {{/if}} >{{ category.name }}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">{{ localize "C5ETRAINING.Description" }}</label>
+    <div class="form-fields">
+      <textarea name="description" id="descriptionInput">{{item.description}}</textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="progress">{{ localize 'C5ETRAINING.CurrentProgress' }}</label>
+    <div class="form-fields">
+      <input type="number" name="progress" id="progressInput" value="{{item.progress}}" min="0" max="{{item.completionAt}}">
+      <label class="help">
+        <i class="fas fa-question-circle"></i>
+        <span class="tooltip">{{ localize 'C5ETRAINING.ProgressInputHelpText' }}</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="progressionStyle">{{ localize "C5ETRAINING.ProgressionType" }}</label>
+    <div class="form-fields">
+      <select name="progressionStyle" id="progressionStyleInput">
+        <option value="FIXED" {{#if (eq item.progressionStyle "FIXED")}} selected {{/if}}>{{ localize "C5ETRAINING.ProgressionStyleFixed" }}</option>
+        <option value="ABILITY" {{#if (eq item.progressionStyle "ABILITY")}} selected {{/if}}>{{ localize "C5ETRAINING.ProgressionStyleAbilityCheck" }}</option>
+        <option value="SKILL" {{#if (eq item.progressionStyle "SKILL")}} selected {{/if}}>{{ localize "C5ETRAINING.ProgressionStyleSkillCheck" }}</option>
+        <option value="TOOL" {{#if (eq item.progressionStyle "TOOL")}} selected {{/if}}>{{ localize "C5ETRAINING.ProgressionStyleToolCheck" }}</option>
+        <option value="MACRO" {{#if (eq item.progressionStyle "MACRO")}} selected {{/if}}>{{ localize "C5ETRAINING.ProgressionStyleMacro" }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- SHOW FOR FIXED VALUE -->
+  {{#if (eq item.progressionStyle "FIXED")}}
+    <h3 class="form-header">{{ localize "C5ETRAINING.ProgressionStyleFixedHeader" }}</h3>
+    <p class="notes">{{ localize "C5ETRAINING.ProgressionStyleFixedHelp" }}</p>
+    {{> "modules/5e-training/templates/partials/fixed.html" item=item}}
+  {{/if}}
+
+  <!-- SHOW FOR ABILITY -->
+  {{#if (eq item.progressionStyle "ABILITY")}}
+    <h3 class="form-header">{{ localize "C5ETRAINING.ProgressionStyleAbilityCheckHeader" }}</h3>
+    <p class="notes">{{ localize "C5ETRAINING.ProgressionStyleAbilityCheckHelp" }}</p>
+    {{> "modules/5e-training/templates/partials/ability.html" item=item}}
+  {{/if}}
+
+  <!-- SHOW FOR SKILL -->
+  {{#if (eq item.progressionStyle "SKILL")}}
+    <h3 class="form-header">{{ localize "C5ETRAINING.ProgressionStyleSkillCheckHeader" }}</h3>
+    <p class="notes">{{ localize "C5ETRAINING.ProgressionStyleSkillCheckHelp" }}</p>
+    {{> "modules/5e-training/templates/partials/skill.html" item=item}}
+  {{/if}}
+
+  <!-- SHOW FOR TOOL -->
+  {{#if (eq item.progressionStyle "TOOL")}}
+    <h3 class="form-header">{{ localize "C5ETRAINING.ProgressionStyleToolCheckHeader" }}</h3>
+    <p class="notes">{{ localize "C5ETRAINING.ProgressionStyleToolCheckHelp" }}</p>
+    {{> "modules/5e-training/templates/partials/tool.html" item=item}}
+  {{/if}}
+
+  <!-- SHOW FOR MACRO -->
+  {{#if (eq item.progressionStyle "MACRO")}}
+    <h3 class="form-header">{{ localize "C5ETRAINING.ProgressionStyleMacroHeader" }}</h3>
+    <p class="notes">{{ localize "C5ETRAINING.ProgressionStyleMacroHelp" }}</p>
+    {{> "modules/5e-training/templates/partials/macro.html" item=item}}
+  {{/if}}
+
+  <footer>
+    <button id="crash-create-item"><i class='fas fa-check'></i> {{ localize "C5ETRAINING.SaveTrackedItem" }}</button>
+  </footer>
+
+</form>
