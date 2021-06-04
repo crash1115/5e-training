@@ -1,3 +1,7 @@
+# Version 0.6.1
+- Compatibility with Foundry 0.8.6
+- Fixed logic that determines which users can perform migrations on which actors. Asst / GM's should be able to do all actors now, and Trusted/Players should be able to do the ones they own.
+
 # Version 0.6.0 (Foundry 0.8.x)
 
 NOTICE: This version will prompt you to perform a migration that will automatically update all of the items tracked on your actors to a new data structure. Please back up your data before installing this update. If the migration fails for any reason, please reach out to me and I can try to help you fix anything that breaks.
