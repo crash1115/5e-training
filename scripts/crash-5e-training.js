@@ -233,11 +233,12 @@ async function migrateAllActors(){
   for(var i = 0; i < game.actors.contents.length; i++){
     let a = game.actors.contents[i];
 
-    // If the user doesn't own the actor, skip it
+    // If the user can't update the actor, skip it
     let currentUserId = game.userId;
     let currentUserOwnsActor = a.data.permission[currentUserId] === 3;
-    if(!currentUserOwnsActor){
-      console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);
+    let currentUserIsGm = game.user.isGM;
+    if(!currentUserOwnsActor && !currentUserIsGm){
+      // console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);
       continue;
     }
 
@@ -250,7 +251,7 @@ async function migrateAllActors(){
         allTrainingItems[j].updateMe = true;
         allTrainingItems[j].schemaVersion = 0;
         itemsToUpdate++;
-      } else if(allTrainingItems[j].SchemVersion < LATEST_MIGRATION){ // If the latest is newer, gotta update
+      } else if(allTrainingItems[j].schemaVersion < LATEST_MIGRATION){ // If the latest is newer, gotta update
         allTrainingItems[j] = true;
         itemsToUpdate++;
       }
