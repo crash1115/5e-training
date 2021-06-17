@@ -1,5 +1,5 @@
 # Version 0.6.1
-- Compatibility with Foundry 0.8.6
+- Compatibility with Foundry 0.8.7
 - Fixed logic that determines which users can perform migrations on which actors. Asst / GM's should be able to do all actors now, and Trusted/Players should be able to do the ones they own.
 
 # Version 0.6.0 (Foundry 0.8.x)
