@@ -1,3 +1,8 @@
+# Version 0.6.2
+- Compatibility with Foundry 0.8.8
+- Fixed a bug causing newly created Monster Blocks sheets to be unable to expand properly
+- Fixed a bug causing Macro activities to not save macro names
+
 # Version 0.6.1
 - Compatibility with Foundry 0.8.7
 - Fixed logic that determines which users can perform migrations on which actors. Asst / GM's should be able to do all actors now, and Trusted/Players should be able to do the ones they own.

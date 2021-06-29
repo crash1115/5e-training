@@ -219,8 +219,9 @@ function adjustSheetWidth(app){
   let currentWidth = app.position.width;
   let defaultWidth = app.options.width;
   let sheetIsSmaller = currentWidth < (defaultWidth + game.settings.get("5e-training", "extraSheetWidth"));
+  let sheetIsMonsterBlock = app.options.classes.includes("monsterblock");
 
-  return settingEnabled && sheetHasTab && sheetIsSmaller;
+  return settingEnabled && sheetHasTab && sheetIsSmaller && !sheetIsMonsterBlock;
 }
 
 async function migrateAllActors(){
