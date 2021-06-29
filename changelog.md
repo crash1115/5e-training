@@ -1,6 +1,7 @@
 # Version 0.6.2
 - Compatibility with Foundry 0.8.8
 - Fixed a bug causing newly created Monster Blocks sheets to be unable to expand properly
+- Fixed a bug causing Macro activities to not save macro names
 
 # Version 0.6.1
 - Compatibility with Foundry 0.8.7
