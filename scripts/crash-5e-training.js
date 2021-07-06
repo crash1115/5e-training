@@ -382,7 +382,7 @@ export function crashTNT(){
   function getActivitiesForActor(actorName){
     let actor = game.actors.getName(actorName);
     if(actor){
-      let allItems = actor.getFlag("5e-training", "trainingItems");
+      let allItems = actor.getFlag("5e-training", "trainingItems") || [];
       return allItems;
     } else {
       ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning"));
@@ -395,11 +395,10 @@ export function crashTNT(){
       ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning"));
       return;
     }
-    let allItems = actor.getFlag("5e-training", "trainingItems");
+    let allItems = actor.getFlag("5e-training", "trainingItems") || [];
     let itemIdx = allItems.findIndex((i) => i.name === itemName);
     if(itemIdx < 0){
       ui.notifications.warn( game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") + ": " + itemName );
-      return;
     } else {
       return allItems[itemIdx];
     }

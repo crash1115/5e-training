@@ -1,3 +1,7 @@
+# Version 0.6.3
+- Fixed a bug in `CrashTNT.getActivitiesForActor` that caused it to throw an error when used with actors with no activities
+- Fixed a bug in `CrashTNT.getActivity` that caused it to throw an error when used with actors with no activities
+
 # Version 0.6.2
 - Compatibility with Foundry 0.8.8
 - Fixed a bug causing newly created Monster Blocks sheets to be unable to expand properly
