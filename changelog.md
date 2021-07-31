@@ -1,3 +1,6 @@
+# Version 0.6.4
+- Fixed a bug where current progress couldn't be set to zero in the tracked item edit dialog.
+
 # Version 0.6.3
 - Fixed a bug in `CrashTNT.getActivitiesForActor` that caused it to throw an error when used with actors with no activities
 - Fixed a bug in `CrashTNT.getActivity` that caused it to throw an error when used with actors with no activities
