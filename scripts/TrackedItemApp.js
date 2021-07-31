@@ -67,7 +67,7 @@ export default class TrackedItemApp extends FormApplication {
 
     html.on("change", "#progressInput", ev => {
       let newThing = parseInt($(ev.currentTarget).val());
-      if(!newThing || isNaN(newThing) || (newThing <= 0) || (newThing > this.object.item.completionAt)){
+      if((newThing == null) || isNaN(newThing) || (newThing < 0) || (newThing > this.object.item.completionAt)){
         ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InputErrorProgress"));
         this.render();
       } else {
