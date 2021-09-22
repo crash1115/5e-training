@@ -1,3 +1,6 @@
+# Version 0.6.5
+- Updated Korean translations
+
 # Version 0.6.4
 - Fixed a bug where current progress couldn't be set to zero in the tracked item edit dialog.
 
