@@ -183,10 +183,10 @@ export default class CrashTrackingAndTraining {
         r = await actor.rollAbilityTest(thisItem.ability);
       }
       if(r){
-        let rollMode = CrashTrackingAndTraining.getrollmodeString(r.options.advantageMode);
-        let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
+        let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName;
         // Increase progress
-        thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, r._total);
+        let progressChange = CrashTrackingAndTraining.getRollResult(r);
+        thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
         // Log item completion
         CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
         // Update flags and actor
@@ -205,10 +205,10 @@ export default class CrashTrackingAndTraining {
         r = await actor.rollSkill(thisItem.skill);
       }
       if(r){
-        let rollMode = CrashTrackingAndTraining.getrollmodeString(r.options.advantageMode);
-        let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName + " (" + rollMode + ")";
+        let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName;
         // Increase progress
-        thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, r._total);
+        let progressChange = CrashTrackingAndTraining.getRollResult(r);
+        thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
         // Log item completion
         CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
         // Update flags and actor
@@ -230,10 +230,10 @@ export default class CrashTrackingAndTraining {
           r = await tool.rollToolCheck();
         }
         if(r){
-          let rollMode = CrashTrackingAndTraining.getrollmodeString(r.options.advantageMode);
-          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName + " (" + rollMode + ")";
+          let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName;
           // Increase progress
-          thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, r._total);
+          let progressChange = CrashTrackingAndTraining.getToolRollResult(r);
+          thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
           // Log item completion
           CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
           // Update flags and actor
@@ -315,6 +315,31 @@ export default class CrashTrackingAndTraining {
     return item;
   }
 
+  // Gets the result of the roll. Necessary for compatibility with BR, which returns CustomItemRoll objects.
+  static getRollResult(roll){
+    let result;
+    if(game.modules.get("betterrolls5e")?.active){
+      // result = roll.entries.filter(entry => entry.type=="multiroll")[0].entries.map(x => x.total);
+      result = roll.entries.filter(entry => entry.type=="multiroll")[0].entries[0].total;
+    } else {
+      result = roll._total;
+    }
+    return parseInt(result);
+  }
+
+  // Gets the result of the roll. Necessary for compatibility with BR, which returns CustomItemRoll objects.
+  // This is slightly different for tools because of how the object gets attached to the roll.
+  static getToolRollResult(roll){
+    let result;
+    if(game.modules.get("betterrolls5e")?.active){
+      // result = roll.BetterRoll.entries.filter(entry => entry.type=="multiroll")[0].entries.map(x => x.total);
+      result = roll.BetterRoll.entries.filter(entry => entry.type=="multiroll")[0].entries[0].total;
+    } else {
+      result = roll._total;
+    }
+    return parseInt(result);
+  }
+
   // Checks for completion of an item and alerts if it's done
   static async checkCompletion(actor, item, alreadyCompleted){
     if(alreadyCompleted){ return; }
@@ -379,16 +404,6 @@ export default class CrashTrackingAndTraining {
     }
 
     return rollType;
-  }
-
-  // Takes in the die roll string and returns whether it was made at adv/disadv/normal
-  static getrollmodeString(type){
-    let lookup = {
-      "-1": game.i18n.localize("C5ETRAINING.Disadvantage"),
-      "0": game.i18n.localize("C5ETRAINING.Normal"),
-      "1": game.i18n.localize("C5ETRAINING.Advantage")
-    }
-    return lookup[type] || "???";
   }
 
   // Gets and formats an array of tools the actor has in their inventory. Used for selection menus
