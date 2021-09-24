@@ -1,3 +1,6 @@
+# Version 0.6.6
+- Restores compatibility with Better Rolls. Shift/Ctrl for adv/disadvantage do not work at present, but I wanted to get at least basic functionality restored because people were losing data.
+
 # Version 0.6.5
 - Updated Korean translations
 
