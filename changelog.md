@@ -1,3 +1,7 @@
+# Version 0.6.7
+- Fixing incompatibilities when BR and Midi are both being used simultaneously
+- Fixed a bug where imported items would get lost in the void if they were in a category when they were exported
+
 # Version 0.6.6
 - Restores compatibility with Better Rolls. Shift/Ctrl for adv/disadvantage do not work at present, but I wanted to get at least basic functionality restored because people were losing data.
 

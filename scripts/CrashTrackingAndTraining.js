@@ -176,12 +176,8 @@ export default class CrashTrackingAndTraining {
     if (rollType === "ABILITY"){
       let abilityName = CONFIG.DND5E.abilities[thisItem.ability];
       // Roll to increase progress
-      let r;
-      if (game.settings.get("5e-training", "gmOnlyMode")){
-        r = await actor.rollAbilityTest(thisItem.ability, {rollMode : "gmroll"});
-      } else {
-        r = await actor.rollAbilityTest(thisItem.ability);
-      }
+      let options = CrashTrackingAndTraining.getRollOptions();
+      let r = await actor.rollAbilityTest(thisItem.ability, options);
       if(r){
         let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName;
         // Increase progress
@@ -198,12 +194,8 @@ export default class CrashTrackingAndTraining {
     else if (rollType === "SKILL"){
       let abilityName = CONFIG.DND5E.skills[thisItem.skill];
       // Roll to increase progress
-      let r;
-      if (game.settings.get("5e-training", "gmOnlyMode")){
-        r = await actor.rollSkill(thisItem.skill, {rollMode : "gmroll"});
-      } else {
-        r = await actor.rollSkill(thisItem.skill);
-      }
+      let options = CrashTrackingAndTraining.getRollOptions();
+      let r = await actor.rollSkill(thisItem.skill, options);
       if(r){
         let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName;
         // Increase progress
@@ -223,12 +215,8 @@ export default class CrashTrackingAndTraining {
       if(tool){
         let toolName = tool.name;
         // Roll to increase progress
-        let r;
-        if (game.settings.get("5e-training", "gmOnlyMode")){
-          r = await tool.rollToolCheck({rollMode : "gmroll"});
-        } else {
-          r = await tool.rollToolCheck();
-        }
+        let options = CrashTrackingAndTraining.getRollOptions();
+        let r = await tool.rollToolCheck(options);
         if(r){
           let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName;
           // Increase progress
@@ -265,6 +253,32 @@ export default class CrashTrackingAndTraining {
         ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.MacroNotFoundWarning") +": " + macroName);
       }
     }
+  }
+
+  // Figures out what options we need to tack onto any rolls we do for things to work as expected
+  static getRollOptions(){
+    let options = {};
+    if (game.settings.get("5e-training", "gmOnlyMode")){ options.rollMode = "gmroll"; }; //GM Only Mode
+    if (!game.modules.get("midi-qol")?.active){ options.vanilla = true; }; //Handles BR. Want it on in all cases except when midi is enabled
+    return options
+  }
+
+  // Gets the result of the roll. Necessary for compatibility with BR, which returns CustomItemRoll objects.
+  static getRollResult(roll){
+    let result = roll._total;
+    return parseInt(result);
+  }
+
+  // Gets the result of the roll. Necessary for compatibility with BR, which returns CustomItemRoll objects.
+  // This is slightly different for tools because of how the object gets attached to the roll.
+  static getToolRollResult(roll){
+    let result;
+    if(roll.BetterRoll){
+      result = roll.BetterRoll.entries.filter(entry => entry.type=="multiroll")[0].entries[0].total;
+    } else {
+      result = roll._total;
+    }
+    return parseInt(result);
   }
 
   // Calculates the progress value of an item and logs the change to the progress
@@ -313,31 +327,6 @@ export default class CrashTrackingAndTraining {
 
     item.progress = newProgress;
     return item;
-  }
-
-  // Gets the result of the roll. Necessary for compatibility with BR, which returns CustomItemRoll objects.
-  static getRollResult(roll){
-    let result;
-    if(game.modules.get("betterrolls5e")?.active){
-      // result = roll.entries.filter(entry => entry.type=="multiroll")[0].entries.map(x => x.total);
-      result = roll.entries.filter(entry => entry.type=="multiroll")[0].entries[0].total;
-    } else {
-      result = roll._total;
-    }
-    return parseInt(result);
-  }
-
-  // Gets the result of the roll. Necessary for compatibility with BR, which returns CustomItemRoll objects.
-  // This is slightly different for tools because of how the object gets attached to the roll.
-  static getToolRollResult(roll){
-    let result;
-    if(game.modules.get("betterrolls5e")?.active){
-      // result = roll.BetterRoll.entries.filter(entry => entry.type=="multiroll")[0].entries.map(x => x.total);
-      result = roll.BetterRoll.entries.filter(entry => entry.type=="multiroll")[0].entries[0].total;
-    } else {
-      result = roll._total;
-    }
-    return parseInt(result);
   }
 
   // Checks for completion of an item and alerts if it's done
@@ -503,7 +492,7 @@ export default class CrashTrackingAndTraining {
 
               for(var i = 0; i < importedItems.length; i++){
                 // Unset missing category ID's
-                if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) > -1)){
+                if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) === -1)){
                   importedItems[i].category = "";
                 }
               }
@@ -531,7 +520,7 @@ export default class CrashTrackingAndTraining {
                 }
 
                 // Unset missing category ID's
-                if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) > -1)){
+                if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) === -1)){
                   importedItems[i].category = "";
                 }
               }
