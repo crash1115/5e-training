@@ -9,7 +9,7 @@
 .crash-audit-log .action-table table {
 	text-align: left;
 	border: none;
-	background-color: none;
+	background-color: transparent;
 }
 
 .crash-audit-log .action-table table tr th,
