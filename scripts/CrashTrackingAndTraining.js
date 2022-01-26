@@ -6,7 +6,7 @@ import Category from "./Category.js";
 export default class CrashTrackingAndTraining {
 
   static async addCategory(actorId){
-    console.log("Crash's Tracking & Training (5e) | New Category excuted!");
+    // console.log("Crash's Tracking & Training (5e) | New Category excuted!");
 
     let actor = game.actors.get(actorId);
     let data = {
@@ -17,7 +17,7 @@ export default class CrashTrackingAndTraining {
   }
 
   static async editCategory(actorId, categoryId){
-    console.log("Crash's Tracking & Training (5e) | Edit Category excuted!");
+    // console.log("Crash's Tracking & Training (5e) | Edit Category excuted!");
 
     let actor = game.actors.get(actorId);
     let allCategories = actor.getFlag("5e-training","categories") || [];
@@ -30,7 +30,7 @@ export default class CrashTrackingAndTraining {
   }
 
   static async deleteCategory(actorId, categoryId){
-    console.log("Crash's Tracking & Training (5e) | Delete Category excuted!");
+    // console.log("Crash's Tracking & Training (5e) | Delete Category excuted!");
 
     // Set up some variables
     let actor = game.actors.get(actorId);
@@ -69,7 +69,7 @@ export default class CrashTrackingAndTraining {
   }
 
   static async addItem(actorId, DROPDOWN_OPTIONS){
-    console.log("Crash's Tracking & Training (5e) | New Item excuted!");
+    // console.log("Crash's Tracking & Training (5e) | New Item excuted!");
     let actor = game.actors.get(actorId);
     let allCategories = actor.getFlag("5e-training","categories") || [];
     let item = new TrackedItem;
@@ -84,7 +84,7 @@ export default class CrashTrackingAndTraining {
   }
 
   static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS){
-    console.log("Crash's Tracking & Training (5e) | Edit Downtime Activity excuted!");
+    // console.log("Crash's Tracking & Training (5e) | Edit Downtime Activity excuted!");
     let actor = game.actors.get(actorId);
     let allCategories = actor.getFlag("5e-training","categories") || [];
     let allItems = actor.getFlag("5e-training", "trainingItems") || [];
@@ -100,7 +100,7 @@ export default class CrashTrackingAndTraining {
   }
 
   static async deleteFromSheet(actorId, itemId){
-    console.log("Crash's Tracking & Training (5e) | Delete Downtime Activity excuted!");
+    // console.log("Crash's Tracking & Training (5e) | Delete Downtime Activity excuted!");
 
     // Set up some variables
     let actor = game.actors.get(actorId);
@@ -129,7 +129,7 @@ export default class CrashTrackingAndTraining {
   }
 
   static async updateItemProgressFromSheet(actorId, itemId, value){
-      console.log("Crash's Tracking & Training (5e) | Progression Override excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Progression Override excuted!");
 
       // Set up some variables
       let actor = game.actors.get(actorId);
@@ -163,7 +163,7 @@ export default class CrashTrackingAndTraining {
   }
 
   static async progressItem(actorId, itemId){
-    console.log("Crash's Tracking & Training (5e) | Progress Downtime Activity excuted!");
+    // console.log("Crash's Tracking & Training (5e) | Progress Downtime Activity excuted!");
 
     // Set up some variables
     let actor = game.actors.get(actorId);
@@ -355,7 +355,7 @@ export default class CrashTrackingAndTraining {
       }
 
       if (sendIt){
-        console.log("Crash's Tracking & Training (5e) | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedATrackedItem"));
+        // console.log("Crash's Tracking & Training (5e) | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedATrackedItem"));
         let chatHtml = await renderTemplate('modules/5e-training/templates/completion-message.html', {actor:actor, activity:item});
         let chatObj = {content: chatHtml};
         if(game.settings.get("5e-training", "gmOnlyMode")){

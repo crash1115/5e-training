@@ -13,10 +13,9 @@ Check out the [wiki](https://github.com/crash1115/5e-training/wiki) for instruct
 Contact me on Discord (CRASH1115#2944) to chat, or create an issue right here on GitHub.
 
 ## Attributions and Special Thanks
-- Thanks to platypus_pi for help with English translations
 - Thanks to KLO#1490 for Korean translations
-- Thanks to hmqgg#5775 for Chinese translations
 - Thanks to MS-PBS for Spanish translations
+- Thanks Varriount for some CSS fixes
 
 ## License
 - This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).

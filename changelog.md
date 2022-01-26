@@ -1,3 +1,9 @@
+# Version 0.6.8
+- Fixed some small CSS issues (credit Varriount)
+- Get rid of some log spam
+- Remove Chinese localization, as it lives in its own repo (credit Hmqgg)
+- Confirmed v9 compatibility
+
 # Version 0.6.7
 - Fixing incompatibilities when BR and Midi are both being used simultaneously
 - Fixed a bug where imported items would get lost in the void if they were in a category when they were exported

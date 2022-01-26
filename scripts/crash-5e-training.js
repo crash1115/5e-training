@@ -52,14 +52,14 @@ async function addTrainingTab(app, html, data) {
     // NEW CATEGORY
     html.find('.crash-training-new-category').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Create Category excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Create Category excuted!");
       await CrashTrackingAndTraining.addCategory(actor.id);
     });
 
     // EDIT CATEGORY
     html.find('.crash-training-edit-category').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Edit Category excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Edit Category excuted!");
       let fieldId = event.currentTarget.id;
       let categoryId = fieldId.replace('crash-edit-category-','');
       await CrashTrackingAndTraining.editCategory(actor.id, categoryId);
@@ -68,7 +68,7 @@ async function addTrainingTab(app, html, data) {
     // DELETE CATEGORY
     html.find('.crash-training-delete-category').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Delete Category excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Delete Category excuted!");
       let fieldId = event.currentTarget.id;
       let categoryId = fieldId.replace('crash-delete-category-','');
       await CrashTrackingAndTraining.deleteCategory(actor.id, categoryId);
@@ -77,14 +77,14 @@ async function addTrainingTab(app, html, data) {
     // ADD NEW DOWNTIME ACTIVITY
     html.find('.crash-training-add').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Create Item excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Create Item excuted!");
       await CrashTrackingAndTraining.addItem(actor.id, DROPDOWN_OPTIONS);
     });
 
     // EDIT DOWNTIME ACTIVITY
     html.find('.crash-training-edit').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Edit Item excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Edit Item excuted!");
       let allItems = actor.getFlag("5e-training","trainingItems") || [];
       let itemId = event.currentTarget.id.replace('crash-edit-','');
       if(!itemId){
@@ -97,7 +97,7 @@ async function addTrainingTab(app, html, data) {
     // DELETE DOWNTIME ACTIVITY
     html.find('.crash-training-delete').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Delete Item excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Delete Item excuted!");
       let allItems = actor.getFlag("5e-training","trainingItems") || [];
       let itemId = event.currentTarget.id.replace('crash-delete-','');
       if(!itemId){
@@ -110,7 +110,7 @@ async function addTrainingTab(app, html, data) {
     // EDIT PROGRESS VALUE
     html.find('.crash-training-override').change(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Progress Override excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Progress Override excuted!");
       let field = event.currentTarget;
       let itemId = event.currentTarget.id.replace('crash-override-','');
       if(!itemId){
@@ -130,7 +130,7 @@ async function addTrainingTab(app, html, data) {
     // ROLL TO TRAIN
     html.find('.crash-training-roll').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Roll Item excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Roll Item excuted!");
       let itemId = event.currentTarget.id.replace('crash-roll-','');
       if(!itemId){
         ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),{permanent:true});
@@ -144,7 +144,7 @@ async function addTrainingTab(app, html, data) {
     // dnd5e/module/actor/sheets/base.js
     html.find('.crash-training-toggle-desc').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Toggle Acvtivity Info excuted!");
+      // console.log("Crash's Tracking & Training (5e) | Toggle Acvtivity Info excuted!");
 
       // Set up some variables
       let fieldId = event.currentTarget.id;
@@ -189,7 +189,7 @@ async function addTrainingTab(app, html, data) {
     // OPEN AUDIT LOG
     html.find('.crash-training-audit').click(async (event) => {
       event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | GM Audit excuted!");
+      // console.log("Crash's Tracking & Training (5e) | GM Audit excuted!");
       new AuditLog(actor).render(true);
     });
 
@@ -239,7 +239,7 @@ async function migrateAllActors(){
     let currentUserOwnsActor = a.data.permission[currentUserId] === 3;
     let currentUserIsGm = game.user.isGM;
     if(!currentUserOwnsActor && !currentUserIsGm){
-      // console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);
+      console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);
       continue;
     }
 
@@ -338,7 +338,7 @@ Hooks.on(`renderActorSheet`, (app, html, data) => {
 });
 
 Hooks.on(`CrashTrainingTabReady`, (app, html, data) => {
-  console.log("Crash's Tracking & Training (5e) | Downtime tab ready!");
+  // console.log("Crash's Tracking & Training (5e) | Downtime tab ready!");
 });
 
 Hooks.on(`ready`, () => {
