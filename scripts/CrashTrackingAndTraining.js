@@ -259,7 +259,7 @@ export default class CrashTrackingAndTraining {
   static getRollOptions(){
     let options = {};
     if (game.settings.get("5e-training", "gmOnlyMode")){ options.rollMode = "gmroll"; }; //GM Only Mode
-    if (!game.modules.get("midi-qol")?.active){ options.vanilla = true; }; //Handles BR. Want it on in all cases except when midi is enabled
+    if (!game.modules.get("midi-qol")?.active || isNewerVersion(game.modules.get("midi-qol").data.version, "0.9.25")) {options.vanilla = true} //Handles BR. Want it on in all cases except when midi is enabled
     return options
   }
 
