@@ -1,3 +1,7 @@
+# Version 0.6.9
+- Restrict module to dnd5e system (credit MrVauxs)
+- Fix compatibility issues with MidiQOL and BetterRolls (credit tposney)
+
 # Version 0.6.8
 - Fixed some small CSS issues (credit Varriount)
 - Get rid of some log spam

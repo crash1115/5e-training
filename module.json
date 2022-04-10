@@ -6,7 +6,8 @@
   "url": "https://github.com/crash1115/5e-training",
   "readme": "https://github.com/crash1115/5e-training/blob/master/README.md",
   "bugs": "https://github.com/crash1115/5e-training/issues",
-  "version": "0.6.8",
+  "version": "0.6.9",
+  "system": ["dnd5e"],
   "minimumCoreVersion": "0.8.2",
   "compatibleCoreVersion": "9",
   "minimumSystemVersion": "1.3.0",
@@ -37,5 +38,5 @@
     }
   ],
   "manifest": "https://raw.githubusercontent.com/crash1115/5e-training/master/module.json",
-  "download": "https://github.com/crash1115/5e-training/releases/download/v0.6.8/5e-training.zip"
+  "download": "https://github.com/crash1115/5e-training/releases/download/v0.6.9/5e-training.zip"
 }
