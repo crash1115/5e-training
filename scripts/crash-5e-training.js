@@ -25,7 +25,7 @@ async function addTrainingTab(app, html, data) {
   if (showTrainingTab){
 
     // Get our actor and our flags
-    let actor = game.actors.contents.find(a => a.data._id === data.actor._id);
+    let actor = game.actors.contents.find(a => a._id === data.actor._id);
     let trainingItems = await actor.getFlag("5e-training", "trainingItems");
 
     // Update the nav menu
@@ -214,8 +214,8 @@ async function addTrainingTab(app, html, data) {
 // we have training enabled, this returns true.
 function adjustSheetWidth(app){
   let settingEnabled = !!game.settings.get("5e-training", "extraSheetWidth");
-  let sheetHasTab = ((app.object.data.type === 'npc') && game.settings.get("5e-training", "enableTrainingNpc")) ||
-                    ((app.object.data.type === 'character') && game.settings.get("5e-training", "enableTraining"));
+  let sheetHasTab = ((app.object.type === 'npc') && game.settings.get("5e-training", "enableTrainingNpc")) ||
+                    ((app.object.type === 'character') && game.settings.get("5e-training", "enableTraining"));
   let currentWidth = app.position.width;
   let defaultWidth = app.options.width;
   let sheetIsSmaller = currentWidth < (defaultWidth + game.settings.get("5e-training", "extraSheetWidth"));
@@ -236,7 +236,7 @@ async function migrateAllActors(){
 
     // If the user can't update the actor, skip it
     let currentUserId = game.userId;
-    let currentUserOwnsActor = a.data.permission[currentUserId] === 3;
+    let currentUserOwnsActor = a.permission[currentUserId] === 3;
     let currentUserIsGm = game.user.isGM;
     if(!currentUserOwnsActor && !currentUserIsGm){
       console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);

@@ -18,7 +18,7 @@ export function registerHelpers(){
     } else if(item.progressionStyle === "ABILITY" ){
       formatted = CONFIG.DND5E.abilities[item.ability];
     } else if(item.progressionStyle === "SKILL" ){
-      formatted = CONFIG.DND5E.skills[item.skill];
+      formatted = CONFIG.DND5E.skills[item.skill].label;
     } else if(item.progressionStyle === "TOOL" ){
       let toolId = item.tool;
       let tool = actor.items.filter(item => { return item._id === toolId })[0];

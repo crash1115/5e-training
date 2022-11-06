@@ -1,3 +1,8 @@
+# Version 1.0.0 (Foundry v10)
+- Compatibility update for Foundry v10
+- Importing has been streamlined and now also handles categories
+- As of this release I will no longer be officially maintaing this module. You're welcome to keep submitting bug reports, and I'll try to fix issues if/when I can, but feature requests that haven't been gotten to by now will likely never get done. Thanks all for sticking with me this far, really appreciate all the support.
+
 # Version 0.6.9
 - Restrict module to dnd5e system (credit MrVauxs)
 - Fix compatibility issues with MidiQOL and BetterRolls (credit tposney)
