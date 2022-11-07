@@ -25,8 +25,7 @@
   "C5ETRAINING.AdjustProgressValue": "Adjust Progress",
   "C5ETRAINING.Roll": "Roll",
   "C5ETRAINING.ToolNotFoundWarning": "Selected tool not found. Please edit the item and select a new one.",
-
-  "C5ETRAINING.ProgressionStyleFixed": "Fixed Value",
+ 
   "C5ETRAINING.MacroNotFoundWarning": "Couldn't find macro with name",
 
   "C5ETRAINING.CompletedATrackedItem": "completed a tracked item.",
@@ -150,7 +149,6 @@
   "C5ETRAINING.ProgressionStyleAbilityCheck": "Ability Check",
   "C5ETRAINING.ProgressionStyleSkillCheck": "Skill Check",
   "C5ETRAINING.ProgressionStyleToolCheck": "Tool Check",
-  "C5ETRAINING.ProgressionStyleMacro": "Macro",
 
   "C5ETRAINING.ProgressionStyleFixedHeader": "Details - Fixed Value",
   "C5ETRAINING.ProgressionStyleAbilityCheckHeader": "Details - Ability Check",
@@ -176,11 +174,9 @@
   "C5ETRAINING.CheckTypeColumnHeader": "Type",
   "C5ETRAINING.ProgressColumnHeader": "Progress",
   "C5ETRAINING.ToggleInfo": "Toggle Info",
-  "C5ETRAINING.AdjustProgressValue": "Adjust Progress",
 
   "C5ETRAINING.EditItem": "Edit Item",
   "C5ETRAINING.EditCategory": "Edit Category",
-  "C5ETRAINING.DeleteCategory": "Delete Category",
 
   "C5ETRAINING.None": "None",
   "C5ETRAINING.Delete": "Delete",
@@ -199,8 +195,8 @@
   "C5ETRAINING.ExportTrackedItemsTooltip": "Export tracked items to a file",
   "C5ETRAINING.ImportTrackedItemsTooltip": "Import tracked items from a file",
 
-  "C5ETRAINING.ExportNoTrackedItems": "No items to export. Cancelling export.",
-  "C5ETRAINING.ImportNoTrackedItems": "No items to import. Cancelling import.",
+  "C5ETRAINING.ExportNoTrackedItems": "No items or categories to export. Cancelling export.",
+  "C5ETRAINING.ImportNoTrackedItems": "No items or categories to import. Cancelling import.",
   "C5ETRAINING.ImportNoFile": "No file selected. Cancelling import.",
 
   "C5ETRAINING.ImportTypeSelectionTitle": "How should we import?",
@@ -209,9 +205,9 @@
   "C5ETRAINING.ImportTypeSelectionOverwrite": "Replace",
   "C5ETRAINING.ImportTypeSelectionCombine": "Combine",
 
-  "C5ETRAINING.ImportDupeWarningTitle": "Possible Duplicate Items",
-  "C5ETRAINING.ImportDupeWarningText": "We found some things during the import that we thought might be duplicate items. Instead of just deleting whichever one we felt like, we kept them both so you can figure out which to keep.",
-  "C5ETRAINING.ImportDupeWarningConfirm": "Got it, thanks!",
+  "C5ETRAINING.ImportOldWarningTitle": "Could Not Import Categories",
+  "C5ETRAINING.ImportOldWarningText": "The data you imported is from an older version of the module that didn't support the export of category data along with items. We imported it for you anyway, but all items have been placed into the Uncategorized category.",
+  "C5ETRAINING.ImportOldWarningConfirm": "Got it, thanks!",
 
   "C5ETRAINING.ImportComplete": "Import Complete",
 

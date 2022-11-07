@@ -1,3 +1,6 @@
+## No Longer Being Maintained
+Due to time constraints, I'm no longer able to keep updating this module with any amount of frequency. You're welcome to keep using it; there's a decent chance that it'll get updated from time to time because my group uses it, but I won't be keeping up with feature requests or non-critical bug reports at the level that'd be expected for something actively being maintained. Thanks for sticking with me on this wild ride, it's been a lot of fun!
+
 ![Header Image](https://raw.githubusercontent.com/crash1115/5e-training/master/media/cover.png)
 
 ![GitHub All Releases](https://img.shields.io/github/downloads/crash1115/5e-training/total) ![GitHub Releases](https://img.shields.io/github/downloads/crash1115/5e-training/latest/total) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/crash1115/5e-training?label=latest%20version)
@@ -10,7 +13,7 @@ Tracking & Training is a module for the dnd5e system in Foundry VTT that adds a 
 Check out the [wiki](https://github.com/crash1115/5e-training/wiki) for instructions, screenshots, sample macros, compatibility info, API documentation, and more!
 
 ## Got Questions? Find a Bug?
-Contact me on Discord (CRASH1115#2944) to chat, or create an issue right here on GitHub.
+Create an issue right here on GitHub. If it's a critical/breaking bug, I'll try to fix it when I can. Feature requests likely won't be worked on unless I can find a use case for them with my groups that use this.
 
 ## Attributions and Special Thanks
 - Thanks to KLO#1490 for Korean translations

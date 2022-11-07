@@ -192,7 +192,7 @@ export default class CrashTrackingAndTraining {
 
     // Progression Type: Ability Check or DC - SKILL
     else if (rollType === "SKILL"){
-      let abilityName = CONFIG.DND5E.skills[thisItem.skill];
+      let abilityName = CONFIG.DND5E.skills[thisItem.skill].label;
       // Roll to increase progress
       let options = CrashTrackingAndTraining.getRollOptions();
       let r = await actor.rollSkill(thisItem.skill, options);
@@ -398,11 +398,11 @@ export default class CrashTrackingAndTraining {
   // Gets and formats an array of tools the actor has in their inventory. Used for selection menus
   static getActorTools(actorId){
     let actor = game.actors.get(actorId);
-    let items = actor.data.items;
+    let items = actor.items;
     let tools = items.filter(item => item.type === "tool");
     let formatted = tools.map(obj => {
       let newObj = {};
-      newObj.value = obj.data._id;
+      newObj.value = obj._id;
       newObj.label = obj.name;
       return newObj;
     });
@@ -446,13 +446,17 @@ export default class CrashTrackingAndTraining {
   static exportItems(actorId){
     let actor = game.actors.get(actorId);
     let allItems = actor.getFlag("5e-training","trainingItems") || [];
-    if(allItems.length < 1){
+    let allCategories = actor.getFlag("5e-training","categories") || [];
+    let dataToExport = {
+      items: allItems,
+      categories: allCategories
+    }
+    if(allItems.length < 1 && allCategories.length < 1){
       ui.notifications.info(game.i18n.localize("C5ETRAINING.ExportNoTrackedItems"));
       return;
     }
-    let jsonData = JSON.stringify(allItems);
-    saveDataToFile(jsonData, 'application/json', `tracked-items-backup.json`);
-    ui.notifications.info(game.i18n.localize("C5ETRAINING.ExportComplete"));
+    let jsonData = JSON.stringify(dataToExport);
+    saveDataToFile(jsonData, 'application/json', `${actor.id}-tracked-items-backup.json`);
   }
 
   static async importItems(actorId){
@@ -465,81 +469,164 @@ export default class CrashTrackingAndTraining {
         return;
       }
       readTextFromFile(file).then(async contents => {
-        let importedItems = JSON.parse(contents);
-        if(importedItems.length < 1){
+        let importedData = JSON.parse(contents);
+        let importedItems = [];
+        let importedCategories = [];
+
+        // Handles old format of export/import
+        if(importedData.items){
+          importedItems = importedData.items;
+          importedCategories = importedData.categories;
+        } else {
+          new Dialog({
+            title: game.i18n.localize("C5ETRAINING.ImportOldWarningTitle"),
+            content: `<p>${game.i18n.localize("C5ETRAINING.ImportOldWarningText")}</p>`,
+            buttons: {
+              ok: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.ImportOldWarningConfirm")},
+            },
+            default: "ok"
+          }).render(true);
+          console.log("Crash's Tracking & Training (5e) | Import detected old format.", importedData);
+          importedItems = importedData;
+        }
+
+        if(importedItems.length < 1 && importedCategories.legnth < 1){
           ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportNoTrackedItems"));
           return;
         }
-        let act = "quit";
-        let content = `<p><b>${game.i18n.localize("C5ETRAINING.ImportTypeSelectionOverwrite")}:</b> ${game.i18n.localize("C5ETRAINING.ImportTypeSelectionTextOverwrite")}</p>
-                       <p><b>${game.i18n.localize("C5ETRAINING.ImportTypeSelectionCombine")}:</b> ${game.i18n.localize("C5ETRAINING.ImportTypeSelectionTextCombine")}</p>`;
-        // Create dialog
-        new Dialog({
-          title: game.i18n.localize("C5ETRAINING.ImportTypeSelectionTitle"),
-          content: content,
-          buttons: {
-            overwrite: {icon: "<i class='fas fa-file-import'></i>", label: game.i18n.localize("C5ETRAINING.ImportTypeSelectionOverwrite"), callback: () => act = "overwrite"},
-            add: {icon: "<i class='fas fa-plus'></i>", label: game.i18n.localize("C5ETRAINING.ImportTypeSelectionCombine"), callback: () => act = "add"},
-            quit: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => act = "quit"},
-          },
-          default: "quit",
-          close: async (html) => {
-            if(act === "quit"){
-              return;
-            } else if (act === "overwrite") {
-              let currentCategories = actor.getFlag("5e-training","categories") || [];
-              let currentCategoryIds = currentCategories.map(c => c.id);
-
-              for(var i = 0; i < importedItems.length; i++){
-                // Unset missing category ID's
-                if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) === -1)){
-                  importedItems[i].category = "";
-                }
-              }
-              actor.setFlag("5e-training","trainingItems",importedItems);
-              await ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
-            } else if (act === "add") {
-              let currentItems = actor.getFlag("5e-training","trainingItems") || [];
-              let currentCategories = actor.getFlag("5e-training","categories") || [];
-              let currentIds = currentItems.map(i => i.id);
-              let currentNames = currentItems.map(i => i.name);
-              let currentCategoryIds = currentCategories.map(c => c.id);
-              let possibleDupes = false;
-
-              for(var i = 0; i < importedItems.length; i++){
-                // De-dupe ID's
-                if(currentIds.indexOf(importedItems[i].id) > -1){
-                  let matchedIdx = currentIds.indexOf(importedItems[i].id);
-                  importedItems[i].id = randomID();
-                  possibleDupes = true;
-                }
-
-                // Check for duplicate names
-                if(currentNames.indexOf(importedItems[i].name) > -1){
-                  possibleDupes = true;
-                }
-
-                // Unset missing category ID's
-                if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) === -1)){
-                  importedItems[i].category = "";
-                }
-              }
-              let combinedItems = currentItems.concat(importedItems);
-              await actor.setFlag("5e-training","trainingItems", combinedItems);
-              ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
-              if(possibleDupes){
-                new Dialog({
-                  title: game.i18n.localize("C5ETRAINING.ImportDupeWarningTitle"),
-                  content: `<p>${game.i18n.localize("C5ETRAINING.ImportDupeWarningText")}</p>`,
-                  buttons: {
-                    ok: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.ImportDupeWarningConfirm")},
-                  },
-                  default: "ok"
-                }).render(true);
+        
+        let currentCategories = actor.getFlag("5e-training","categories") || [];
+        let currentCategoryIds = currentCategories.map(c => c.id);
+        let currentCategoryNames = currentCategories.map(c => c.name);
+        let categoriesToDelete = [];
+        
+        for(var i=0; i < importedCategories.length; i++){
+          // De-dupe category ID's
+          if(currentCategoryIds.indexOf(importedCategories[i].id) > -1){
+            let newId = randomID()
+            let oldId = importedCategories[i].id;
+            for(var j = 0; j < importedItems.length; j++){
+              if(importedItems[j].category === oldId){
+                importedItems[j].category = newId;
               }
             }
+            importedCategories[i].id = newId;
           }
-        }).render(true);
+
+          // If category exists with same name, combine into one category
+          if(currentCategoryNames.indexOf(importedCategories[i].name) > -1){
+            let newCategory = importedCategories[i];
+            let existingCategory = currentCategories.filter(obj => obj.name === importedCategories[i].name)[0];
+            let existingCategoryId = existingCategory.id;
+            let importedCategoryId = newCategory.id;
+
+            for(var j = 0; j < importedItems.length; j++){
+              if(importedItems[j].category === importedCategoryId){
+                importedItems[j].category = existingCategoryId;
+              }
+            }
+            // Flag these categories for deletion
+            categoriesToDelete.push(importedCategoryId);
+          }
+
+        }
+
+        let currentItems = actor.getFlag("5e-training","trainingItems") || [];
+        let currentIds = currentItems.map(i => i.id);
+        let currentNames = currentItems.map(i => i.name);
+
+        for(var i = 0; i < importedItems.length; i++){
+          // De-dupe item ID's
+          if(currentIds.indexOf(importedItems[i].id) > -1){
+            importedItems[i].id = randomID();
+          }
+
+          // Unset missing category ID's
+          let importedCategoryIds = importedCategories.map(c => c.id);
+          let availableCategoryIds = currentCategoryIds.concat(importedCategoryIds)
+          if((availableCategoryIds.length === 0) || (availableCategoryIds.indexOf(importedItems[i].category) === -1)){
+            importedItems[i].category = "";
+          }
+        }
+
+        let combinedItems = currentItems.concat(importedItems);
+        let combinedCategories = currentCategories.concat(importedCategories).filter(c => !categoriesToDelete.includes(c.id));
+
+        await actor.setFlag("5e-training","categories", combinedCategories);
+        await actor.setFlag("5e-training","trainingItems", combinedItems);
+
+        ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
+
+       // let act = "quit";
+        //let content = `<p><b>${game.i18n.localize("C5ETRAINING.ImportTypeSelectionOverwrite")}:</b> ${game.i18n.localize("C5ETRAINING.ImportTypeSelectionTextOverwrite")}</p>
+        //               <p><b>${game.i18n.localize("C5ETRAINING.ImportTypeSelectionCombine")}:</b> ${game.i18n.localize("C5ETRAINING.ImportTypeSelectionTextCombine")}</p>`;
+        // Create dialog
+        // new Dialog({
+        //   title: game.i18n.localize("C5ETRAINING.ImportTypeSelectionTitle"),
+        //   content: content,
+        //   buttons: {
+        //     overwrite: {icon: "<i class='fas fa-file-import'></i>", label: game.i18n.localize("C5ETRAINING.ImportTypeSelectionOverwrite"), callback: () => act = "overwrite"},
+        //     add: {icon: "<i class='fas fa-plus'></i>", label: game.i18n.localize("C5ETRAINING.ImportTypeSelectionCombine"), callback: () => act = "add"},
+        //     quit: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => act = "quit"},
+        //   },
+        //   default: "quit",
+        //   close: async (html) => {
+        //     if(act === "quit"){
+        //       return;
+        //     } else if (act === "overwrite") {
+        //       let currentCategories = actor.getFlag("5e-training","categories") || [];
+        //       let currentCategoryIds = currentCategories.map(c => c.id);
+
+        //       for(var i = 0; i < importedItems.length; i++){
+        //         // Unset missing category ID's
+        //         if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) === -1)){
+        //           importedItems[i].category = "";
+        //         }
+        //       }
+        //       actor.setFlag("5e-training","trainingItems",importedItems);
+        //       await ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
+        //     } else if (act === "add") {
+        //       let currentItems = actor.getFlag("5e-training","trainingItems") || [];
+        //       let currentCategories = actor.getFlag("5e-training","categories") || [];
+        //       let currentIds = currentItems.map(i => i.id);
+        //       let currentNames = currentItems.map(i => i.name);
+        //       let currentCategoryIds = currentCategories.map(c => c.id);
+        //       let possibleDupes = false;
+
+        //       for(var i = 0; i < importedItems.length; i++){
+        //         // De-dupe ID's
+        //         if(currentIds.indexOf(importedItems[i].id) > -1){
+        //           let matchedIdx = currentIds.indexOf(importedItems[i].id);
+        //           importedItems[i].id = randomID();
+        //           possibleDupes = true;
+        //         }
+
+        //         // Check for duplicate names
+        //         if(currentNames.indexOf(importedItems[i].name) > -1){
+        //           possibleDupes = true;
+        //         }
+
+        //         // Unset missing category ID's
+        //         if((currentCategoryIds.length === 0) || (currentCategoryIds.indexOf(importedItems[i].category) === -1)){
+        //           importedItems[i].category = "";
+        //         }
+        //       }
+        //       let combinedItems = currentItems.concat(importedItems);
+        //       await actor.setFlag("5e-training","trainingItems", combinedItems);
+        //       ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
+        //       if(possibleDupes){
+        //         new Dialog({
+        //           title: game.i18n.localize("C5ETRAINING.ImportDupeWarningTitle"),
+        //           content: `<p>${game.i18n.localize("C5ETRAINING.ImportDupeWarningText")}</p>`,
+        //           buttons: {
+        //             ok: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.ImportDupeWarningConfirm")},
+        //           },
+        //           default: "ok"
+        //         }).render(true);
+        //       }
+        //     }
+        //   }
+        // }).render(true);
       });
     });
     input.trigger('click');
