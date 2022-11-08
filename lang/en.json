@@ -68,6 +68,8 @@
 
   "C5ETRAINING.SettingGmOnlyMode": "Enable GM Only Mode.",
   "C5ETRAINING.SettingGmOnlyModeHint": "Enabling this will put the module into GM Only mode. When this is on, the tab does not display on sheets for non-GM users, completion messages are automatically whispered to GM rather than displayed publicly, and roll dialogs will automatically have the Private GM Roll mode selected.",
+  "C5ETRAINING.SettingGmOnlyEditMode": "Enable GM Only Edit Mode.",
+  "C5ETRAINING.SettingGmOnlyEditModeHint": "Enabling this will put the module into GM Only Edit mode. When this is on, only a GM can add/edit category or add/edit any training. Basically the player can only roll the dice.",
   "C5ETRAINING.SettingShowDowntimeTabPc": "Show Tracking Tab (PCs)",
   "C5ETRAINING.SettingShowDowntimeTabPcHint": "Toggling this on will display the tracking tab on all PC sheets. You will need to close and reopen sheets for this to take effect.",
   "C5ETRAINING.SettingShowDowntimeTabNpc": "Show Tracking Tab (NPCs)",

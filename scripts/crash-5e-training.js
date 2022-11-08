@@ -19,8 +19,13 @@ async function addTrainingTab(app, html, data) {
   // Determine if we should show the downtime tab
   let showTrainingTab = false;
   let showToUser = game.users.current.isGM || !game.settings.get("5e-training", "gmOnlyMode");
-  if(data.isCharacter && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTraining") && showToUser; }
-  else if(data.isNPC && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTrainingNpc") && showToUser; }
+  let notShowToUserEditMode = game.settings.get("5e-training", "gmOnlyEditMode") && !game.users.current.isGM;
+  if(data.isCharacter && data.editable){ 
+    showTrainingTab = game.settings.get("5e-training", "enableTraining") && showToUser; 
+  }
+  else if(data.isNPC && data.editable){ 
+    showTrainingTab = game.settings.get("5e-training", "enableTrainingNpc") && showToUser; 
+  }
 
   if (showTrainingTab){
 
@@ -37,6 +42,7 @@ async function addTrainingTab(app, html, data) {
     // Get some permissions
     let showImportButton = game.settings.get("5e-training", "showImportButton");
     data.showImportButton = showImportButton;
+    data.showToUserEditMode = !notShowToUserEditMode;
 
     // Create the tab content
     let sheet = html.find('.sheet-body');

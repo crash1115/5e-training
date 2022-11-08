@@ -27,6 +27,15 @@ export function registerSettings() {
     type: Boolean
   });
 
+  game.settings.register("5e-training", "gmOnlyEditMode", {
+    name: game.i18n.localize("C5ETRAINING.SettingGmOnlyEditMode"),
+    hint: game.i18n.localize("C5ETRAINING.SettingGmOnlyEditModeHint"),
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   game.settings.register("5e-training", "enableTraining", {
     name: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabPc"),
     hint: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabPcHint"),
