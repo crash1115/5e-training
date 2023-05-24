@@ -239,7 +239,7 @@ async function migrateAllActors(){
     let currentUserOwnsActor = a.permission[currentUserId] === 3;
     let currentUserIsGm = game.user.isGM;
     if(!currentUserOwnsActor && !currentUserIsGm){
-      console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);
+      //console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name);
       continue;
     }
 
@@ -293,12 +293,12 @@ async function migrateAllActors(){
             // Backup old data and store in backup flag
             let backup = {trainingItems: allTrainingItems, timestamp: new Date()};
             ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.BackingUpDataFor") + ": " + a.data.name);
-            console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.BackingUpDataFor") + ": " + a.data.name);
+            //console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.BackingUpDataFor") + ": " + a.data.name);
             await a.setFlag("5e-training", "backup", backup);
 
             // Alert that we're migrating actor
             ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.UpdatingDataFor") + ": " + a.data.name);
-            console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.UpdatingDataFor") + ": " + a.data.name);
+            //console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.UpdatingDataFor") + ": " + a.data.name);
 
             // Loop through items and update if they need updates
             for(var j = 0; j < allTrainingItems.length; j++){
@@ -316,7 +316,7 @@ async function migrateAllActors(){
             }
             await a.setFlag("5e-training", "trainingItems", allTrainingItems);
             ui.notifications.notify("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.SuccessUpdatingDataFor") + ": " + a.data.name);
-            console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.SuccessUpdatingDataFor") + ": " + a.data.name);
+            //console.log("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.SuccessUpdatingDataFor") + ": " + a.data.name);
           }
         }
       }
