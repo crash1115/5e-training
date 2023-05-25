@@ -1,3 +1,8 @@
+# Version 1.0.1
+- Compatibility update for Foundry v11
+- Removed console log spam when running migration scripts
+- Updated license. Previous versions of this module were released under CC, which wasn't really appropriate. Now we're using MIT. Have fun.
+
 # Version 1.0.0 (Foundry v10)
 - Compatibility update for Foundry v10
 - Importing has been streamlined and now also handles categories
