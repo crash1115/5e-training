@@ -1,3 +1,7 @@
+# Version 1.0.2
+- Updated how ability lavels are referenced in sheet renders
+- Fixed how actor data is referenced in the audit log
+
 # Version 1.0.1
 - Compatibility update for Foundry v11
 - Removed console log spam when running migration scripts
