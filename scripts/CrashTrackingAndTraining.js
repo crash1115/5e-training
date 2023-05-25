@@ -174,7 +174,7 @@ export default class CrashTrackingAndTraining {
 
     // Progression Type: Ability Check or DC - ABILITY
     if (rollType === "ABILITY"){
-      let abilityName = CONFIG.DND5E.abilities[thisItem.ability];
+      let abilityName = CONFIG.DND5E.abilities[thisItem.ability].label;
       // Roll to increase progress
       let options = CrashTrackingAndTraining.getRollOptions();
       let r = await actor.rollAbilityTest(thisItem.ability, options);
