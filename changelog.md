@@ -1,3 +1,6 @@
+# Version 1.1.0
+- Compatibility for dnd5e 3.0
+
 # Version 1.0.2
 - Updated how ability lavels are referenced in sheet renders
 - Fixed how actor data is referenced in the audit log
