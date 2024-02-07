@@ -19,29 +19,35 @@ async function addTrainingTab(app, html, data) {
   // Determine if we should show the downtime tab
   let showTrainingTab = false;
   let showToUser = game.users.current.isGM || !game.settings.get("5e-training", "gmOnlyMode");
-  if(data.isCharacter && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTraining") && showToUser; }
-  else if(data.isNPC && data.editable){ showTrainingTab = game.settings.get("5e-training", "enableTrainingNpc") && showToUser; }
+  if(data.isCharacter){ showTrainingTab = game.settings.get("5e-training", "enableTraining") && showToUser; }
+  else if(data.isNPC){ showTrainingTab = game.settings.get("5e-training", "enableTrainingNpc") && showToUser; }
 
   if (showTrainingTab){
 
-    // Get our actor and our flags
+    // Get our actor and set up some data
     let actor = game.actors.contents.find(a => a._id === data.actor._id);
-    let trainingItems = await actor.getFlag("5e-training", "trainingItems");
+    data.showImportButton = game.settings.get("5e-training", "showImportButton");
 
-    // Update the nav menu
+    // Figure out what button and tab content we need
+    // We assume the legacy sheet by default, and check the app's template to see if we need to use the 3.0 version insteaed.
     let tabName = game.settings.get("5e-training", "tabName");
-    let trainingTabBtn = $('<a class="item" data-tab="training">' + tabName + '</a>');
-    let tabs = html.find('.tabs[data-group="primary"]');
-    tabs.append(trainingTabBtn);
+    let trainingTabBtn = $('<a class="item control" data-group="primary" data-tooltop="" data-tab="training">' + tabName + '</a>');
+    let trainingTabHtml = $(await renderTemplate('modules/5e-training/templates/training-section.html', data));
 
-    // Get some permissions
-    let showImportButton = game.settings.get("5e-training", "showImportButton");
-    data.showImportButton = showImportButton;
+    if(app.template === "systems/dnd5e/templates/actors/character-sheet-2.hbs"){
+      trainingTabBtn = $('<a class="item control" data-group="primary" data-tooltip="' + tabName + '" aria-label="' + tabName + '" data-tab="training"><i class="fas fa-clock"</i></a>');
+      trainingTabHtml = $(await renderTemplate('modules/5e-training/templates/training-section-new.html', data));
+    }
+
+    // Add the tab to the tab bar
+    let tabs = html.find('.tabs[data-group="primary"]');
+    tabs.append(trainingTabBtn); 
 
     // Create the tab content
-    let sheet = html.find('.sheet-body');
-    let trainingTabHtml = $(await renderTemplate('modules/5e-training/templates/training-section.html', data));
-    sheet.append(trainingTabHtml);
+    let legacySheetTab = html.find('.sheet-body');
+    let newSheetTab = html.find('.tab-body');
+    legacySheetTab.append(trainingTabHtml);
+    newSheetTab.append(trainingTabHtml);
 
     // Set up our big list of dropdown options
     let actorTools = CrashTrackingAndTraining.getActorTools(actor.id);
