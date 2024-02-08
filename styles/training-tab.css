@@ -184,6 +184,7 @@
   font-family: var(--t5ek-body-font-family);
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list .header-row .item-name {
+  font-size: 0.75rem;
   font-family: var(--t5ek-body-font-family);
   color: var(--t5ek-primary-font-color);
 }
