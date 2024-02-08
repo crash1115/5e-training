@@ -1,3 +1,7 @@
+# Version 1.0.3
+- Compatibility with Kgar's Tidy sheets
+- OG Tidy is no longer supported
+
 # Version 1.0.2
 - Updated how ability lavels are referenced in sheet renders
 - Fixed how actor data is referenced in the audit log

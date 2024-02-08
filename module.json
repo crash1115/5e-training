@@ -4,7 +4,7 @@
   "url": "https://github.com/crash1115/5e-training",
   "readme": "https://github.com/crash1115/5e-training/blob/master/README.md",
   "bugs": "https://github.com/crash1115/5e-training/issues",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "esmodules": [
     "scripts/crash-5e-training.js"
   ],
@@ -35,7 +35,7 @@
     }
   ],
   "manifest": "https://raw.githubusercontent.com/crash1115/5e-training/master/module.json",
-  "download": "https://github.com/crash1115/5e-training/releases/download/v1.0.2/5e-training.zip",
+  "download": "https://github.com/crash1115/5e-training/releases/download/v1.0.3/5e-training.zip",
   "id": "5e-training",
   "authors": [
     {
@@ -53,10 +53,21 @@
       "type": "system",
       "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
       "compatibility": {
-        "minimum": "2.2.0",
-        "verified": "2.2.0"
+        "minimum": "2.4.1",
+        "verified": "2.4.1"
       }
     }]
-  }
+  },
+  "media": [
+    {
+      "type": "setup",
+      "url": "modules/5e-training/media/thumbnail.png"
+    }
+  ],
+  "flags": {
+    "hotReload": {
+        "extensions": ["html", "css", "json"]
+    }
+  } 
 }
 
