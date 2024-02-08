@@ -1,3 +1,6 @@
+# Version 1.0.4
+- Fixed bug preventing NPC sheets from opening when used with Tidy
+
 # Version 1.0.3
 - Compatibility with Kgar's Tidy sheets
 - OG Tidy is no longer supported

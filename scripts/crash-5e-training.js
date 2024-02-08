@@ -384,7 +384,7 @@ Hooks.on("tidy5e-sheet.ready", (api) => {
         return data;
       },
       enabled: (data) => {
-        return data.editable && game.settings.get(CONSTANTS.MODULE_NAME, "enableTrainingNpc");
+        return data.editable && game.settings.get("5e-training", "enableTrainingNpc");
       },
       onRender: ({ app, element, data }) => {
         activateTabListeners(data.actor, $(element));
