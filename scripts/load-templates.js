@@ -4,7 +4,8 @@ export const preloadTemplates = async function() {
     "modules/5e-training/templates/partials/skill.html",
     "modules/5e-training/templates/partials/tool.html",
     "modules/5e-training/templates/partials/macro.html",
-    "modules/5e-training/templates/partials/fixed.html"
+    "modules/5e-training/templates/partials/fixed.html",
+    "modules/5e-training/templates/partials/training-section-contents.html"
   ];
   return loadTemplates(templatePaths);
 };
