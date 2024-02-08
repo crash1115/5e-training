@@ -164,32 +164,32 @@
 }
 
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-controls div {
-  color: var(--t5ek-secondary-color);
-  background: var(--t5ek-faint-color);
+  color: var(--t5e-secondary-color);
+  background: var(--t5e-faint-color);
   border-radius: 0.1875rem;
   border: none;
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-controls div:hover {
-  color: var(--t5ek-primary-color);
+  color: var(--t5e-primary-color);
   text-shadow: none;
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list {
-  color: var(--t5ek-primary-font-color);
+  color: var(--t5e-primary-font-color);
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list .header-row {
-  background: var(--t5ek-table-header-row-color);
+  background: var(--t5e-table-header-row-color);
   border: none;
-  color: var(--t5ek-tertiary-color);
+  color: var(--t5e-tertiary-color);
   font-size: 0.75rem;
-  font-family: var(--t5ek-body-font-family);
+  font-family: var(--t5e-body-font-family);
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list .header-row .item-name {
   font-size: 0.75rem;
-  font-family: var(--t5ek-body-font-family);
-  color: var(--t5ek-primary-font-color);
+  font-family: var(--t5e-body-font-family);
+  color: var(--t5e-primary-font-color);
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list .header-row .item-controls a:hover {
-  color: var(--t5ek-primary-font-color);
+  color: var(--t5e-primary-font-color);
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list {
   padding-right: 0px;
@@ -197,7 +197,7 @@
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item {
   border: none;
   margin-bottom: 3px;
-  background-color: var(--t5ek-faintest-color);
+  background-color: var(--t5e-faintest-color);
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name:hover {
   color: unset;
@@ -207,15 +207,15 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-progress .progress-bar .crash-training-completion {
-  color: var(--t5ek-primary-color);
-  background-color: var(--t5ek-sheet-unlocked-icon-background);
+  color: var(--t5e-primary-color);
+  background-color: var(--t5e-sheet-unlocked-icon-background);
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-controls {
-  color: var(--t5ek-light-color);
+  color: var(--t5e-light-color);
   margin-right: 4px;
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-controls a:hover {
-  color: var(--t5ek-primary-font-color);
+  color: var(--t5e-primary-font-color);
 }
 :is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-summary {
   padding-left: 8px;
