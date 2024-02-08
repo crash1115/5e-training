@@ -177,7 +177,7 @@ function activateTabListeners(actor, html){
     let allItems = actor.getFlag("5e-training","trainingItems") || [];
     let item = allItems.filter(obj => obj.id === itemId)[0];
     let desc = item.description || "";
-    let li = $(event.currentTarget).parents(".item");
+    let li = $(event.currentTarget).parents(".training-item");
 
     if ( li.hasClass("expanded") ) {
       let summary = li.children(".item-summary");

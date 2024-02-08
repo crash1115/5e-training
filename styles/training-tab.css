@@ -1,18 +1,9 @@
-
-/* Control Buttons Container */
-.dnd5e.sheet .crash-training .crash-training-controls,
-.tidy5e.sheet .crash-training .crash-training-controls {
+.crash-training .crash-training-controls {
   display: flex;
   justify-content: flex-end;
   margin: 4px 0;
 }
-.tidy5e.sheet .crash-training .crash-training-controls {
-  margin: 0px 15px 4px 0;
-}
-
-/* Control Buttons */
-.dnd5e.sheet .crash-training .crash-training-controls div,
-.tidy5e.sheet .crash-training .crash-training-controls div {
+.crash-training .crash-training-controls div {
   font-size: 12px;
   color: #7a7971;
   text-align: center;
@@ -23,296 +14,208 @@
   border: 2px groove #eeede0;
   border-radius: 4px;
 }
-.dnd5e.sheet .crash-training .crash-training-controls div.push-left,
-.tidy5e.sheet .crash-training .crash-training-controls div.push-left {
+.crash-training .crash-training-controls div.push-left {
   margin-right: auto;
 }
-.tidy5eDark .tidy5e.sheet .crash-training .crash-training-controls div {
-  border: 2px groove #7a7971;
-}
-
-.dnd5e.sheet .crash-training .crash-training-controls div:hover,
-.tidy5e.sheet .crash-training .crash-training-controls div:hover {
+.crash-training .crash-training-controls div:hover {
   cursor: pointer;
   color: black;
   text-shadow: 0 0 5px red;
 }
-.dark-mode .dnd5e.sheet .crash-training .crash-training-controls div:hover {
-  cursor: pointer;
-  color: #3F88E6;
-  text-shadow: 0 0 5px #004aa9;
-}
-.tidy5eDark .tidy5e.sheet .crash-training .crash-training-controls div:hover{
-  text-shadow: none;
-  color: rgba(255, 100, 0, 1);
-}
-
-.dnd5e.sheet .crash-training .crash-training-controls div:last-of-type,
-.tidy5e.sheet  .crash-training .crash-training-controls div:last-of-type {
-  margin-right: 0px;
-}
-
-
-/* Item List */
-.dnd5e.sheet .crash-training .items-list,
-.tidy5e.sheet  .crash-training .items-list {
-  list-style: none;
+.crash-training .crash-training-category-list {
   margin: 0;
   padding: 0;
   overflow-y: auto;
   scrollbar-width: thin;
   color: #7a7971;
 }
-
-/* Item List Header */
-.dnd5e.sheet .crash-training .items-list .items-header,
-.tidy5e.sheet  .crash-training .items-list .items-header {
+.crash-training .crash-training-category-list .header-row {
   height: 28px;
-  margin: 2px 0;
-  padding: 0;
+  padding-inline: 4px;
   align-items: center;
   background: rgba(0, 0, 0, 0.05);
   border: 2px groove #eeede0;
   font-weight: bold;
   border-radius: 0px;
-}
-.tidy5eDark .tidy5e.sheet  .crash-training .items-list .items-header {
-  border: 1px;
-  color: white;
-}
-
-/* Type Column Header */
-.dnd5e.sheet .crash-training .activity-type,
-.tidy5e.sheet  .crash-training .activity-type {
-  flex: 0 0 150px;
   font-size: 12px;
   color: #7a7971;
-  text-align: center;
-	border-right: 1px solid #c9c7b8;
 }
-.dark-mode .dnd5e.sheet .crash-training .activity-type {
-	border-right: none;
+.crash-training .crash-training-category-list .header-row .item-name {
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 16px;
 }
-.tidy5eDark .tidy5e.sheet .crash-training .activity-type {
-	border-right: none;
-}
-
-/* Progress Override Column Header*/
-.dnd5e.sheet .crash-training .activity-override,
-.tidy5e.sheet   .crash-training .activity-override {
-  flex: 0 0 110px;
-  font-size: 12px;
-  color: #7a7971;
+.crash-training .crash-training-category-list .header-row .activity-override {
   text-align: center;
 }
-
-/* Progress Column Header*/
-.dnd5e.sheet .crash-training .activity-progress,
-.tidy5e.sheet   .crash-training .activity-progress {
-  flex: 0 0 190px;
-  font-size: 12px;
-  color: #7a7971;
-  text-align: center;
-  height: 14px;
-  border-right: 1px solid #c9c7b8;
-}
-.dark-mode .dnd5e.sheet .crash-training .activity-progress{
-  border-right: none;
-}
-.tidy5eDark .tidy5e.sheet .crash-training .activity-progress {
-	border-right: none;
-}
-
-/* Edit and Delete Buttons */
-.dnd5e.sheet .crash-training .crash-item-controls,
-.tidy5e.sheet .crash-training .crash-item-controls {
-  flex: 0 0 50px;
-	justify-content: space-between;
-  padding-right: 5px;
-  padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
-}
-
-
-/*======================== COLUMS ==========================*/
-
-/* Item Name */
-.dnd5e.sheet .crash-training .items-list .item-name,
-.tidy5e.sheet .crash-training .items-list .item-name {
-  flex: 2;
-  margin: 0;
-  overflow: hidden;
+.crash-training .crash-training-category-list .header-row .item-controls {
   font-size: 13px;
-  font-style: normal;
-  text-align: left;
+  margin-left: auto;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list {
+  padding-left: 2px;
+  padding-right: 6px;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item {
+  font-size: 13px;
+  align-items: center;
+  border-bottom: 1px solid #c9c7b8;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item:last-of-type {
+  border-bottom: none;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name {
+  display: flex;
   align-items: center;
 }
-
-.dnd5e.sheet .crash-training .item .item-name h4,
-.tidy5e.sheet .crash-training .item .item-name h4 {
-  font-weight: 400;
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name:hover {
+  cursor: pointer;
+  color: black;
+  text-shadow: 0 0 5px red;
 }
-
-/* Roll Buttons */
-.dnd5e.sheet .crash-training .crash-training-roll,
-.dnd5e.sheet .crash-training .crash-training-roll-disabled,
-.tidy5e.sheet .crash-training .crash-training-roll,
-.tidy5e.sheet .crash-training .crash-training-roll-disabled {
-	flex: 0 0 30px;
-	height: 30px;
-	background-size: 30px;
-	background-position: center;
-	background-repeat: no-repeat;
-	border: none;
-	margin-right: 5px;
-}
-
-.dnd5e.sheet .crash-training .crash-training-roll .checkmark,
-.tidy5e.sheet .crash-training .crash-training-roll .checkmark {
-	display: none;
-}
-
-.dnd5e.sheet .crash-training .item-name:hover .crash-training-roll,
-.tidy5e.sheet .crash-training .item-name:hover .crash-training-roll {
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name:hover .crash-training-roll {
   background-image: url("/../icons/svg/d20-grey.svg") !important;
 }
-
-.dnd5e.sheet .crash-training .item-name:hover .crash-training-roll:hover,
-.tidy5e.sheet .crash-training .item-name:hover .crash-training-roll:hover {
-	background-image: url("/../icons/svg/d20-black.svg") !important;
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name .crash-training-roll, .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name .crash-training-roll-disabled {
+  flex: 0 0 30px;
+  height: 30px;
+  background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  margin-right: 5px;
 }
-
-.dnd5e.sheet .crash-training .crash-training-roll-disabled,
-.tidy5e.sheet .crash-training .crash-training-roll-disabled {
-	opacity: 50%;
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name .crash-training-roll .checkmark {
+  display: none;
 }
-
-.dnd5e.sheet .crash-training .crash-training-roll-disabled .checkmark,
-.tidy5e.sheet .crash-training .crash-training-roll-disabled .checkmark {
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name .crash-training-roll:hover {
+  background-image: url("/../icons/svg/d20-black.svg") !important;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name .crash-training-roll-disabled {
+  opacity: 50%;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name .crash-training-roll-disabled .checkmark {
   color: white;
   display: block;
   font-size: 30px;
   text-shadow: 0 0 5px black;
+  text-align: center;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-override {
+  display: flex;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-override input {
+  flex: 1;
+  text-align: right;
+  padding-right: 2px;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-override span {
+  flex: 1;
+  align-self: center;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-progress {
+  display: grid;
+  align-items: center;
+  margin-right: 10px;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-progress .progress-bar {
+  flex: 10;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  height: 20px;
+  margin: 5px;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-progress .progress-bar .crash-training-completion {
+  color: #111111;
+  background-color: rgba(255, 0, 0, 0.4);
+  border-radius: 4px;
+  height: 100%;
+  line-height: 22px;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-progress .progress-bar .crash-training-completion span {
+  margin-left: 5px;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-controls {
+  margin-left: auto;
+}
+.crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-summary {
+  margin-top: 5px;
+}
+.crash-training .crash-training-column-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr 50px;
+}
+.crash-training .crash-training-column-grid .item-name {
+  grid-column: 1/1;
+}
+.crash-training .crash-training-column-grid .activity-type {
+  grid-column: 2/2;
+}
+.crash-training .crash-training-column-grid .activity-override {
+  grid-column: 3/3;
+}
+.crash-training .crash-training-column-grid .activity-progress {
+  grid-column: 4/4;
+}
+.crash-training .crash-training-column-grid .item-controls {
+  grid-column: 5/5;
+}
+.crash-training .crash-training-column-grid .item-summary {
+  grid-column: 1/5;
 }
 
-/* Type Column */
-.dnd5e.sheet .crash-training .activity-type-row,
-.tidy5e.sheet .crash-training .activity-type-row {
-  flex: 0 0 150px;
-	text-transform: capitalize;
-	text-align: center;
-	font-size: 12px;
-	border-right: 1px solid #c9c7b8;
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-controls div {
+  color: var(--t5ek-secondary-color);
+  background: var(--t5ek-faint-color);
+  border-radius: 0.1875rem;
+  border: none;
 }
-
-.dark-mode .dnd5e.sheet .crash-training .activity-type-row{
-  border-right: none;
-}
-.tidy5eDark .tidy5e.sheet .crash-training .activity-type-row{
-  border-right: none;
-}
-
-/* Progress Override Column */
-.dnd5e.sheet .crash-training .activity-override-row,
-.tidy5e.sheet .crash-training .activity-override-row {
-  flex: 0 0 110px;
-	font-size: 12px;
-}
-
-.dnd5e.sheet .crash-training .activity-override-row input,
-.tidy5e.sheet .crash-training .activity-override-row input {
-	max-width: 50px;
-	text-align: right;
-  display: inline-block;
-}
-
-/* Progress Bar Column */
-.dnd5e.sheet .crash-training .activity-progress-row,
-.tidy5e.sheet .crash-training .activity-progress-row {
-  flex: 0 0 190px;
-	font-size: 12px;
-	border-right: 1px solid #c9c7b8;
-}
-.dark-mode .dnd5e.sheet .crash-training .activity-progress-row{
-	border-right: none;
-}
-.tidy5eDark .tidy5e.sheet .crash-training .activity-progress-row{
-	border-right: none;
-}
-
-/* Training Bar */
-.dnd5e.sheet .crash-training .activity-progress-row .progress-bar,
-.tidy5e.sheet .crash-training .activity-progress-row .progress-bar {
-	flex: 0 0 180px; /* 190 - 10px margin */
-	background-color: rgba(0,0,0,0.1);
-	border-radius: 4px;
-	height: 20px;
-	margin: 5px;
-}
-
-/* Training Bar - Filled Portion */
-.dnd5e.sheet .crash-training .activity-progress-row .crash-training-completion,
-.tidy5e.sheet .crash-training .activity-progress-row .crash-training-completion {
-	color: #111111;
-	background-color: rgba(255,0,0,0.4);
-	border-radius: 4px;
-	height: 100%;
-	line-height: 22px;
-}
-.dark-mode .dnd5e.sheet .crash-training .activity-progress-row .crash-training-completion{
-	color: white;
-	background-color: #004aa9;
-  opacity:0.8;
-}
-.tidy5eDark .tidy5e.sheet .crash-training .activity-progress-row .crash-training-completion {
-	color: white;
-	background-color: rgba(255, 100, 0, 0.6);
-}
-
-/* Training Bar Progress Percent Text */
-.dnd5e.sheet .crash-training .activity-progress-row .crash-training-completion span,
-.tidy5e.sheet .crash-training .activity-progress-row .crash-training-completion span {
-	margin-left: 5px;
-}
-
-/* Add and Audit Log Buttons */
-.dnd5e.sheet .crash-training .crash-item-row-controls {
-  flex: 0 0 45px; /*50px - 5px right padding on the row*/
-	justify-content: space-between;
-	display: flex;
-	padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
-}
-
-.tidy5e.sheet .crash-training .crash-item-row-controls {
-  flex: 0 0 45px;
-	justify-content: space-between;
-	display: flex;
-	padding-left: 0px;
-  padding-right: 11px;
-}
-
-.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-edit,
-.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-delete,
-.tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-edit,
-.tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-delete {
-	font-size: 12px;
-	text-align: center;
-	flex: 1;
-}
-
-.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-edit:hover,
-.dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-delete:hover,
-.tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-edit:hover,
-.tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-delete:hover {
-	text-shadow: 0 0 5px red;
-}
-
-.dark-mode .dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-edit:hover,
-.dark-mode .dnd5e.sheet .crash-training .crash-item-row-controls .crash-training-delete:hover{
-	text-shadow: 0 0 5px #004aa9;
-}
-
-.tidy5eDark .tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-edit:hover,
-.tidy5eDark .tidy5e.sheet .crash-training .crash-item-row-controls .crash-training-delete:hover{
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-controls div:hover {
+  color: var(--t5ek-primary-color);
   text-shadow: none;
-  color: rgba(255, 100, 0, 1);
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list {
+  color: var(--t5ek-primary-font-color);
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list .header-row {
+  background: var(--t5ek-table-header-row-color);
+  border: none;
+  color: var(--t5ek-tertiary-color);
+  font-size: 0.75rem;
+  font-family: var(--t5ek-body-font-family);
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list .header-row .item-name {
+  font-family: var(--t5ek-body-font-family);
+  color: var(--t5ek-primary-font-color);
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list .header-row .item-controls a:hover {
+  color: var(--t5ek-primary-font-color);
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list {
+  padding-right: 0px;
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item {
+  border: none;
+  margin-bottom: 3px;
+  background-color: var(--t5ek-faintest-color);
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-name:hover {
+  color: unset;
+  text-shadow: none;
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-progress .progress-bar {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .activity-progress .progress-bar .crash-training-completion {
+  color: var(--t5ek-primary-color);
+  background-color: var(--t5ek-sheet-unlocked-icon-background);
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-controls {
+  color: var(--t5ek-light-color);
+  margin-right: 4px;
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-controls a:hover {
+  color: var(--t5ek-primary-font-color);
+}
+:is(.sheet[data-sheet-module=tidy5e-sheet]) .crash-training .crash-training-category-list ol.crash-training-item-list li.training-item .item-summary {
+  padding-left: 8px;
 }
