@@ -1,0 +1,217 @@
+
+{
+  "C5ETRAINING.ChangeLog": "Änderungen",
+
+  "C5ETRAINING.CreateEditCategoryAppTitle": "Erstelle / Editiere Kategorie",
+  "C5ETRAINING.UnnamedCategory": "Unbenannte Kategorie",
+
+  "C5ETRAINING.InvalidNumberWarning": "Ungültige Eingabe. Bitte Nummer eingeben.",
+
+  "C5ETRAINING.Skipping": "ÜBERSPRINGE MIGRATION FÜR AKTEUR",
+  "C5ETRAINING.BackingUpDataFor": "SICHERE DATEN FÜR AKTEUR",
+  "C5ETRAINING.UpdatingDataFor": "AKTUALISIERE DATEN FÜR AKTEUR",
+  "C5ETRAINING.ProblemUpdatingDataFor": "PROBLEM BEIM AKTUALISIEREN DER DATEN FÜR AKTEUR",
+  "C5ETRAINING.SuccessUpdatingDataFor": "DATEN FÜR AKTEUR ERFOLGREICH AKTUALISIERT",
+
+  "C5ETRAINING.ActorNotFoundWarning": "AKTEUR nicht gefunden.",
+  "C5ETRAINING.ItemNotFoundWarning": "Fand kein nachverfolgtes Element namens",
+  "C5ETRAINING.ProgressValueIsNanWarning": "Fortschrittswert ist keine Zahl",
+  "C5ETRAINING.LogActionMacro": "Makro / Externer Code",
+
+  "C5ETRAINING.NewCategory": "Neue Kategorie",
+  "C5ETRAINING.DeleteCategory": "Lösche Kategorie",
+  "C5ETRAINING.Cancel": "Abbruch",
+  "C5ETRAINING.DeleteItem": "Lösche Element",
+  "C5ETRAINING.AdjustProgressValue": "Fortschritt anpassen",
+  "C5ETRAINING.Roll": "Würfeln",
+  "C5ETRAINING.ToolNotFoundWarning": "Ausgewähltes Werkzeug nicht gefunden. Bitte das Element bearbeiten und ein neues auswählen.",
+ 
+  "C5ETRAINING.MacroNotFoundWarning": "Fand kein Makro namens",
+
+  "C5ETRAINING.CompletedATrackedItem": "beendete ein nachverfolgtes Element.",
+
+  "C5ETRAINING.Disadvantage": "Nachteil",
+  "C5ETRAINING.Advantage": "Vorteil",
+  "C5ETRAINING.Normal": "Normal",
+
+  "C5ETRAINING.AbilityCha": "Charisma",
+  "C5ETRAINING.AbilityCon": "Konstitution",
+  "C5ETRAINING.AbilityDex": "Geschicklichkeit",
+  "C5ETRAINING.AbilityInt": "Intelligenz",
+  "C5ETRAINING.AbilityStr": "Stärke",
+  "C5ETRAINING.AbilityWis": "Weisheit",
+
+  "C5ETRAINING.SkillAcr": "Acrobatik",
+  "C5ETRAINING.SkillAni": "Tierhandhabung",
+  "C5ETRAINING.SkillArc": "Arkana",
+  "C5ETRAINING.SkillAth": "Athletik",
+  "C5ETRAINING.SkillDec": "Täuschung",
+  "C5ETRAINING.SkillHis": "Geschichtswissen",
+  "C5ETRAINING.SkillIns": "Personenkenntnis",
+  "C5ETRAINING.SkillInv": "Untersuchung",
+  "C5ETRAINING.SkillItm": "Einschüchterung",
+  "C5ETRAINING.SkillMed": "Medizin",
+  "C5ETRAINING.SkillNat": "Naturkunde",
+  "C5ETRAINING.SkillPer": "Überredungskunst",
+  "C5ETRAINING.SkillPrc": "Wahrnehmung",
+  "C5ETRAINING.SkillPrf": "Darbietung",
+  "C5ETRAINING.SkillRel": "Religion",
+  "C5ETRAINING.SkillSlt": "Fingerfertigkeit",
+  "C5ETRAINING.SkillSte": "Verstohlenheit",
+  "C5ETRAINING.SkillSur": "Überlebenskunst",
+
+  "C5ETRAINING.InvalidTool": "Werkzeug Nicht Gefunden",
+  "C5ETRAINING.ProgressionStyleMacro": "Makro",
+  "C5ETRAINING.DC": "SG (Schwierigkeitsgrad)",
+  "C5ETRAINING.RollItem": "Würfel Element",
+  "C5ETRAINING.RollItemDisabled": "Würfeln deaktiviert. Element bereits abgeschlossen.",
+
+  "C5ETRAINING.SettingGmOnlyMode": "Nur-SL-Modus aktivieren.",
+  "C5ETRAINING.SettingGmOnlyModeHint": "Wenn diese Option aktiviert ist, wird das Modul in den Nur-SL-Modus versetzt. Die Registerkarte wird nicht auf Charakterbögen für Nicht-SL-Benutzer angezeigt, Abschlussmeldungen werden automatisch an den SL geflüstert und nicht öffentlich angezeigt, und in Würfeldialogen wird automatisch der Modus \"Privater SL Wurf\" ausgewählt.",
+  "C5ETRAINING.SettingShowDowntimeTabPc": "Registerkarte \"Nachverfolgung\" anzeigen (SC)",
+  "C5ETRAINING.SettingShowDowntimeTabPcHint": "Wenn diese Option aktivieren ist, wird die Registerkarte \"Nachverfolgung\" auf allen SC-Bögen angezeigt. Die Fenster müssen geschlossen und erneut geöffnet werden, damit dies wirksam wird.",
+  "C5ETRAINING.SettingShowDowntimeTabNpc": "Registerkarte 'Nachverfolgung' anzeigen (NSC)",
+  "C5ETRAINING.SettingShowDowntimeTabNpcHint": "Wenn diese Option aktiviert ist, wird der Registerkarte \"Nachverfolgung\" auf allen NSC-Bögen angezeigt. Die Fenster müssen geschlossen und erneut geöffnet werden, damit dies wirksam wird.",
+  "C5ETRAINING.SettingDowntimeTabName": "Name für Registerkarte \"Nachverfolgung\"",
+  "C5ETRAINING.SettingDowntimeTabNameHint": "Legt den Titel der Registerkarte \"Nachverfolgung\" auf den hier eingegebenen Namen fest. Die Standardeinstellung ist \"Auszeit\", aber es kann ein beliebiger Name vergeben werden, je nachdem, wie das Modul verwendet wird.",
+  "C5ETRAINING.SettingExtraSheetWidth": "Anpassung Charkaterbogenweite",
+  "C5ETRAINING.SettingExtraSheetWidthHint": "(Client) Wird hier einen Wert eingeben, so wird die Standardbreite des Charkaterbogen um die angegebene Anzahl von Pixeln geändert. Möglicherweise muss dieser Wert vergrößert oder verkleinert werden, um sicherzustellen, dass die Registerkarten des Bogens in einer Zeile bleiben. Der Standardwert ist 50 und funktioniert, wenn der Standard-dnd5e-Bogen und der Standardregisternamen verwendet wird.",
+  "C5ETRAINING.SettingDefaultCompletionTarget": "Standardabschlussziel",
+  "C5ETRAINING.SettingDefaultCompletionTargetHint": "Legt das Standardabschlussziel fest, das erforderlich ist, um 100 % für nachverfolgte Aufgaben mit prüfungsbasiertem Fortschritt zu erreichen. Als Faustregel kann man davon ausgehen, dass eine durchschnittliche Person pro Pürfung etwa 10 Punkte zu ihrem Fortschritt hinzufügen kann. Der Standardwert ist 300 (oder 30 Tage für eine durchschnittliche Person, die einmal pro Tag trainiert).",
+  "C5ETRAINING.SettingAnnounceCompletionFor": "Ankündigung der Fertigstellung von nachverfolgten Aufgaben für:",
+  "C5ETRAINING.SettingAnnounceCompletionForHint": "Wähle aus, welche Akteurstypen bei der Erledigung der nachverfolgten Aufgabe Chat-Nachrichten auslösen sollen.",
+  "C5ETRAINING.SettingShowImportButton": "Zeige Importknopf",
+  "C5ETRAINING.SettingShowImportButtonHint": "Aktivieren Sie diese Option, um die Schaltfläche \"Importieren\" auf der Registerkarte \"Nachverfolgung\" anzuzeigen. Dies ist als Werkzeug zur Fehlersuche / Datenwiederherstellung gedacht, und es gibt keine Prüfungen, um den Import unerwarteter Daten zu verhindern. Der Import unerwarteter Daten auf diese Weise kann das Modul für den Akteur zerstören. Die Verwendung diese Funktion erfolgt auf eigene Gefahr!",
+
+  "C5ETRAINING.SettingTabName": "Registername",
+  "C5ETRAINING.SettingTabNameHint": "Legt den Titel der Registerkarte auf den hier eingegebenen Wert fest. Die Vorgabe ist \"Tracking\", aber je nach Verwendung des Moduls kann ein beliebiger Name gewählt werden.",
+  "C5ETRAINING.SettingAnnounceActivityCompletionFor": "Ankündigung der Fertigstellung für:",
+  "C5ETRAINING.SettingAnnounceActivityCompletionForHint": "Bei diesen Akteurstypen wird jedes Mal eine Chat-Nachricht angezeigt, wenn sie ein nachverfolgtes Element abschließen.",
+  "C5ETRAINING.NpcsOnly": "Nur NSC",
+  "C5ETRAINING.PcsAndNpcs": "SC und NSC",
+  "C5ETRAINING.PcsOnly": "Nur SC",
+
+  "C5ETRAINING.CreateEditItemAppTitle": "Erstelle / Editiere nachverfolgtes Element",
+
+  "C5ETRAINING.NewItem": "Neues Element",
+
+  "C5ETRAINING.InputErrorName": "Bitte einen gültigen Elementnamen eingeben.",
+  "C5ETRAINING.InputErrorMacroName": "Bitte einen gültigen Makronamen eingeben.",
+  "C5ETRAINING.InputErrorFixedIncrease": "Bitte einen gültigen Steigerungswert eingeben.",
+  "C5ETRAINING.InputErrorCompletionAt": "Bitte einen gültigen Zielwert eingeben.",
+  "C5ETRAINING.InputErrorProgress": "Bitte einen gültigen Fortschrittswert eingeben.",
+
+  "C5ETRAINING.UnnamedMacro": "Unbenanntes Makro",
+  "C5ETRAINING.SelectAnAbility": "Fähigkeit",
+  "C5ETRAINING.CheckDC": "SG-Prüfung (Optional)",
+  "C5ETRAINING.CompletionTarget": "Abschlussziel",
+  "C5ETRAINING.SelectIncreaseAmount": "Fortschrittszuwachswert",
+  "C5ETRAINING.MacroName": "Makroname",
+  "C5ETRAINING.SelectASkill": "Fertigkeit",
+  "C5ETRAINING.SelectATool": "Werkzeug",
+
+  "C5ETRAINING.CompletionTargetInputHelpText": "Die Gesamtsumme aller Prüfungen, die erforderlich sind, um die Aufgabe als vollständig zu kennzeichnen. Muss eine Zahl größer 0 sein.",
+  "C5ETRAINING.SuccessesRequiredInputHelpText": "Die Anzahl der erfolgreichen Prüfungen, die durchgeführt werden müssen, um die Aufgabe abzuschließen. Muss eine Zahl größer 0 sein.",
+  "C5ETRAINING.FixedIncreaseInputHelpText": "Der Betrag, um den sich der Fortschritt dieses Aufgabe bei jedem Würfeln erhöht. Muss eine Zahl größer 0 sein.",
+  "C5ETRAINING.MacroNameInputHelpText": "Der Name des Makros, das ausgeführt werden soll, wenn dieses Aufgabe gewürfelt wird. Muss exakt übereinstimmen.",
+  "C5ETRAINING.ToolInputHelpText": "Diese Liste wird auf der Grundlage der Werkzeuge im Inventar des Akteurs erstellt. Ist sie leer, füge ein Werkzeug hinzu und versuche es erneut.",
+  "C5ETRAINING.ProgressInputHelpText": "Der aktuelle Fortschrittswert der Aufgabe. Muss eine Zahl zwischen 0 und dem Zielwert für die Fertigstellung der Aufgabe (wenn kein SG festgelegt ist) oder den erforderlichen Erfolgen (wenn ein SG festgelegt ist) sein.",
+
+  "C5ETRAINING.Time": "Zeit (UTC)",
+  "C5ETRAINING.User": "Benutzer",
+  "C5ETRAINING.Item": "Element",
+  "C5ETRAINING.Action": "Aktion",
+  "C5ETRAINING.ProgressChange": "Fortschrittsveränderung",
+  "C5ETRAINING.ChangeLogDeleteNote": "Hinweis: Das Verwerfen von Änderungen macht diese NICHT rückgängig. Wenn Änderungen, die hier zu sehen sind, rückgängig gemacht werden sollen, muss dies manuell erfolgen, aber dieses Protokoll kann als Leitfaden dienen, um herauszufinden, welche Änderungen bei Bedarf vorgenommen werden müssen.",
+  "C5ETRAINING.ChangeLogInstructionsGm": "Dieses Protokoll zeigt eine Liste aller Änderungen, die am Fortschritt der einzelnen verfolgten Gegenstände dieses Charakters vorgenommen wurden. Elemente aus dieser Liste könne´n entfernt werden, nachdem sie überprüft wurden, indem das Kästchen in der Spalte \"Verwerfen\" angekreuzt wird und auf die Schaltfläche am unteren Rand des Fensters geklickt wird. Danach sind sie für niemanden mehr einsehbar.",
+  "C5ETRAINING.ChangeLogInstructionsPlayer": "Dieses Protokoll zeigt eine Liste der Änderungen an, die am Fortschritt jedes der verfolgten Elemente vorgenommen wurden, die noch nicht vom SL überprüft wurden. Sobald diese geprüft sind, werden sie hier nicht mehr angezeigt.",
+  "C5ETRAINING.Dismiss": "Verwerfen",
+  "C5ETRAINING.DismissSelected": "Ausgewählte verwerfen",
+
+  "C5ETRAINING.CategoryCreationInstructions": "Die Elemente auf dieser Registerkarte mithilfe von Kategorien organisieren.",
+  "C5ETRAINING.Name": "Name",
+  "C5ETRAINING.Description": "Beschreibung",
+  "C5ETRAINING.SaveCategory": "Kategorie speichern",
+
+  "C5ETRAINING.TrackedItemComplete": "Nachverfolgtes Element vollendet",
+  "C5ETRAINING.Completed": "vollendet",
+
+  "C5ETRAINING.DeleteCategoryConfirmation": "Sicher, dass diese Kategorie gelöscht werden soll? Alle Elemente in dieser Kategorie werden in den Bereich \"Unsortiert\" verschoben.",
+  "C5ETRAINING.DeleteItemConfirmation": "Sicher, dass dieses Element gelöscht werden soll?",
+
+  "C5ETRAINING.GeneralInformationHeader": "Allgemeine Informationen",
+  "C5ETRAINING.ItemId": "Element ID",
+  "C5ETRAINING.Image": "Bild",
+  "C5ETRAINING.Category": "Kategorie",
+  "C5ETRAINING.ProgressionType": "Fortschrittsart",
+  "C5ETRAINING.CurrentProgress": "Gegenwärtiger Fortschritt",
+  "C5ETRAINING.ProgressionStyleFixed": "Fester Wert",
+  "C5ETRAINING.ProgressionStyleAbilityCheck": "Fähigkeitsprobe",
+  "C5ETRAINING.ProgressionStyleSkillCheck": "Fertigkeitsprobe",
+  "C5ETRAINING.ProgressionStyleToolCheck": "Werkzeugprobe",
+
+  "C5ETRAINING.ProgressionStyleFixedHeader": "Details - Fester Wert",
+  "C5ETRAINING.ProgressionStyleAbilityCheckHeader": "Details - Fähigkeitsprobe",
+  "C5ETRAINING.ProgressionStyleSkillCheckHeader": "Details - Fertigkeitsprobe",
+  "C5ETRAINING.ProgressionStyleToolCheckHeader": "Details - Werkzeugprobe",
+  "C5ETRAINING.ProgressionStyleMacroHeader": "Details - Makro",
+
+  "C5ETRAINING.ProgressionStyleFixedHelp": "Jedes Mal, wenn gewürfelt wird, erhöht sich der Fortschrittswert des Elements um einen bestimmten Wert.",
+  "C5ETRAINING.ProgressionStyleAbilityCheckHelp": "Jedes Mal, wenn gewürfelt wird, erfolgt eine Aufforderung, die angegebene Fähigkeitsprobe zu machen. Wenn kein SG festgelegt ist, wird der Fortschritt des Elements um eine Zahl erhöht, die dem Ergebnis der Probe entspricht. Wenn ein SG festgelegt ist, erhöht eine erfolgreiche Probe den Fortschritt um 1.",
+  "C5ETRAINING.ProgressionStyleSkillCheckHelp": "Jedes Mal, wenn gewürfelt wird, erfolgt eine Aufforderung, die angegebene Fertigkeitsprobe durchzuführen. Ist kein SG festgelegt, wird der Fortschritt des Elements um eine Zahl erhöht, die dem Ergebnis der Probe entspricht. Ist ein SG festgelegt, erhöht eine erfolgreiche Probe den Fortschritt um 1.",
+  "C5ETRAINING.ProgressionStyleToolCheckHelp": "Jedes Mal, wenn gewürfelt wird, erfolgt eine Aufforderung, die angegebene Werkzeugprobe durchzuführen. Ist kein SG festgelegt, wird der Fortschritt des Elements um eine Zahl erhöht, die dem Ergebnis der Probe entspricht. Wenn ein SG festgelegt ist, erhöht eine erfolgreiche Probe den Fortschritt um 1.",
+  "C5ETRAINING.ProgressionStyleMacroHelp": "Jedes Mal, wenn gewürfelt wird, wird das genannte Makro ausgeführt. Damit der Fortschritt des Elements erhöht werden kann, muss das Makro die API dieses Moduls aufrufen. Für Beispielmakros und API-Dokumentation siehe das Github-Repository des Moduls.",
+
+  "C5ETRAINING.SaveTrackedItem": "Nachverfolgtes Element speichern",
+
+  "C5ETRAINING.AddCategory": "Kategorie hinzufügen",
+  "C5ETRAINING.AddItem": "Element hinzufügen",
+  "C5ETRAINING.CreateNewCategory": "Erstelle eine neue Kategorie",
+  "C5ETRAINING.CreateNewItem": "Erstelle ein neues Element",
+  "C5ETRAINING.ReviewChanges": "Änderungen überprüfen",
+
+  "C5ETRAINING.Uncategorized": "Unsortiert",
+  "C5ETRAINING.CheckTypeColumnHeader": "Art",
+  "C5ETRAINING.ProgressColumnHeader": "Fortschritt",
+  "C5ETRAINING.ToggleInfo": "Info umschalten",
+
+  "C5ETRAINING.EditItem": "Element editieren",
+  "C5ETRAINING.EditCategory": "Kategorie editieren",
+
+  "C5ETRAINING.None": "Leer",
+  "C5ETRAINING.Delete": "Löschen",
+  "C5ETRAINING.RollItemProgress": "Element würfeln, um Fortschritt zu erzielen.",
+
+  "C5ETRAINING.MigrationPromptTitle": "Neue Migration erforderlich",
+  "C5ETRAINING.MigrationPromptBackupWarning": "Datensicherung erstellen!",
+  "C5ETRAINING.MigrationPromptText1": "Bei der letzten Aktualisierung dieses Moduls wurde die Struktur der Daten geändert. Alle Akteure, die Elemente unter Verwendung der alten Daten nachverfolgen, müssen auf diese neue Struktur migriert werden, bevor diese Elemente wieder verwendet werden können.",
+  "C5ETRAINING.MigrationPromptText2": "Bei Migrationen können Daten verloren gehen oder beschädigt werden. Die Daten dieses Moduls werden gesichert, wenn die Migration durchgeführt wird, aber es wird dringend empfohlen, alle Daten zusätzlich zu sichern, um sicherzugehen.",
+  "C5ETRAINING.MigrationPromptText3": "Es gibt {num} Akteur(e), die aktualisiert werden müssen. Möchten die Migration jetzt durchgeführt werden?",
+  "C5ETRAINING.MigrationPromptYes": "Jetzt migrieren!",
+  "C5ETRAINING.MigrationPromptNo": "Später durchführen.",
+
+  "C5ETRAINING.ExportTrackedItems": "Export",
+  "C5ETRAINING.ImportTrackedItems": "Import",
+  "C5ETRAINING.ExportTrackedItemsTooltip": "Exportiere nachverfolgte Elemente als Datei",
+  "C5ETRAINING.ImportTrackedItemsTooltip": "Importiere nachverfolgte Elemente aus Datei",
+
+  "C5ETRAINING.ExportNoTrackedItems": "Keine Elemente oder Kategorien zu exportieren. Export abgebrochen.",
+  "C5ETRAINING.ImportNoTrackedItems": "Keine Elemente oder Kategorien zu importieren. Import abgebrochen.",
+  "C5ETRAINING.ImportNoFile": "Keine Datei ausgewählt. Import abgebrochen.",
+
+  "C5ETRAINING.ImportTypeSelectionTitle": "Wie soll importiert werden?",
+  "C5ETRAINING.ImportTypeSelectionTextOverwrite": "Löscht dauerhaft alle aktuell nachverfolgten Elemente und ersetzt diese durch die importierten.",
+  "C5ETRAINING.ImportTypeSelectionTextCombine": "Führt die aktuell verfolgten Elemente mit denen, die zu importieren versucht werden, zusammen und behält beide.",
+  "C5ETRAINING.ImportTypeSelectionOverwrite": "Ersetzen",
+  "C5ETRAINING.ImportTypeSelectionCombine": "Zusammenführen",
+
+  "C5ETRAINING.ImportOldWarningTitle": "Kategorien können nicht importiert werden",
+  "C5ETRAINING.ImportOldWarningText": "Die importierten Daten stammen aus einer älteren Version des Moduls, die den Export von Kategoriedaten zusammen mit Artikeln nicht unterstützte. Es wurde trotzdem versucht diese zu importieren, aber alle Artikel wurden in die Kategorie \"Unsortiert\" eingeordnet.",
+  "C5ETRAINING.ImportOldWarningConfirm": "Verstanden, danke!",
+
+  "C5ETRAINING.ImportComplete": "Import abgeschlossen",
+
+  "C5ETRAINING.NoIdWarning": "Element ID nicht gefunden. Dies liegt wahrscheinlich daran, dass dieses Element von einer früheren Version dieses Moduls erstellt wurde. In der Regel lässt es sich beheben, indem die Seite aktualisiert und die Migration durchgeführt wird, wenn dazu aufgefordert wird. Wenn keine Aufforderung zur Migration angezeigt wird, kann der Autor des Moduls eventuell helfen! Die nachverfolgten Elemente dieses Akteurs exportieren und diese an den Autor über einen Fehlerbericht auf GitHub oder Discord senden (ENGLISCH ERFORDERLICH!).",
+
+  "C5ETRAINING.SuccessesRequired": "Erforderliche Erfolge"
+}
