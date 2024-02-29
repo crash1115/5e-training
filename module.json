@@ -32,6 +32,11 @@
       "name": "Español",
       "path": "lang/es.json",
       "flags": {}
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
     }
   ],
   "manifest": "https://raw.githubusercontent.com/crash1115/5e-training/master/module.json",
