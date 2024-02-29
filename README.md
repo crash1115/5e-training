@@ -1,6 +1,10 @@
 ## No Longer Being Maintained
 Due to time constraints, I'm no longer able to keep updating this module with any amount of frequency. You're welcome to keep using it; there's a decent chance that it'll get updated from time to time because my group uses it, but I won't be keeping up with feature requests or non-critical bug reports at the level that'd be expected for something actively being maintained. Thanks for sticking with me on this wild ride, it's been a lot of fun!
 
+If you're looking for an alternative to this module, p4535992 has taken up the mantle with [Downtime Dnd5e](https://github.com/p4535992/foundryvtt-downtime-dnd5e).
+
+___
+
 ![Header Image](https://raw.githubusercontent.com/crash1115/5e-training/master/media/cover.png)
 
 ![GitHub All Releases](https://img.shields.io/github/downloads/crash1115/5e-training/total) ![GitHub Releases](https://img.shields.io/github/downloads/crash1115/5e-training/latest/total) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/crash1115/5e-training?label=latest%20version)
@@ -18,6 +22,7 @@ Create an issue right here on GitHub. If it's a critical/breaking bug, I'll try 
 ## Attributions and Special Thanks
 - Thanks to KLO#1490 for Korean translations
 - Thanks to MS-PBS for Spanish translations
+- Thanks to DevConFox for German translations
 - Thanks Varriount for some CSS fixes
 
 ## License
