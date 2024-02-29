@@ -1,3 +1,6 @@
+# Version 1.1.0
+- Compatibility for dnd5e 3.x
+
 # Version 1.0.4
 - Fixed bug preventing NPC sheets from opening when used with Tidy
 
