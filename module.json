@@ -53,10 +53,21 @@
       "type": "system",
       "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
       "compatibility": {
-        "minimum": "3.0.0",
-        "verified": "3.0.0"
+        "minimum": "3.0.3",
+        "verified": "3.0.3"
       }
     }]
-  }
+  },
+  "media": [
+    {
+      "type": "setup",
+      "url": "modules/5e-training/media/thumbnail.png"
+    }
+  ],
+  "flags": {
+    "hotReload": {
+        "extensions": ["html", "css", "json"]
+    }
+  } 
 }
 

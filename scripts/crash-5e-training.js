@@ -13,6 +13,8 @@ Hooks.once("init", () => {
   registerHelpers();
 });
 
+
+
 // The Meat And Potatoes
 async function addTrainingTab(app, html, data) {
 
@@ -35,9 +37,8 @@ async function addTrainingTab(app, html, data) {
     let trainingTabHtml = $(await renderTemplate('modules/5e-training/templates/training-section.html', data));
 
     if(app.template === "systems/dnd5e/templates/actors/character-sheet-2.hbs"){
-      trainingTabBtn = $('<a class="item control" data-group="primary" data-tooltip="' + tabName + '" aria-label="' + tabName + '" data-tab="training"><i class="fas fa-clock"</i></a>');
-      trainingTabHtml = $(await renderTemplate('modules/5e-training/templates/training-section-new.html', data));
-    }
+      trainingTabBtn = $('<a class="item control" data-group="primary" data-tooltip="' + tabName + '" aria-label="' + tabName + '" data-tab="training"><i class="fas fa-bars-progress"</i></a>');
+     }
 
     // Add the tab to the tab bar
     let tabs = html.find('.tabs[data-group="primary"]');
@@ -49,155 +50,8 @@ async function addTrainingTab(app, html, data) {
     legacySheetTab.append(trainingTabHtml);
     newSheetTab.append(trainingTabHtml);
 
-    // Set up our big list of dropdown options
-    let actorTools = CrashTrackingAndTraining.getActorTools(actor.id);
-    const ABILITIES = CrashTrackingAndTraining.formatAbilitiesForDropdown();
-    const SKILLS = CrashTrackingAndTraining.formatSkillsForDropdown();
-    const DROPDOWN_OPTIONS = {abilities: ABILITIES, skills: SKILLS, tools: actorTools};
-
-    // NEW CATEGORY
-    html.find('.crash-training-new-category').click(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | Create Category excuted!");
-      await CrashTrackingAndTraining.addCategory(actor.id);
-    });
-
-    // EDIT CATEGORY
-    html.find('.crash-training-edit-category').click(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | Edit Category excuted!");
-      let fieldId = event.currentTarget.id;
-      let categoryId = fieldId.replace('crash-edit-category-','');
-      await CrashTrackingAndTraining.editCategory(actor.id, categoryId);
-    });
-
-    // DELETE CATEGORY
-    html.find('.crash-training-delete-category').click(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | Delete Category excuted!");
-      let fieldId = event.currentTarget.id;
-      let categoryId = fieldId.replace('crash-delete-category-','');
-      await CrashTrackingAndTraining.deleteCategory(actor.id, categoryId);
-    });
-
-    // ADD NEW DOWNTIME ACTIVITY
-    html.find('.crash-training-add').click(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | Create Item excuted!");
-      await CrashTrackingAndTraining.addItem(actor.id, DROPDOWN_OPTIONS);
-    });
-
-    // EDIT DOWNTIME ACTIVITY
-    html.find('.crash-training-edit').click(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | Edit Item excuted!");
-      let allItems = actor.getFlag("5e-training","trainingItems") || [];
-      let itemId = event.currentTarget.id.replace('crash-edit-','');
-      if(!itemId){
-        ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),{permanent:true});
-        return;
-      }
-      await CrashTrackingAndTraining.editFromSheet(actor.id, itemId, DROPDOWN_OPTIONS);
-    });
-
-    // DELETE DOWNTIME ACTIVITY
-    html.find('.crash-training-delete').click(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | Delete Item excuted!");
-      let allItems = actor.getFlag("5e-training","trainingItems") || [];
-      let itemId = event.currentTarget.id.replace('crash-delete-','');
-      if(!itemId){
-        ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning",{permanent:true}));
-        return;
-      }
-      await CrashTrackingAndTraining.deleteFromSheet(actor.id, itemId);
-    });
-
-    // EDIT PROGRESS VALUE
-    html.find('.crash-training-override').change(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | Progress Override excuted!");
-      let field = event.currentTarget;
-      let itemId = event.currentTarget.id.replace('crash-override-','');
-      if(!itemId){
-        ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),{permanent:true});
-        return;
-      }
-      let allItems = actor.getFlag("5e-training","trainingItems") || [];
-      let thisItem = allItems.filter(obj => obj.id === itemId)[0];
-      if(isNaN(field.value)){
-        field.value = thisItem.progress;
-        ui.notifications.warn("Crash's 5e Tracking & Training: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
-      } else {
-        CrashTrackingAndTraining.updateItemProgressFromSheet(actor.id, itemId, field.value);
-      }
-    });
-
-    // ROLL TO TRAIN
-    html.find('.crash-training-roll').click(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | Roll Item excuted!");
-      let itemId = event.currentTarget.id.replace('crash-roll-','');
-      if(!itemId){
-        ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),{permanent:true});
-        return;
-      }
-      await CrashTrackingAndTraining.progressItem(actor.id, itemId);
-    });
-
-    // TOGGLE DESCRIPTION
-    // Modified version of _onItemSummary from dnd5e system located in
-    // dnd5e/module/actor/sheets/base.js
-    html.find('.crash-training-toggle-desc').click(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | Toggle Acvtivity Info excuted!");
-
-      // Set up some variables
-      let fieldId = event.currentTarget.id;
-      let itemId = fieldId.replace('crash-toggle-desc-','');
-      if(!itemId){
-        ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),{permanent:true});
-        return;
-      }
-      let allItems = actor.getFlag("5e-training","trainingItems") || [];
-      let item = allItems.filter(obj => obj.id === itemId)[0];
-      let desc = item.description || "";
-      let li = $(event.currentTarget).parents(".item");
-
-      if ( li.hasClass("expanded") ) {
-        let summary = li.children(".item-summary");
-        summary.slideUp(200, () => summary.remove());
-      } else {
-        let div = $(`<div class="item-summary">${desc}</div>`);
-        li.append(div.hide());
-        div.slideDown(200);
-      }
-      li.toggleClass("expanded");
-
-    });
-
-    // EXPORT
-    html.find('.crash-training-export').click(async (event) => {
-      event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Export excuted!");
-      let actorId = actor.id;
-      CrashTrackingAndTraining.exportItems(actor.id);
-    });
-
-    // IMPORT
-    html.find('.crash-training-import').click(async (event) => {
-      event.preventDefault();
-      console.log("Crash's Tracking & Training (5e) | Import excuted!");
-      let actorId = actor.id;
-      await CrashTrackingAndTraining.importItems(actor.id);
-    });
-
-    // OPEN AUDIT LOG
-    html.find('.crash-training-audit').click(async (event) => {
-      event.preventDefault();
-      // console.log("Crash's Tracking & Training (5e) | GM Audit excuted!");
-      new AuditLog(actor).render(true);
-    });
+    // Make the buttons all do things
+    activateTabListeners(actor, html);
 
     // Set Training Tab as Active
     html.find('.tabs .item[data-tab="training"]').click(ev => {
@@ -208,11 +62,164 @@ async function addTrainingTab(app, html, data) {
     html.find('.tabs .item:not(.tabs .item[data-tab="training"])').click(ev => {
       app.activateTrainingTab = false;
     });
-
   }
 
   //Tab is ready
   Hooks.call(`CrashTrainingTabReady`, app, html, data);
+}
+
+function activateTabListeners(actor, html){
+  // Set up our big list of dropdown options
+  let actorTools = CrashTrackingAndTraining.getActorTools(actor.id);
+  const ABILITIES = CrashTrackingAndTraining.formatAbilitiesForDropdown();
+  const SKILLS = CrashTrackingAndTraining.formatSkillsForDropdown();
+  const DROPDOWN_OPTIONS = {abilities: ABILITIES, skills: SKILLS, tools: actorTools};
+  
+  // NEW CATEGORY
+  html.find('.crash-training-new-category').click(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | Create Category excuted!");
+    await CrashTrackingAndTraining.addCategory(actor.id);
+  });
+
+  // EDIT CATEGORY
+  html.find('.crash-training-edit-category').click(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | Edit Category excuted!");
+    let fieldId = event.currentTarget.id;
+    let categoryId = fieldId.replace('crash-edit-category-','');
+    await CrashTrackingAndTraining.editCategory(actor.id, categoryId);
+  });
+
+  // DELETE CATEGORY
+  html.find('.crash-training-delete-category').click(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | Delete Category excuted!");
+    let fieldId = event.currentTarget.id;
+    let categoryId = fieldId.replace('crash-delete-category-','');
+    await CrashTrackingAndTraining.deleteCategory(actor.id, categoryId);
+  });
+
+  // ADD NEW DOWNTIME ACTIVITY
+  html.find('.crash-training-add').click(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | Create Item excuted!");
+    await CrashTrackingAndTraining.addItem(actor.id, DROPDOWN_OPTIONS);
+  });
+
+  // EDIT DOWNTIME ACTIVITY
+  html.find('.crash-training-edit').click(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | Edit Item excuted!");
+    let allItems = actor.getFlag("5e-training","trainingItems") || [];
+    let itemId = event.currentTarget.id.replace('crash-edit-','');
+    if(!itemId){
+      ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),{permanent:true});
+      return;
+    }
+    await CrashTrackingAndTraining.editFromSheet(actor.id, itemId, DROPDOWN_OPTIONS);
+  });
+
+  // DELETE DOWNTIME ACTIVITY
+  html.find('.crash-training-delete').click(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | Delete Item excuted!");
+    let allItems = actor.getFlag("5e-training","trainingItems") || [];
+    let itemId = event.currentTarget.id.replace('crash-delete-','');
+    if(!itemId){
+      ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning",{permanent:true}));
+      return;
+    }
+    await CrashTrackingAndTraining.deleteFromSheet(actor.id, itemId);
+  });
+
+  // EDIT PROGRESS VALUE
+  html.find('.crash-training-override').change(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | Progress Override excuted!");
+    let field = event.currentTarget;
+    let itemId = event.currentTarget.id.replace('crash-override-','');
+    if(!itemId){
+      ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),{permanent:true});
+      return;
+    }
+    let allItems = actor.getFlag("5e-training","trainingItems") || [];
+    let thisItem = allItems.filter(obj => obj.id === itemId)[0];
+    if(isNaN(field.value)){
+      field.value = thisItem.progress;
+      ui.notifications.warn("Crash's 5e Tracking & Training: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning"));
+    } else {
+      CrashTrackingAndTraining.updateItemProgressFromSheet(actor.id, itemId, field.value);
+    }
+  });
+
+  // ROLL TO TRAIN
+  html.find('.crash-training-roll').click(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | Roll Item excuted!");
+    let itemId = event.currentTarget.id.replace('crash-roll-','');
+    if(!itemId){
+      ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),{permanent:true});
+      return;
+    }
+    await CrashTrackingAndTraining.progressItem(actor.id, itemId);
+  });
+
+  // TOGGLE DESCRIPTION
+  // Modified version of _onItemSummary from dnd5e system located in
+  // dnd5e/module/actor/sheets/base.js
+  html.find('.crash-training-toggle-desc').click(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | Toggle Acvtivity Info excuted!");
+
+    // Set up some variables
+    let fieldId = event.currentTarget.id;
+    let itemId = fieldId.replace('crash-toggle-desc-','');
+    if(!itemId){
+      ui.notifications.warn("Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),{permanent:true});
+      return;
+    }
+    let allItems = actor.getFlag("5e-training","trainingItems") || [];
+    let item = allItems.filter(obj => obj.id === itemId)[0];
+    let desc = item.description || "";
+    let li = $(event.currentTarget).parents(".training-item");
+
+    if ( li.hasClass("expanded") ) {
+      let summary = li.children(".item-summary");
+      summary.slideUp(200, () => summary.remove());
+    } else {
+      let div = $(`<div class="item-summary">${desc}</div>`);
+      li.append(div.hide());
+      div.slideDown(200);
+    }
+    li.toggleClass("expanded");
+
+  });
+
+  // EXPORT
+  html.find('.crash-training-export').click(async (event) => {
+    event.preventDefault();
+    console.log("Crash's Tracking & Training (5e) | Export excuted!");
+    let actorId = actor.id;
+    CrashTrackingAndTraining.exportItems(actor.id);
+  });
+
+  // IMPORT
+  html.find('.crash-training-import').click(async (event) => {
+    event.preventDefault();
+    console.log("Crash's Tracking & Training (5e) | Import excuted!");
+    let actorId = actor.id;
+    await CrashTrackingAndTraining.importItems(actor.id);
+  });
+
+  // OPEN AUDIT LOG
+  html.find('.crash-training-audit').click(async (event) => {
+    event.preventDefault();
+    // console.log("Crash's Tracking & Training (5e) | GM Audit excuted!");
+    new AuditLog(actor).render(true);
+  });
+
+  
 }
 
 // Determines whether or not the sheet should have its width adjusted.
@@ -331,16 +338,66 @@ async function migrateAllActors(){
 }
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
+  if (tidy5eApi?.isTidy5eSheet?.(app)) {
+    // Cancel doing stuff for Tidy; it has its own tab setup stuff below.
+    return;
+  }
+
   let widenSheet = adjustSheetWidth(app);
   if(widenSheet){
     let newPos = {width: app.position.width + game.settings.get("5e-training", "extraSheetWidth")}
     app.setPosition(newPos);
   }
+  
   addTrainingTab(app, html, data).then(function(){
     if (app.activateTrainingTab) {
       app._tabs[0].activate("training");
     }
   });
+});
+
+// New Tidy Support
+let tidy5eApi = undefined;
+Hooks.on("tidy5e-sheet.ready", (api) => {
+  tidy5eApi = api;
+  api.registerCharacterTab(
+    new api.models.HandlebarsTab({
+      tabId: "downtime",
+      path: `modules/5e-training/templates/partials/training-section-contents.html`,
+      title: () => game.settings.get("5e-training", "tabName"),
+      getData: (data) => {
+        data.showImportButton = game.settings.get("5e-training", "showImportButton");
+        return data;
+      },
+      enabled: (data) => {
+        return data.editable && game.settings.get("5e-training", "enableTraining");
+      },
+      onRender: ({ app, element, data }) => {
+        activateTabListeners(data.actor, $(element));
+      },
+      tabContentsClasses: ["crash-training"],
+      activateDefaultSheetListeners: false,
+    })
+  );
+  api.registerNpcTab(
+    new api.models.HandlebarsTab({
+      tabId: "downtime-dnd5e-training-tab",
+      path: `modules/5e-training/templates/partials/training-section-contents.html`,
+      title: () => game.settings.get("5e-training", "tabName"),
+      getData: (data) => {
+        data.showImportButton = game.settings.get("5e-training", "showImportButton");
+        return data;
+      },
+      enabled: (data) => {
+        return data.editable && game.settings.get(CONSTANTS.MODULE_NAME, "enableTrainingNpc");
+      },
+      onRender: ({ app, element, data }) => {
+        activateTabListeners(data.actor, $(element));
+      },
+      tabContentsClasses: ["crash-training"],
+      activateDefaultSheetListeners: false,
+    })
+  );
 });
 
 Hooks.on(`CrashTrainingTabReady`, (app, html, data) => {

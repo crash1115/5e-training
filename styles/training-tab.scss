@@ -1,0 +1,294 @@
+// I manually generate the training-tab.css file from the Sass in here. Changing stuff in here won't impact the module at all.
+
+.crash-training {
+
+    // Control Bar
+    .crash-training-controls {
+        display: flex;
+        justify-content: flex-end;
+        margin: 4px 0;
+
+        div {
+            font-size: 12px;
+            color: #7a7971;
+            text-align: center;
+            margin-right: 4px;
+            padding: 5px 8px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.05);
+            border: 2px groove #eeede0;
+            border-radius: 4px;
+
+            &.push-left {
+                margin-right: auto;
+            }
+
+            &:hover{
+                cursor: pointer;
+                color: black;
+                text-shadow: 0 0 5px red;
+            }
+        }
+    }
+
+    // List of Categories
+    .crash-training-category-list {    
+        margin: 0;
+        padding: 0;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        color: #7a7971;
+
+        .header-row {
+            height: 28px;
+            padding-inline: 4px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.05);
+            border: 2px groove #eeede0;
+            font-weight: bold;
+            border-radius: 0px;
+
+            font-size: 12px;
+            color: #7a7971;
+
+            .item-name {
+                font-family: "Modesto Condensed", "Palatino Linotype", serif;
+                font-size: 16px;
+            }
+
+            .activity-override {
+                text-align: center;
+            }
+
+            .item-controls{
+                font-size: 13px;
+                margin-left: auto;
+            }
+        }       
+        
+        // List of Items
+        ol.crash-training-item-list {
+            padding-left: 2px;
+            padding-right: 6px;
+
+            li.training-item {
+                font-size: 13px;
+                align-items: center;
+                border-bottom: 1px solid #c9c7b8;
+
+                &:last-of-type{
+                    border-bottom: none;
+                }
+
+                .item-name{
+                    display: flex;
+                    align-items: center;
+
+                    &:hover {
+                        cursor: pointer;
+                        color: black;
+                        text-shadow: 0 0 5px red;
+
+                        .crash-training-roll {
+                            background-image: url("/../icons/svg/d20-grey.svg") !important;
+                        }
+                    }
+
+                    .crash-training-roll, .crash-training-roll-disabled {
+                        flex: 0 0 30px;
+                        height: 30px;
+                        background-size: 30px;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        border: none;
+                        margin-right: 5px;
+                    }
+
+                    .crash-training-roll {
+                        .checkmark {
+                            display: none;
+                        }
+                        &:hover {
+                            background-image: url("/../icons/svg/d20-black.svg") !important;
+                        }
+                    }
+                    .crash-training-roll-disabled {
+                        opacity: 50%;
+                        .checkmark {
+                            color: white;
+                            display: block;
+                            font-size: 30px;
+                            text-shadow: 0 0 5px black;
+                            text-align: center;
+                        }
+                    }
+                }
+
+                .activity-override {
+                    display: flex;
+                    input {
+                        flex: 1;
+                        text-align: right;
+                        padding-right: 2px;
+                    }
+                    span {
+                        flex: 1;
+                        align-self: center;
+                    }
+                }
+
+                .activity-progress {
+                    display: grid;
+                    align-items: center;
+                    margin-right: 10px;
+
+                    .progress-bar {
+                        flex: 10;
+                        background-color: rgba(0,0,0,0.1);
+                        border-radius: 4px;
+                        height: 20px;
+                        margin: 5px;
+
+                        .crash-training-completion {
+                            color: #111111;
+                            background-color: rgba(255,0,0,0.4);
+                            border-radius: 4px;
+                            height: 100%;
+                            line-height: 22px;
+                            span {
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+                }
+
+                .item-controls {
+                    margin-left: auto;
+                }
+
+                .item-summary{
+                    margin-top: 5px;
+                }
+                
+            }
+        }
+    }
+
+    // This is just the grid that's applied to headers and rows in the tables to keep things lined up nicely.
+    .crash-training-column-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 2fr 50px;
+
+        .item-name {
+            grid-column: 1/1; 
+        }
+
+        .activity-type {
+            grid-column: 2/2; 
+        }
+
+        .activity-override{
+            grid-column:3/3; 
+        }
+
+        .activity-progress{
+            grid-column: 4/4; 
+        }
+
+        .item-controls{
+            grid-column: 5/5; 
+        }
+
+        .item-summary {
+            grid-column: 1/5;
+        }
+    }
+
+}
+
+// Kgar Tidy Styling
+:is(.sheet[data-sheet-module="tidy5e-sheet"]){
+    .crash-training{
+        .crash-training-controls {
+
+            div {        
+                color: var(--t5e-secondary-color);
+                background: var(--t5e-faint-color);
+                
+                border-radius: 0.1875rem;
+                border:none;
+
+                &:hover{
+                    color: var(--t5e-primary-color);
+                    text-shadow: none;
+                }
+            }
+        }
+
+        .crash-training-category-list {    
+            color: var(--t5e-primary-font-color);
+
+            .header-row {
+                background: var(--t5e-table-header-row-color);
+                border: none;
+                color: var(--t5e-tertiary-color);
+                font-size: .75rem;
+                font-family: var(--t5e-body-font-family);
+                
+                .item-name {
+                    font-size: .75rem;
+                    font-family: var(--t5e-body-font-family);
+                    color:var(--t5e-primary-font-color);
+                }
+
+                .item-controls {
+                    a:hover {
+                        color:var(--t5e-primary-font-color);
+                    }
+                }
+            }       
+            
+            // List of Items
+            ol.crash-training-item-list {
+                padding-right: 0px;
+
+                li.training-item {
+                    border:none;
+                    margin-bottom: 3px;
+                    background-color: var(--t5e-faintest-color);
+
+                    .item-name{
+                        &:hover {
+                            color: unset;
+                            text-shadow: none;
+                        }
+                    }
+
+                    .activity-progress {
+                        .progress-bar {
+                            background-color: rgba(0,0,0,0.1);
+
+                            .crash-training-completion {
+                                color: var(--t5e-primary-color);
+                                background-color: var(--t5e-sheet-unlocked-icon-background);
+                            }
+                        }
+                    }
+
+                    .item-controls {
+                        color: var(--t5e-light-color);
+                        margin-right: 4px;
+    
+                        a:hover {
+                            color:var(--t5e-primary-font-color);
+                        }
+                    }
+
+                    .item-summary {
+                        padding-left: 8px;
+                    }
+                }
+            }
+        }
+    }
+}

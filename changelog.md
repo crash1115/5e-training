@@ -1,5 +1,9 @@
 # Version 1.1.0
-- Compatibility for dnd5e 3.0
+- Compatibility for dnd5e 3.x
+
+# Version 1.0.3
+- Compatibility with Kgar's Tidy sheets
+- OG Tidy is no longer supported
 
 # Version 1.0.2
 - Updated how ability lavels are referenced in sheet renders
