@@ -27,3 +27,4 @@ Create an issue right here on GitHub. If it's a critical/breaking bug, I'll try 
 
 ## License
 - This work is licensed under the [Foundry Virtual Tabletop EULA - Limited License Agreement for Module Development](https://foundryvtt.com/article/license/).
+- Versions 1.0.1 and later use the MIT license. Prior versions are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
