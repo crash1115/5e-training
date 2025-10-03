@@ -1,7 +1,7 @@
 ## No Longer Being Maintained
 Due to time constraints, I'm no longer able to keep updating this module with any amount of frequency. You're welcome to keep using it; there's a decent chance that it'll get updated from time to time because my group uses it, but I won't be keeping up with feature requests or non-critical bug reports at the level that'd be expected for something actively being maintained. Thanks for sticking with me on this wild ride, it's been a lot of fun!
 
-If you're looking for an alternative to this module, p4535992 has taken up the mantle with [Downtime Dnd5e](https://github.com/p4535992/foundryvtt-downtime-dnd5e).
+If you're looking for an alternative to this module, check out [Downtime Dnd5e](https://github.com/laquasicinque/foundryvtt-downtime-dnd5e).
 
 ___
 
